@@ -4,9 +4,6 @@
  */
 package general;
 
-import pckMemoria.InterfaceMemoria;
-import pckMemoria.MemoriaPrincipal;
-
 /**
  *
  * @author José Andrés

@@ -2,6 +2,7 @@ package general;
 
 import java.util.Arrays;
 
+import pckMemoria.Cache;
 import pckMemoria.CacheDirecta;
 import pckMemoria.MemoriaPrincipal;
 
@@ -29,8 +30,8 @@ public class Test {
 		
 		// Memoria
 		System.out.println("--- Memoria --- \n");
-		InterfaceMemoria m1 = new MemoriaPrincipal(1024, true);
-		InterfaceMemoria m2 = new MemoriaPrincipal(512, true);
+		MemoriaPrincipal m1 = new MemoriaPrincipal(1024, true);
+		MemoriaPrincipal m2 = new MemoriaPrincipal(512, true);
 		
 		for (int i = 0; i < 128; i+=4)
 			m1.guardarDato(i, i * 2);
@@ -53,7 +54,7 @@ public class Test {
 		System.out.println(m2.toString(true));
 		
 		
-		CacheDirecta c = new CacheDirecta(16, 4);
+		Cache c = new CacheDirecta(16, 4);
 		for (int i = 0; i < 16*4*4; i+=4)
 		{
 			c.guardarDato(i, i * 2);
