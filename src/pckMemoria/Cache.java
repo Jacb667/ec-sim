@@ -10,7 +10,9 @@ public interface Cache {
 	
 	public int leerDato(int direccion);
 	public void guardarDato(int direccion, int dato);
-	public int[] leerLinea(int direccion, int tam_linea);
+	
+	// Operaciones para líneas (cache)
+	public int[] leerLinea(int direccion);
 	public void guardarLinea(int direccion, int[] linea);
 	
 	public String toString(boolean mostrarTodos);
