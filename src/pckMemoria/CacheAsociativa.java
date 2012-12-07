@@ -1,6 +1,6 @@
 package pckMemoria;
 
-public class CacheAsociativa
+public class CacheAsociativa implements Cache
 {
 
 	public int leerDato(int direccion) {

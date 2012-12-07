@@ -11,7 +11,7 @@ import java.util.Arrays;
  * 
  */
 
-public class CacheDirecta
+public class CacheDirecta implements Cache
 {
 	private int palabras_linea;
 	private int entradas;
