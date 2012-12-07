@@ -62,8 +62,8 @@ public class Test {
 		
 		System.out.println(c.toString());
 		
-		System.out.println(c.leerDato(24));
+		System.out.println(c.leerDato(0x2FF));
 		
-		System.out.println("Leer 30,8: " + Arrays.toString(c.leerLinea(30, 8)));
+		//System.out.println("Leer: " + Arrays.toString(c.leerLinea(0xFF)));
 	}
 }

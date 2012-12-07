@@ -127,46 +127,42 @@ public class CacheDirecta implements Cache
 		for (int i = 0; i < datos.length; i++)
 		{
 			// Dirección (hex) : Dato (dec)
-			strB.append(String.format("0x%3S", Integer.toHexString(i << 2)).replace(" ", "0")).append(" : ").append(Arrays.toString(datos[i]));
+			strB.append(String.format("0x%3S", Integer.toHexString(i << 2 << bits_pal)).replace(" ", "0")).append(" : ").append(Arrays.toString(datos[i]));
 			strB.append("\n");
 		}
 		
 		return strB.toString();
 	}
 	
-	// Dirección física, hay que eliminar los 2 últimos bits.
-	private int getInicioBloque(int direccion, int tam_linea)
+	// Leer línea que contiene la dirección especificada
+	// Este método se ejecuta después de "existeDato".
+	// Es decir, si ejecutamos este método es porque ya sabemos que el dato existe y se puede leer.
+	public int[] leerLinea(int direccion)
 	{
-		return (int) Math.floor((direccion >> 2) / tam_linea);
-	}
-	
-	public int[] leerLinea(int direccion, int tam_linea)
-	{
-		int[] res =  new int[tam_linea];
-		int direccion_inicio = getInicioBloque(direccion, tam_linea) * tam_linea;
+		int[] res =  new int[palabras_linea];
+		int direccion_inicio = buscarPosicion(direccion);
 		
-		int dir = 0;
-		int pal = 0;
-		for(; dir+pal < tam_linea; dir++)
+		for (int i = 0; i < palabras_linea; i++)
 		{
-			for(; pal < palabras_linea && dir+pal < tam_linea; pal++)
-				res[dir+pal] = datos[direccion_inicio + dir][pal];
+			res[i] = datos[direccion_inicio][i];
 		}
 		
 		return res;
 	}
 
+	// Guardamos el dato en su posición.
+	// Este método guarda el dato en la línea especificada, no comprueba si ya estaba ocupado.
 	public void guardarLinea(int direccion, int[] linea)
 	{
 		int tam_linea = linea.length;
-		int direccion_entrada = getInicioBloque(direccion, tam_linea) * tam_linea;
+		int direccion_inicio = buscarPosicion(direccion);
 		
-		dirty[direccion_entrada] = true;
-		valid[direccion_entrada] = true;
+		dirty[direccion_inicio] = true;
+		valid[direccion_inicio] = true;
 		
 		for (int i = 0; i < palabras_linea; i++)
 		{
-			datos[direccion_entrada][i] = linea[i];
+			datos[direccion_inicio][i] = linea[i];
 		}
 	}
 
