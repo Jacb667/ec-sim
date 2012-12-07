@@ -38,31 +38,23 @@ public class Test {
 		
 		System.out.println(m1.toString(true));
 		
-		/*System.out.println("Leer 0x00,1: " + Arrays.toString(m1.leerLinea(0x00, 1)));
-		System.out.println("Leer 0x10,1: " + Arrays.toString(m1.leerLinea(0x10, 1)));
-		System.out.println("Leer 0x51,4: " + Arrays.toString(m1.leerLinea(0x51, 4)));
-		System.out.println("Leer 0x52,4: " + Arrays.toString(m1.leerLinea(0x52, 4)));
-		System.out.println("Leer 0x53,4: " + Arrays.toString(m1.leerLinea(0x53, 4)));
-		System.out.println("Leer 0x54,4: " + Arrays.toString(m1.leerLinea(0x54, 4)));
-		System.out.println("Leer 0x55,4: " + Arrays.toString(m1.leerLinea(0x55, 4)));
-		System.out.println("Leer 0x56,4: " + Arrays.toString(m1.leerLinea(0x56, 4)));
-		System.out.println("Leer 0x40,2: " + Arrays.toString(m1.leerLinea(0x40, 2)));
-		System.out.println("Leer 0x40,12: " + Arrays.toString(m1.leerLinea(0x40, 12)));*/
+		//System.out.println("Leer 0x40,2: " + Arrays.toString(m1.leerLinea(0x40, 2)));
 		
 		m2.guardarLinea(0, m1.leerLinea(0x40, 12));
 		
 		System.out.println(m2.toString(true));
 		
-		
-		Cache c = new CacheDirecta(16, 4);
-		for (int i = 0; i < 16*4*4; i+=4)
-		{
-			c.guardarDato(i, i * 2);
-		}
+		Cache c = new CacheDirecta(9, 1);
+		for (int i = 0; i < 9*4; i+=4)
+			c.guardarDato(i, i * 2, false);
 		
 		System.out.println(c.toString());
 		
-		System.out.println(c.leerDato(0x2FF));
+		System.out.println(c.leerDato(0x04));
+		
+		c.guardarLinea(64, m1.leerLinea(0x50, 1), false);
+		
+		System.out.println(c.toString());
 		
 		//System.out.println("Leer: " + Arrays.toString(c.leerLinea(0xFF)));
 	}
