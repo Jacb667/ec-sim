@@ -1,5 +1,7 @@
 package general;
 
+// Esta es una clase Global, que puede ser accedida desde todo el proyecto.
+
 public class Global {
 	
 	final static public int LONGITUD_BITS = 32;
