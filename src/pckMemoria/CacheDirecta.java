@@ -15,15 +15,16 @@ public class CacheDirecta implements InterfaceMemoria
 {
 	private int palabras_linea;
 	private int entradas;
-	
+
 	private int bits_tag;
 	private int bits_dir;
 	private int bits_pal;
-	
+
 	private int[] tags;
 	private boolean[] valid;
+	private boolean[] dirty;
 	private int[/*lineas*/][/*palabras*/] datos;
-	
+
 	public CacheDirecta(int _entradas, int _palabras_linea)
 	{
 		palabras_linea = _palabras_linea;
@@ -46,10 +47,11 @@ public class CacheDirecta implements InterfaceMemoria
 		
 		tags = new int[entradas];
 		valid = new boolean[entradas];
+		dirty = new boolean[entradas];
 		
 		datos = new int[entradas][palabras_linea];
 	}
-	
+
 	public boolean existeDato(int direccion)
 	{
 		int entrada = buscarPosicion(direccion);
@@ -58,14 +60,25 @@ public class CacheDirecta implements InterfaceMemoria
 		int tag = direccion >> 2 >> bits_pal >> bits_dir;
 		
 		// Buscamos en el tag para ver si existe la palabra.
-		if (tags[entrada] == tag)
+		if (valid[entrada] && tags[entrada] == tag)
 			return true;
 		
 		return false;
 	}
 	
+	// Busco la posición de la palabra en la línea
+	private int posicionPalabra(int direccion)
+	{
+		// Primero hay que ignorar los 2 bits de offset:
+		int pos = direccion >> 2;
+			
+		// Los siguientes bits son de la palabra.
+		// La entrada será el módulo de 2^bits_pal
+		return (int) (pos % Math.pow(2, bits_pal));
+	}
+
 	// Busco la posición en el array (entry) del dato.
-	public int buscarPosicion(int direccion)
+	private int buscarPosicion(int direccion)
 	{
 		// Primero hay que ignorar los 2 bits de offset:
 		// Los últimos bits del final son para seleccionar palabra, los ignoramos:
@@ -76,22 +89,31 @@ public class CacheDirecta implements InterfaceMemoria
 		return (int) (pos % Math.pow(2, bits_dir));
 	}
 
+	// Leer el dato en dirección
+	// Este método se ejecuta después de "existeDato".
+	// Es decir, si ejecutamos este método es porque ya sabemos que el dato existe y se puede leer.
 	public int leerDato(int direccion)
 	{
+		int pos = buscarPosicion(direccion);
+		int pal = posicionPalabra(direccion);
 		
-		return 0;
+		return datos[pos][pal];
 	}
 
+	// Guardamos el dato en su posición.
+	// Si se llama a este método es porque la línea correspondiente ya está cargada en esta caché.
 	public void guardarDato(int direccion, int dato)
 	{
-
+		int pos = buscarPosicion(direccion);
+		int pal = posicionPalabra(direccion);
 		
+		datos[pos][pal] = dato;
+		dirty[pos] = true;
 	}
-
-	public int[] leerLinea(int direccion, int tam_linea)
+	
+	public boolean isDirty(int direccion)
 	{
-
-		return null;
+		return dirty[direccion >> 2];
 	}
 
 	public String toString()
@@ -106,15 +128,20 @@ public class CacheDirecta implements InterfaceMemoria
 		
 		return strB.toString();
 	}
+	
+	public int[] leerLinea(int direccion, int tam_linea)
+	{
+
+		return null;
+	}
 
 	public void guardarLinea(int direccion, int[] linea)
 	{
 		
 	}
 
-	@Override
-	public String toString(boolean mostrarTodos) {
-		// TODO Auto-generated method stub
-		return null;
+	public String toString(boolean mostrarTodos)
+	{
+		return toString();
 	}
 }
