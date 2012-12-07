@@ -1,9 +1,12 @@
 package pckMemoria;
 
-public interface InterfaceMemoria {
+public interface Cache {
 	
 	public boolean existeDato(int direccion);
 	public boolean isDirty(int direccion);
+	public boolean isValid(int direccion);
+	
+	public int getTamanoLinea();
 	
 	public int leerDato(int direccion);
 	public void guardarDato(int direccion, int dato);

@@ -1,7 +1,8 @@
 package general;
 
+import java.util.Arrays;
+
 import pckMemoria.CacheDirecta;
-import pckMemoria.InterfaceMemoria;
 import pckMemoria.MemoriaPrincipal;
 
 public class Test {
@@ -53,11 +54,15 @@ public class Test {
 		
 		
 		CacheDirecta c = new CacheDirecta(16, 4);
-		c.guardarDato(24, 20);
-		System.out.println(c.leerDato(24));
+		for (int i = 0; i < 16*4*4; i+=4)
+		{
+			c.guardarDato(i, i * 2);
+		}
+		
 		System.out.println(c.toString());
 		
+		System.out.println(c.leerDato(24));
 		
-		//System.out.println("Pos: " + c.buscarPosicion(32));
+		System.out.println("Leer 30,8: " + Arrays.toString(c.leerLinea(30, 8)));
 	}
 }

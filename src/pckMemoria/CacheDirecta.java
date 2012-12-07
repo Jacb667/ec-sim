@@ -11,7 +11,7 @@ import java.util.Arrays;
  * 
  */
 
-public class CacheDirecta implements InterfaceMemoria
+public class CacheDirecta
 {
 	private int palabras_linea;
 	private int entradas;
@@ -115,6 +115,11 @@ public class CacheDirecta implements InterfaceMemoria
 	{
 		return dirty[direccion >> 2];
 	}
+	
+	public boolean isValid(int direccion)
+	{
+		return valid[direccion >> 2];
+	}
 
 	public String toString()
 	{
@@ -129,19 +134,49 @@ public class CacheDirecta implements InterfaceMemoria
 		return strB.toString();
 	}
 	
+	// Dirección física, hay que eliminar los 2 últimos bits.
+	private int getInicioBloque(int direccion, int tam_linea)
+	{
+		return (int) Math.floor((direccion >> 2) / tam_linea);
+	}
+	
 	public int[] leerLinea(int direccion, int tam_linea)
 	{
-
-		return null;
+		int[] res =  new int[tam_linea];
+		int direccion_inicio = getInicioBloque(direccion, tam_linea) * tam_linea;
+		
+		int dir = 0;
+		int pal = 0;
+		for(; dir+pal < tam_linea; dir++)
+		{
+			for(; pal < palabras_linea && dir+pal < tam_linea; pal++)
+				res[dir+pal] = datos[direccion_inicio + dir][pal];
+		}
+		
+		return res;
 	}
 
 	public void guardarLinea(int direccion, int[] linea)
 	{
+		int tam_linea = linea.length;
+		int direccion_entrada = getInicioBloque(direccion, tam_linea) * tam_linea;
 		
+		dirty[direccion_entrada] = true;
+		valid[direccion_entrada] = true;
+		
+		for (int i = 0; i < palabras_linea; i++)
+		{
+			datos[direccion_entrada][i] = linea[i];
+		}
 	}
 
 	public String toString(boolean mostrarTodos)
 	{
 		return toString();
+	}
+
+	public int getTamanoLinea()
+	{
+		return palabras_linea;
 	}
 }

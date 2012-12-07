@@ -9,7 +9,7 @@ package pckMemoria;
  * 4 bytes, por lo que no necesitamos los 2 últimos bits de la dirección de memoria.
  */
 
-public class MemoriaPrincipal implements InterfaceMemoria
+public class MemoriaPrincipal
 {
 	private int entradas;
 	private int[] mem;
@@ -107,9 +107,8 @@ public class MemoriaPrincipal implements InterfaceMemoria
 		return strB.toString();
 	}
 
-	@Override
-	public boolean isDirty(int direccion) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean isValid(int direccion)
+	{
+		return valid[direccion >> 2];
 	}
 }
