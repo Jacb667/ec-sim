@@ -8,7 +8,7 @@ public class BancoRegistros {
 	public BancoRegistros()
 	{
 		// 32 registros, desde 0 hasta 31
-		datos = new int[general.Constants.TAMAÑO_BANCO];
+		datos = new int[general.Global.TAMAÑO_BANCO];
 		datos[0] = 0;
 	}
 	
