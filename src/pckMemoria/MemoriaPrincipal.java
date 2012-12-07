@@ -106,4 +106,10 @@ public class MemoriaPrincipal implements InterfaceMemoria
 		
 		return strB.toString();
 	}
+
+	@Override
+	public boolean isDirty(int direccion) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

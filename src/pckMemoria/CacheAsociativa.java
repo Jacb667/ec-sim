@@ -38,5 +38,11 @@ public class CacheAsociativa implements InterfaceMemoria
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public boolean isDirty(int direccion) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 }

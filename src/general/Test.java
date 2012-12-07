@@ -53,7 +53,11 @@ public class Test {
 		
 		
 		CacheDirecta c = new CacheDirecta(16, 4);
+		c.guardarDato(24, 20);
+		System.out.println(c.leerDato(24));
 		System.out.println(c.toString());
-		System.out.println("Pos: " + c.buscarPosicion(32));
+		
+		
+		//System.out.println("Pos: " + c.buscarPosicion(32));
 	}
 }

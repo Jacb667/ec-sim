@@ -1,4 +1,6 @@
 
+package general;
+
 public class Registros {
 	public final static int PRED=32;
 	
