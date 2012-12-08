@@ -9,6 +9,7 @@ public interface Cache {
 	// Comprobaciones
 	public boolean existeDato(int direccion);
 	public boolean isDirty(int direccion);
+	public boolean estaLibre(int direccion);
 	
 	// Tamaño de línea.
 	public int getTamanoLinea();

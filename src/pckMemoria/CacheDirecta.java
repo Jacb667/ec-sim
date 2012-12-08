@@ -54,36 +54,35 @@ public class CacheDirecta implements Cache
 	
 	// Comprobaciones
 	public int getTamanoLinea() { return palabras_linea; }
+	
+	// Me determina si la línea en esa dirección está "sucia", es decir,
+	// si se debe enviar a memoria principal antes de escribir en ella.
 	public boolean isDirty(int direccion)
 	{
-		int entrada = buscarPosicion(direccion);
-		
-		// Extraemos el tag
-		int tag = direccion >> 2 >> bits_pal >> bits_dir;
-		
-		// Buscamos en el tag para ver si existe la palabra.
-		if (dirty[entrada] && tags[entrada] == tag)
-			return true;
-		
-		return false;
+		return dirty[buscarPosicion(direccion)];
+	}
+	
+	// Esta función me determina si la posición está libre o no.
+	// Es decir, si se puede almacenar una línea sin "pisar" otra.
+	public boolean estaLibre(int direccion)
+	{
+		return !valid[buscarPosicion(direccion)];
 	}
 
+	// Me determina si el dato existe o no. Para que exista el dato se debe
+	// comprobar el TAG, ya que en una misma posición puede haber distintas líneas.
 	public boolean existeDato(int direccion)
 	{
 		int entrada = buscarPosicion(direccion);
 		
-		// Extraemos el tag
-		int tag = direccion >> 2 >> bits_pal >> bits_dir;
-		
 		// Buscamos en el tag para ver si existe la palabra.
-		if (valid[entrada] && tags[entrada] == tag)
+		if (valid[entrada] && tags[entrada] == extraerTag(direccion))
 			return true;
 		
 		return false;
 	}
 	
-	// Leer el dato en dirección
-	// Este método se ejecuta después de "existeDato".
+	// Leer el dato. Este método se ejecuta después de "existeDato".
 	// Es decir, si ejecutamos este método es porque ya sabemos que el dato existe y se puede leer.
 	public int leerDato(int direccion)
 	{
@@ -100,10 +99,10 @@ public class CacheDirecta implements Cache
 		int pos = buscarPosicion(direccion);
 		int pal = posicionPalabra(direccion);
 		
+		tags[pos] = extraerTag(direccion);
 		datos[pos][pal] = dato;
-		
-		if (setDirty)
-			dirty[pos] = true;
+		valid[pos] = true;
+		dirty[pos] = setDirty;
 	}
 
 	// Leer línea que contiene la dirección especificada
@@ -115,9 +114,7 @@ public class CacheDirecta implements Cache
 		int direccion_inicio = buscarPosicion(direccion);
 		
 		for (int i = 0; i < palabras_linea; i++)
-		{
 			res[i] = datos[direccion_inicio][i];
-		}
 		
 		return res;
 	}
@@ -129,14 +126,12 @@ public class CacheDirecta implements Cache
 		int tam_linea = linea.length;
 		int direccion_inicio = buscarPosicion(direccion);
 		
-		if (setDirty)
-			dirty[direccion_inicio] = true;
-		valid[direccion_inicio] = true;
-		
+		tags[direccion_inicio] = extraerTag(direccion);
 		for (int i = 0; i < palabras_linea; i++)
-		{
 			datos[direccion_inicio][i] = linea[i];
-		}
+		
+		dirty[direccion_inicio] = setDirty;
+		valid[direccion_inicio] = true;
 	}
 	
 	public String toString()
@@ -145,7 +140,11 @@ public class CacheDirecta implements Cache
 		for (int i = 0; i < datos.length; i++)
 		{
 			// Dirección (hex) : Dato (dec)
-			strB.append(String.format("0x%3S", Integer.toHexString(i << 2 << bits_pal)).replace(" ", "0")).append(" : ").append(Arrays.toString(datos[i]));
+			//strB.append(String.format("0x%3S", Integer.toHexString(i << 2 << bits_pal)).replace(" ", "0")).append(" : ").append(Arrays.toString(datos[i]));
+			//strB.append("\n");
+			strB.append(String.format("0x%3S", Integer.toHexString(i << 2 << bits_pal)).replace(" ", "0"));
+			strB.append(" -> ").append(tags[i]).append(" : ").append(Arrays.toString(datos[i]));
+			strB.append(" ").append(valid[i]).append(" ").append(dirty[i]);
 			strB.append("\n");
 		}
 		
@@ -157,9 +156,9 @@ public class CacheDirecta implements Cache
 	{
 		// Primero hay que ignorar los 2 bits de offset:
 		int pos = direccion >> 2;
-			
+		
 		// Los siguientes bits son de la palabra.
-		// La entrada será el módulo de 2^bits_pal
+		// La entrada será el módulo de palabras po línea.
 		return (int) (pos % palabras_linea);
 	}
 
@@ -171,8 +170,14 @@ public class CacheDirecta implements Cache
 		int pos = direccion >> 2 >> bits_pal;
 		
 		// Los siguientes bits son del índice.
-		// La entrada será el módulo de 2^bits_dir
+		// La entrada será el módulo del número de entradas.
 		return (int) (pos % entradas);
+	}
+	
+	// Extrae el tag de una dirección.
+	private int extraerTag(int direccion)
+	{
+		return direccion >> 2 >> bits_pal >> bits_dir;
 	}
 }
 

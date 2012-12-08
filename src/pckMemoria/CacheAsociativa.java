@@ -35,7 +35,10 @@ public class CacheAsociativa implements Cache
 		boolean res = false;
 		int via = 0;
 		while (!res && via < vias.length)
-			res = vias[via].equals(direccion);
+		{
+			res = vias[via].existeDato(direccion);
+			via++;
+		}
 		
 		return res;
 	}
@@ -43,8 +46,16 @@ public class CacheAsociativa implements Cache
 	// Compruebo si isDirty en la vía que esté.
 	public boolean isDirty(int direccion)
 	{
-		// TODO Auto-generated method stub
-		return false;
+		boolean isDirty = false;
+		int i = 0;
+		while (!isDirty && i < vias.length)
+		{
+			if (vias[i].existeDato(direccion))
+				isDirty = vias[i].isDirty(direccion);
+			i++;
+		}
+		
+		return isDirty;
 	}
 
 	public int getTamanoLinea()
@@ -56,7 +67,14 @@ public class CacheAsociativa implements Cache
 	// Compruebo en qué vía está y leo el dato.
 	public int leerDato(int direccion)
 	{
+		for (int i = 0; i < vias.length; i++)
+		{
+			if (vias[i].existeDato(direccion))
+				return vias[i].leerDato(direccion);
+			i++;
+		}
 
+		// Nunca deberíamos llegar aquí...
 		return 0;
 	}
 
@@ -64,19 +82,63 @@ public class CacheAsociativa implements Cache
 	// Compruebo en qué vía está y guardo el dato.
 	public void guardarDato(int direccion, int dato, boolean setDirty)
 	{
-		
+		for (int i = 0; i < vias.length; i++)
+		{
+			if (vias[i].existeDato(direccion))
+			{
+				vias[i].guardarDato(direccion, dato, setDirty);
+				break;
+			}
+			i++;
+		}
 	}
 
-	@Override
-	public int[] leerLinea(int direccion) {
-		// TODO Auto-generated method stub
+	// Leer una línea.
+	public int[] leerLinea(int direccion)
+	{
+		for (int i = 0; i < vias.length; i++)
+		{
+			if (vias[i].existeDato(direccion))
+				return vias[i].leerLinea(direccion);
+			i++;
+		}
+
+		// Nunca deberíamos llegar aquí...
 		return null;
 	}
 
-	@Override
-	public void guardarLinea(int direccion, int[] linea, boolean setDirty) {
-		// TODO Auto-generated method stub
+	// Guardar una línea.
+	public void guardarLinea(int direccion, int[] linea, boolean setDirty)
+	{
+		for (int i = 0; i < vias.length; i++)
+		{
+			if (vias[i].existeDato(direccion))
+			{
+				vias[i].guardarLinea(direccion, linea, setDirty);
+				break;
+			}
+			i++;
+		}
+	}
+	
+	public String toString()
+	{
+		StringBuilder strB = new StringBuilder();
 		
+		for (int i = 0; i < vias.length; i++)
+		{
+			strB.append("-- Via ").append(i).append("\n\n");
+			strB.append(vias[i].toString()).append("\n");
+			strB.append("\n");
+		}
+		
+		return strB.toString();
+	}
+
+	@Override
+	public boolean estaLibre(int direccion) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
