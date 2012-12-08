@@ -15,23 +15,12 @@ public class MemoriaPrincipal
 	private int[] mem;
 	private boolean[] valid;
 	
-	public MemoriaPrincipal(int _tamaño, boolean b)
+	public MemoriaPrincipal(int _entradas)
 	{
-		// Si b me envían bytes de la memoria
-		if (b)
-		{
-			// Dividimos entre 32 para conocer el número de entradas.
-			entradas = _tamaño / 32;
-			mem = new int[entradas];
-			valid = new boolean[entradas];
-		}
-		// En caso contrario me envían las entradas (entradas * 32 = tamaño).
-		else
-		{
-			entradas = _tamaño;
-			mem = new int[entradas];
-			valid = new boolean[entradas];
-		}
+		// Entradas debe ser divisible entre palabras_linea.
+		entradas = _entradas;
+		mem = new int[entradas];
+		valid = new boolean[entradas];
 	}
 	
 	// Compruebo si la dirección es válida.
@@ -107,8 +96,8 @@ public class MemoriaPrincipal
 		return strB.toString();
 	}
 
-	public boolean isValid(int direccion)
+	public boolean estaLibre(int direccion)
 	{
-		return valid[direccion >> 2];
+		return !valid[direccion >> 2];
 	}
 }
