@@ -8,17 +8,18 @@ public interface Cache {
 	
 	// Comprobaciones
 	public boolean existeDato(int direccion);
-	public boolean isDirty(int direccion);
-	public boolean estaLibre(int direccion);
+	public boolean lineaDirty(int direccion);
+	public boolean lineaLibre(int direccion);
 	
 	// Tamaño de línea.
 	public int getTamanoLinea();
 	
 	// Operaciones para datos individuales.
-	public int leerDato(int direccion);
-	public void guardarDato(int direccion, int dato, boolean setDirty);
+	public int consultarDato(int direccion);
+	public void modificarDato(int direccion, int dato);
 	
 	// Operaciones para líneas (cache)
 	public int[] leerLinea(int direccion);
-	public void guardarLinea(int direccion, int[] linea, boolean setDirty);
+	public void escribirLinea(int direccion, int[] linea);
+	public int[] reemplazarLinea(int direccion, int[] linea);
 }
