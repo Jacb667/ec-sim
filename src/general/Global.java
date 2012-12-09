@@ -39,6 +39,15 @@ public class Global {
 		END,	// Final del programa
 	}
 	
+	public enum PoliticasReemplazo
+	{
+		LRU,		// Menos usado recientemente - Reemplaza el bloque que hace más tiempo que no se ha usado.
+		LFU,		// Menos frecuencias de uso - Reemplaza el bloque que se ha usado menos veces.
+		FIFO,		// Primero entrar, primero salir - Reemplaza el primer bloque que entró.
+		SCHANC,		// FIFO, pero con 2 "oportunidades" antes de reemplazar un bloque.
+		RANDOM		// Aleatorio - Elimina un bloque al azar.
+	}
+	
 	
 }
 
