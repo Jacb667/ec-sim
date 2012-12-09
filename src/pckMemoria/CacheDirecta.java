@@ -57,14 +57,14 @@ public class CacheDirecta implements Cache
 	
 	// Me determina si la línea en esa dirección está "sucia", es decir,
 	// si se debe enviar a memoria principal antes de escribir en ella.
-	public boolean isDirty(int direccion)
+	public boolean lineaDirty(int direccion)
 	{
 		return dirty[buscarPosicion(direccion)];
 	}
 	
 	// Esta función me determina si la posición está libre o no.
 	// Es decir, si se puede almacenar una línea sin "pisar" otra.
-	public boolean estaLibre(int direccion)
+	public boolean lineaLibre(int direccion)
 	{
 		return !valid[buscarPosicion(direccion)];
 	}
@@ -84,7 +84,7 @@ public class CacheDirecta implements Cache
 	
 	// Leer el dato. Este método se ejecuta después de "existeDato".
 	// Es decir, si ejecutamos este método es porque ya sabemos que el dato existe y se puede leer.
-	public int leerDato(int direccion)
+	public int consultarDato(int direccion)
 	{
 		int pos = buscarPosicion(direccion);
 		int pal = posicionPalabra(direccion);
@@ -94,7 +94,7 @@ public class CacheDirecta implements Cache
 
 	// Guardamos el dato en su posición.
 	// Si se llama a este método es porque la línea correspondiente ya está cargada en esta caché.
-	public void guardarDato(int direccion, int dato, boolean setDirty)
+	public void modificarDato(int direccion, int dato)
 	{
 		int pos = buscarPosicion(direccion);
 		int pal = posicionPalabra(direccion);
@@ -102,7 +102,7 @@ public class CacheDirecta implements Cache
 		tags[pos] = extraerTag(direccion);
 		datos[pos][pal] = dato;
 		valid[pos] = true;
-		dirty[pos] = setDirty;
+		dirty[pos] = true;
 	}
 
 	// Leer línea que contiene la dirección especificada
@@ -110,7 +110,7 @@ public class CacheDirecta implements Cache
 	// Es decir, si ejecutamos este método es porque ya sabemos que el dato existe y se puede leer.
 	public int[] leerLinea(int direccion)
 	{
-		int[] res =  new int[palabras_linea];
+		int[] res = new int[palabras_linea];
 		int direccion_inicio = buscarPosicion(direccion);
 		
 		for (int i = 0; i < palabras_linea; i++)
@@ -119,9 +119,9 @@ public class CacheDirecta implements Cache
 		return res;
 	}
 
-	// Guardamos el dato en su posición.
+	// Escribe una línea en la caché.
 	// Este método guarda el dato en la línea especificada, no comprueba si ya estaba ocupado.
-	public void guardarLinea(int direccion, int[] linea, boolean setDirty)
+	public void escribirLinea(int direccion, int[] linea)
 	{
 		int tam_linea = linea.length;
 		int direccion_inicio = buscarPosicion(direccion);
@@ -130,8 +130,18 @@ public class CacheDirecta implements Cache
 		for (int i = 0; i < palabras_linea; i++)
 			datos[direccion_inicio][i] = linea[i];
 		
-		dirty[direccion_inicio] = setDirty;
+		dirty[direccion_inicio] = false;
 		valid[direccion_inicio] = true;
+	}
+	
+	// Reemplaza una línea en la caché por otra.
+	// La línea anterior la devuelve (para enviarla a otro nivel si estaba "sucia").
+	public int[] reemplazarLinea(int direccion, int[] linea)
+	{
+		int[] res = leerLinea(direccion);
+		escribirLinea(direccion, linea);
+		
+		return res;
 	}
 	
 	public String toString()
@@ -143,7 +153,7 @@ public class CacheDirecta implements Cache
 			//strB.append(String.format("0x%3S", Integer.toHexString(i << 2 << bits_pal)).replace(" ", "0")).append(" : ").append(Arrays.toString(datos[i]));
 			//strB.append("\n");
 			strB.append(String.format("0x%3S", Integer.toHexString(i << 2 << bits_pal)).replace(" ", "0"));
-			strB.append(" -> ").append(tags[i]).append(" : ").append(Arrays.toString(datos[i]));
+			strB.append(" -> ").append(Integer.toHexString(tags[i])).append(" : ").append(Arrays.toString(datos[i]));
 			strB.append(" ").append(valid[i]).append(" ").append(dirty[i]);
 			strB.append("\n");
 		}
