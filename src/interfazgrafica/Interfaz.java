@@ -17,9 +17,11 @@ public class Interfaz {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        NewJPanel p=new NewJPanel();
+        Vista v=new Vista();
         JFrame ventana=new JFrame("Programa");
-        ventana.setContentPane(p);
+        Controlador ctr= new Controlador(v);
+        v.controlador(ctr);
+        ventana.setContentPane(v);
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ventana.pack();
         ventana.setVisible(true);
