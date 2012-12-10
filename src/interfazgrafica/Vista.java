@@ -1,4 +1,6 @@
 package interfazgrafica;
+
+import java.awt.event.ActionListener;
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -8,12 +10,12 @@ package interfazgrafica;
  *
  * @author Manuel
  */
-public class NewJPanel extends javax.swing.JPanel {
+public class Vista extends javax.swing.JPanel {
 
     /**
      * Creates new form NewJPanel
      */
-    public NewJPanel() {
+    public Vista() {
         initComponents();
     }
 
@@ -42,7 +44,7 @@ public class NewJPanel extends javax.swing.JPanel {
         cargar_ram_t = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        niveles_cache_cb = new javax.swing.JComboBox();
         tam_cache1_t = new javax.swing.JTextField();
         tam_cache1_l = new javax.swing.JLabel();
         tam_cache2_l = new javax.swing.JLabel();
@@ -159,7 +161,7 @@ public class NewJPanel extends javax.swing.JPanel {
 
         jLabel1.setText("Niveles de Cache");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3" }));
+        niveles_cache_cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3" }));
 
         tam_cache1_l.setText("Tamaño de Cache 1");
 
@@ -189,7 +191,7 @@ public class NewJPanel extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(niveles_cache_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tam_cache2_t, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -212,7 +214,7 @@ public class NewJPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(niveles_cache_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tam_cache1_t, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tam_cache1_l))
                 .addGap(18, 18, 18)
@@ -371,7 +373,7 @@ public class NewJPanel extends javax.swing.JPanel {
     private javax.swing.JTabbedPane ejecucion_p;
     private javax.swing.JButton ejecutar_b;
     private javax.swing.JButton exportar_b;
-    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox niveles_cache_cb;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
@@ -394,5 +396,36 @@ public class NewJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField tam_pal_t;
     private javax.swing.JLabel tam_reg_l;
     private javax.swing.JTextField tam_reg_t;
+    
+    public static final String CBNCACHE="Niveles de cache";
     // End of variables declaration//GEN-END:variables
+    
+    public void controlador(ActionListener ctr)
+    {
+    	niveles_cache_cb.setActionCommand(CBNCACHE);
+    	niveles_cache_cb.addActionListener(ctr);
+    	
+    }
+    public String getnvCache()
+    {
+    	return niveles_cache_cb.getSelectedItem().toString();
+    }
+    public void nvCache(int n)
+    {
+    	if(n==1)
+    	{
+    		tam_cache2_t.setEditable(false);
+    		tam_cache3_t.setEditable(false);
+    	}
+    	else if(n==2)
+    	{
+    		tam_cache2_t.setEditable(true);
+    		tam_cache3_t.setEditable(false);
+    	}
+    	else if (n==3)
+    	{
+    		tam_cache2_t.setEditable(true);
+    		tam_cache3_t.setEditable(true);
+    	}
+    }
 }
