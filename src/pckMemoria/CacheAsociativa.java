@@ -8,20 +8,19 @@ import java.util.Random;
 
 public class CacheAsociativa implements Cache
 {
-	
 	// Cada una de las vías se implementa como una caché directa.
 	// De modo que el diseño es bastante simple.
 	private CacheDirecta vias[];
 	
 	private int entradas;
 	private int palabras_linea;
-	private PoliticasReemplazo politica;
+	private Politica politica;
 	
 	// En caché directa se recomienda usar tamaños de potencias de 2^x.
 	// En caché asociativa la división entradas/vías DEBE dar exacto (no decimales).
 	// También se recomienda que entradas sea potencia de 2 (y divisible entre vías).
 	// Estas comprobaciones deben ser echas antes de invocar a este constructor.
-	public CacheAsociativa(int _entradas, int _palabras_linea, int _vias, PoliticasReemplazo _politica)
+	public CacheAsociativa(int _entradas, int _palabras_linea, int _vias, PoliticasReemplazo _Tpolitica)
 	{
 		entradas = _entradas / _vias;
 		palabras_linea = _palabras_linea;
@@ -33,7 +32,7 @@ public class CacheAsociativa implements Cache
 		for (int i = 0; i < _vias; i++)
 			vias[i] = new CacheDirecta(entradas, palabras_linea);
 		
-		politica = _politica;
+		politica = new Politica(_Tpolitica, _entradas, _vias);
 	}
 	
 	// Para saber si un dato está, comprobamos todas las vías.
@@ -125,46 +124,17 @@ public class CacheAsociativa implements Cache
 		}
 	}
 	
-	private int elegirLineaReemplazo(int direccion)
-	{
-		int res = 0;
-		
-		switch(politica)
-		{
-			// Reemplaza la línea que menos se usa recientemente.
-			case LRU:
-				
-				
-			// Reemplaza el bloque que se ha usado menos veces.
-			case LFU:		
-				
-				
-			// Reemplaza el primer bloque que entró.
-			case FIFO:
-				
-				
-			// Reemplaza el primer bloque que entró y no se ha usado.
-			case SCHANC:
-
-			
-			// Reemplaza un bloque aleatorio.
-			default:
-				Random rand = new Random(new Date().getTime());
-				res = rand.nextInt(vias.length);
-		}
-		
-		return res;
-	}
-	
 	// Reemplaza una línea por otra. Devuelve la línea anterior.
 	// Usará la política de reemplazo para determinar qué línea se elimina.
 	public int[] reemplazarLinea(int direccion, int[] linea)
 	{
 		int res[] = new int[palabras_linea];
-		int via = elegirLineaReemplazo(direccion);
+		int via = politica.elegirViaReemplazo(buscarPosicion(direccion));
 		
 		res = vias[via].leerLinea(direccion);
 		vias[via].escribirLinea(direccion, linea);
+		
+		politica.nuevaLinea(buscarPosicion(direccion), via);
 		
 		return res;
 	}
@@ -195,4 +165,122 @@ public class CacheAsociativa implements Cache
 
 		return res;
 	}
+	
+	// Busco la posición en el array (entry) del dato.
+	private int buscarPosicion(int direccion)
+	{
+		// Primero hay que ignorar los 2 bits de offset:
+		// Los últimos bits del final son para seleccionar palabra, los ignoramos:
+		int pos = direccion >> 2 >> general.Op.bitsDireccionar(palabras_linea);;
+		
+		// Los siguientes bits son del índice.
+		// La entrada será el módulo del número de entradas.
+		return (int) (pos % entradas);
+	}
 }
+
+class Politica {
+	
+	private int entradas;
+	private int vias;
+	private int[][] datos_reemplazo;
+	private PoliticasReemplazo tipo;
+	
+	public Politica(PoliticasReemplazo _tipo, int _entradas, int _vias)
+	{
+		tipo = _tipo;
+		vias = _vias;
+		entradas = _entradas;
+		
+		datos_reemplazo = new int[entradas][vias];
+	}
+	
+	// Actualizar política cuando se inserta una nueva línea en una vía.
+	public void nuevaLinea(int entrada, int via)
+	{
+		switch(tipo)
+		{
+			// Los demás quedan invariables. A esta le asigno el tiempo.
+			case LRU:
+				datos_reemplazo[entrada][via] = (int)(System.currentTimeMillis());
+				break;
+
+			// Incrementa todos en 1 y añade esta con valor 0.
+			case LFU:
+			case FIFO:
+				for (int i=0; i < vias; i++)
+					datos_reemplazo[entrada][i]++;
+				datos_reemplazo[entrada][via] = 0;
+				break;
+				
+			// Cuenta como acceso.
+			case AGING:
+				for (int i=0; i < vias; i++)
+					datos_reemplazo[entrada][i] /= 10;
+				datos_reemplazo[entrada][via] += 10000000;
+		}
+	}
+	
+	// Elegir la vía que se reemplazará.
+	public int elegirViaReemplazo(int entrada)
+	{
+		int res = 0;
+		
+		switch(tipo)
+		{
+			// Valor más bajo (más antiguo).
+			case LRU:
+			case AGING:
+				for (int i = 0; i < vias; i++)
+				{
+					if (datos_reemplazo[entrada][i] < datos_reemplazo[entrada][res])
+						res = i;
+				}
+				break;
+			
+			// Valor más alto.
+			case LFU:
+			case FIFO:
+				for (int i = 0; i < vias; i++)
+				{
+					if (datos_reemplazo[entrada][i] > datos_reemplazo[entrada][res])
+						res = i;
+				}
+				break;
+				
+			// Aleatorio.
+			default:
+				Random rand = new Random(new Date().getTime());
+				res = rand.nextInt(vias);
+
+		}
+		
+		return res;
+	}
+	
+	/*switch(tipo)
+	{
+		// Reemplaza la línea que menos se usa recientemente.
+		case LRU:
+			
+			
+		// Reemplaza el bloque que se ha usado menos veces.
+		case LFU:		
+			
+			
+		// Reemplaza el primer bloque que entró.
+		case FIFO:
+			
+			
+		// Reemplaza el primer bloque que entró y no se ha usado.
+		case SCHANC:
+
+		
+		// Reemplaza un bloque aleatorio.
+		default:
+			Random rand = new Random(new Date().getTime());
+			res = rand.nextInt(vias.length);
+	}*/
+	
+}
+
