@@ -44,7 +44,7 @@ public class Global {
 		LRU,		// Menos usado recientemente - Reemplaza el bloque que hace más tiempo que no se ha usado.
 		LFU,		// Menos frecuencias de uso - Reemplaza el bloque que se ha usado menos veces.
 		FIFO,		// Primero entrar, primero salir - Reemplaza el primer bloque que entró.
-		SCHANC,		// FIFO, pero con 2 "oportunidades" antes de reemplazar un bloque.
+		AGING,		// Histórico de usos (32 bits).
 		RANDOM		// Aleatorio - Elimina un bloque al azar.
 	}
 	

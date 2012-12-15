@@ -1,5 +1,7 @@
 package pckMemoria;
 
+import general.Global.PoliticasReemplazo;
+
 // Jerarquía de memoria
 public class Jerarquia {
 	
@@ -11,6 +13,8 @@ public class Jerarquia {
 	{
 		System.arraycopy(_caches, 0, caches, 0, _caches.length);
 		memoria = _memoria;
+		
+		
 		
 		
 	}
