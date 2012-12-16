@@ -1,6 +1,7 @@
 package pckMemoria;
 
 import general.Global.PoliticasReemplazo;
+import general.MemoryException;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -50,28 +51,21 @@ public class CacheAsociativa implements Cache
 	}
 
 	// Compruebo si isDirty en la vía que esté.
-	public boolean lineaDirty(int direccion)
+	public boolean lineaDirty(int direccion) throws MemoryException
 	{
 		boolean isDirty = false;
-		int i = 0;
-		while (!isDirty && i < vias.length)
+		for (int i = 0; i < vias.length; i++)
 		{
 			if (vias[i].existeDato(direccion))
-				isDirty = vias[i].lineaDirty(direccion);
-			i++;
+				return vias[i].lineaDirty(direccion);
 		}
 		
-		return isDirty;
-	}
-
-	public int getTamanoLinea()
-	{
-		return palabras_linea;
+		throw new MemoryException("Comprobación de dirección inválida 0x" + Integer.toHexString(direccion));
 	}
 
 	// Si esto se ejecuta es porque sabemos que el dato está (en alguna vía).
 	// Compruebo en qué vía está y leo el dato.
-	public int consultarDato(int direccion)
+	public int consultarDato(int direccion) throws MemoryException
 	{
 		for (int i = 0; i < vias.length; i++)
 		{
@@ -80,25 +74,28 @@ public class CacheAsociativa implements Cache
 		}
 
 		// Nunca deberíamos llegar aquí...
-		return 0;
+		throw new MemoryException("Consulta de dato no existente en dirección 0x" + Integer.toHexString(direccion));
 	}
 
 	// Si esto se ejecuta es porque sabemos que el bloque del dato está (en alguna vía).
 	// Compruebo en qué vía está y guardo el dato.
-	public void modificarDato(int direccion, int dato)
+	public void modificarDato(int direccion, int dato) throws MemoryException
 	{
 		for (int i = 0; i < vias.length; i++)
 		{
 			if (vias[i].existeDato(direccion))
 			{
 				vias[i].modificarDato(direccion, dato);
-				break;
+				return;
 			}
 		}
+		
+		// Nunca deberíamos llegar aquí...
+		throw new MemoryException("Modificación de dato no existente en dirección 0x" + Integer.toHexString(direccion));
 	}
 
 	// Leer una línea.
-	public int[] leerLinea(int direccion)
+	public int[] leerLinea(int direccion) throws MemoryException
 	{
 		for (int i = 0; i < vias.length; i++)
 		{
@@ -107,26 +104,29 @@ public class CacheAsociativa implements Cache
 		}
 
 		// Nunca deberíamos llegar aquí...
-		return null;
+		throw new MemoryException("Lectura de línea no existente en dirección 0x" + Integer.toHexString(direccion));
 	}
 
 	// Guardar una línea.
 	// Si ejecutamos este método es porque al menos existe una vía libre donde guardarlo.
-	public void escribirLinea(int direccion, int[] linea)
+	public void escribirLinea(int direccion, int[] linea) throws MemoryException
 	{
 		for (int i = 0; i < vias.length; i++)
 		{
 			if (vias[i].lineaLibre(direccion))
 			{
 				vias[i].escribirLinea(direccion, linea);
-				break;
+				return;
 			}
 		}
+		
+		// Nunca deberíamos llegar aquí...
+		throw new MemoryException("Escritura de línea imposible en dirección 0x" + Integer.toHexString(direccion));
 	}
 	
 	// Reemplaza una línea por otra. Devuelve la línea anterior.
 	// Usará la política de reemplazo para determinar qué línea se elimina.
-	public int[] reemplazarLinea(int direccion, int[] linea)
+	public int[] reemplazarLinea(int direccion, int[] linea) throws MemoryException
 	{
 		int res[] = new int[palabras_linea];
 		int via = politica.elegirViaReemplazo(buscarPosicion(direccion));
@@ -151,6 +151,11 @@ public class CacheAsociativa implements Cache
 		}
 		
 		return strB.toString();
+	}
+	
+	public int getTamanoLinea()
+	{
+		return palabras_linea;
 	}
 
 	// Me determina si una dirección está libre o no.
@@ -195,6 +200,36 @@ class Politica {
 		datos_reemplazo = new int[entradas][vias];
 	}
 	
+	// Actualizar política cuando se accede a una línea en una vía.
+	public void accesoLinea(int entrada, int via)
+	{
+		switch(tipo)
+		{
+			// Los demás quedan invariables. A esta le asigno el tiempo.
+			case LRU:
+				datos_reemplazo[entrada][via] = (int)(System.currentTimeMillis());
+				break;
+
+			// Incrementa todos en 1 excepto esta.
+			case LFU:
+				for (int i=0; i < vias; i++)
+					if (i != via)
+					datos_reemplazo[entrada][i]++;
+				break;
+				
+			// No hace nada, sólo importa el orden de entrada.
+			case FIFO:
+				break;
+				
+			// Acceso.
+			case AGING:
+				for (int i=0; i < vias; i++)
+					datos_reemplazo[entrada][i] /= 10;
+				datos_reemplazo[entrada][via] += 10000000;
+				break;
+		}
+	}
+	
 	// Actualizar política cuando se inserta una nueva línea en una vía.
 	public void nuevaLinea(int entrada, int via)
 	{
@@ -218,6 +253,7 @@ class Politica {
 				for (int i=0; i < vias; i++)
 					datos_reemplazo[entrada][i] /= 10;
 				datos_reemplazo[entrada][via] += 10000000;
+				break;
 		}
 	}
 	
@@ -256,31 +292,6 @@ class Politica {
 		}
 		
 		return res;
-	}
-	
-	/*switch(tipo)
-	{
-		// Reemplaza la línea que menos se usa recientemente.
-		case LRU:
-			
-			
-		// Reemplaza el bloque que se ha usado menos veces.
-		case LFU:		
-			
-			
-		// Reemplaza el primer bloque que entró.
-		case FIFO:
-			
-			
-		// Reemplaza el primer bloque que entró y no se ha usado.
-		case SCHANC:
-
-		
-		// Reemplaza un bloque aleatorio.
-		default:
-			Random rand = new Random(new Date().getTime());
-			res = rand.nextInt(vias.length);
-	}*/
-	
+	}	
 }
 
