@@ -1,11 +1,8 @@
 package pckMemoria;
 
-import general.Global.PoliticasReemplazo;
+import general.Global.TiposReemplazo;
 import general.MemoryException;
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.Random;
 
 public class CacheAsociativa implements Cache
 {
@@ -15,13 +12,13 @@ public class CacheAsociativa implements Cache
 	
 	private int entradas;
 	private int palabras_linea;
-	private Politica politica;
+	public PoliticaReemplazo politica;
 	
 	// En caché directa se recomienda usar tamaños de potencias de 2^x.
 	// En caché asociativa la división entradas/vías DEBE dar exacto (no decimales).
 	// También se recomienda que entradas sea potencia de 2 (y divisible entre vías).
 	// Estas comprobaciones deben ser echas antes de invocar a este constructor.
-	public CacheAsociativa(int _entradas, int _palabras_linea, int _vias, PoliticasReemplazo _Tpolitica)
+	public CacheAsociativa(int _entradas, int _palabras_linea, int _vias, TiposReemplazo _Tpolitica)
 	{
 		entradas = _entradas / _vias;
 		palabras_linea = _palabras_linea;
@@ -33,7 +30,7 @@ public class CacheAsociativa implements Cache
 		for (int i = 0; i < _vias; i++)
 			vias[i] = new CacheDirecta(entradas, palabras_linea);
 		
-		politica = new Politica(_Tpolitica, _entradas, _vias);
+		politica = new PoliticaReemplazo(_Tpolitica, _entradas, _vias);
 	}
 	
 	// Para saber si un dato está, comprobamos todas las vías.
@@ -70,7 +67,10 @@ public class CacheAsociativa implements Cache
 		for (int i = 0; i < vias.length; i++)
 		{
 			if (vias[i].existeDato(direccion))
+			{
+				politica.accesoLinea(buscarPosicion(direccion), i);
 				return vias[i].consultarDato(direccion);
+			}
 		}
 
 		// Nunca deberíamos llegar aquí...
@@ -85,6 +85,7 @@ public class CacheAsociativa implements Cache
 		{
 			if (vias[i].existeDato(direccion))
 			{
+				politica.accesoLinea(buscarPosicion(direccion), i);
 				vias[i].modificarDato(direccion, dato);
 				return;
 			}
@@ -182,116 +183,5 @@ public class CacheAsociativa implements Cache
 		// La entrada será el módulo del número de entradas.
 		return (int) (pos % entradas);
 	}
-}
-
-class Politica {
-	
-	private int entradas;
-	private int vias;
-	private int[][] datos_reemplazo;
-	private PoliticasReemplazo tipo;
-	
-	public Politica(PoliticasReemplazo _tipo, int _entradas, int _vias)
-	{
-		tipo = _tipo;
-		vias = _vias;
-		entradas = _entradas;
-		
-		datos_reemplazo = new int[entradas][vias];
-	}
-	
-	// Actualizar política cuando se accede a una línea en una vía.
-	public void accesoLinea(int entrada, int via)
-	{
-		switch(tipo)
-		{
-			// Los demás quedan invariables. A esta le asigno el tiempo.
-			case LRU:
-				datos_reemplazo[entrada][via] = (int)(System.currentTimeMillis());
-				break;
-
-			// Incrementa todos en 1 excepto esta.
-			case LFU:
-				for (int i=0; i < vias; i++)
-					if (i != via)
-					datos_reemplazo[entrada][i]++;
-				break;
-				
-			// No hace nada, sólo importa el orden de entrada.
-			case FIFO:
-				break;
-				
-			// Acceso.
-			case AGING:
-				for (int i=0; i < vias; i++)
-					datos_reemplazo[entrada][i] /= 10;
-				datos_reemplazo[entrada][via] += 10000000;
-				break;
-		}
-	}
-	
-	// Actualizar política cuando se inserta una nueva línea en una vía.
-	public void nuevaLinea(int entrada, int via)
-	{
-		switch(tipo)
-		{
-			// Los demás quedan invariables. A esta le asigno el tiempo.
-			case LRU:
-				datos_reemplazo[entrada][via] = (int)(System.currentTimeMillis());
-				break;
-
-			// Incrementa todos en 1 y añade esta con valor 0.
-			case LFU:
-			case FIFO:
-				for (int i=0; i < vias; i++)
-					datos_reemplazo[entrada][i]++;
-				datos_reemplazo[entrada][via] = 0;
-				break;
-				
-			// Cuenta como acceso.
-			case AGING:
-				for (int i=0; i < vias; i++)
-					datos_reemplazo[entrada][i] /= 10;
-				datos_reemplazo[entrada][via] += 10000000;
-				break;
-		}
-	}
-	
-	// Elegir la vía que se reemplazará.
-	public int elegirViaReemplazo(int entrada)
-	{
-		int res = 0;
-		
-		switch(tipo)
-		{
-			// Valor más bajo (más antiguo).
-			case LRU:
-			case AGING:
-				for (int i = 0; i < vias; i++)
-				{
-					if (datos_reemplazo[entrada][i] < datos_reemplazo[entrada][res])
-						res = i;
-				}
-				break;
-			
-			// Valor más alto.
-			case LFU:
-			case FIFO:
-				for (int i = 0; i < vias; i++)
-				{
-					if (datos_reemplazo[entrada][i] > datos_reemplazo[entrada][res])
-						res = i;
-				}
-				break;
-				
-			// Aleatorio.
-			default:
-				Random rand = new Random(new Date().getTime());
-				res = rand.nextInt(vias);
-
-		}
-		
-		return res;
-	}	
 }
 

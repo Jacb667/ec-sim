@@ -1,6 +1,6 @@
 package pckMemoria;
 
-import general.Global.PoliticasReemplazo;
+import general.Global.TiposReemplazo;
 
 // Jerarquía de memoria
 public class Jerarquia {
