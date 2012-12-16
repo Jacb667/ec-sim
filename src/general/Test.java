@@ -1,6 +1,6 @@
 package general;
 
-import general.Global.PoliticasReemplazo;
+import general.Global.TiposReemplazo;
 
 import java.util.Arrays;
 
@@ -72,7 +72,7 @@ public class Test {
 				System.out.println(c.consultarDato(0xE0));*/
 			
 			System.out.println("Cache Asociativa: \n");
-			Cache c = new CacheAsociativa(16, 4, 4, PoliticasReemplazo.RANDOM);
+			CacheAsociativa c = new CacheAsociativa(16, 4, 4, TiposReemplazo.LRU);
 			
 			c.escribirLinea(0x0000, new int[]{0,1,2,3});
 			c.escribirLinea(0xFF00, new int[]{99,100,101,102});
@@ -89,6 +89,8 @@ public class Test {
 			System.out.println(c.consultarDato(0xFF04));
 			
 			c.modificarDato(0xFF04, 900);
+			
+			System.out.println(c.politica.toString());
 			
 			System.out.println("Reemplazo: " + Arrays.toString(c.reemplazarLinea(0xFF00, new int[]{55,66,77,88})));
 			
