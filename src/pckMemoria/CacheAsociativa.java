@@ -30,7 +30,7 @@ public class CacheAsociativa implements Cache
 		for (int i = 0; i < _vias; i++)
 			vias[i] = new CacheDirecta(entradas, palabras_linea);
 		
-		politica = new PoliticaReemplazo(_Tpolitica, _entradas, _vias);
+		politica = new PoliticaReemplazo(_Tpolitica, entradas, vias.length);
 	}
 	
 	// Para saber si un dato está, comprobamos todas las vías.
@@ -117,6 +117,7 @@ public class CacheAsociativa implements Cache
 			if (vias[i].lineaLibre(direccion))
 			{
 				vias[i].escribirLinea(direccion, linea);
+				politica.nuevaLinea(buscarPosicion(direccion), i);
 				return;
 			}
 		}
@@ -133,8 +134,9 @@ public class CacheAsociativa implements Cache
 		int via = politica.elegirViaReemplazo(buscarPosicion(direccion));
 		
 		res = vias[via].leerLinea(direccion);
-		vias[via].escribirLinea(direccion, linea);
 		
+		// Escribimos directamente en la vía seleccionada.
+		vias[via].escribirLinea(direccion, linea);
 		politica.nuevaLinea(buscarPosicion(direccion), via);
 		
 		return res;
@@ -146,9 +148,8 @@ public class CacheAsociativa implements Cache
 		
 		for (int i = 0; i < vias.length; i++)
 		{
-			strB.append("-- Via ").append(i).append("\n\n");
+			strB.append("-- Via ").append(i).append("\n");
 			strB.append(vias[i].toString()).append("\n");
-			strB.append("\n");
 		}
 		
 		return strB.toString();
