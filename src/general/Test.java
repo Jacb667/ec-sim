@@ -72,12 +72,12 @@ public class Test {
 				System.out.println(c.consultarDato(0xE0));*/
 			
 			System.out.println("Cache Asociativa: \n");
-			CacheAsociativa c = new CacheAsociativa(16, 4, 4, TiposReemplazo.LRU);
+			CacheAsociativa c = new CacheAsociativa(16, 4, 4, TiposReemplazo.LFU);
 			
 			c.escribirLinea(0x0000, new int[]{0,1,2,3});
 			c.escribirLinea(0xFF00, new int[]{99,100,101,102});
 			c.escribirLinea(0xCC00, new int[]{55,56,57,25});
-			
+			System.out.println(c.politica.toString());
 			//c.modificarDato(0x20, 76);
 			
 			System.out.println(c.toString());
@@ -92,7 +92,9 @@ public class Test {
 			
 			System.out.println(c.politica.toString());
 			
-			System.out.println("Reemplazo: " + Arrays.toString(c.reemplazarLinea(0xFF00, new int[]{55,66,77,88})));
+			System.out.println("Reemplazo: " + Arrays.toString(c.reemplazarLinea(0x1400, new int[]{5,6,7,8})));
+			System.out.println(c.politica.toString());
+			System.out.println("Reemplazo: " + Arrays.toString(c.reemplazarLinea(0x1000, new int[]{55,66,77,88})));
 			
 			System.out.println(c.toString());
 			//c.modificarDato(0x14, 0, true);

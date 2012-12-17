@@ -119,7 +119,7 @@ public class PoliticaReemplazo {
 	// Imprimir política entera (para debug)
 	public String toString()
 	{
-		StringBuilder strB = new StringBuilder("Politica " + tipo.toString());
+		StringBuilder strB = new StringBuilder("Politica " + tipo.toString() + "\n");
 		for (int i = 0; i < datos_reemplazo.length; i++)
 		{
 			strB.append(Arrays.toString(datos_reemplazo[i]));
