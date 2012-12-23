@@ -6,7 +6,6 @@ import java.util.Arrays;
 
 import pckMemoria.Cache;
 import pckMemoria.CacheAsociativa;
-import pckMemoria.CacheDirecta;
 import pckMemoria.MemoriaPrincipal;
 
 public class Test {
@@ -92,9 +91,9 @@ public class Test {
 			
 			System.out.println(c.politica.toString());
 			
-			System.out.println("Reemplazo: " + Arrays.toString(c.reemplazarLinea(0x1400, new int[]{5,6,7,8})));
+			System.out.println("Reemplazo: " + c.reemplazarLinea(0x1400, new int[]{5,6,7,8}));
 			System.out.println(c.politica.toString());
-			System.out.println("Reemplazo: " + Arrays.toString(c.reemplazarLinea(0x1000, new int[]{55,66,77,88})));
+			System.out.println("Reemplazo: " + c.reemplazarLinea(0x1000, new int[]{55,66,77,88}));
 			
 			System.out.println(c.toString());
 			//c.modificarDato(0x14, 0, true);
