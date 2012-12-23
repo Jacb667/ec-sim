@@ -10,7 +10,7 @@ public interface Cache {
 	
 	// Comprobaciones
 	public boolean existeDato(int direccion);
-	public boolean lineaDirty(int direccion) throws MemoryException;
+	//public boolean lineaDirty(int direccion) throws MemoryException;
 	public boolean lineaLibre(int direccion);
 	
 	// Tamaño de línea.
@@ -23,5 +23,5 @@ public interface Cache {
 	// Operaciones para líneas (cache)
 	public int[] leerLinea(int direccion) throws MemoryException;
 	public void escribirLinea(int direccion, int[] linea) throws MemoryException;
-	public int[] reemplazarLinea(int direccion, int[] linea) throws MemoryException;
+	public LineaReemplazo reemplazarLinea(int direccion, int[] linea) throws MemoryException;
 }

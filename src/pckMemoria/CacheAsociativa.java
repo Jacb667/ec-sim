@@ -47,19 +47,6 @@ public class CacheAsociativa implements Cache
 		return res;
 	}
 
-	// Compruebo si isDirty en la vía que esté.
-	public boolean lineaDirty(int direccion) throws MemoryException
-	{
-		boolean isDirty = false;
-		for (int i = 0; i < vias.length; i++)
-		{
-			if (vias[i].existeDato(direccion))
-				return vias[i].lineaDirty(direccion);
-		}
-		
-		throw new MemoryException("Comprobación de dirección inválida 0x" + Integer.toHexString(direccion));
-	}
-
 	// Si esto se ejecuta es porque sabemos que el dato está (en alguna vía).
 	// Compruebo en qué vía está y leo el dato.
 	public int consultarDato(int direccion) throws MemoryException
@@ -94,7 +81,7 @@ public class CacheAsociativa implements Cache
 		// Nunca deberíamos llegar aquí...
 		throw new MemoryException("Modificación de dato no existente en dirección 0x" + Integer.toHexString(direccion));
 	}
-
+	
 	// Leer una línea.
 	public int[] leerLinea(int direccion) throws MemoryException
 	{
@@ -128,15 +115,13 @@ public class CacheAsociativa implements Cache
 	
 	// Reemplaza una línea por otra. Devuelve la línea anterior.
 	// Usará la política de reemplazo para determinar qué línea se elimina.
-	public int[] reemplazarLinea(int direccion, int[] linea) throws MemoryException
+	public LineaReemplazo reemplazarLinea(int direccion, int[] linea) throws MemoryException
 	{
-		int res[] = new int[palabras_linea];
 		int via = politica.elegirViaReemplazo(buscarPosicion(direccion));
 		
-		res = vias[via].leerLinea(direccion);
+		// Reemplazamos. Devolverá null si la línea no estaba sucia.
+		LineaReemplazo res = vias[via].reemplazarLinea(direccion, linea);
 		
-		// Escribimos directamente en la vía seleccionada.
-		vias[via].escribirLinea(direccion, linea);
 		politica.nuevaLinea(buscarPosicion(direccion), via);
 		
 		return res;
