@@ -16,7 +16,6 @@ public class CacheDirecta implements Cache
 	private int palabras_linea;
 	private int entradas;
 
-	private int bits_tag;
 	private int bits_dir;
 	private int bits_pal;
 
@@ -30,20 +29,14 @@ public class CacheDirecta implements Cache
 		palabras_linea = _palabras_linea;
 		entradas = _entradas;
 		
-		// Eliminar offset
-		int bits_restantes = general.Global.LONGITUD_BITS - 2;
+		// Bits direccionamiento.
 		if (palabras_linea > 1)
 		{
 			bits_pal = general.Op.bitsDireccionar(palabras_linea);
 			// Eliminar bits palabra.
-			bits_restantes -= bits_pal;
 		}
 		// Direccionar entradas
 		bits_dir = general.Op.bitsDireccionar(entradas);
-		bits_restantes -= bits_dir;
-		
-		// Tag
-		bits_tag = bits_restantes;
 		
 		tags = new int[entradas];
 		valid = new boolean[entradas];
@@ -57,7 +50,7 @@ public class CacheDirecta implements Cache
 	
 	// Me determina si la línea en esa dirección está "sucia", es decir,
 	// si se debe enviar a memoria principal antes de escribir en ella.
-	public boolean lineaDirty(int direccion)
+	private boolean lineaDirty(int direccion)
 	{
 		return dirty[buscarPosicion(direccion)];
 	}
@@ -123,7 +116,6 @@ public class CacheDirecta implements Cache
 	// Este método guarda el dato en la línea especificada, no comprueba si ya estaba ocupado.
 	public void escribirLinea(int direccion, int[] linea)
 	{
-		int tam_linea = linea.length;
 		int direccion_inicio = buscarPosicion(direccion);
 		
 		tags[direccion_inicio] = extraerTag(direccion);
@@ -135,10 +127,15 @@ public class CacheDirecta implements Cache
 	}
 	
 	// Reemplaza una línea en la caché por otra.
-	// La línea anterior la devuelve (para enviarla a otro nivel si estaba "sucia").
-	public int[] reemplazarLinea(int direccion, int[] linea)
+	// Si la línea estaba "sucia", la devuelve para poder enviarla a otro nivel.
+	public LineaReemplazo reemplazarLinea(int direccion, int[] linea)
 	{
-		int[] res = leerLinea(direccion);
+		LineaReemplazo res = null;
+		
+		// La devolvemos solamente si está "sucia".
+		if (lineaDirty(direccion))
+			res = new LineaReemplazo(getDireccionGuardado(direccion), leerLinea(direccion));
+		
 		escribirLinea(direccion, linea);
 		
 		return res;
@@ -149,9 +146,6 @@ public class CacheDirecta implements Cache
 		StringBuilder strB = new StringBuilder();
 		for (int i = 0; i < datos.length; i++)
 		{
-			// Dirección (hex) : Dato (dec)
-			//strB.append(String.format("0x%3S", Integer.toHexString(i << 2 << bits_pal)).replace(" ", "0")).append(" : ").append(Arrays.toString(datos[i]));
-			//strB.append("\n");
 			strB.append(String.format("0x%3S", Integer.toHexString(i << 2 << bits_pal)).replace(" ", "0"));
 			strB.append(" -> ").append(Integer.toHexString(tags[i])).append(" : ").append(Arrays.toString(datos[i]));
 			strB.append(" ").append(valid[i]).append(" ").append(dirty[i]);
@@ -182,6 +176,24 @@ public class CacheDirecta implements Cache
 		// Los siguientes bits son del índice.
 		// La entrada será el módulo del número de entradas.
 		return (int) (pos % entradas);
+	}
+	
+	// Me devuelve la dirección de la línea guardada donde iría dirección.
+	private int getDireccionGuardado(int direccion)
+	{
+		int posicion = buscarPosicion(direccion);
+		
+		// Cogemos el TAG guardado.
+		int dir = tags[posicion];
+		
+		// bits_dir y sumamos la posición.
+		dir = dir << bits_dir;
+		dir += posicion;
+		
+		// Añadimos bits de palabra y offset.
+		dir = dir << bits_pal << 2;
+
+		return dir;
 	}
 	
 	// Extrae el tag de una dirección.
