@@ -23,5 +23,6 @@ public interface Cache {
 	// Operaciones para líneas (cache)
 	public int[] leerLinea(int direccion) throws MemoryException;
 	public void escribirLinea(int direccion, int[] linea) throws MemoryException;
+	public void actualizarLinea(int direccion, int[] linea);
 	public LineaReemplazo reemplazarLinea(int direccion, int[] linea) throws MemoryException;
 }

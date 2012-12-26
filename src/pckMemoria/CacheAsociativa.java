@@ -113,6 +113,20 @@ public class CacheAsociativa implements Cache
 		throw new MemoryException("Escritura de línea imposible en dirección 0x" + Integer.toHexString(direccion));
 	}
 	
+	// Actualizar una línea existente.
+	public void actualizarLinea(int direccion, int[] linea)
+	{
+		for (int i = 0; i < vias.length; i++)
+		{
+			if (vias[i].existeDato(direccion))
+			{
+				politica.accesoLinea(buscarPosicion(direccion), i);
+				vias[i].escribirLinea(direccion, linea);
+				return;
+			}
+		}
+	}
+	
 	// Reemplaza una línea por otra. Devuelve la línea anterior.
 	// Usará la política de reemplazo para determinar qué línea se elimina.
 	public LineaReemplazo reemplazarLinea(int direccion, int[] linea) throws MemoryException

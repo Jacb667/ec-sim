@@ -9,12 +9,14 @@ public class JerarquiaMemoria {
 	
 	private Cache caches[];
 	private MemoriaPrincipal memoria;
+	private int tam_linea;
 	
 	
 	public JerarquiaMemoria(Cache[] _caches, MemoriaPrincipal _memoria)
 	{
 		System.arraycopy(_caches, 0, caches, 0, _caches.length);
 		memoria = _memoria;
+		tam_linea = caches[0].getTamanoLinea();
 	}
 	
 	// Leer un dato.
@@ -85,7 +87,11 @@ public class JerarquiaMemoria {
 			{
 				Log.println(3, "Existen posiciones libres para traer la línea");
 				// Traemos la línea desde el siguiente nivel de caché.
-				c.escribirLinea(direccion, traerLinea(direccion, c));
+				traerLinea(0, direccion);
+				
+				// El dato ya debería existir.
+				if (!c.existeDato(direccion))
+					throw new MemoryException("Dato inexistente en cache L0");
 				
 				// El dato ya está aquí. Lo modifico.
 				Log.println(2, "Dato modificado en cache L0");
@@ -97,14 +103,11 @@ public class JerarquiaMemoria {
 			{
 				Log.println(3, "NO existen posiciones libres para traer la línea");
 				// Traemos la línea desde el siguiente nivel de caché.
-				LineaReemplazo linR = c.reemplazarLinea(direccion, traerLinea(direccion, c));
+				traerLinea(0, direccion);
 				
-				// Si era dirty, tenemos que enviarla al siguiente nivel.
-				if (linR != null)
-				{
-					Log.println(2, "Se actualiza la línea reemplazada \"dirty\" en los demás niveles");
-					actualizarLinea(linR);
-				}
+				// El dato ya debería existir.
+				if (!c.existeDato(direccion))
+					throw new MemoryException("Dato inexistente en cache L0");
 				
 				// El dato ya está aquí. Lo modifico.
 				Log.println(2, "Dato modificado en cache L0");
@@ -115,68 +118,109 @@ public class JerarquiaMemoria {
 		}
 	}
 
-	// Trae una línea desde el siguiente nivel de caché donde se encuentre.
-	// Si no está en otro nivel superior, la trae desde RAM.
-	private int[] traerLinea(int direccion, Cache c) throws MemoryException
-	{
-		for (int j = 1; j < caches.length; j++)
-		{
-			if (caches[j].existeDato(direccion))
-			{
-				Log.println(2, "Traigo línea desde cache L" + (j+1));
-				return caches[j].leerLinea(direccion);
-			}
-		}
-		
-		// Si aun así no existe (no se ha podido traer) leemos desde RAM.
-		Log.println(2, "Traigo línea desde memoria principal");
-		if (memoria.existeDato(direccion))
-			return memoria.leerLinea(direccion, c.getTamanoLinea());
-		
-		throw new MemoryException("No se ha encontrado la dirección 0x" + Integer.toHexString(direccion));
-	}
-	
-	// Actualiza una línea "sucia" en los siguientes niveles de caché.
-	private void actualizarLinea(LineaReemplazo lineaR) throws MemoryException
-	{
-		int direccion = lineaR.getDireccion();
-		int[] linea = lineaR.getLinea();
-		
-		Log.println(3, "Se actualiza la línea 0x" + Integer.toHexString(direccion));
-		
-		for (int j = 1; j < caches.length; j++)
-		{
-			if (caches[j].existeDato(direccion))
-			{
-				Log.println(3, "Actualizo cache L" + (j+1));
-				caches[j].escribirLinea(direccion, linea);
-			}
-		}
-		
-		// Si aun así no existe (no se ha podido traer) leemos desde RAM.
-		if (memoria.existeDato(direccion))
-		{
-			Log.println(3, "Actualizo memoria principal");
-			memoria.guardarLinea(direccion, linea);
-		}
-		
-		throw new MemoryException("No se ha encontrado la dirección 0x" + Integer.toHexString(direccion));
-	}
-	
-	
-	
-	
 	// Mueve una línea hasta el nivel actual.
-	private void traerLineaACache(int nivel)
+	private void traerLinea(int nivel, int direccion) throws MemoryException
 	{
+		int nivel_sig = nivel+1;
 		
+		if (nivel_sig <= 0 || nivel_sig > caches.length)
+			throw new MemoryException("Fallo en nivel de jerarquía de cache. Acceso a L" + nivel_sig);
+		
+		// La búsqueda es recursiva. Si no existe en L0, se trae desde L1.
+		// Si no existe en L1, se trae desde el siguiente, etc.
+		// Siguiente nivel es memoria.
+		if (nivel_sig == caches.length)
+		{
+			MemoriaPrincipal sig = memoria;
+			Cache act = caches[nivel];
+			
+			// Esto siempre debería ocurrir...
+			if (sig.existeDato(direccion))
+			{
+				int[] linea = sig.leerLinea(direccion, tam_linea);
+				
+				// Si hay hueco en la caché donde almacenar (nivel actual).
+				if (act.lineaLibre(direccion))
+				{
+					act.escribirLinea(direccion, linea);
+					return;
+				}
+				else  // Si no hay hueco.
+				{
+					LineaReemplazo linR = act.reemplazarLinea(direccion, linea);
+					
+					// Si era dirty, tenemos que enviarla al siguiente nivel.
+					if (linR != null)
+					{
+						Log.println(2, "Se actualiza la línea reemplazada \"dirty\" en los demás niveles");
+						actualizarLinea(linR, nivel);
+					}
+					return;
+				}
+			}
+			else
+				throw new MemoryException("Fallo al traer desde memoria la línea 0x" + Integer.toHexString(direccion));
+		}
+		else
+		{
+			Cache sig = caches[nivel+1];  // De donde leo el dato.
+			Cache act = caches[nivel];  // A donde traigo el dato.
+			
+			// Llamada recursiva para traer a los demás niveles.
+			if (!sig.existeDato(direccion))
+				traerLinea(nivel+1, direccion);
+			
+			// Una vez hemos llegado aquí, el dato debe existir en el nivel anterior.
+			if (sig.existeDato(direccion))
+			{
+				int[] linea = sig.leerLinea(direccion);
+				
+				// Si hay hueco en la caché donde almacenar (nivel actual).
+				if (act.lineaLibre(direccion))
+				{
+					act.escribirLinea(direccion, linea);
+					return;
+				}
+				else  // Si no hay hueco.
+				{
+					LineaReemplazo linR = act.reemplazarLinea(direccion, linea);
+					
+					// Si era dirty, tenemos que enviarla al siguiente nivel.
+					if (linR != null)
+					{
+						Log.println(2, "Se actualiza la línea reemplazada \"dirty\" en los demás niveles");
+						actualizarLinea(linR, nivel);
+					}
+					
+					return;
+				}
+			}
+			else
+				throw new MemoryException("Fallo al traer desde cache la línea 0x" + Integer.toHexString(direccion));
+		}
 	}
 	
 	
-	// Actualizar línea
-	private void actualizarLineaCache(int nivel, int[] linea)
+	// Actualizar línea desde el nivel actual.
+	// Actualiza todos los niveles superiores.
+	private void actualizarLinea(LineaReemplazo linR, int nivel) throws MemoryException
 	{
+		int nivel_sig = nivel+1;
 		
+		if (nivel_sig <= 0 || nivel_sig > caches.length)
+			throw new MemoryException("Fallo en nivel de jerarquía de cache. Acceso a L" + nivel_sig);
+		
+		int direccion = linR.getDireccion();
+		int[] linea = linR.getLinea();
+		
+		for (int i = nivel_sig; i < caches.length; i++)
+		{
+			Log.println(3, "Actualizo en cache L" + i + " la dirección 0x" + Integer.toHexString(direccion));
+			caches[i].actualizarLinea(direccion, linea);
+		}
+		
+		Log.println(3, "Actualizo en memoria la dirección 0x" + Integer.toHexString(direccion));
+		memoria.guardarLinea(direccion, linea);
 	}
 
 }
