@@ -126,6 +126,12 @@ public class CacheDirecta implements Cache
 		valid[direccion_inicio] = true;
 	}
 	
+	// Actualiza una línea existente.
+	public void actualizarLinea(int direccion, int[] linea)
+	{
+		escribirLinea(direccion, linea);
+	}
+	
 	// Reemplaza una línea en la caché por otra.
 	// Si la línea estaba "sucia", la devuelve para poder enviarla a otro nivel.
 	public LineaReemplazo reemplazarLinea(int direccion, int[] linea)
