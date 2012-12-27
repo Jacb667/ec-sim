@@ -7,7 +7,7 @@ public class Log {
 	// 2 = mostrar inicio de operaciones, hits, miss, etc.
 	// 3 = más detallado, muestra traza completa de operaciones.
 	// 4 = muestra la traza completa de todo.
-	private static int nivel = 0;
+	private static int nivel = 4;
 
 	public static int getNivel()
 	{
