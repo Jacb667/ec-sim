@@ -5,29 +5,20 @@ import javax.swing.JTable;
 import pckMemoria.Cache;
 import pckMemoria.MemoriaPrincipal;
 
-public class TablaInterfaz extends JTable {
+public class TablaInterfaz {
 	
 	private MemoriaPrincipal memoria;
 	private Cache cache;
 	private boolean t;
 	
-	public boolean isCellEditable(int rowIndex, int vColIndex)
-	{
-		return false;
-	}
-	
 	public TablaInterfaz(MemoriaPrincipal mem)
 	{
-		
-		setFillsViewportHeight(true);
 		t = false;
 		memoria = mem;
 	}
 	
 	public TablaInterfaz(Cache c)
 	{
-		
-		setFillsViewportHeight(true);
 		t = true;
 		cache = c;
 	}
@@ -42,9 +33,19 @@ public class TablaInterfaz extends JTable {
 	
 	private JTable crearTablaMemoria()
 	{
-
+		String[] columnas = memoria.getColumnas();
+		String[][] datos = memoria.getDatos();
 		
-
+		JTable jt = new JTable(datos, columnas) {
+			public boolean isCellEditable(int rowIndex, int vColIndex) { return false; }
+			};
+		jt.setFillsViewportHeight(true);
+		
+		jt.setRowSelectionAllowed(false);
+		jt.setCellSelectionEnabled(false);
+		jt.setColumnSelectionAllowed(false);
+		
+		return jt;
 	}
 	
 	private JTable crearTablaCache()
