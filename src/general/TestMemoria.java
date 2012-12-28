@@ -9,6 +9,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import componentes.Tabla;
+
 import pckMemoria.*;
 
 public class TestMemoria {
@@ -80,7 +82,7 @@ public class TestMemoria {
 			
 			frame2.setVisible(true);*/
 			
-			TablaInterfaz tabla1 = new TablaInterfaz(memoria);
+			Tabla tabla1 = new Tabla(memoria.getDatos(), memoria.getColumnas());
 			
 			JFrame frame = new JFrame();
 			frame.setTitle( "Memoria" );
@@ -90,7 +92,7 @@ public class TestMemoria {
 			topPanel.setLayout( new BorderLayout() );
 			frame.getContentPane().add( topPanel );
 			
-			JScrollPane scrollPane = new JScrollPane( table );
+			JScrollPane scrollPane = new JScrollPane( tabla1 );
 			topPanel.add( scrollPane, BorderLayout.CENTER );
 			
 			frame.setVisible(true);
