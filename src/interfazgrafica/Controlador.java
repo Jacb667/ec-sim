@@ -1,5 +1,5 @@
 package interfazgrafica;
-
+import general.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -16,7 +16,7 @@ public class Controlador implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		String comando = e.getActionCommand();
 		
-		if(comando.equals(v.CBNCACHE))
+		if(comando.equals(Global.CBNCACHE))
 		{
 			int x=Integer.parseInt(v.getnvCache());
 			v.nvCache(x);
