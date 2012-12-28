@@ -1,6 +1,9 @@
 
 package pckMemoria;
 
+import javax.swing.JPanel;
+import javax.swing.JTable;
+
 /* 
  * La memoria RAM se considera que no tiene vías ni es asociativa.
  * Por lo tanto, conociendo el tamaño en bytes podemos determinar sus líneas (de 1 palabra cada una).
@@ -99,5 +102,28 @@ public class MemoriaPrincipal
 	public boolean estaLibre(int direccion)
 	{
 		return !valid[direccion >> 2];
+	}
+	
+	
+	/*
+	 *  Funciones para JTable (interfaz gráfica).
+	 */
+	public String[] getColumnas()
+	{
+		return new String[]{"Dirección", "Dato", "Estado"};
+	}
+	
+	public String[][] getDatos()
+	{
+		String[][] datos = new String[entradas][3];
+		
+		for (int i = 0; i < entradas; i++)
+		{
+			// Dirección, dato, valido
+			String[] linea = {Integer.toHexString(i<<2), String.valueOf(leerDato(i<<2)), estaLibre(i<<2) ? "L" : "V"};
+			datos[(int) Math.floor(i)] = linea;
+		}
+		
+		return datos;
 	}
 }
