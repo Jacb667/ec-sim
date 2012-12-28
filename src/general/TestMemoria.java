@@ -1,5 +1,14 @@
 package general;
 
+import interfazgrafica.TablaInterfaz;
+
+import java.awt.BorderLayout;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+
 import pckMemoria.*;
 
 public class TestMemoria {
@@ -41,6 +50,52 @@ public class TestMemoria {
 			System.out.println("Cache L1:\n" + caches[1].toString());
 			System.out.println("Memoria:\n" + memoria.toString(true));
 			
+			/*JFrame frame = new JFrame();
+			frame.setTitle( "Memoria" );
+			frame.setSize( 300, 200 );
+			
+			JPanel topPanel = new JPanel();
+			topPanel.setLayout( new BorderLayout() );
+			frame.getContentPane().add( topPanel );
+			
+			JTable table = memoria.crearJTable();
+			
+			JScrollPane scrollPane = new JScrollPane( table );
+			topPanel.add( scrollPane, BorderLayout.CENTER );
+			
+			frame.setVisible(true);
+			
+			JFrame frame2 = new JFrame();
+			frame2.setTitle( "Cache 0" );
+			frame2.setSize( 300, 200 );
+			
+			JPanel topPanel2 = new JPanel();
+			topPanel2.setLayout( new BorderLayout() );
+			frame2.getContentPane().add( topPanel2 );
+			
+			JTable table2 = memoria.crearJTable();
+			
+			JScrollPane scrollPane2 = new JScrollPane( table2 );
+			topPanel2.add( scrollPane2, BorderLayout.CENTER );
+			
+			frame2.setVisible(true);*/
+			
+			TablaInterfaz tabla1 = new TablaInterfaz(memoria);
+			
+			JFrame frame = new JFrame();
+			frame.setTitle( "Memoria" );
+			frame.setSize( 300, 200 );
+			
+			JPanel topPanel = new JPanel();
+			topPanel.setLayout( new BorderLayout() );
+			frame.getContentPane().add( topPanel );
+			
+			JScrollPane scrollPane = new JScrollPane( table );
+			topPanel.add( scrollPane, BorderLayout.CENTER );
+			
+			frame.setVisible(true);
+			
+	
 		}
 		catch (MemoryException e)
 		{
