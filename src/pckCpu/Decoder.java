@@ -1,5 +1,7 @@
 package pckCpu;
 import java.util.*;
+import general.*;
+import general.Global.Intrucciones;
 
 public class Decoder
 {
@@ -117,6 +119,7 @@ public class Decoder
 	public void decFunc(String func, String reg1, String elem2)
 	{
 		func=func.toUpperCase();
+		
 		switch(func)
 		{
 			case"ADD": System.out.println("Operacion suma");
