@@ -1,16 +1,10 @@
 package componentes;
 
-import java.awt.Color;
-
-import javax.swing.CellRendererPane;
 import javax.swing.JTable;
+import javax.swing.table.TableColumn;
 
+@SuppressWarnings("serial")
 public class Tabla extends JTable {
-	
-	private static final Color ColorA = new Color(241, 245, 250);
-	private static final Color ColorB = new Color(0xd9d9d9);
-	
-	//private static final CellRendererPane CELL_RENDER_PANE = new CellRendererPane();
 	
 	// Nuestra propia JTable, ya que necesito realizar algunas modificaciones.
 	public Tabla(Object[][] data, Object[] columns)
@@ -21,20 +15,41 @@ public class Tabla extends JTable {
 	
 	private void init()
 	{
-		setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		//setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		
 		setTableHeader(createDefaultTableHeader());
 		getTableHeader().setReorderingAllowed(false);
 		setOpaque(false);
-		//setIntercellSpacing(new Dimension(0, 0));
-		// turn off grid painting as we'll handle this manually in order to paint
-		// grid lines over the entire viewport.
-		//setShowGrid(true);
+		
+		// Bloqueo la redimensión de las columnas.
+		tamañoColumna(0, 100);
+		tamañoColumna(1, 100);
+		tamañoColumna(2, 50);
+		
+		// Desactivamos la selección de filas y columnas.
+		setRowSelectionAllowed(false);
+		setCellSelectionEnabled(false);
+		setColumnSelectionAllowed(false);
 	}
 	
 	// Ninguna celda es editable por el usuario.
 	public boolean isCellEditable(int rowIndex, int vColIndex)
 	{ 
 		return false;
+	}
+	
+	// Esta sirve para que salga el Checkbox en la columna booleana.
+	public Class getColumnClass(int c)
+	{
+        return getValueAt(0, c).getClass();
+    }
+	
+	private void tamañoColumna(int c, int tam)
+	{
+		TableColumn columna = getColumnModel().getColumn(c);
+		columna.setMinWidth(tam);
+		//columna.setMaxWidth(tam);
+		columna.setPreferredWidth(tam);
 	}
 
 }
