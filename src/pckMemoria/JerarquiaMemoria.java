@@ -1,6 +1,5 @@
 package pckMemoria;
 
-import general.Global.TiposReemplazo;
 import general.Log;
 import general.MemoryException;
 

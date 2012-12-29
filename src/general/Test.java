@@ -2,8 +2,6 @@ package general;
 
 import general.Global.TiposReemplazo;
 
-import java.util.Arrays;
-
 import pckMemoria.Cache;
 import pckMemoria.CacheAsociativa;
 import pckMemoria.MemoriaPrincipal;
