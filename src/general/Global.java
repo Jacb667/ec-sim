@@ -4,10 +4,17 @@ package general;
 
 public class Global {
 	
+	// Propiedades CPU
 	final static public int LONGITUD_BITS = 32;
 	final static public int TAMAÑO_MEMORIA = 1024;
 	final static public int TAMAÑO_BANCO = 32;
-	public static final String CBNCACHE="Niveles de cache";
+	
+	// Propiedades tablas interfaz
+	final static public int TAMAÑO_CELDA_NORMAL = 60;
+	final static public int TAMAÑO_CELDA_BOOLEAN = 40;
+
+	
+	final static public String CBNCACHE = "Niveles de cache";
 
 	public enum Intrucciones
 	{

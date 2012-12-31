@@ -1,7 +1,9 @@
 package pckMemoria;
 
+import general.Global;
 import general.MemoryException;
 
+import java.awt.Dimension;
 import java.util.Arrays;
 
 /* Tamaño:
@@ -254,6 +256,20 @@ public class CacheDirecta implements Cache
 		}
 		
 		return res;
+	}
+	
+	public Dimension[] getTamaños()
+	{
+		int tamaño = 4 + palabras_linea;
+		Dimension[] dim = new Dimension[tamaño];
+		
+		for (int i = 0; i < tamaño-2; i++)
+			dim[i] = new Dimension(Global.TAMAÑO_CELDA_NORMAL, 0);
+		
+		dim[tamaño-1] = new Dimension(Global.TAMAÑO_CELDA_BOOLEAN, Global.TAMAÑO_CELDA_BOOLEAN*2);
+		dim[tamaño-2] = new Dimension(Global.TAMAÑO_CELDA_BOOLEAN, Global.TAMAÑO_CELDA_BOOLEAN*2);
+		
+		return dim;
 	}
 	
 	public Object getDato(int linea, int posicion)

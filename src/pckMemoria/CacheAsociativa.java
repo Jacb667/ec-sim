@@ -1,5 +1,8 @@
 package pckMemoria;
 
+import java.awt.Dimension;
+
+import general.Global;
 import general.Global.TiposReemplazo;
 import general.MemoryException;
 
@@ -210,6 +213,20 @@ public class CacheAsociativa implements Cache
 		return columnas;
 	}
 	
+	public Dimension[] getTamaños()
+	{
+		int tamaño = 4 + palabras_linea;
+		Dimension[] dim = new Dimension[tamaño];
+		
+		for (int i = 0; i < tamaño-2; i++)
+			dim[i] = new Dimension(Global.TAMAÑO_CELDA_NORMAL, 0);
+		
+		dim[tamaño-1] = new Dimension(Global.TAMAÑO_CELDA_BOOLEAN, Global.TAMAÑO_CELDA_BOOLEAN*2);
+		dim[tamaño-2] = new Dimension(Global.TAMAÑO_CELDA_BOOLEAN, Global.TAMAÑO_CELDA_BOOLEAN*2);
+		
+		return dim;
+	}
+	
 	public Object[][] getDatos()
 	{
 		int tamaño = 4 + palabras_linea;
@@ -240,7 +257,6 @@ public class CacheAsociativa implements Cache
 				{
 					dato = new Boolean[vias.length];
 					// Recorro cada una de las cachés para montar el array de cada campo.
-					System.out.println("campo="+campo);
 					for (int via = 0; via < vias.length; via++)
 						dato[via] = Boolean.valueOf(String.valueOf(vias[via].getDato(lin, campo)));
 				}

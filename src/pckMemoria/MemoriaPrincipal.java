@@ -1,6 +1,9 @@
 
 package pckMemoria;
 
+import java.awt.Dimension;
+
+import general.Global;
 import general.MemoryException;
 
 /* 
@@ -113,6 +116,17 @@ public class MemoriaPrincipal
 	public String[] getColumnas()
 	{
 		return new String[]{"Dirección", "Dato", "Válida"};
+	}
+	
+	public Dimension[] getTamaños()
+	{
+		Dimension[] dim = new Dimension[3];
+		
+		dim[0] = new Dimension(Global.TAMAÑO_CELDA_NORMAL,0);
+		dim[1] = new Dimension(Global.TAMAÑO_CELDA_NORMAL,0);
+		dim[2] = new Dimension(Global.TAMAÑO_CELDA_BOOLEAN, Global.TAMAÑO_CELDA_BOOLEAN*2);
+		
+		return dim;
 	}
 	
 	public Object[][] getDatos()

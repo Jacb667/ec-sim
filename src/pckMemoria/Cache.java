@@ -1,5 +1,7 @@
 package pckMemoria;
 
+import java.awt.Dimension;
+
 import general.MemoryException;
 
 public interface Cache {
@@ -29,4 +31,5 @@ public interface Cache {
 	// Funciones para JTable (interfaz gráfica)
 	public String[] getColumnas();
 	public Object[][] getDatos();
+	public Dimension[] getTamaños();
 }

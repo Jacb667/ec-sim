@@ -1,5 +1,9 @@
 package componentes;
 
+import java.awt.Dimension;
+
+import general.Global;
+
 import javax.swing.JTable;
 import javax.swing.JViewport;
 import javax.swing.table.TableCellRenderer;
@@ -12,9 +16,6 @@ import pckMemoria.MemoriaPrincipal;
 @SuppressWarnings("serial")
 public class Tabla extends JTable {
 	
-	private final int TAMAÑO_DEFECTO = 60;
-	private final int TAMAÑO_BOOLEAN = 40;
-	
 	// Nuestra propia JTable, ya que necesito realizar algunas modificaciones.
 	public Tabla(Object[][] data, Object[] columns)
 	{
@@ -26,12 +27,16 @@ public class Tabla extends JTable {
 	{
 		super(memoria.getDatos(), memoria.getColumnas());
 		init();
+		// Bloqueo la redimensión de las columnas.
+		tamañoColumnas(this, memoria.getTamaños());
 	}
 	
 	public Tabla(Cache cache)
 	{
 		super(cache.getDatos(), cache.getColumnas());
 		init();
+		// Bloqueo la redimensión de las columnas.
+		tamañoColumnas(this, cache.getTamaños());
 	}
 	
 	// Inicializar
@@ -42,10 +47,7 @@ public class Tabla extends JTable {
 		setTableHeader(createDefaultTableHeader());
 		getTableHeader().setReorderingAllowed(false);
 		setOpaque(false);
-		
-		// Bloqueo la redimensión de las columnas.
-		tamañoColumnas();
-		
+
 		// Desactivamos la selección de filas y columnas.
 		setRowSelectionAllowed(false);
 		setCellSelectionEnabled(false);
@@ -81,25 +83,18 @@ public class Tabla extends JTable {
     }
 	
 	// Inicializa el tamaño de las columnas dependiendo del tipo de dato.
-	private void tamañoColumnas()
+	public static void tamañoColumnas(JTable tabla, Dimension[] tamaños)
 	{
-		for (int i = 0; i < getColumnCount(); i++)
+		for (int i = 0; i < tamaños.length; i++)
 		{
-			TableColumn columna = getColumnModel().getColumn(i);
-			if (getColumnClass(i) == Boolean.class)
-			{
-				columna.setMinWidth(TAMAÑO_BOOLEAN);
-				columna.setMaxWidth(TAMAÑO_BOOLEAN*2);
-				columna.setPreferredWidth(TAMAÑO_BOOLEAN);
-			}
-			else
-			{
-				columna.setMinWidth(TAMAÑO_DEFECTO);
-				columna.setPreferredWidth(TAMAÑO_DEFECTO);
-			}
+			TableColumn columna = tabla.getColumnModel().getColumn(i);
+			columna.setMinWidth(tamaños[i].width);
+			columna.setPreferredWidth(tamaños[i].width);
+			if (tamaños[i].height != 0)
+				columna.setMaxWidth(tamaños[i].height);
 		}
 	}
-	
+
 	public void setRenderTablaEnCelda()
 	{
 		TableCellRenderer jTableCellRenderer = new RenderTablaEnCelda();
