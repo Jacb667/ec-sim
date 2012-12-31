@@ -2,6 +2,8 @@ package pckMemoria;
 
 import java.awt.Dimension;
 
+import componentes.Tabla;
+
 import general.MemoryException;
 
 public interface Cache {
@@ -32,4 +34,7 @@ public interface Cache {
 	public String[] getColumnas();
 	public Object[][] getDatos();
 	public Dimension[] getTamaños();
+	
+	public Tabla getInterfaz();
+	public void setInterfaz(Tabla interfaz);
 }

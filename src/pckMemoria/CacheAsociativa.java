@@ -2,6 +2,8 @@ package pckMemoria;
 
 import java.awt.Dimension;
 
+import componentes.Tabla;
+
 import general.Global;
 import general.Global.TiposReemplazo;
 import general.MemoryException;
@@ -16,6 +18,8 @@ public class CacheAsociativa implements Cache
 	private int entradas;
 	private int palabras_linea;
 	public PoliticaReemplazo politica;
+	
+	private Tabla interfaz;
 	
 	// En caché directa se recomienda usar tamaños de potencias de 2^x.
 	// En caché asociativa la división entradas/vías DEBE dar exacto (no decimales).
@@ -266,6 +270,16 @@ public class CacheAsociativa implements Cache
 		}
 		
 		return res;
+	}
+
+	public Tabla getInterfaz()
+	{
+		return interfaz;
+	}
+
+	public void setInterfaz(Tabla interfaz)
+	{
+		this.interfaz = interfaz;
 	}
 }
 

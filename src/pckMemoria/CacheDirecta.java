@@ -6,6 +6,8 @@ import general.MemoryException;
 import java.awt.Dimension;
 import java.util.Arrays;
 
+import componentes.Tabla;
+
 /* Tamaño:
  * 
  * Palabras de 4 bytes.
@@ -27,6 +29,8 @@ public class CacheDirecta implements Cache
 	private boolean[] valid;
 	private boolean[] dirty;
 	private int[/*lineas*/][/*palabras*/] datos;
+	
+	private Tabla interfaz;
 
 	public CacheDirecta(int _entradas, int _palabras_linea) throws MemoryException
 	{
@@ -228,7 +232,7 @@ public class CacheDirecta implements Cache
 		columnas[tamaño-2] = "Válida";
 		columnas[tamaño-1] = "Dirty";
 		for (int i = 0; i < palabras_linea; i++)
-			columnas[i+2] = "Palabra " + String.valueOf(i);
+			columnas[i+2] = "Palabra " + i;
 		
 		return columnas;
 	}
@@ -250,9 +254,9 @@ public class CacheDirecta implements Cache
 			linea[tamaño-2] = new Boolean(valid[i]);
 			
 			for (int j = 0; j < palabras_linea; j++)
-				linea[j+2] = datos[i][j];
+				linea[j+2] = String.valueOf(datos[i][j]);
 
-			res[(int) Math.floor(i)] = linea;
+			res[i] = linea;
 		}
 		
 		return res;
@@ -275,13 +279,23 @@ public class CacheDirecta implements Cache
 	public Object getDato(int linea, int posicion)
 	{
 		if (posicion == 0)  // Tag
-			return tags[linea];
+			return String.valueOf(tags[linea]);
 		else if (posicion > 0 && posicion <= palabras_linea)  // Palabra
-			return datos[linea][posicion-1];
+			return String.valueOf(datos[linea][posicion-1]);
 		else if (posicion == palabras_linea+1)  // Valid
-			return valid[linea];
+			return new Boolean(valid[linea]);
 		else
-			return dirty[linea];
+			return new Boolean(dirty[linea]);
+	}
+
+	public Tabla getInterfaz()
+	{
+		return interfaz;
+	}
+
+	public void setInterfaz(Tabla interfaz)
+	{
+		this.interfaz = interfaz;
 	}
 }
 

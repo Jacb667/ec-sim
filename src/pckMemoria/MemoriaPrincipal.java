@@ -3,6 +3,8 @@ package pckMemoria;
 
 import java.awt.Dimension;
 
+import componentes.Tabla;
+
 import general.Global;
 import general.MemoryException;
 
@@ -19,6 +21,7 @@ public class MemoriaPrincipal
 	private int entradas;
 	private int[] mem;
 	private boolean[] valid;
+	private Tabla interfaz;
 	
 	public MemoriaPrincipal(int _entradas) throws MemoryException
 	{
@@ -52,6 +55,12 @@ public class MemoriaPrincipal
 	{
 		mem[direccion >> 2] = dato;
 		valid[direccion >> 2] = true;
+		
+		if (interfaz != null)
+		{
+			interfaz.setValueAt(String.valueOf(dato), direccion >> 2, 1);
+			interfaz.setValueAt(true, direccion >> 2, 2);
+		}
 	}
 	
 	// Dirección física, hay que eliminar los 2 últimos bits.
@@ -142,5 +151,15 @@ public class MemoriaPrincipal
 		}
 		
 		return datos;
+	}
+
+	public Tabla getInterfaz()
+	{
+		return interfaz;
+	}
+
+	public void setInterfaz(Tabla interfaz)
+	{
+		this.interfaz = interfaz;
 	}
 }
