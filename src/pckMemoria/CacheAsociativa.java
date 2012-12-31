@@ -183,5 +183,65 @@ public class CacheAsociativa implements Cache
 		// La entrada será el módulo del número de entradas.
 		return (int) (pos % entradas);
 	}
+	
+	
+	/*
+	 *  Funciones para JTable (interfaz gráfica).
+	 */
+	public String[] getColumnas()
+	{
+		int tamaño = 4 + palabras_linea;
+		String[] columnas = new String[tamaño];
+		columnas[0] = "Línea";
+		columnas[1] = "Tag";
+		columnas[tamaño-2] = "Válida";
+		columnas[tamaño-1] = "Dirty";
+		for (int i = 0; i < palabras_linea; i++)
+			columnas[i+2] = "Palabra " + String.valueOf(i);
+		
+		return columnas;
+	}
+	
+	public Object[][] getDatos()
+	{
+		int tamaño = 4 + palabras_linea;
+		Object[][] res = new Object[entradas][tamaño];
+		
+		// Leemos la primera columna, que es la de las direcciones (sólo una)
+		Object[][] primera = vias[0].getDatos();
+		for (int lin = 0; lin < entradas; lin++)
+			res[lin][0] = primera[lin][0];
+		
+		for (int lin = 0; lin < entradas; lin++)
+		{
+			// Recorro palabras de cada línea
+			for (int campo = 0; campo < tamaño-1; campo++)
+			{
+				Object[] dato;
+				// Tamaño-1 es el final.
+				// Tamaño-2 es dirty.
+				// Tamaño-3 es valid.
+				if (campo < tamaño-3)
+				{
+					dato = new String[vias.length];
+					// Recorro cada una de las cachés para montar el array de cada campo.
+					for (int via = 0; via < vias.length; via++)
+						dato[via] = String.valueOf(vias[via].getDato(lin, campo));
+				}
+				else
+				{
+					dato = new Boolean[vias.length];
+					// Recorro cada una de las cachés para montar el array de cada campo.
+					System.out.println("campo="+campo);
+					for (int via = 0; via < vias.length; via++)
+						dato[via] = Boolean.valueOf(String.valueOf(vias[via].getDato(lin, campo)));
+				}
+				res[lin][campo+1] = dato;
+
+			}
+		}
+		
+		return res;
+	}
 }
 

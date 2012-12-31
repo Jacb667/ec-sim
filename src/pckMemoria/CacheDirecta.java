@@ -207,5 +207,60 @@ public class CacheDirecta implements Cache
 	{
 		return direccion >> 2 >> bits_pal >> bits_dir;
 	}
+	
+	
+	/*
+	 *  Funciones para JTable (interfaz gráfica).
+	 */
+	public String[] getColumnas()
+	{
+		int tamaño = 4 + palabras_linea;
+		String[] columnas = new String[tamaño];
+		columnas[0] = "Línea";
+		columnas[1] = "Tag";
+		columnas[tamaño-2] = "Válida";
+		columnas[tamaño-1] = "Dirty";
+		for (int i = 0; i < palabras_linea; i++)
+			columnas[i+2] = "Palabra " + String.valueOf(i);
+		
+		return columnas;
+	}
+	
+	public Object[][] getDatos()
+	{
+		int tamaño = 4 + palabras_linea;
+		Object[][] res = new Object[entradas][tamaño];
+		
+		for (int i = 0; i < entradas; i++)
+		{
+			int direccion = i << 2 << bits_pal;
+			
+			Object[] linea = new Object[tamaño];
+			
+			linea[0] = String.format("0x%4S", Integer.toHexString(direccion)).replace(" ", "0");
+			linea[1] = String.valueOf(tags[i]);
+			linea[tamaño-1] = new Boolean(dirty[i]);
+			linea[tamaño-2] = new Boolean(valid[i]);
+			
+			for (int j = 0; j < palabras_linea; j++)
+				linea[j+2] = datos[i][j];
+
+			res[(int) Math.floor(i)] = linea;
+		}
+		
+		return res;
+	}
+	
+	public Object getDato(int linea, int posicion)
+	{
+		if (posicion == 0)  // Tag
+			return tags[linea];
+		else if (posicion > 0 && posicion <= palabras_linea)  // Palabra
+			return datos[linea][posicion-1];
+		else if (posicion == palabras_linea+1)  // Valid
+			return valid[linea];
+		else
+			return dirty[linea];
+	}
 }
 
