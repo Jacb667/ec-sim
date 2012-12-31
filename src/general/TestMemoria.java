@@ -32,7 +32,7 @@ public class TestMemoria {
 			
 			// 2 niveles de cache directa
 			caches[0] = new CacheDirecta(4,4);  // Caché de 4 entradas 4 palabras por línea.
-			caches[1] = new CacheAsociativa(16,4,8,TiposReemplazo.LRU);  // Caché de 8 entradas 4 palabras por línea.
+			caches[1] = new CacheAsociativa(8,4,8,TiposReemplazo.LRU);  // Caché de 8 entradas 4 palabras por línea.
 			
 			// Memoria principal con 128 posiciones.
 			MemoriaPrincipal memoria = new MemoriaPrincipal(128);
@@ -117,14 +117,14 @@ public class TestMemoria {
 				}
 			}*/
 		}
-		/*catch (MemoryException e)
+		catch (MemoryException e)
 		{
 			System.err.println(e);
 			e.printStackTrace();
-		}*/
+		}
 		catch (Exception e)
 		{
-			//e.printStackTrace();
+			e.printStackTrace();
 		}
 	}
 
