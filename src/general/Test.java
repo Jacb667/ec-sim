@@ -27,8 +27,8 @@ public class Test {
 			
 			System.out.println("StringFormat: " + String.format("%16s", Integer.toBinaryString(num3)).replace(" ", "0"));
 			
-			System.out.println("Bits: " + general.Op.bitsNecesarios(num));
-			System.out.println("Bits dir: " + general.Op.bitsDireccionar(num4));
+			System.out.println("Bits: " + Global.bitsNecesarios(num));
+			System.out.println("Bits dir: " + Global.bitsDireccionar(num4));
 			
 			// Memoria
 			System.out.println("--- Memoria --- \n");

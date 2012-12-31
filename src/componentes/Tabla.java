@@ -2,8 +2,6 @@ package componentes;
 
 import java.awt.Dimension;
 
-import general.Global;
-
 import javax.swing.JTable;
 import javax.swing.JViewport;
 import javax.swing.table.TableCellRenderer;
