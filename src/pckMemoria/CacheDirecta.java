@@ -1,5 +1,7 @@
 package pckMemoria;
 
+import general.MemoryException;
+
 import java.util.Arrays;
 
 /* Tamaño:
@@ -24,8 +26,11 @@ public class CacheDirecta implements Cache
 	private boolean[] dirty;
 	private int[/*lineas*/][/*palabras*/] datos;
 
-	public CacheDirecta(int _entradas, int _palabras_linea)
+	public CacheDirecta(int _entradas, int _palabras_linea) throws MemoryException
 	{
+		if (_entradas < 1 || _palabras_linea < 1)
+			throw new MemoryException("Error en inicialización de caché.");
+		
 		palabras_linea = _palabras_linea;
 		entradas = _entradas;
 		

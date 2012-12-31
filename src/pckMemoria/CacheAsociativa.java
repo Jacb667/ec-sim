@@ -17,11 +17,16 @@ public class CacheAsociativa implements Cache
 	// En caché directa se recomienda usar tamaños de potencias de 2^x.
 	// En caché asociativa la división entradas/vías DEBE dar exacto (no decimales).
 	// También se recomienda que entradas sea potencia de 2 (y divisible entre vías).
-	// Estas comprobaciones deben ser echas antes de invocar a este constructor.
-	public CacheAsociativa(int _entradas, int _palabras_linea, int _vias, TiposReemplazo _Tpolitica)
+	public CacheAsociativa(int _entradas, int _palabras_linea, int _vias, TiposReemplazo _Tpolitica) throws MemoryException
 	{
+		if (_vias < 1)
+			throw new MemoryException("Error en inicialización de caché.");
+		
 		entradas = _entradas / _vias;
 		palabras_linea = _palabras_linea;
+		
+		if (entradas <= 0 || _entradas % _vias != 0 || _palabras_linea < 1)
+			throw new MemoryException("Error en inicialización de caché.");
 		
 		// Creamos el array de vías
 		vias = new CacheDirecta[_vias];
@@ -167,7 +172,10 @@ public class CacheAsociativa implements Cache
 		boolean res = false;
 		int i = 0;
 		while (!res && i < vias.length)
+		{
 			res = vias[i].lineaLibre(direccion);
+			i++;
+		}
 
 		return res;
 	}
