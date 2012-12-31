@@ -43,7 +43,7 @@ public class RenderTablaEnCelda implements TableCellRenderer {
 				public int getRowCount() { return passed.length; }
 				public Object getValueAt(int rowIndex, int columnIndex) {
 					return passed[rowIndex]; }
-				public boolean isCellEditable(int row, int col){ return true; }
+				public boolean isCellEditable(int row, int col){ return false; }
 				public Class<? extends Object> getColumnClass(int c)
 				{
 					Object valor = getValueAt(0, c);
