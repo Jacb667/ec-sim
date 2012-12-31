@@ -39,6 +39,7 @@ public class RenderTablaEnCelda implements TableCellRenderer {
 			 *fields and that will be embedded in the main table */
 			return new JTable( new AbstractTableModel() 
 			{
+				private static final long serialVersionUID = 1L;
 				public int getColumnCount() { return 1; }
 				public int getRowCount() { return passed.length; }
 				public Object getValueAt(int rowIndex, int columnIndex) {

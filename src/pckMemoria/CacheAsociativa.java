@@ -188,7 +188,7 @@ public class CacheAsociativa implements Cache
 	{
 		// Primero hay que ignorar los 2 bits de offset:
 		// Los últimos bits del final son para seleccionar palabra, los ignoramos:
-		int pos = direccion >> 2 >> general.Op.bitsDireccionar(palabras_linea);;
+		int pos = direccion >> 2 >> Global.bitsDireccionar(palabras_linea);;
 		
 		// Los siguientes bits son del índice.
 		// La entrada será el módulo del número de entradas.

@@ -8,6 +8,8 @@ import javax.swing.JFrame;
 
 public class VentanaLimitada extends JFrame {
 	
+	private static final long serialVersionUID = 1L;
+
 	// Esta ventana está limitada a unas dimensiones mínimas y máximas.
 	@Override
 	public void paint(Graphics g)

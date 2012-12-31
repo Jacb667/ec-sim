@@ -39,11 +39,11 @@ public class CacheDirecta implements Cache
 		// Bits direccionamiento.
 		if (palabras_linea > 1)
 		{
-			bits_pal = general.Op.bitsDireccionar(palabras_linea);
+			bits_pal = Global.bitsDireccionar(palabras_linea);
 			// Eliminar bits palabra.
 		}
 		// Direccionar entradas
-		bits_dir = general.Op.bitsDireccionar(entradas);
+		bits_dir = Global.bitsDireccionar(entradas);
 		
 		tags = new int[entradas];
 		valid = new boolean[entradas];
