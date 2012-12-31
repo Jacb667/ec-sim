@@ -117,8 +117,9 @@ public class MemoriaPrincipal
 		for (int i = 0; i < entradas; i++)
 		{
 			// Dirección, dato, valido
-			Object[] linea = {String.format("0x%4S", Integer.toHexString(i << 2)).replace(" ", "0"), String.valueOf(leerDato(i<<2)), new Boolean(!estaLibre(i<<2))};
-			datos[(int) Math.floor(i)] = linea;
+			int direccion = i << 2;
+			Object[] linea = {String.format("0x%4S", Integer.toHexString(direccion)).replace(" ", "0"), String.valueOf(mem[i]), new Boolean(valid[i])};
+			datos[i] = linea;
 		}
 		
 		return datos;

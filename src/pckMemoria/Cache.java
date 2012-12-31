@@ -25,4 +25,8 @@ public interface Cache {
 	public void escribirLinea(int direccion, int[] linea) throws MemoryException;
 	public void actualizarLinea(int direccion, int[] linea);
 	public LineaReemplazo reemplazarLinea(int direccion, int[] linea) throws MemoryException;
+	
+	// Funciones para JTable (interfaz gráfica)
+	public String[] getColumnas();
+	public Object[][] getDatos();
 }
