@@ -1,6 +1,8 @@
 
 package pckMemoria;
 
+import general.MemoryException;
+
 /* 
  * La memoria RAM se considera que no tiene vías ni es asociativa.
  * Por lo tanto, conociendo el tamaño en bytes podemos determinar sus líneas (de 1 palabra cada una).
@@ -15,8 +17,11 @@ public class MemoriaPrincipal
 	private int[] mem;
 	private boolean[] valid;
 	
-	public MemoriaPrincipal(int _entradas)
+	public MemoriaPrincipal(int _entradas) throws MemoryException
 	{
+		if (_entradas < 1)
+			throw new MemoryException("Error en inicialización de memoria.");
+			
 		// Entradas debe ser divisible entre palabras_linea.
 		entradas = _entradas;
 		mem = new int[entradas];
