@@ -2,6 +2,7 @@ package pckMemoria;
 
 import general.Log;
 import general.MemoryException;
+import general.Log.Flags;
 
 // Jerarquía de memoria
 public class JerarquiaMemoria {
@@ -9,7 +10,6 @@ public class JerarquiaMemoria {
 	private Cache caches[];
 	private MemoriaPrincipal memoria;
 	private int tam_linea;
-	
 	
 	public JerarquiaMemoria(Cache[] _caches, MemoriaPrincipal _memoria)
 	{
@@ -23,6 +23,7 @@ public class JerarquiaMemoria {
 	// Leer un dato.
 	public int leerDato(int direccion) throws MemoryException
 	{
+		Log.report(Flags.MEMORY_READ);
 		Log.println(3, "Lectura en memoria 0x" + Integer.toHexString(direccion));
 		
 		// Busco en caché L0. Si no está, debemos traer la línea completa.
@@ -32,11 +33,13 @@ public class JerarquiaMemoria {
 		{
 			// Caché HIT L0
 			Log.println(2, "Dato encontrado en cache L0");
+			Log.report(Flags.CACHE_HIT, 0);
 			return c.consultarDato(direccion);
 		}
 		else  // No existe el dato (MISS)
 		{
 			Log.println(3, "El dato NO existe en cache L0");
+			Log.report(Flags.CACHE_MISS, 0);
 			// Traemos la línea desde el siguiente nivel de caché.
 			traerLinea(0, direccion);
 
@@ -53,6 +56,7 @@ public class JerarquiaMemoria {
 	// Se utiliza la política Write-Back y Write-Allocate
 	public void guardarDato(int direccion, int dato) throws MemoryException
 	{
+		Log.report(Flags.MEMORY_WRITE);
 		Log.println(3, "Guardado en memoria 0x" + Integer.toHexString(direccion));
 		
 		// Siempre escribimos en la cache L0.
@@ -63,6 +67,7 @@ public class JerarquiaMemoria {
 		{
 			Log.println(3, "El dato existe en cache L0");
 			Log.println(2, "Dato modificado en cache L0");
+			Log.report(Flags.CACHE_HIT, 0);
 			c.modificarDato(direccion, dato);
 			// TODO: Write-Through.
 			return;
@@ -70,6 +75,7 @@ public class JerarquiaMemoria {
 		else  // No existe el dato (MISS)
 		{
 			Log.println(3, "El dato NO existe en cache L0");
+			Log.report(Flags.CACHE_MISS, 0);
 			// Traemos la línea desde el siguiente nivel de caché.
 			traerLinea(0, direccion);
 				
@@ -86,9 +92,9 @@ public class JerarquiaMemoria {
 	}
 
 	// Mueve una línea hasta el nivel actual.
-	private void traerLinea(int nivel, int direccion) throws MemoryException
+	private void traerLinea(int nivel_act, int direccion) throws MemoryException
 	{
-		int nivel_sig = nivel+1;
+		int nivel_sig = nivel_act+1;
 		
 		if (nivel_sig <= 0 || nivel_sig > caches.length)
 			throw new MemoryException("Fallo en nivel de jerarquía de cache. Acceso a L" + nivel_sig);
@@ -98,9 +104,9 @@ public class JerarquiaMemoria {
 		// Siguiente nivel es memoria.
 		if (nivel_sig == caches.length)
 		{
-			Log.println(3, "Trayendo bloque desde memoria a L" + nivel);
+			Log.println(3, "Trayendo bloque desde memoria a L" + nivel_act);
 			MemoriaPrincipal sig = memoria;
-			Cache act = caches[nivel];
+			Cache act = caches[nivel_act];
 			
 			// Esto siempre debería ocurrir...
 			if (!sig.existeDato(direccion))
@@ -111,7 +117,7 @@ public class JerarquiaMemoria {
 			// Si hay hueco en la caché donde almacenar (nivel actual).
 			if (act.lineaLibre(direccion))
 			{
-				Log.println(3, "Hay hueco libre en L" + nivel + " para traer el bloque");
+				Log.println(3, "Hay hueco libre en L" + nivel_act + " para traer el bloque");
 				act.escribirLinea(direccion, linea);
 			}
 			else  // Si no hay hueco.
@@ -122,21 +128,27 @@ public class JerarquiaMemoria {
 				if (linR != null)
 				{
 					Log.println(3, "El bloque reemplazado era \"dirty\", se actualiza en los demás niveles");
-					actualizarLinea(linR, nivel);
+					actualizarLinea(linR, nivel_act);
 				}
 			}
 		}
 		else
 		{
-			Log.println(3, "Trayendo bloque desde L" + nivel_sig + " a L" + nivel);
+			Log.println(3, "Trayendo bloque desde L" + nivel_sig + " a L" + nivel_act);
 			Cache sig = caches[nivel_sig];  // De donde leo el dato.
-			Cache act = caches[nivel];  // A donde traigo el dato.
+			Cache act = caches[nivel_act];  // A donde traigo el dato.
 			
 			// Llamada recursiva para traer a los demás niveles.
 			if (!sig.existeDato(direccion))
+			{
 				traerLinea(nivel_sig, direccion);
+				Log.report(Flags.CACHE_MISS, nivel_sig);
+			}
 			else
+			{
 				Log.errorln(2, "Dato encontrado en cache L" + nivel_sig);
+				Log.report(Flags.CACHE_HIT, nivel_sig);
+			}
 			
 			// Una vez hemos llegado aquí, el dato debe existir en el nivel anterior.
 			if (!sig.existeDato(direccion))
@@ -147,7 +159,7 @@ public class JerarquiaMemoria {
 			// Si hay hueco en la caché donde almacenar (nivel actual).
 			if (act.lineaLibre(direccion))
 			{
-				Log.println(3, "Hay hueco libre en L" + nivel + " para traer el bloque");
+				Log.println(3, "Hay hueco libre en L" + nivel_act + " para traer el bloque");
 				act.escribirLinea(direccion, linea);
 			}
 			else  // Si no hay hueco.
@@ -158,7 +170,7 @@ public class JerarquiaMemoria {
 				if (linR != null)
 				{
 					Log.println(3, "El bloque reemplazado era \"dirty\", se actualiza en los demás niveles");
-					actualizarLinea(linR, nivel);
+					actualizarLinea(linR, nivel_act);
 				}
 			}
 		}
@@ -168,9 +180,9 @@ public class JerarquiaMemoria {
 	// Actualizar línea desde el nivel actual.
 	// Actualiza todos los niveles superiores.
 	// Añadir un boolean para tipo de política.
-	private void actualizarLinea(LineaReemplazo linR, int nivel) throws MemoryException
+	private void actualizarLinea(LineaReemplazo linR, int nivel_act) throws MemoryException
 	{
-		int nivel_sig = nivel+1;
+		int nivel_sig = nivel_act+1;
 		
 		if (nivel_sig <= 0 || nivel_sig > caches.length)
 			throw new MemoryException("Acceso a L" + nivel_sig + " en jerarquía de memoria");
@@ -187,5 +199,4 @@ public class JerarquiaMemoria {
 		Log.println(3, "Actualizo en memoria la dirección 0x" + Integer.toHexString(direccion));
 		memoria.guardarLinea(direccion, linea);
 	}
-
 }

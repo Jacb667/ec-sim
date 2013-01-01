@@ -237,6 +237,11 @@ public class CacheDirecta implements Cache
 		return dir;
 	}
 	
+	public int getTagGuardado(int posicion)
+	{
+		return tags[posicion];
+	}
+	
 	// Extrae el tag de una dirección.
 	private int extraerTag(int direccion)
 	{
