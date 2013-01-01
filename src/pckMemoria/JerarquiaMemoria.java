@@ -135,6 +135,8 @@ public class JerarquiaMemoria {
 			// Llamada recursiva para traer a los demás niveles.
 			if (!sig.existeDato(direccion))
 				traerLinea(nivel_sig, direccion);
+			else
+				Log.errorln(2, "Dato encontrado en cache L" + nivel_sig);
 			
 			// Una vez hemos llegado aquí, el dato debe existir en el nivel anterior.
 			if (!sig.existeDato(direccion))

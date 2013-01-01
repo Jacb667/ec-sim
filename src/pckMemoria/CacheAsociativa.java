@@ -1,7 +1,6 @@
 package pckMemoria;
 
 import java.awt.Dimension;
-
 import componentes.Tabla;
 
 import general.Global;
@@ -80,12 +79,18 @@ public class CacheAsociativa implements Cache
 	// Compruebo en qué vía está y guardo el dato.
 	public void modificarDato(int direccion, int dato) throws MemoryException
 	{
-		for (int i = 0; i < vias.length; i++)
+		for (int via = 0; via < vias.length; via++)
 		{
-			if (vias[i].existeDato(direccion))
+			if (vias[via].existeDato(direccion))
 			{
-				politica.accesoLinea(buscarPosicion(direccion), i);
-				vias[i].modificarDato(direccion, dato);
+				int pos = buscarPosicion(direccion);
+				int pal = vias[via].posicionPalabra(direccion);
+				politica.accesoLinea(pos, via);
+				vias[via].modificarDato(direccion, dato);
+				
+				if (interfaz != null)
+					actualizarDatoInterfaz(dato, via, pos, pal);
+				
 				return;
 			}
 		}
@@ -111,29 +116,40 @@ public class CacheAsociativa implements Cache
 	// Si ejecutamos este método es porque al menos existe una vía libre donde guardarlo.
 	public void escribirLinea(int direccion, int[] linea) throws MemoryException
 	{
-		for (int i = 0; i < vias.length; i++)
+		for (int via = 0; via < vias.length; via++)
 		{
-			if (vias[i].lineaLibre(direccion))
+			if (vias[via].lineaLibre(direccion))
 			{
-				vias[i].escribirLinea(direccion, linea);
-				politica.nuevaLinea(buscarPosicion(direccion), i);
+				int pos = buscarPosicion(direccion);
+				vias[via].escribirLinea(direccion, linea);
+				politica.nuevaLinea(pos, via);
+				
+				if (interfaz != null)
+					actualizarLineaInterfaz(linea, via, pos);
+				
 				return;
 			}
 		}
 		
 		// Nunca deberíamos llegar aquí...
-		throw new MemoryException("Escritura de línea imposible en dirección 0x" + Integer.toHexString(direccion));
+		throw new MemoryException("Escritura de línea imposible en dirección 0x" + Integer.toHexString(direccion) +
+				" pos " + buscarPosicion(direccion));
 	}
 	
 	// Actualizar una línea existente.
 	public void actualizarLinea(int direccion, int[] linea)
 	{
-		for (int i = 0; i < vias.length; i++)
+		for (int via = 0; via < vias.length; via++)
 		{
-			if (vias[i].existeDato(direccion))
+			if (vias[via].existeDato(direccion))
 			{
-				politica.accesoLinea(buscarPosicion(direccion), i);
-				vias[i].escribirLinea(direccion, linea);
+				int pos = buscarPosicion(direccion);
+				politica.accesoLinea(pos, via);
+				vias[via].escribirLinea(direccion, linea);
+				
+				if (interfaz != null)
+					actualizarLineaInterfaz(linea, via, pos);
+				
 				return;
 			}
 		}
@@ -143,12 +159,16 @@ public class CacheAsociativa implements Cache
 	// Usará la política de reemplazo para determinar qué línea se elimina.
 	public LineaReemplazo reemplazarLinea(int direccion, int[] linea) throws MemoryException
 	{
-		int via = politica.elegirViaReemplazo(buscarPosicion(direccion));
+		int pos = buscarPosicion(direccion);
+		int via = politica.elegirViaReemplazo(pos);
 		
 		// Reemplazamos. Devolverá null si la línea no estaba sucia.
 		LineaReemplazo res = vias[via].reemplazarLinea(direccion, linea);
 		
 		politica.nuevaLinea(buscarPosicion(direccion), via);
+		
+		if (interfaz != null)
+			actualizarLineaInterfaz(linea, via, pos);
 		
 		return res;
 	}
@@ -270,6 +290,79 @@ public class CacheAsociativa implements Cache
 		}
 		
 		return res;
+	}
+	
+	// Actualiza un dato en la interfaz gráfica.
+	private void actualizarDatoInterfaz(int dato, int via, int pos, int pal)
+	{
+		int tamaño = 4 + palabras_linea;
+		// Modificamos un dato.
+		Object A_dato = interfaz.getValueAt(pos, pal+2);
+		if (A_dato.getClass().isArray())
+		{
+			// Cada posición es una vía.
+			String[] actual = (String[])A_dato;
+			actual[via] = String.valueOf(dato);
+			interfaz.setValueAt(actual, pos, pal+2);
+		}
+		
+		// Modificamos el estado de valid.
+		Object A_valid = interfaz.getValueAt(pos, tamaño-2);
+		if (A_valid.getClass().isArray())
+		{
+			// Cada posición es una vía.
+			Boolean[] actual = (Boolean[])A_valid;
+			actual[via] = new Boolean(true);
+			interfaz.setValueAt(actual, pos, tamaño-2);
+		}
+		
+		// Modificamos el estado de dirty.
+		Object A_dirty = interfaz.getValueAt(pos, tamaño-1);
+		if (A_dirty.getClass().isArray())
+		{
+			// Cada posición es una vía.
+			Boolean[] actual = (Boolean[])A_dirty;
+			actual[via] = new Boolean(true);
+			interfaz.setValueAt(actual, pos, tamaño-1);
+		}
+	}
+	
+	// Actualizar una línea en la interfaz.
+	private void actualizarLineaInterfaz(int[] linea, int via, int pos)
+	{
+		int tamaño = 4 + palabras_linea;
+		// Modificamos los datos
+		for (int pal = 0; pal < linea.length; pal++)
+		{
+			Object A_dato = interfaz.getValueAt(pos, pal+2);
+			if (A_dato.getClass().isArray())
+			{
+				// Cada posición es una vía.
+				String[] actual = (String[])A_dato;
+				actual[via] = String.valueOf(linea[pal]);
+				interfaz.setValueAt(actual, pos, pal+2);
+			}
+		}
+		
+		// Modificamos el estado de valid.
+		Object A_valid = interfaz.getValueAt(pos, tamaño-2);
+		if (A_valid.getClass().isArray())
+		{
+			// Cada posición es una vía.
+			Boolean[] actual = (Boolean[])A_valid;
+			actual[via] = new Boolean(true);
+			interfaz.setValueAt(actual, pos, tamaño-2);
+		}
+		
+		// Modificamos el estado de dirty.
+		Object A_dirty = interfaz.getValueAt(pos, tamaño-1);
+		if (A_dirty.getClass().isArray())
+		{
+			// Cada posición es una vía.
+			Boolean[] actual = (Boolean[])A_dirty;
+			actual[via] = new Boolean(false);
+			interfaz.setValueAt(actual, pos, tamaño-1);
+		}
 	}
 
 	public Tabla getInterfaz()
