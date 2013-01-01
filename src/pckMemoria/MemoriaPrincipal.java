@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import componentes.Tabla;
 
 import general.Global;
+import general.Log;
+import general.Log.Flags;
 import general.MemoryException;
 
 /* 
@@ -77,6 +79,8 @@ public class MemoriaPrincipal
 	// Se usa para enviar una línea completa a caché
 	public int[] leerLinea(int direccion, int tam_linea)
 	{
+		Log.report(Flags.BLOCK_READ);
+		
 		int[] res =  new int[tam_linea];
 		int direccion_inicio = getInicioBloque(direccion, tam_linea) * tam_linea;
 		
@@ -90,6 +94,8 @@ public class MemoriaPrincipal
 	
 	public void guardarLinea(int direccion, int[] linea) 
 	{
+		Log.report(Flags.BLOCK_WRITE);
+		
 		int tam_linea = linea.length;
 		int direccion_inicio = getInicioBloque(direccion, tam_linea) * tam_linea;
 		

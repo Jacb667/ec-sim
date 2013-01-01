@@ -285,7 +285,6 @@ public class CacheAsociativa implements Cache
 						dato[via] = Boolean.valueOf(String.valueOf(vias[via].getDato(lin, campo)));
 				}
 				res[lin][campo+1] = dato;
-
 			}
 		}
 		
@@ -296,6 +295,16 @@ public class CacheAsociativa implements Cache
 	private void actualizarDatoInterfaz(int dato, int via, int pos, int pal)
 	{
 		int tamaño = 4 + palabras_linea;
+		// Modificamos el tag.
+		Object A_tag = interfaz.getValueAt(pos, 1);
+		if (A_tag.getClass().isArray())
+		{
+			// Cada posición es una vía.
+			String[] actual = (String[])A_tag;
+			actual[via] = String.valueOf(vias[via].getTagGuardado(pos));
+			interfaz.setValueAt(actual, pos, 1);
+		}
+		
 		// Modificamos un dato.
 		Object A_dato = interfaz.getValueAt(pos, pal+2);
 		if (A_dato.getClass().isArray())
@@ -331,6 +340,16 @@ public class CacheAsociativa implements Cache
 	private void actualizarLineaInterfaz(int[] linea, int via, int pos)
 	{
 		int tamaño = 4 + palabras_linea;
+		// Modificamos el tag.
+		Object A_tag = interfaz.getValueAt(pos, 1);
+		if (A_tag.getClass().isArray())
+		{
+			// Cada posición es una vía.
+			String[] actual = (String[])A_tag;
+			actual[via] = String.valueOf(vias[via].getTagGuardado(pos));
+			interfaz.setValueAt(actual, pos, 1);
+		}
+
 		// Modificamos los datos
 		for (int pal = 0; pal < linea.length; pal++)
 		{

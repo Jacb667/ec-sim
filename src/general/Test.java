@@ -32,8 +32,8 @@ public class Test {
 			
 			// Memoria
 			System.out.println("--- Memoria --- \n");
-			MemoriaPrincipal m1 = new MemoriaPrincipal(32);
-			MemoriaPrincipal m2 = new MemoriaPrincipal(16);
+			MemoriaPrincipal m1 = new MemoriaPrincipal(32, 4);
+			MemoriaPrincipal m2 = new MemoriaPrincipal(16, 4);
 			
 			for (int i = 0; i < 128; i+=4)
 				m1.guardarDato(i, i * 2);
