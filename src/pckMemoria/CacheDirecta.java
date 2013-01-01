@@ -102,11 +102,22 @@ public class CacheDirecta implements Cache
 	{
 		int pos = buscarPosicion(direccion);
 		int pal = posicionPalabra(direccion);
+		int tag = extraerTag(direccion);
 		
-		tags[pos] = extraerTag(direccion);
+		tags[pos] = tag;
 		datos[pos][pal] = dato;
 		valid[pos] = true;
 		dirty[pos] = true;
+		
+		// Actualizar interfaz gráfica.
+		if (interfaz != null)
+		{
+			int tamaño = 4 + palabras_linea;
+			interfaz.setValueAt(String.valueOf(tag), pos, 1);  // Tag
+			interfaz.setValueAt(String.valueOf(dato), pos, pal+2);  // Palabra
+			interfaz.setValueAt(true, pos, tamaño-2);  // Valid
+			interfaz.setValueAt(true, pos, tamaño-1);  // Dirty
+		}
 	}
 
 	// Leer línea que contiene la dirección especificada
@@ -128,13 +139,26 @@ public class CacheDirecta implements Cache
 	public void escribirLinea(int direccion, int[] linea)
 	{
 		int direccion_inicio = buscarPosicion(direccion);
+		int tag = extraerTag(direccion);
 		
-		tags[direccion_inicio] = extraerTag(direccion);
+		tags[direccion_inicio] = tag;
 		for (int i = 0; i < palabras_linea; i++)
 			datos[direccion_inicio][i] = linea[i];
 		
 		dirty[direccion_inicio] = false;
 		valid[direccion_inicio] = true;
+		
+		// Actualizar interfaz gráfica.
+		if (interfaz != null)
+		{
+			int tamaño = 4 + palabras_linea;
+			for (int i = 0; i < palabras_linea; i++)
+				interfaz.setValueAt(String.valueOf(linea[i]), direccion_inicio, i+2);  // Palabra
+			
+			interfaz.setValueAt(String.valueOf(tag), direccion_inicio, 1);  // Tag
+			interfaz.setValueAt(true, direccion_inicio, tamaño-2);  // Valid
+			interfaz.setValueAt(false, direccion_inicio, tamaño-1);  // Dirty
+		}
 	}
 	
 	// Actualiza una línea existente.
@@ -151,7 +175,7 @@ public class CacheDirecta implements Cache
 		
 		// La devolvemos solamente si está "sucia".
 		if (lineaDirty(direccion))
-			res = new LineaReemplazo(getDireccionGuardado(direccion), leerLinea(direccion));
+			res = new LineaReemplazo(getDireccionGuardada(direccion), leerLinea(direccion));
 		
 		escribirLinea(direccion, linea);
 		
@@ -173,7 +197,7 @@ public class CacheDirecta implements Cache
 	}
 	
 	// Busco la posición de la palabra en la línea
-	private int posicionPalabra(int direccion)
+	public int posicionPalabra(int direccion)
 	{
 		// Primero hay que ignorar los 2 bits de offset:
 		int pos = direccion >> 2;
@@ -196,7 +220,7 @@ public class CacheDirecta implements Cache
 	}
 	
 	// Me devuelve la dirección de la línea guardada donde iría dirección.
-	private int getDireccionGuardado(int direccion)
+	private int getDireccionGuardada(int direccion)
 	{
 		int posicion = buscarPosicion(direccion);
 		

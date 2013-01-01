@@ -23,9 +23,12 @@ public class MemoriaPrincipal
 	private boolean[] valid;
 	private Tabla interfaz;
 	
-	public MemoriaPrincipal(int _entradas) throws MemoryException
+	// De momento no se usa. En un futuro podría usarse para controlar las peticiones de líneas.
+	//private int palabras_linea;
+	
+	public MemoriaPrincipal(int _entradas, int _palabras_linea) throws MemoryException
 	{
-		if (_entradas < 1)
+		if (_entradas < 1 || _palabras_linea < 1 || _entradas % _palabras_linea != 0)
 			throw new MemoryException("Error en inicialización de memoria.");
 			
 		// Entradas debe ser divisible entre palabras_linea.
@@ -56,6 +59,7 @@ public class MemoriaPrincipal
 		mem[direccion >> 2] = dato;
 		valid[direccion >> 2] = true;
 		
+		// Actualizar interfaz gráfica.
 		if (interfaz != null)
 		{
 			interfaz.setValueAt(String.valueOf(dato), direccion >> 2, 1);
@@ -93,6 +97,13 @@ public class MemoriaPrincipal
 		{
 			mem[direccion_inicio + i] = linea[i];
 			valid[direccion_inicio + i] = true;
+			
+			// Actualizar interfaz gráfica.
+			if (interfaz != null)
+			{
+				interfaz.setValueAt(String.valueOf(linea[i]), direccion_inicio + i, 1);
+				interfaz.setValueAt(true, direccion_inicio + i, 2);
+			}
 		}
 	}
 	
