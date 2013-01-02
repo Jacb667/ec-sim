@@ -29,18 +29,19 @@ public class TestMemoria {
 	
 	public TestMemoria()
 	{
-		final int palabras_linea = 4;
+		final int palabras_linea = 8;
 		
 		try
 		{
-			Cache[] caches = new Cache[2];
+			Cache[] caches = new Cache[3];
 			
 			// 2 niveles de cache directa
-			caches[0] = new CacheDirecta(4,palabras_linea);  // Caché de 4 entradas 4 palabras por línea.
-			caches[1] = new CacheAsociativa(8,palabras_linea,4,TiposReemplazo.LRU);  // Caché de 8 entradas 4 palabras por línea.
+			caches[0] = new CacheDirecta(16,palabras_linea);  // Caché de 4 entradas 4 palabras por línea.
+			caches[1] = new CacheAsociativa(64,palabras_linea,8,TiposReemplazo.LRU);  // Caché de 8 entradas 4 palabras por línea.
+			caches[2] = new CacheAsociativa(128,palabras_linea,16,TiposReemplazo.LRU);
 			
 			// Memoria principal con 128 posiciones.
-			MemoriaPrincipal memoria = new MemoriaPrincipal(256, palabras_linea);
+			MemoriaPrincipal memoria = new MemoriaPrincipal(2048, palabras_linea);
 			
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 			
@@ -49,7 +50,7 @@ public class TestMemoria {
 			JScrollPane jscroll1 = new JScrollPane(tablaMemoria, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 			frameMemoria.setTitle("Memoria");
 			frameMemoria.setPreferredSize( new Dimension(245, 400) );
-			frameMemoria.setMinimumSize(new Dimension(245, 400));
+			frameMemoria.setMinimumSize(new Dimension(250, 400));
 			frameMemoria.setMaximumSize(new Dimension(400, 2000));
 			frameMemoria.add( jscroll1 );
 			frameMemoria.pack();
@@ -61,7 +62,7 @@ public class TestMemoria {
 			frameCache1 = new VentanaLimitada();
 			JScrollPane jscroll2 = new JScrollPane(tablaCache1, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 			frameCache1.setTitle("Cache L0");
-			frameCache1.setPreferredSize( new Dimension(500, 200) );
+			frameCache1.setPreferredSize( new Dimension(600, 200) );
 			frameCache1.setMinimumSize(new Dimension(500, 200));
 			frameCache1.setMaximumSize(new Dimension(2000, 2000));
 			frameCache1.add( jscroll2 );
@@ -75,8 +76,8 @@ public class TestMemoria {
 			frameCache2 = new VentanaLimitada();
 			JScrollPane jscroll3 = new JScrollPane(tablaCache2, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 			frameCache2.setTitle("Cache L1");
-			frameCache2.setPreferredSize( new Dimension(500, 200) );
-			frameCache2.setMinimumSize(new Dimension(500, 200));
+			frameCache2.setPreferredSize( new Dimension(800, 500) );
+			frameCache2.setMinimumSize(new Dimension(500, 300));
 			frameCache2.setMaximumSize(new Dimension(2000, 2000));
 			frameCache2.add( jscroll3 );
 			frameCache2.pack();
@@ -84,10 +85,24 @@ public class TestMemoria {
 			frameCache2.setVisible(true);
 			caches[1].setInterfaz(tablaCache2);
 			
+			tablaCache3 = new Tabla(caches[2]);
+			tablaCache3.setRenderTablaEnCelda();
+			frameCache3 = new VentanaLimitada();
+			JScrollPane jscroll4 = new JScrollPane(tablaCache3, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+			frameCache3.setTitle("Cache L2");
+			frameCache3.setPreferredSize( new Dimension(800, 500) );
+			frameCache3.setMinimumSize(new Dimension(500, 300));
+			frameCache3.setMaximumSize(new Dimension(2000, 2000));
+			frameCache3.add( jscroll4 );
+			frameCache3.pack();
+			frameCache3.addWindowListener(new VentanaOculta(frameCache3));
+			frameCache3.setVisible(true);
+			caches[2].setInterfaz(tablaCache3);
+			
 			JerarquiaMemoria jmem = new JerarquiaMemoria(caches, memoria);
 			
 			// Inicialización de la memoria para hacer pruebas.
-			for (int i = 0; i < 256*4; i+=4)
+			for (int i = 0; i < 2048*4; i+=4)
 				memoria.guardarDato(i, i);
 			
 			/*System.out.println("Cache L0:\n" + caches[0].toString());
@@ -124,9 +139,9 @@ public class TestMemoria {
 			
 			Random r = new Random();
 			
-			int[] temp = new int[256];
+			int[] temp = new int[2048];
 			
-			for (int i = 0; i < 256; i++)
+			for (int i = 0; i < 2048; i++)
 				temp[i] = i*4;
 			
 			System.out.println(Arrays.toString(temp));
@@ -136,9 +151,9 @@ public class TestMemoria {
 			
 			Thread.sleep(5000);
 			
-			for (int i = 0; i < 1000; i++)
+			for (int i = 0; i < 50000; i++)
 			{
-				int dir = r.nextInt(256*4);
+				int dir = r.nextInt(2048*4);
 				int dato = r.nextInt(1000000);
 				
 				System.out.println("Guardo dato " + dato + " en dirección 0x" + Integer.toHexString(dir));
@@ -149,7 +164,7 @@ public class TestMemoria {
 				
 				//Thread.sleep(1000);
 				
-				int dir2 = r.nextInt(256*4);
+				int dir2 = r.nextInt(2048*4);
 				
 				System.out.print("Leo dirección 0x" + Integer.toHexString(dir2) + "  ");
 				int dato2 = jmem.leerDato(dir2);
