@@ -1,0 +1,6 @@
+# Esto es un comentario.
+loop: add,$1,$2
+sw $5, 100($2)
+addi $6,100
+j loop
+subi $5, 100($2)

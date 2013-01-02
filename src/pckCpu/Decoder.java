@@ -5,15 +5,32 @@ import general.Global.Intrucciones;
 
 public class Decoder
 {
-	private SortedMap<String,Integer> map=new TreeMap<String,Integer>();
-	public void readLine(String s)
+	private SortedMap<String,Integer> etiquetas = new TreeMap<String,Integer>();
+	
+	public void decodificarInstruccion(String s, int lin) throws CpuException
 	{
-		StringTokenizer str=new StringTokenizer(s,"'\n'");
-		while (str.hasMoreTokens())
+		String linea = s.toUpperCase();
+		
+		// Comprobar si tiene etiqueta.
+		StringTokenizer strEtiq = new StringTokenizer(linea, ":");
+		if (strEtiq.countTokens() > 2)
+			throw new CpuException("Error en formato de instrucción en línea " + lin);
+		
+		
+		
+		
+		StringTokenizer str = new StringTokenizer(s," '\n'");
+		
+		System.out.println("tokens = " + str.countTokens());
+		
+		
+		
+		/*while (str.hasMoreTokens())
 		{
 			decloop(str.nextToken());
-		}
+		}*/
 	}
+	
 	public void decloop(String s)
 	{
 		StringTokenizer str =new StringTokenizer(s,":");
@@ -29,12 +46,13 @@ public class Decoder
 			dec(func);
 		}
 	}
+	
 	public void dec(String s)
 	{
 		System.out.println(s);
-		StringTokenizer str= new StringTokenizer(s,", ; '\n'");
+		StringTokenizer str = new StringTokenizer(s,", ; '\n'");
 		int num=str.countTokens();
-		if(num==3)
+		if(num == 3)
 		{
 			String func=str.nextToken();
 			String reg1=str.nextToken();
@@ -48,18 +66,15 @@ public class Decoder
 			{
 				System.out.println("ERROR reg1, no es un registro");
 			}
-			
-			
-			
 		}
-		else if(num==2)
+		else if(num == 2)
 		{
 			//FUNCIONES J,JR,JAL
 			String func=str.nextToken();
 			String jum=str.nextToken();
 			System.out.println("Jump toNum "+isNum(jum));
 		}
-		else if(num==4)
+		else if(num == 4)
 		{
 			String func=str.nextToken();
 			String reg1=str.nextToken();
@@ -70,17 +85,18 @@ public class Decoder
 				//FUNCION BEQ, BNE,
 			}
 		}
-		
-		
 	}
-	public void putMap(String s, int i)
+	
+	public void añadirEtiqueta(String s, int i)
 	{
-		map.put(s, i);
+		etiquetas.put(s, i);
 	}
-	public SortedMap<String,Integer> getMap()
+	
+	public SortedMap<String,Integer> getEtiquetas()
 	{
-		return map;
+		return etiquetas;
 	}
+	
 	public boolean isReg(String s)
 	{
 		boolean reg=false;
@@ -90,6 +106,7 @@ public class Decoder
 		}
 		return reg;
 	}
+	
 	public boolean isConst(String s)
 	{
 		boolean is=false;
