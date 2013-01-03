@@ -16,35 +16,82 @@ public class Global {
 	
 	final static public String CBNCACHE = "Niveles de cache";
 
-	public enum Intrucciones
+	public enum Opcode
 	{
-		ADD,	// Suma 2 registros
-		ADDI,	// Suma registro con inmediate
-		SUB,	// Resta 2 registros
-		SUBI,	// Resta registro con inmediate
-		LW,		// Carga word en registro
-		SW,		// Guarda word de registro a memoria
-		AND,	// AND alu
-		ANDI,	// AND alu inmediate
-		OR,		// OR alu
-		ORI,	// OR alu inmediate
-		XOR,	// XOR alu
-		XORI,	// XOR alu inmediate
-		NOR,	// NOR alu
-		NORI,	// NOR alu inmediate
-		MULT,	// Multiplicacion alu
-		DIV,	// Division alu
-		SLT,	// Guarda 1 si menor que
-		SLTI,	// Guarda 1 si menor que inmediate
-		SLL,	// Shift left
-		SRL,	// Shift right
-		BEQ,	// Salta si iguales
-		BNE,	// Salta si distintos
-		J,		// Salta
-		JR,		// Vuelve a registro ($31)
-		JAL,	// Salta y guarda PC+4 en registro ($31)
-		NOP,	// No operation (stall)
-		END,	// Final del programa
+		ADD("RRR"),				// Suma 2 registros
+		ADDI("RRC"),			// Suma registro con inmediate
+		SUB("RRR"),				// Resta 2 registros
+		SUBI("RRC"),			// Resta registro con inmediate
+		LW("RCR"),				// Carga word en registro
+		SW("RCR"),				// Guarda word de registro a memoria
+		AND("RRR"),				// AND alu
+		ANDI("RRC"),			// AND alu inmediate
+		OR("RRR"),				// OR alu
+		ORI("RRC"),				// OR alu inmediate
+		XOR("RRR"),				// XOR alu
+		XORI("RRC"),			// XOR alu inmediate
+		NOR("RRR"),				// NOR alu
+		NORI("RRC"),			// NOR alu inmediate
+		//MULT,					// Multiplicacion alu (de momento no)
+		//DIV,					// Division alu (de momento no)
+		SLT("RRR"),				// Guarda 1 si menor que
+		SLTI("RRC"),			// Guarda 1 si menor que inmediate
+		SLL("RRC"),				// Shift left
+		SRL("RRC"),				// Shift right
+		BEQ("RRE"),				// Salta si iguales
+		BNE("RRE"),				// Salta si distintos
+		J("E","C"),				// Salto
+		JR("R"),				// Vuelve a registro ($31)
+		JAL("RE", "RC"),		// Salta y guarda PC+4 en registro ($31)
+		NOP(""),				// No operation (stall)
+		END("");				// Final del programa
+		
+
+		/*
+		 * Formatos de instrucción:
+		 * (Cada instrucción sólo soporta un formato).
+		 * 		
+		 * 		RRR - 3 registros (destino, origen1, origen2).
+		 * 		RRC - 2 registros y constante.
+		 * 		E	- 1 etiqueta (salto J).
+		 * 		C	- Constante para dirección de memoria.
+		 * 		R	- Registro.
+		 * 		RRE	- 2 registros y etiqueta (saltos condicionales).
+		 * 		RCR	- Registro, constante y registro (los 2 últimos para calcular memoria).
+		 * 		RE	- Registro y etiqueta.
+		 * 		RC	- Registro y constante (para salto a dirección de memoria).
+		 * 
+		 * 		
+		 */
+		
+		private String formato1;
+		private String formato2;
+
+		Opcode(String t1)
+		{
+			formato1 = t1;
+			formato2 = null;
+		}
+
+		Opcode(String t1, String t2)
+		{
+			formato1 = t1;
+			formato2 = t2;
+		}
+
+		public String getFormato1() { return formato1; }
+		public String getFormato2() { return formato2; }
+		public String toString() { return name(); }
+		
+		public static Opcode find(String name)
+		{
+		    for (Opcode op : Opcode.values())
+		    {
+		        if (name.equalsIgnoreCase(op.toString()))
+		        	return op;
+		    }
+		    return null;
+		}
 	}
 	
 	public enum TiposReemplazo
