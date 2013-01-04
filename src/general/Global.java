@@ -32,17 +32,15 @@ public class Global {
 		XORI("DRC"),			// XOR alu inmediate
 		NOR("DRR"),				// NOR alu
 		NORI("DRC"),			// NOR alu inmediate
-		//MULT,					// Multiplicacion alu (de momento no)
-		//DIV,					// Division alu (de momento no)
 		SLT("DRR"),				// Guarda 1 si menor que
 		SLTI("DRC"),			// Guarda 1 si menor que inmediate
 		SLL("DRC"),				// Shift left
 		SRL("DRC"),				// Shift right
-		BEQ("RRE","RRC"),		// Salta si iguales
-		BNE("RRE","RRC"),		// Salta si distintos
-		J("E","C"),				// Salto
+		BEQ("RRE","RRJ"),		// Salta si iguales
+		BNE("RRE","RRJ"),		// Salta si distintos
+		J("E","J"),				// Salto
 		JR("R"),				// Vuelve a registro ($31)
-		JAL("DE", "DC"),		// Salta y guarda PC+4 en registro ($31)
+		JAL("DE", "DJ"),		// Salta y guarda PC+4 en registro ($31)
 		NOP(""),				// No operation (stall)
 		END("");				// Final del programa
 		
@@ -54,14 +52,14 @@ public class Global {
 		 * 		DRR - 3 registros (destino, origen1, origen2).
 		 * 		DRC - 2 registros y constante.
 		 * 		E	- 1 etiqueta (salto J).
-		 * 		C	- Constante para dirección de memoria.
 		 * 		R	- Registro.
+		 * 		J	- Constante es dirección de salto.
 		 * 		RRE	- 2 registros y etiqueta (saltos condicionales).
-		 * 		RRC - 2 registros y constante (saltos condicionales).
+		 * 		RRJ - 2 registros y constante (saltos condicionales).
 		 * 		RCR	- Registro, constante y registro (los 2 últimos para calcular memoria).
 		 * 		DCR	- Registro, constante y registro (los 2 últimos para calcular memoria).
 		 * 		DE	- Registro y etiqueta.
-		 * 		DC	- Registro y constante (para salto a dirección de memoria).
+		 * 		DJ	- Registro y constante (para salto a dirección de memoria).
 		 * 
 		 * 		
 		 */
@@ -93,6 +91,33 @@ public class Global {
 		        	return op;
 		    }
 		    return null;
+		}
+		
+		// Devuelve true si la instrucción es un salto.
+		public static boolean esSalto(Opcode opcode)
+		{
+			switch(opcode)
+			{
+				case BEQ:
+				case BNE:
+				case J:
+				case JR:
+				case JAL:
+					return true;
+			}
+			return false;
+		}
+		
+		// Devuelve true si la instrucción es de memoria.
+		public static boolean esMemoria(Opcode opcode)
+		{
+			switch(opcode)
+			{
+				case SW:
+				case LW:
+					return true;
+			}
+			return false;
 		}
 	}
 	
