@@ -1,247 +1,110 @@
 package pckCpu;
 import java.util.*;
-import general.*;
-import general.Global.Intrucciones;
 
 public class Decoder
 {
-	private SortedMap<String,Integer> etiquetas = new TreeMap<String,Integer>();
+	private SortedMap<String, Instruccion> etiquetas;
+	private List<Instruccion> instrucciones;
+	private int primera_instruccion;
+	private int ultima_instruccion;
+
+	final static public String SEPARADORES_ETIQUETAS = ":";
+	final static public String SEPARADORES_PARAMETROS = ",;() \t";
 	
-	public void decodificarInstruccion(String s, int lin) throws CpuException
+	public Decoder(int pos_mem)
 	{
-		String linea = s.toUpperCase();
+		instrucciones = new ArrayList<Instruccion>();
+		etiquetas = new TreeMap<String, Instruccion>();
+		primera_instruccion = pos_mem;
+		ultima_instruccion = pos_mem;
+	}
+	
+	public void decodificarInstruccion(String s, int lin_fich) throws CpuException
+	{
+		// La pasamos a mayúsculas y eliminamos espacios en blanco al principio y final (trim).
+		String cadena = s.toUpperCase().trim();
 		
 		// Comprobar si tiene etiqueta.
-		StringTokenizer strEtiq = new StringTokenizer(linea, ":");
-		if (strEtiq.countTokens() > 2)
-			throw new CpuException("Error en formato de instrucción en línea " + lin);
+		StringTokenizer strEtiq = new StringTokenizer(cadena, SEPARADORES_ETIQUETAS);
+		if (strEtiq.countTokens() > 2 || strEtiq.countTokens() == 0)
+			throw new CpuException("Error en formato de instrucción en línea " + lin_fich);
 		
+		String etiqueta = null;
+		// Si esto ocurre, tenemos una etiqueta.
+		if (strEtiq.countTokens() == 2)
+			etiqueta = strEtiq.nextToken();
+
+		// En caso contrario tenemos una instrucción normal.
+		Instruccion inst = new Instruccion(strEtiq.nextToken(), lin_fich, ultima_instruccion);
+		ultima_instruccion += 4;
 		
+		if (etiqueta != null)
+			añadirEtiqueta(etiqueta, inst);
 		
-		
-		StringTokenizer str = new StringTokenizer(s," '\n'");
-		
-		System.out.println("tokens = " + str.countTokens());
-		
-		
-		
-		/*while (str.hasMoreTokens())
-		{
-			decloop(str.nextToken());
-		}*/
-	}
-	
-	public void decloop(String s)
-	{
-		StringTokenizer str =new StringTokenizer(s,":");
-		String func=str.nextToken();
-		if(str.hasMoreTokens())
-		{
-			String op=str.nextToken();
-			System.out.println(func+": "+op+" ...");
-			dec(op);
-		}
-		else
-		{
-			dec(func);
-		}
-	}
-	
-	public void dec(String s)
-	{
-		System.out.println(s);
-		StringTokenizer str = new StringTokenizer(s,", ; '\n'");
-		int num=str.countTokens();
-		if(num == 3)
-		{
-			String func=str.nextToken();
-			String reg1=str.nextToken();
-			String elem2=str.nextToken();
-			
-			if(isReg(reg1))
-			{
-				decFunc(func, reg1,elem2);
-			}
-			else
-			{
-				System.out.println("ERROR reg1, no es un registro");
-			}
-		}
-		else if(num == 2)
-		{
-			//FUNCIONES J,JR,JAL
-			String func=str.nextToken();
-			String jum=str.nextToken();
-			System.out.println("Jump toNum "+isNum(jum));
-		}
-		else if(num == 4)
-		{
-			String func=str.nextToken();
-			String reg1=str.nextToken();
-			String reg2=str.nextToken();
-			String to=str.nextToken();
-			if((isReg(reg1))&&(isReg(reg2)))
-			{
-				//FUNCION BEQ, BNE,
-			}
-		}
-	}
-	
-	public void añadirEtiqueta(String s, int i)
-	{
-		etiquetas.put(s, i);
-	}
-	
-	public SortedMap<String,Integer> getEtiquetas()
-	{
-		return etiquetas;
-	}
-	
-	public boolean isReg(String s)
-	{
-		boolean reg=false;
-		if(s.charAt(0)=='$')
-		{
-			reg=true;
-		}
-		return reg;
-	}
-	
-	public boolean isConst(String s)
-	{
-		boolean is=false;
-		StringTokenizer str=new StringTokenizer(s,"()");
-		if(str.countTokens()==1)
-		{
-			is=true;
-		}
-		
-		return is;
-	}
-	public boolean isNum(String s)
-	{
-		boolean num=true;
-		try
-		{
-			int x=Integer.parseInt(s);
-		}
-		catch (NumberFormatException e)
-		{
-			num=false;
-		}
-		
-		return num;
+		// El tamaño de la lista es la posición donde se insertará.
+		instrucciones.add(instrucciones.size(), inst);
 	}
 
-	public void decFunc(String func, String reg1, String elem2)
+	// Añade una etiqueta y su correspondiente instrucción.
+	public void añadirEtiqueta(String etiq, Instruccion inst)
 	{
-		func=func.toUpperCase();
+		etiquetas.put(etiq, inst);
+	}
+	
+	// Obtiene la dirección de la instrucción a la que apunta una etiqueta.
+	private int getPosicionEtiqueta(String etiq)
+	{
+		Instruccion inst = etiquetas.get(etiq);
+		if (inst != null)
+			return inst.getDireccion();
 		
-		switch(func)
+		return -1;
+	}
+	
+	// Valida el código ya decodificado.
+	public void validarCodigo() throws CpuException
+	{
+		// Comprobamos todas las instrucciones buscando etiquetas de salto.
+		// Para cada etiqueta, comprobamos si existe o no.
+		// Además, asignamos a la instrucción la dirección real de salto.
+		for (Instruccion inst : instrucciones)
 		{
-			case"ADD": System.out.println("Operacion suma");
-				if(isReg(elem2))
+			if (inst.esSalto())
+			{
+				String etiq = inst.getEtiqueta();
+				if (etiq != null)
 				{
-					
-					System.out.println("elem2 es reg");
+					int direccion = getPosicionEtiqueta(etiq);
+					if (direccion == -1)
+						throw new CpuException("Etiqueta no válida " + etiq + " en línea " + inst.getLinea());
+		
+					inst.setDireccionSalto(direccion);
 				}
-				else if(isConst(elem2))
-				{
-					System.out.println("error, add solo acepta dos registros no constantes");
-				}
+				// Compruebo si tiene dirección de salto.
 				else
 				{
-					System.out.println("error, add solo acepta dos registros no direccion de memoria");
-				}
-			break;
-			case "ADDI": System.out.println("Suma inmediata");
-				if(isReg(elem2))
-				{
+					// Le sumo la primera instrucción (ya que es relativa a la primera).
+					int direccion = inst.getDireccionSalto() + primera_instruccion;
 					
-					System.out.println("error addi necesita una constante no reg.");
-				}
-				else if(isConst(elem2))
-				{
-					System.out.println("elem2 es const");
-				}
-				else
-				{
-					System.out.println("error addi necesita una constante no dir.mem.");
-				}
-			break;
-			case "SUB": System.out.println("resta");
-				if(isReg(elem2))
-				{
+					if (direccion < primera_instruccion || direccion > ultima_instruccion)
+						throw new CpuException("Dirección no válida " + direccion + " en línea " + inst.getLinea());
 					
-					System.out.println("elem2 es reg");
+					// Asignamos la nueva dirección de salto.
+					inst.setDireccionSalto(direccion);
 				}
-				else if(isConst(elem2))
-				{
-					System.out.println("error, sub solo acepta dos registros no constantes");
-				}
-				else
-				{
-					System.out.println("error, add solo acepta dos registros no direccion de memoria");
-				}
-			break;
-			case "SUBI": System.out.println("resta inmediata");
-				if(isReg(elem2))
-				{
-					
-					System.out.println("error subi necesita una constante no reg.");
-				}
-				else if(isConst(elem2))
-				{
-					System.out.println("elem2 es const");
-				}
-				else
-				{
-					System.out.println("error subi necesita una constante no dir.mem.");
-				}
-			break;
-			case "LW": System.out.println("Cargar dato");
-				if(isReg(elem2))
-				{
-					
-					System.out.println("error en lw, elm2=reg");
-				}
-				else if(isConst(elem2))
-				{
-					System.out.println("error en lw, elem2=const");
-				}
-				else
-				{
-					System.out.println("elem2 es direccion memoria");
-				}
-			break;
-			case "SW": System.out.println("Guardar dato");
-				if(isReg(elem2))
-				{
-					
-					System.out.println("error en  sw elem2= reg");
-				}
-				else if(isConst(elem2))
-				{
-					System.out.println("error en sw elem2 es const");
-				}
-				else
-				{
-					System.out.println("elem2 es direccion memoria");
-				}
-			break;
+			}
 		}
-		/*if(isReg(elem2))
+	}
+	
+	public String toString()
+	{
+		StringBuilder strB = new StringBuilder("Encontradas " + instrucciones.size() + " instrucciones");
+		strB.append("\n");
+		for (Instruccion inst : instrucciones)
 		{
-			
-			System.out.println("elem2 es reg");
+			strB.append(inst);
 		}
-		else if(isConst(elem2))
-		{
-			System.out.println("elem2 es const");
-		}
-		else
-		{
-			System.out.println("elem2 es direccion memoria");
-		}*/
+		
+		return strB.toString();
 	}
 }
