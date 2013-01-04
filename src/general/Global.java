@@ -18,31 +18,31 @@ public class Global {
 
 	public enum Opcode
 	{
-		ADD("RRR"),				// Suma 2 registros
-		ADDI("RRC"),			// Suma registro con inmediate
-		SUB("RRR"),				// Resta 2 registros
-		SUBI("RRC"),			// Resta registro con inmediate
+		ADD("DRR"),				// Suma 2 registros
+		ADDI("DRC"),			// Suma registro con inmediate
+		SUB("DRR"),				// Resta 2 registros
+		SUBI("DRC"),			// Resta registro con inmediate
 		LW("RCR"),				// Carga word en registro
 		SW("RCR"),				// Guarda word de registro a memoria
-		AND("RRR"),				// AND alu
-		ANDI("RRC"),			// AND alu inmediate
-		OR("RRR"),				// OR alu
-		ORI("RRC"),				// OR alu inmediate
-		XOR("RRR"),				// XOR alu
-		XORI("RRC"),			// XOR alu inmediate
-		NOR("RRR"),				// NOR alu
-		NORI("RRC"),			// NOR alu inmediate
+		AND("DRR"),				// AND alu
+		ANDI("DRC"),			// AND alu inmediate
+		OR("DRR"),				// OR alu
+		ORI("DRC"),				// OR alu inmediate
+		XOR("DRR"),				// XOR alu
+		XORI("DRC"),			// XOR alu inmediate
+		NOR("DRR"),				// NOR alu
+		NORI("DRC"),			// NOR alu inmediate
 		//MULT,					// Multiplicacion alu (de momento no)
 		//DIV,					// Division alu (de momento no)
-		SLT("RRR"),				// Guarda 1 si menor que
-		SLTI("RRC"),			// Guarda 1 si menor que inmediate
-		SLL("RRC"),				// Shift left
-		SRL("RRC"),				// Shift right
+		SLT("DRR"),				// Guarda 1 si menor que
+		SLTI("DRC"),			// Guarda 1 si menor que inmediate
+		SLL("DRC"),				// Shift left
+		SRL("DRC"),				// Shift right
 		BEQ("RRE"),				// Salta si iguales
 		BNE("RRE"),				// Salta si distintos
 		J("E","C"),				// Salto
 		JR("R"),				// Vuelve a registro ($31)
-		JAL("RE", "RC"),		// Salta y guarda PC+4 en registro ($31)
+		JAL("DE", "DC"),		// Salta y guarda PC+4 en registro ($31)
 		NOP(""),				// No operation (stall)
 		END("");				// Final del programa
 		
@@ -51,15 +51,16 @@ public class Global {
 		 * Formatos de instrucción:
 		 * (Cada instrucción sólo soporta un formato).
 		 * 		
-		 * 		RRR - 3 registros (destino, origen1, origen2).
-		 * 		RRC - 2 registros y constante.
+		 * 		DRR - 3 registros (destino, origen1, origen2).
+		 * 		DRC - 2 registros y constante.
 		 * 		E	- 1 etiqueta (salto J).
 		 * 		C	- Constante para dirección de memoria.
 		 * 		R	- Registro.
 		 * 		RRE	- 2 registros y etiqueta (saltos condicionales).
 		 * 		RCR	- Registro, constante y registro (los 2 últimos para calcular memoria).
-		 * 		RE	- Registro y etiqueta.
-		 * 		RC	- Registro y constante (para salto a dirección de memoria).
+		 * 		DCR	- Registro, constante y registro (los 2 últimos para calcular memoria).
+		 * 		DE	- Registro y etiqueta.
+		 * 		DC	- Registro y constante (para salto a dirección de memoria).
 		 * 
 		 * 		
 		 */
@@ -118,6 +119,33 @@ public class Global {
 		// sobrepasa una única posición, ya es necesario un bit más para
 		// direccionar).
 		return (int) Math.ceil((Math.log(i) / Math.log(2)));
+	}
+	
+	// Devuelve true/false si la cadena es numérica o no.
+	public static boolean esNumero(String s)
+	{
+		if (s == null || s.isEmpty())
+			return false;
+		
+		int i = 0;
+		
+		// Por si empieza en negativo.
+		if (s.charAt(0) == '-')
+		{
+			if (s.length() > 1)
+				i++;
+			else
+				return false;
+		}
+		
+		// Recorremos a partir de i.
+		for (; i < s.length(); i++)
+		{
+			if (!Character.isDigit(s.charAt(i)))
+				return false;
+		}
+		
+		return true;
 	}
 }
 
