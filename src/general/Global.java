@@ -22,7 +22,7 @@ public class Global {
 		ADDI("DRC"),			// Suma registro con inmediate
 		SUB("DRR"),				// Resta 2 registros
 		SUBI("DRC"),			// Resta registro con inmediate
-		LW("RCR"),				// Carga word en registro
+		LW("DCR"),				// Carga word en registro
 		SW("RCR"),				// Guarda word de registro a memoria
 		AND("DRR"),				// AND alu
 		ANDI("DRC"),			// AND alu inmediate
