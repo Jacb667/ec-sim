@@ -38,8 +38,8 @@ public class Global {
 		SLTI("DRC"),			// Guarda 1 si menor que inmediate
 		SLL("DRC"),				// Shift left
 		SRL("DRC"),				// Shift right
-		BEQ("RRE"),				// Salta si iguales
-		BNE("RRE"),				// Salta si distintos
+		BEQ("RRE","RRC"),		// Salta si iguales
+		BNE("RRE","RRC"),		// Salta si distintos
 		J("E","C"),				// Salto
 		JR("R"),				// Vuelve a registro ($31)
 		JAL("DE", "DC"),		// Salta y guarda PC+4 en registro ($31)
@@ -57,6 +57,7 @@ public class Global {
 		 * 		C	- Constante para dirección de memoria.
 		 * 		R	- Registro.
 		 * 		RRE	- 2 registros y etiqueta (saltos condicionales).
+		 * 		RRC - 2 registros y constante (saltos condicionales).
 		 * 		RCR	- Registro, constante y registro (los 2 últimos para calcular memoria).
 		 * 		DCR	- Registro, constante y registro (los 2 últimos para calcular memoria).
 		 * 		DE	- Registro y etiqueta.
