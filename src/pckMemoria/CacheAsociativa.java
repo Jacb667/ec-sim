@@ -392,6 +392,7 @@ public class CacheAsociativa implements Cache
 	public void setInterfaz(Tabla interfaz)
 	{
 		this.interfaz = interfaz;
+		this.interfaz.setRenderTablaEnCelda();
 	}
 }
 
