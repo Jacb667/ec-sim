@@ -21,11 +21,12 @@ public class Config {
 		MEMORIAS_SEPARADAS (0),		// Bool: Indica si se separa la memoria de datos y instrucciones o no.
 		POLITICA_REEMPLAZO (1),		// Int: Politica de reemplazo de datos en caché.
 		TIPO_MOSTRAR (2),			// Int: Tipo de datos a mostrar (bin, oct, dec, hex).
+		INICIO_INSTRUCCIONES (3),   // Int: Dirección de inicio de la memoria de instrucciones.
 		
 		
 		
 		
-		END_CONFIG (2);
+		END_CONFIG (4);
 		
 		private int index;   
 

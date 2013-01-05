@@ -1,25 +1,63 @@
 package pckCpu;
+import general.Config;
+import general.Config.Conf_Type;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 
 public class Decoder
 {
-	private SortedMap<String, Instruccion> etiquetas;
-	private List<Instruccion> instrucciones;
-	private int primera_instruccion;
-	private int ultima_instruccion;
+	private static SortedMap<String, Instruccion> etiquetas = new TreeMap<String, Instruccion>();
+	private static List<Instruccion> instrucciones = new ArrayList<Instruccion>();
+	private static int primera_instruccion = Config.get(Conf_Type.INICIO_INSTRUCCIONES);
+	private static int ultima_instruccion = Config.get(Conf_Type.INICIO_INSTRUCCIONES);
 
 	final static public String SEPARADORES_ETIQUETAS = ":";
 	final static public String SEPARADORES_PARAMETROS = ",;() \t";
+	final static public String[] ETIQUETAS_INICIO = new String[]{"INICIO","START","ENTRY"};
 	
-	public Decoder(int pos_mem)
+	// Procesa un archivo de texto en código ensamblador.
+	public static boolean decodificarArchivo(String nombre)
 	{
-		instrucciones = new ArrayList<Instruccion>();
-		etiquetas = new TreeMap<String, Instruccion>();
-		primera_instruccion = pos_mem;
-		ultima_instruccion = pos_mem;
+		clean();  // Hacemos limpieza siempre antes de abrir un nuevo archivo.
+		try
+		{
+			FileReader fil = new FileReader(nombre);
+			BufferedReader br = new BufferedReader(fil);
+			
+			int i = 1;
+			String linea = br.readLine();
+			while (linea != null)
+			{
+				// Las líneas que comienzan con el carácter # se consideran comentarios.
+				if (linea.charAt(0) != '#')
+					decodificarInstruccion(linea, i);
+				linea = br.readLine();
+				i++;
+			}
+			
+			// Una vez leido, validamos el código.
+			validarCodigo();
+			return true;
+		}
+		catch (IOException e)
+		{
+			System.err.println("Error en la lectura del archivo.");
+			clean();
+			return false;
+		}
+		catch (CpuException e)
+		{
+			System.err.println(e);
+			clean();
+			return false;
+		}
 	}
 	
-	public void decodificarInstruccion(String s, int lin_fich) throws CpuException
+	// Decodifica, crea y añade una instrucción.
+	private static void decodificarInstruccion(String s, int lin_fich) throws CpuException
 	{
 		// La pasamos a mayúsculas y eliminamos espacios en blanco al principio y final (trim).
 		String cadena = s.toUpperCase().trim();
@@ -46,13 +84,36 @@ public class Decoder
 	}
 
 	// Añade una etiqueta y su correspondiente instrucción.
-	public void añadirEtiqueta(String etiq, Instruccion inst)
+	private static void añadirEtiqueta(String etiq, Instruccion inst) throws CpuException
 	{
+		// Comprobamos si es una etiqueta de inicio.
+		boolean es_inicio = false;
+		for (int i = 0; i < ETIQUETAS_INICIO.length; i++)
+		{
+			if (etiq.equalsIgnoreCase(ETIQUETAS_INICIO[i]))
+			{
+				es_inicio = true;
+				break;
+			}
+		}
+		
+		// Con esto igualamos las etiquetas de inicio a una sola.
+		if (es_inicio)
+			etiq = ETIQUETAS_INICIO[0];
+		
+		if (etiquetas.containsKey(etiq))
+		{
+			if (es_inicio)
+				throw new CpuException("Etiqueta de inicio duplicada.");
+			else
+				throw new CpuException("Etiqueta " + etiq + " duplicada.");
+		}
+
 		etiquetas.put(etiq, inst);
 	}
 	
 	// Obtiene la dirección de la instrucción a la que apunta una etiqueta.
-	private int getPosicionEtiqueta(String etiq)
+	private static int getPosicionEtiqueta(String etiq)
 	{
 		Instruccion inst = etiquetas.get(etiq);
 		if (inst != null)
@@ -62,7 +123,7 @@ public class Decoder
 	}
 	
 	// Valida el código ya decodificado.
-	public void validarCodigo() throws CpuException
+	public static void validarCodigo() throws CpuException
 	{
 		// Comprobamos todas las instrucciones buscando etiquetas de salto.
 		// Para cada etiqueta, comprobamos si existe o no.
@@ -96,15 +157,36 @@ public class Decoder
 		}
 	}
 	
-	public String toString()
+	// Devuelve la dirección de la primera instrucción.
+	public static int getPrimeraInstruccion()
+	{
+		
+		return 0;
+	}
+	
+	// Devuelve la lista de instrucciones.
+	public static List<Instruccion> getInstrucciones()
+	{
+		return instrucciones;
+	}
+	
+	// Devuelve información sobre las instrucciones encontradas (para debug).
+	public static String getStringInfo()
 	{
 		StringBuilder strB = new StringBuilder("Encontradas " + instrucciones.size() + " instrucciones");
 		strB.append("\n");
 		for (Instruccion inst : instrucciones)
-		{
 			strB.append(inst);
-		}
 		
 		return strB.toString();
+	}
+	
+	// Clean - Hace limpieza de esta clase. Se utiliza para borrar todo después de un error.
+	public static void clean()
+	{
+		etiquetas = new TreeMap<String, Instruccion>();
+		instrucciones = new ArrayList<Instruccion>();
+		primera_instruccion = Config.get(Conf_Type.INICIO_INSTRUCCIONES);
+		ultima_instruccion = Config.get(Conf_Type.INICIO_INSTRUCCIONES);
 	}
 }
