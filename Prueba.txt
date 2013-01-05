@@ -1,6 +1,9 @@
-# Esto es un comentario.
-loop: add,$1,$2
-sw $5, 100($2)
-addi $6,100
+# Programa de prueba.
+loop: add,$1,$1,$2
+sw $5, 100(R2)
+addi $6,$6,100
 j loop
-subi $5, 100($2)
+j 0
+subi $10,$5,-100
+beq $6,$1,loop
+JAL $31 0

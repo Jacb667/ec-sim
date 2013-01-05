@@ -1,5 +1,7 @@
-package general;
+package Pruebas;
 
+import general.Log;
+import general.MemoryException;
 import general.Global.TiposReemplazo;
 
 import java.awt.Dimension;

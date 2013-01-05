@@ -1,5 +1,7 @@
-package general;
+package Pruebas;
 
+import general.Global;
+import general.MemoryException;
 import general.Global.TiposReemplazo;
 
 import pckMemoria.Cache;
