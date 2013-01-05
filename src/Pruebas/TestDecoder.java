@@ -1,10 +1,13 @@
-package pckCpu;
+package Pruebas;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class testDecoder {
+import pckCpu.CpuException;
+import pckCpu.Decoder;
+
+public class TestDecoder {
 
 	/**
 	 * @param args
