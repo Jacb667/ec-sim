@@ -79,6 +79,10 @@ public class Instruccion {
 		// La constante es un campo de 16 bits. (-32768 a 32767)
 		if (constante < -32768 || constante > 32767)
 			throw new CpuException("La constante no puede superar los 16 bits de longitud.");
+		
+		if (Opcode.esDesplazamiento(opcode))
+			if (constante < 0 || constante > 31)
+				throw new CpuException("No se puede realizar un desplazamiento de " + constante + " bits.");
 	}
 
 	// Comprueba si cumple el formato y decodifica la instrucción.
@@ -232,8 +236,39 @@ public class Instruccion {
 	// Codifica la instrucción a binario (para guardar en memoria).
 	public int codificarBinario()
 	{
+		int resultado = opcode.getCodigo();
+		if (opcode.formatoInst() == 'R')
+		{
+			resultado = resultado << 5;
+			resultado += origen1;
+			resultado = resultado << 5;
+			resultado += origen2;
+			resultado = resultado << 5;
+			resultado += destino;
+			resultado = resultado << 5;
+			if (Opcode.esDesplazamiento(opcode))
+				resultado += constante;  // Sólo en desplazamientos.
+			else
+				resultado += 0;
+			resultado = resultado << 6;
+			resultado += opcode.getFuncion();
+		}
+		else if (opcode.formatoInst() == 'I')
+		{
+			resultado = resultado << 5;
+			resultado += origen1;
+			resultado = resultado << 5;
+			resultado += origen2;
+			resultado = resultado << 16;
+			resultado += constante;
+		}
+		else
+		{
+			resultado = resultado << 26;
+			resultado += d_salto;
+		}
 		
-		return 0;
+		return resultado;
 	}
 
 }
