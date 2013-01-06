@@ -98,7 +98,8 @@ public class Aplicacion extends javax.swing.JFrame {
         
         // Main
         //new Test();
-    	new TestMemoria();
+    	//new TestMemoria();
+    	new TestCpu();
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
