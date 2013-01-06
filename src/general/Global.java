@@ -18,32 +18,33 @@ public class Global {
 
 	public enum Opcode
 	{
-		ADD("DRR"),				// Suma 2 registros
-		ADDI("DRC"),			// Suma registro con inmediate
-		SUB("DRR"),				// Resta 2 registros
-		SUBI("DRC"),			// Resta registro con inmediate
-		LW("DCR"),				// Carga word en registro
-		SW("RCR"),				// Guarda word de registro a memoria
-		AND("DRR"),				// AND alu
-		ANDI("DRC"),			// AND alu inmediate
-		OR("DRR"),				// OR alu
-		ORI("DRC"),				// OR alu inmediate
-		XOR("DRR"),				// XOR alu
-		XORI("DRC"),			// XOR alu inmediate
-		NOR("DRR"),				// NOR alu
-		NORI("DRC"),			// NOR alu inmediate
-		SLT("DRR"),				// Guarda 1 si menor que
-		SLTI("DRC"),			// Guarda 1 si menor que inmediate
-		SLL("DRC"),				// Shift left
-		SRL("DRC"),				// Shift right
-		BEQ("RRE","RRJ"),		// Salta si iguales
-		BNE("RRE","RRJ"),		// Salta si distintos
-		J("E","J"),				// Salto
-		JR("R"),				// Vuelve a registro ($31)
-		JAL("DE", "DJ"),		// Salta y guarda PC+4 en registro ($31)
-		NOP(""),				// No operation (stall)
-		END("");				// Final del programa
-		
+		ADD   (	"DRR",		'R',	0,		0x20	),		// Suma 2 registros
+		ADDU  (	"DRR",		'R',	0,		0x21	),		// Suma 2 registros (sin signo)
+		ADDI  (	"DRC",		'I',	0x8,	0		),		// Suma registro con inmediate
+		ADDIU (	"DRC",		'I',	0x9,	0		),		// Suma registro con inmediate (sin signo)
+		SUB   (	"DRR",		'R',	0,		0x22	),		// Resta 2 registros
+		SUBU  (	"DRR",		'R',	0,		0x23	),		// Resta 2 registros (sin signo)
+		LW    (	"DCR",		'I',	0x23,	0		),		// Carga word en registro
+		SW    (	"RCR",		'I',	0x2B,	0		),		// Guarda word de registro a memoria
+		AND   (	"DRR",		'R',	0,		0x24	),		// AND alu
+		ANDI  (	"DRC",		'I',	0xC,	0		),		// AND alu inmediate
+		OR    (	"DRR",		'R',	0,		0x25	),		// OR alu
+		ORI   (	"DRC",		'I',	0xD,	0		),		// OR alu inmediate
+		XOR   (	"DRR",		'R',	0,		0x26	),		// XOR alu
+		XORI  (	"DRC",		'I',	0xE,	0		),		// XOR alu inmediate
+		NOR   (	"DRR",		'R',	0,		0x27	),		// NOR alu
+		NORI  (	"DRC",		'I',	0xF,	0		),		// NOR alu inmediate
+		SLT   (	"DRR",		'R',	0,		0x2A	),		// Guarda 1 si menor que
+		SLTU  (	"DRR",		'R',	0,		0x2B	),		// Guarda 1 si menor que (sin signo)
+		SLTI  (	"DRC",		'I',	0xA,	0		),		// Guarda 1 si menor que inmediate
+		SLL   (	"DRC",		'R',	0,		0		),		// Shift left
+		SRL   (	"DRC",		'R',	0,		0x2		),		// Shift right
+		BEQ   (	"RRE","RRJ",'I',	0x4,	0		),		// Salta si iguales
+		BNE   (	"RRE","RRJ",'I',	0x5,	0		),		// Salta si distintos
+		J     (	"E","J",	'J',	0x2,	0		),		// Salto
+		JR    (	"R",		'R',	0,		0x8		),		// Vuelve a registro ($31)
+		JAL   (	"E", "J",	'J',	0x3,	0		),		// Salta y guarda PC+4 en registro ($31)
+		;
 
 		/*
 		 * Formatos de instrucción:
@@ -58,29 +59,38 @@ public class Global {
 		 * 		RRJ - 2 registros y constante (saltos condicionales).
 		 * 		RCR	- Registro, constante y registro (los 2 últimos para calcular memoria).
 		 * 		DCR	- Registro, constante y registro (los 2 últimos para calcular memoria).
-		 * 		DE	- Registro y etiqueta.
-		 * 		DJ	- Registro y constante (para salto a dirección de memoria).
-		 * 
 		 * 		
 		 */
 		
 		private String formato1;
 		private String formato2;
+		private int codigo;
+		private int funcion;
+		private char formatoInst;
 
-		Opcode(String t1)
+		Opcode(String f1, char tipo, int op, int fun)
 		{
-			formato1 = t1;
+			formato1 = f1;
 			formato2 = null;
+			formatoInst = tipo;
+			codigo = op;
+			funcion = fun;
 		}
 
-		Opcode(String t1, String t2)
+		Opcode(String f1, String f2, char tipo, int op, int fun)
 		{
-			formato1 = t1;
-			formato2 = t2;
+			formato1 = f1;
+			formato2 = f2;
+			formatoInst = tipo;
+			codigo = op;
+			funcion = fun;
 		}
 
 		public String getFormato1() { return formato1; }
 		public String getFormato2() { return formato2; }
+		public int getCodigo() { return codigo; }
+		public int getFuncion() { return funcion; }
+		public char formatoInst() { return formatoInst; }
 		public String toString() { return name(); }
 		
 		public static Opcode find(String name)
