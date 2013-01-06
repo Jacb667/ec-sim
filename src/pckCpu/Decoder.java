@@ -160,8 +160,12 @@ public class Decoder
 	// Devuelve la dirección de la primera instrucción.
 	public static int getPrimeraInstruccion()
 	{
+		int primera = getPosicionEtiqueta(ETIQUETAS_INICIO[0]);
 		
-		return 0;
+		if (primera == -1)
+			primera = 0;
+		
+		return primera;
 	}
 	
 	// Devuelve la lista de instrucciones.

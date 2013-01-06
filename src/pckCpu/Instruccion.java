@@ -42,7 +42,7 @@ public class Instruccion {
 		}
 		catch (IllegalArgumentException e)
 		{
-			throw new CpuException("Instrucción no soportada en línea " + decode + " en línea " + lin_fich);
+			throw new CpuException("Instrucción " + decode + " no soportada  en línea " + lin_fich);
 		}
 	}
 	
@@ -64,8 +64,17 @@ public class Instruccion {
 			throw new CpuException("No se puede escribir en el registro 0 reservado.");
 		
 		// La constante es un campo de 16 bits. (-32768 a 32767)
-		if (constante < -32768 || constante > 32767)
-			throw new CpuException("La constante no puede superar los 16 bits de longitud.");
+		// Sólo si es una instrucción de tipo J, la dirección de salto puede ser de 26 bits.
+		if (opcode == Opcode.J)
+		{
+			if (d_salto < -33554432 || d_salto > 33554431)
+				throw new CpuException("La dirección de salto no puede superar los 26 bits de longitud.");
+		}
+		else
+		{
+			if (d_salto < -32768 || d_salto > 32767)
+				throw new CpuException("La dirección de salto no puede superar los 16 bits de longitud.");
+		}
 		
 		// La constante es un campo de 16 bits. (-32768 a 32767)
 		if (constante < -32768 || constante > 32767)
@@ -150,16 +159,6 @@ public class Instruccion {
 						destino = v[0];
 						constante = v[1];
 						origen2 = v[2];
-						modifica = true;
-						break;
-					case "DE":  // JAL
-						destino = v[0];
-						etiqueta = etiq;
-						modifica = true;
-						break;
-					case "DJ":  // JAL
-						destino = v[0];
-						d_salto = v[1];
 						modifica = true;
 						break;
 					case "R":  // JR
