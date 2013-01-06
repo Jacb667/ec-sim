@@ -37,8 +37,9 @@ public class Global {
 		SLT   (	"DRR",		'R',	0,		0x2A	),		// Guarda 1 si menor que
 		SLTU  (	"DRR",		'R',	0,		0x2B	),		// Guarda 1 si menor que (sin signo)
 		SLTI  (	"DRC",		'I',	0xA,	0		),		// Guarda 1 si menor que inmediate
-		SLL   (	"DRC",		'R',	0,		0		),		// Shift left
-		SRL   (	"DRC",		'R',	0,		0x2		),		// Shift right
+		SLL   (	"DRC",		'R',	0,		0		),		// Shift left (<<<)
+		SRL   (	"DRC",		'R',	0,		0x2		),		// Shift right (>>>)
+		SRA   (	"DRC",		'R',	0,		0x3		),		// Desplazamiento aritmético (>>)
 		BEQ   (	"RRE","RRJ",'I',	0x4,	0		),		// Salta si iguales
 		BNE   (	"RRE","RRJ",'I',	0x5,	0		),		// Salta si distintos
 		J     (	"E","J",	'J',	0x2,	0		),		// Salto
@@ -125,6 +126,33 @@ public class Global {
 			{
 				case SW:
 				case LW:
+					return true;
+			}
+			return false;
+		}
+		
+		// Devuelve true si es de tipo "sin signo"
+		public static boolean esSinSigno(Opcode opcode)
+		{
+			switch(opcode)
+			{
+				case ADDU:
+				case ADDIU:
+				case SUBU:
+				case SLTU:
+					return true;
+			}
+			return false;
+		}
+		
+		// Devuelve true si es un tipo de desplazamiento
+		public static boolean esDesplazamiento(Opcode opcode)
+		{
+			switch(opcode)
+			{
+				case SLL:
+				case SRL:
+				case SRA:
 					return true;
 			}
 			return false;
