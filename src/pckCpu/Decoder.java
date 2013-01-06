@@ -1,6 +1,4 @@
 package pckCpu;
-import general.Config;
-import general.Config.Conf_Type;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -11,8 +9,8 @@ public class Decoder
 {
 	private static SortedMap<String, Instruccion> etiquetas = new TreeMap<String, Instruccion>();
 	private static List<Instruccion> instrucciones = new ArrayList<Instruccion>();
-	private static int primera_instruccion = Config.get(Conf_Type.INICIO_INSTRUCCIONES);
-	private static int ultima_instruccion = Config.get(Conf_Type.INICIO_INSTRUCCIONES);
+	private static int primera_instruccion = 0;
+	private static int ultima_instruccion = 0;
 
 	final static public String SEPARADORES_ETIQUETAS = ":";
 	final static public String SEPARADORES_PARAMETROS = ",;() \t";
@@ -190,7 +188,7 @@ public class Decoder
 	{
 		etiquetas = new TreeMap<String, Instruccion>();
 		instrucciones = new ArrayList<Instruccion>();
-		primera_instruccion = Config.get(Conf_Type.INICIO_INSTRUCCIONES);
-		ultima_instruccion = Config.get(Conf_Type.INICIO_INSTRUCCIONES);
+		primera_instruccion = 0;
+		ultima_instruccion = 0;
 	}
 }
