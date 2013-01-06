@@ -211,24 +211,16 @@ public class Instruccion {
 	
 	public String toString()
 	{
-		StringBuilder strB = new StringBuilder("Instrucción: " + opcode);
-		strB.append("\n");
-		strB.append("Instrucción: " + opcode);
-		strB.append("\n");
-		strB.append("Destino: " + destino);
-		strB.append("\n");
-		strB.append("Origen1: " + origen1);
-		strB.append("\n");
-		strB.append("Origen2: " + origen2);
-		strB.append("\n");
-		strB.append("Constante: " + constante);
-		strB.append("\n");
-		strB.append("Etiqueta: " + etiqueta);
-		strB.append("\n");
-		strB.append("Dir salto: " + d_salto);
-		strB.append("\n");
-		strB.append("--------------------");
-		strB.append("\n");
+		StringBuilder strB = new StringBuilder("[" + opcode);
+		strB.append(" D" + destino);
+		strB.append(" $" + origen1);
+		strB.append(" $" + origen2);
+		strB.append(" I" + constante);
+		if (etiqueta != null)
+			strB.append(" " + etiqueta);
+		if (Opcode.esSalto(opcode))
+			strB.append(" " + d_salto);
+		strB.append("]");
 		
 		return strB.toString();
 	}

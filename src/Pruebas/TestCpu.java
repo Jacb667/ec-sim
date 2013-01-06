@@ -14,6 +14,7 @@ import general.Config;
 import general.Config.Conf_Type;
 import general.Global.TiposReemplazo;
 import general.MemoryException;
+import pckCpu.Cpu;
 import pckCpu.Decoder;
 import pckCpu.Instruccion;
 import pckMemoria.Cache;
@@ -33,12 +34,15 @@ public class TestCpu {
 	
 	private MemoriaPrincipal memoria;
 	private JerarquiaMemoria jmem;
+	private JerarquiaMemoria jmem2;  // Jerarquía de instrucciones.
 	private Cache[] caches;
+	private Cache[] cache2;  // Caché de instrucciones (por si se separan).
+	private Cpu cpu;
 	
 	public TestCpu()
 	{
 		// Asigno la primera posición de memoria. Por ejemplo la 800.
-		Config.set(Conf_Type.INICIO_INSTRUCCIONES, 800);
+		Config.set(Conf_Type.INICIO_INSTRUCCIONES, 0x3A0);
 		
 		// Leo el código.
 		if (!Decoder.decodificarArchivo("Prueba.txt"))
@@ -60,11 +64,20 @@ public class TestCpu {
 		{
 			inicializarMemoria();
 			inicializarInterfaz();
+			inicializarCpu();
+			
+			int direccion_base = Config.get(Conf_Type.INICIO_INSTRUCCIONES);
 			
 			// Guardo las instrucciones en memoria.
 			System.out.println("Enviando instrucciones a memoria.");
 			for (Instruccion inst : Decoder.getInstrucciones())
-				memoria.guardarDato(inst.getDireccion(), inst.codificarBinario());
+				memoria.guardarDato(direccion_base+inst.getDireccion(), inst.codificarBinario());
+			
+			// Asignamos PC a la primera instrucción.
+			cpu.setPC(direccion_base+Decoder.getPrimeraInstruccion());
+			
+			// Una vez tenemos el código guardado en memoria, comenzamos la ejecución.
+			cpu.ejecutarCodigoMonociclo();
 		}
 		catch (MemoryException e)
 		{
@@ -74,6 +87,12 @@ public class TestCpu {
 		{
 			//e.printStackTrace();
 		}
+	}
+	
+	// Inicializa la Cpu.
+	private void inicializarCpu()
+	{
+		cpu = new Cpu(jmem, null);
 	}
 	
 	// Inicializa la Jerarquía de Memoria.
