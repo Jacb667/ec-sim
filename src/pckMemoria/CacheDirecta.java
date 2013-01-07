@@ -86,6 +86,23 @@ public class CacheDirecta implements Cache
 		return false;
 	}
 	
+	// Invalida una línea.
+	public void invalidarLinea(int direccion)
+	{
+		int pos = buscarPosicion(direccion);
+		
+		valid[pos] = false;
+		dirty[pos] = false;
+		
+		// Actualizar interfaz gráfica.
+		if (interfaz != null)
+		{
+			int tamaño = 4 + palabras_linea;
+			interfaz.setValueAt(false, pos, tamaño-2);  // Valid
+			interfaz.setValueAt(false, pos, tamaño-1);  // Dirty
+		}
+	}
+	
 	// Leer el dato. Este método se ejecuta después de "existeDato".
 	// Es decir, si ejecutamos este método es porque ya sabemos que el dato existe y se puede leer.
 	public int consultarDato(int direccion)
