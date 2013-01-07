@@ -17,11 +17,11 @@ public class BancoRegistros {
 		return datos[direccion];
 	}
 	
-	public void guardarDato(int direccion, int dato)
+	public void guardarDato(int direccion, int dato) throws CpuException
 	{
 		if (direccion == 0)
-			return;
-		
+			throw new CpuException("Intento de escritura en registro $0.");
+
 		datos[direccion] = dato;
 	}
 	
@@ -31,7 +31,10 @@ public class BancoRegistros {
 		for (int i = 0; i < datos.length; i++)
 		{
 			// Dirección (hex) : Dato (dec)
-			strB.append(String.format("0x%2S", Integer.toHexString(i << 2)).replace(" ", "0")).append(" : ").append(datos[i]).append("\n");
+			strB.append(i);
+			strB.append(" : ");
+			strB.append(datos[i]);
+			strB.append("\n");
 		}
 		
 		return strB.toString();

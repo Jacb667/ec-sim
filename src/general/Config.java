@@ -22,11 +22,12 @@ public class Config {
 		POLITICA_REEMPLAZO (1),		// Int: Politica de reemplazo de datos en caché.
 		TIPO_MOSTRAR (2),			// Int: Tipo de datos a mostrar (bin, oct, dec, hex).
 		INICIO_INSTRUCCIONES (3),   // Int: Dirección de inicio de la memoria de instrucciones.
+		NUMERO_PAGINAS (4),			// Int: Número de páginas de memoria.
 		
 		
 		
 		
-		END_CONFIG (4);
+		END_CONFIG (5);
 		
 		private int index;   
 

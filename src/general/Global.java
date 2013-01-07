@@ -37,7 +37,7 @@ public class Global {
 		SLT   (	"DRR",		'R',	0,		0x2A	),		// Guarda 1 si menor que
 		SLTU  (	"DRR",		'R',	0,		0x2B	),		// Guarda 1 si menor que (sin signo)
 		SLTI  (	"DRC",		'I',	0xA,	0		),		// Guarda 1 si menor que inmediate
-		SLL   (	"DRC",		'R',	0,		0		),		// Shift left (<<<)
+		SLL   (	"DRC",		'R',	0,		0		),		// Shift left (<<)
 		SRL   (	"DRC",		'R',	0,		0x2		),		// Shift right (>>>)
 		SRA   (	"DRC",		'R',	0,		0x3		),		// Desplazamiento aritmético (>>)
 		BEQ   (	"RRE","RRJ",'I',	0x4,	0		),		// Salta si iguales
