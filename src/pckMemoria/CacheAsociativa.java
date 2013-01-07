@@ -57,6 +57,24 @@ public class CacheAsociativa implements Cache
 		
 		return res;
 	}
+	
+	// Invalida una línea.
+	public void invalidarLinea(int direccion)
+	{
+		for (int via = 0; via < vias.length; via++)
+		{
+			if (vias[via].existeDato(direccion))
+			{
+				int pos = buscarPosicion(direccion);
+				vias[via].invalidarLinea(direccion);
+				
+				if (interfaz != null)
+					invalidarLineaInterfaz(via, pos);
+				
+				return;
+			}
+		}
+	}
 
 	// Si esto se ejecuta es porque sabemos que el dato está (en alguna vía).
 	// Compruebo en qué vía está y leo el dato.
@@ -370,6 +388,30 @@ public class CacheAsociativa implements Cache
 			// Cada posición es una vía.
 			Boolean[] actual = (Boolean[])A_valid;
 			actual[via] = new Boolean(true);
+			interfaz.setValueAt(actual, pos, tamaño-2);
+		}
+		
+		// Modificamos el estado de dirty.
+		Object A_dirty = interfaz.getValueAt(pos, tamaño-1);
+		if (A_dirty.getClass().isArray())
+		{
+			// Cada posición es una vía.
+			Boolean[] actual = (Boolean[])A_dirty;
+			actual[via] = new Boolean(false);
+			interfaz.setValueAt(actual, pos, tamaño-1);
+		}
+	}
+	
+	private void invalidarLineaInterfaz(int via, int pos)
+	{
+		int tamaño = 4 + palabras_linea;
+		// Modificamos el estado de valid.
+		Object A_valid = interfaz.getValueAt(pos, tamaño-2);
+		if (A_valid.getClass().isArray())
+		{
+			// Cada posición es una vía.
+			Boolean[] actual = (Boolean[])A_valid;
+			actual[via] = new Boolean(false);
 			interfaz.setValueAt(actual, pos, tamaño-2);
 		}
 		

@@ -20,6 +20,9 @@ public interface Cache {
 	// Tamaño de línea.
 	public int getTamanoLinea();
 	
+	// Invalida una línea.
+	public void invalidarLinea(int direccion);
+	
 	// Operaciones para datos individuales.
 	public int consultarDato(int direccion) throws MemoryException;
 	public void modificarDato(int direccion, int dato) throws MemoryException;
