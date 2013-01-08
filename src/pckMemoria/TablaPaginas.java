@@ -77,7 +77,7 @@ public class TablaPaginas {
 	private int calcularId(int direccion)
 	{
 		// 1048575
-		return (int) Math.floor((direccion >> 2) / tamaño_pagina);
+		return (int) Math.floor(direccion / tamaño_pagina);
 	}
 	
 	// Traduce una dirección virtual a una física.
@@ -93,7 +93,7 @@ public class TablaPaginas {
 			// La página está en un marco, podemos traducir la dirección.
 			int offset = (int) Math.floor(direccion % tamaño_pagina);
 			int marco = pag.getMarco();
-			int res = marco << Global.bitsDireccionar(tamaño_pagina) + offset;
+			int res = (marco << Global.bitsDireccionar(tamaño_pagina)) + offset;
 			return res;
 		}
 		else
@@ -105,7 +105,7 @@ public class TablaPaginas {
 				marcos[marco] = pag;
 				pag.asignarMarco(marco);
 				int offset = (int) Math.floor(direccion % tamaño_pagina);
-				int res = marco << Global.bitsDireccionar(tamaño_pagina) + offset;
+				int res = (marco << Global.bitsDireccionar(tamaño_pagina)) + offset;
 				System.out.println("offset " + offset);
 				System.out.println("Asignada a marco " + marco);
 				return res;
@@ -116,7 +116,7 @@ public class TablaPaginas {
 				marcos[marco] = pag;
 				pag.asignarMarco(marco);
 				int offset = (int) Math.floor(direccion % tamaño_pagina);
-				int res = marco << Global.bitsDireccionar(tamaño_pagina) + offset;
+				int res = (marco << Global.bitsDireccionar(tamaño_pagina)) + offset;
 				return res;
 			}
 		}
