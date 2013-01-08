@@ -15,12 +15,15 @@ import general.Config.Conf_Type;
 import general.Global.TiposReemplazo;
 import general.MemoryException;
 import pckCpu.Cpu;
+import pckCpu.CpuException;
 import pckCpu.Decoder;
 import pckCpu.Instruccion;
 import pckMemoria.Cache;
 import pckMemoria.CacheAsociativa;
+import pckMemoria.CacheDirecta;
 import pckMemoria.JerarquiaMemoria;
 import pckMemoria.MemoriaPrincipal;
+import pckMemoria.Traductor;
 
 public class TestCpu {
 	
@@ -51,8 +54,6 @@ public class TestCpu {
 			return;
 		}
 		
-		System.out.println("El archivo se ha procesado correctamente.");
-		
 		// Comprobamos que hay instrucciones.
 		if (Decoder.getInstrucciones().size() == 0)
 		{
@@ -69,7 +70,6 @@ public class TestCpu {
 			int direccion_base = Config.get(Conf_Type.INICIO_INSTRUCCIONES);
 			
 			// Guardo las instrucciones en memoria.
-			System.out.println("Enviando instrucciones a memoria.");
 			for (Instruccion inst : Decoder.getInstrucciones())
 				memoria.guardarDato(direccion_base+inst.getDireccion(), inst.codificarBinario());
 			
@@ -96,7 +96,7 @@ public class TestCpu {
 	}
 	
 	// Inicializa la Jerarquía de Memoria.
-	private void inicializarMemoria() throws MemoryException
+	private void inicializarMemoria() throws MemoryException, CpuException
 	{
 		caches = new Cache[1];
 		
@@ -104,6 +104,10 @@ public class TestCpu {
 		memoria = new MemoriaPrincipal(256, palabras_linea);
 		
 		jmem = new JerarquiaMemoria(caches, memoria);
+		
+		Cache tlb = new CacheDirecta(4,1);
+		
+		Traductor.inicializar(256, 16, 4, tlb, null);
 	}
 	
 	// Inicializa la interfaz gráfica.
