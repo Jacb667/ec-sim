@@ -16,8 +16,9 @@ public class TablaPaginas {
 	private SortedMap<Integer, Pagina> paginas;
 	private Pagina[] marcos;
 	
-	private int tamaño_pagina;
-	private long memoria_maxima;
+	private int entradas_pagina;
+	private int tam_pagina;
+	private int entrada_maxima;
 	private int num_paginas;
 	private int num_marcos;
 	private int palabras_linea;
@@ -43,47 +44,58 @@ public class TablaPaginas {
 	 * 5 - Actualizar TLB.
 	 * 6 - Construir la dirección REAL usando la TLB y el offset de la dirección virtual.
 	 */
-	public TablaPaginas(int tam_pagina, int pal_linea, long max_memoria, int tam_mem_princ, TiposReemplazo _Tpolitica)
+	
+	// Este constructor utiliza NUMERO DE ENTRADAS de cada tipo.
+	public TablaPaginas(int ent_pag, int pal_linea, int max_ent_mem, int ent_mem_princ, TiposReemplazo _Tpolitica)
 	{
-		// Max_memoria por defecto: 0xFFFFFFFF
+		// Max_memoria por defecto: 0xFFFFFFFF -> Max ent: 0xFFFFFFFF / 4
 		// Memoria principal por defecto: 2048 (64KB).
 		// Una página de 4KB tendrá tamaño 4096 / 4 = 1024.
-		memoria_maxima = max_memoria / 4;
-		num_paginas = (int) (memoria_maxima / tam_pagina);
-		System.out.println("memoria_maxima: " + memoria_maxima);
-		System.out.println("tam_pagina: " + tam_pagina);
-		System.out.println("num_paginas: " + num_paginas);
-		num_marcos = tam_mem_princ / tam_pagina;
+		entrada_maxima = max_ent_mem;
+		num_paginas = entrada_maxima / ent_pag;
+		num_marcos = ent_mem_princ / ent_pag;
 		marcos = new Pagina[num_marcos];
 		paginas = new TreeMap<Integer, Pagina>();
-		tamaño_pagina = tam_pagina;
+		entradas_pagina = ent_pag;
 		palabras_linea = pal_linea;
+		tam_pagina = entradas_pagina * 4;
+		
+		System.out.println("entrada_maxima: " + entrada_maxima);
+		System.out.println("tam_pagina: " + ent_pag);
+		System.out.println("num_paginas: " + num_paginas);
+		System.out.println("num_marcos: " + num_marcos);
+		
+		System.out.println("Máxima dirección virtual: " + ((entrada_maxima << 2)-1));
+		System.out.println("Máxima dirección física: " + (((num_paginas) << Global.bitsDireccionar(tam_pagina))-1));
+		System.out.println("Máxima dirección memoria: " + (((num_marcos) << Global.bitsDireccionar(tam_pagina))-1));
 		
 		// La política sólo tendrá 1 entrada, con el número de marcos que hay.
 		politica = new PoliticaReemplazo(_Tpolitica, 1, marcos.length);
 	}
 	
 	// Crea una página nueva.
-	public Pagina crearPagina(int direccion) throws MemoryException
+	private Pagina crearPagina(int direccion) throws MemoryException
 	{
 		int id = calcularId(direccion);
 		System.out.println("Creando página id " + id);
-		Pagina nueva = new Pagina(tamaño_pagina, palabras_linea, id);
+		Pagina nueva = new Pagina(entradas_pagina, palabras_linea, id);
 		paginas.put(id, nueva);
 		return nueva;
 	}
 	
 	// Calcular id de página
-	private int calcularId(int direccion)
+	public int calcularId(int direccion)
 	{
-		// 1048575
-		return (int) Math.floor(direccion / tamaño_pagina);
+		return (int) Math.floor(direccion / tam_pagina);
 	}
 	
 	// Traduce una dirección virtual a una física.
 	// Si no le corresponde una dirección física deberá poner la página en un marco.
 	public int traducirDireccion(int direccion) throws MemoryException
 	{
+		if ((direccion >> 2) >= entrada_maxima)
+			throw new MemoryException("La dirección sobrepasa el límite de direccionamiento.");
+			
 		// Primero buscamos en qué página debe estar la dirección.
 		Pagina pag = seleccionarPagina(direccion);
 		
@@ -91,9 +103,9 @@ public class TablaPaginas {
 		if (pag.getMarco() != -1)
 		{
 			// La página está en un marco, podemos traducir la dirección.
-			int offset = (int) Math.floor(direccion % tamaño_pagina);
+			int offset = (int) Math.floor(direccion % tam_pagina);
 			int marco = pag.getMarco();
-			int res = (marco << Global.bitsDireccionar(tamaño_pagina)) + offset;
+			int res = (marco << Global.bitsDireccionar(tam_pagina)) + offset;
 			return res;
 		}
 		else
@@ -104,8 +116,8 @@ public class TablaPaginas {
 			{
 				marcos[marco] = pag;
 				pag.asignarMarco(marco);
-				int offset = (int) Math.floor(direccion % tamaño_pagina);
-				int res = (marco << Global.bitsDireccionar(tamaño_pagina)) + offset;
+				int offset = (int) Math.floor(direccion % tam_pagina);
+				int res = (marco << Global.bitsDireccionar(tam_pagina)) + offset;
 				System.out.println("offset " + offset);
 				System.out.println("Asignada a marco " + marco);
 				return res;
@@ -115,8 +127,8 @@ public class TablaPaginas {
 				marco = liberarMarco();
 				marcos[marco] = pag;
 				pag.asignarMarco(marco);
-				int offset = (int) Math.floor(direccion % tamaño_pagina);
-				int res = (marco << Global.bitsDireccionar(tamaño_pagina)) + offset;
+				int offset = (int) Math.floor(direccion % tam_pagina);
+				int res = (marco << Global.bitsDireccionar(tam_pagina)) + offset;
 				return res;
 			}
 		}
