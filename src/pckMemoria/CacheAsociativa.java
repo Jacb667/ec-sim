@@ -1,6 +1,9 @@
 package pckMemoria;
 
 import java.awt.Dimension;
+import java.util.ArrayList;
+import java.util.List;
+
 import componentes.Tabla;
 
 import general.Global;
@@ -74,6 +77,28 @@ public class CacheAsociativa implements Cache
 				return;
 			}
 		}
+	}
+	
+	// Invalida una página.
+	public List<LineaReemplazo> invalidarPagina(int pagina_id)
+	{
+		List<LineaReemplazo> linRes = new ArrayList<LineaReemplazo>();
+		
+		List<LineaReemplazo> eliminadas;
+		for (int via = 0; via < vias.length; via++)
+		{
+			eliminadas = vias[via].invalidarPagina(pagina_id);
+			linRes.addAll(eliminadas);
+			
+			// Actualizar interfaz.
+			if (interfaz != null)
+			{
+				for (LineaReemplazo linR : eliminadas)
+					invalidarLineaInterfaz(via, buscarPosicion(linR.getDireccion()));
+			}
+		}
+		
+		return linRes;
 	}
 
 	// Si esto se ejecuta es porque sabemos que el dato está (en alguna vía).

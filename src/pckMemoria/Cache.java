@@ -1,6 +1,7 @@
 package pckMemoria;
 
 import java.awt.Dimension;
+import java.util.List;
 
 import componentes.Tabla;
 
@@ -22,6 +23,7 @@ public interface Cache {
 	
 	// Invalida una línea.
 	public void invalidarLinea(int direccion);
+	public List<LineaReemplazo> invalidarPagina(int pagina_id);
 	
 	// Operaciones para datos individuales.
 	public int consultarDato(int direccion) throws MemoryException;

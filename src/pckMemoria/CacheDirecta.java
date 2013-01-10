@@ -4,7 +4,9 @@ import general.Global;
 import general.MemoryException;
 
 import java.awt.Dimension;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import componentes.Tabla;
 
@@ -26,6 +28,7 @@ public class CacheDirecta implements Cache
 	private int bits_pal;
 
 	private int[] tags;
+	private int[] paginas;  // Al igual que el TAG, guardamos la página correspondiente.
 	private boolean[] valid;
 	private boolean[] dirty;
 	private int[/*lineas*/][/*palabras*/] datos;
@@ -50,6 +53,7 @@ public class CacheDirecta implements Cache
 		bits_dir = Global.bitsDireccionar(entradas);
 		
 		tags = new int[entradas];
+		paginas = new int[entradas];
 		valid = new boolean[entradas];
 		dirty = new boolean[entradas];
 		
@@ -101,6 +105,33 @@ public class CacheDirecta implements Cache
 			interfaz.setValueAt(false, pos, tamaño-2);  // Valid
 			interfaz.setValueAt(false, pos, tamaño-1);  // Dirty
 		}
+	}
+	
+	// Invalidar página. Devuelve una lista con las entradas eliminadas.
+	public List<LineaReemplazo> invalidarPagina(int pagina_id)
+	{
+		List<LineaReemplazo> eliminadas = new ArrayList<LineaReemplazo>();
+		for (int pos = 0; pos < datos.length; pos++)
+		{
+			if (paginas[pos] == pagina_id)
+			{
+				valid[pos] = false;
+				dirty[pos] = false;
+				
+				LineaReemplazo LinR = new LineaReemplazo(getDireccionGuardada(pos << 2), datos[pos]);
+				eliminadas.add(LinR);
+				
+				// Actualizar interfaz gráfica.
+				if (interfaz != null)
+				{
+					int tamaño = 4 + palabras_linea;
+					interfaz.setValueAt(false, pos, tamaño-2);  // Valid
+					interfaz.setValueAt(false, pos, tamaño-1);  // Dirty
+				}
+			}
+		}
+		
+		return eliminadas;
 	}
 	
 	// Leer el dato. Este método se ejecuta después de "existeDato".
