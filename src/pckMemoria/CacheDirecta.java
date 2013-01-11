@@ -285,6 +285,21 @@ public class CacheDirecta implements Cache
 		return dir;
 	}
 	
+	private int getDireccionGuardadaEntrada(int posicion)
+	{
+		// Cogemos el TAG guardado.
+		int dir = tags[posicion];
+		
+		// bits_dir y sumamos la posición.
+		dir = dir << bits_dir;
+		dir += posicion;
+		
+		// Añadimos bits de palabra y offset.
+		dir = dir << bits_pal << 2;
+		
+		return dir;
+	}
+	
 	public int getTagGuardado(int posicion)
 	{
 		return tags[posicion];
