@@ -118,7 +118,7 @@ public class CacheDirecta implements Cache
 				valid[pos] = false;
 				dirty[pos] = false;
 				
-				LineaReemplazo LinR = new LineaReemplazo(getDireccionGuardada(pos << 2), datos[pos]);
+				LineaReemplazo LinR = new LineaReemplazo(getDireccionGuardadaEntrada(pos), datos[pos]);
 				eliminadas.add(LinR);
 				
 				// Actualizar interfaz gráfica.
@@ -236,6 +236,7 @@ public class CacheDirecta implements Cache
 		for (int i = 0; i < datos.length; i++)
 		{
 			strB.append(String.format("0x%3S", Integer.toHexString(i << 2 << bits_pal)).replace(" ", "0"));
+			strB.append(" ("+paginas[i]+")");
 			strB.append(" -> ").append(Integer.toHexString(tags[i])).append(" : ").append(Arrays.toString(datos[i]));
 			strB.append(" ").append(valid[i]).append(" ").append(dirty[i]);
 			strB.append("\n");
