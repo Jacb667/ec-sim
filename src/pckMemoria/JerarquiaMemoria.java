@@ -112,6 +112,7 @@ public class JerarquiaMemoria {
 			if (!sig.existeDato(direccion))
 				throw new MemoryException("Fallo al traer desde memoria la línea 0x" + Integer.toHexString(direccion));
 			
+			Log.report(Flags.BLOCK_READ);
 			int[] linea = sig.leerLinea(direccion, tam_linea);
 			
 			// Si hay hueco en la caché donde almacenar (nivel actual).
@@ -176,11 +177,10 @@ public class JerarquiaMemoria {
 		}
 	}
 	
-	
 	// Actualizar línea desde el nivel actual.
 	// Actualiza todos los niveles superiores.
 	// Añadir un boolean para tipo de política.
-	private void actualizarLinea(LineaReemplazo linR, int nivel_act) throws MemoryException
+	public void actualizarLinea(LineaReemplazo linR, int nivel_act) throws MemoryException
 	{
 		int nivel_sig = nivel_act+1;
 		
@@ -197,6 +197,7 @@ public class JerarquiaMemoria {
 		}
 		
 		Log.println(3, "Actualizo en memoria la dirección 0x" + Integer.toHexString(direccion));
+		Log.report(Flags.BLOCK_WRITE);
 		memoria.guardarLinea(direccion, linea);
 	}
 }

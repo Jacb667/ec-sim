@@ -83,7 +83,7 @@ public class TablaPaginas {
 		return nueva;
 	}
 	
-	// Calcular id de página
+	// Calcular id de página. La ID se calcula con direcciones VIRTUALES.
 	public int calcularId(int direccion)
 	{
 		return (int) Math.floor(direccion / tam_pagina);
@@ -163,7 +163,7 @@ public class TablaPaginas {
 		return -1;
 	}
 	
-	// Selecciona la página en la que se encuentra la dirección REAL.
+	// Selecciona la página correspondiente a la dirección VIRTUAL.
 	public Pagina seleccionarPagina(int direccion) throws MemoryException
 	{
 		// Buscamos la página.
@@ -177,11 +177,36 @@ public class TablaPaginas {
 		return pag;
 	}
 	
+	// Selecciona el marco a partir de la dirección REAL
+	public int seleccionarMarco(int direccion)
+	{
+		int marco = direccion >> Global.bitsDireccionar(tam_pagina);
+		return marco;
+	}
+	
+	// Devuelve la lista de marcos.
+	public Pagina[] getMarcos()
+	{
+		return marcos;
+	}
+	
+	// Devuelve el tamaño de página.
+	public int getTamañoPagina()
+	{
+		return tam_pagina;
+	}
+	
+	// Devuelve el tamaño de página.
+	public int getEntradasPagina()
+	{
+		return entradas_pagina;
+	}
+	
 	public String toString()
 	{
-		StringBuilder strB = new StringBuilder("Páginas en marco: ");
+		StringBuilder strB = new StringBuilder("Páginas en marco: \n");
 		for (int i = 0; i < marcos.length; i++)
-			strB.append(marcos[i] + ",");
+			strB.append("Marco [" + i + "]" + "\n" + marcos[i] + "\n");
 		
 		strB.append("\n");
 		strB.append("Número de páginas en total: " + paginas.size());

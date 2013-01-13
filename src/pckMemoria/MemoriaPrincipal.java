@@ -6,124 +6,105 @@ import java.awt.Dimension;
 import componentes.Tabla;
 
 import general.Global;
-import general.Log;
-import general.Log.Flags;
-import general.MemoryException;
 
 /* 
- * La memoria RAM se considera que no tiene vías ni es asociativa.
- * Por lo tanto, conociendo el tamaño en bytes podemos determinar sus líneas (de 1 palabra cada una).
- * 
- * La memoria en una memoria se almacena por palabras de 1 byte, nosotros almacenamos en campos INT de
- * 4 bytes, por lo que no necesitamos los 2 últimos bits de la dirección de memoria.
+ * La memoria principal se compone de Páginas, con una capacidad de las páginas que caben en los marcos de la Tabla de Paginación.
+ * Para acceder a un dato de la memoria, se buscará la página a la que pertenece.
+ * Si la página ya está en un marco, se guarda directamente en la página correspondiente.
+ * Si no está en un marco, será necesario traer la página a un marco cualquiera, siendo necesario reemplazar otra página si están todos ocupados.
+ * En caso de eliminar una página de un marco, deberán eliminarse de las memorias Caché todas las entradas pertenecientes a esa página.
  */
 
 public class MemoriaPrincipal
 {
-	private int entradas;
-	private int[] mem;
-	private boolean[] valid;
+	private TablaPaginas tablaPags;
 	private Tabla interfaz;
+	private int entradas;
 	
 	// De momento no se usa. En un futuro podría usarse para controlar las peticiones de líneas.
 	//private int palabras_linea;
-	
-	public MemoriaPrincipal(int _entradas, int _palabras_linea) throws MemoryException
+
+	public MemoriaPrincipal(TablaPaginas tp)
 	{
-		if (_entradas < 1 || _palabras_linea < 1 || _entradas % _palabras_linea != 0)
-			throw new MemoryException("Error en inicialización de memoria.");
-			
-		// Entradas debe ser divisible entre palabras_linea.
-		entradas = _entradas;
-		mem = new int[entradas];
-		valid = new boolean[entradas];
+		tablaPags = tp;
+		entradas = tablaPags.getMarcos().length * tablaPags.getEntradasPagina();
 	}
 	
-	// Compruebo si la dirección es válida.
+	// Selecciona una página a partir de la dirección física recibida.
+	private Pagina seleccionarPagina(int direccion)
+	{
+		// Aquí no podemos usar seleccionarPagina, ya que sólo tenemos la dirección física.
+		int marco = tablaPags.seleccionarMarco(direccion);
+		Pagina pag = tablaPags.getMarcos()[marco];
+		return pag;
+	}
+	
+	// Comprueba si existe una dirección en memoria principal.
 	public boolean existeDato(int direccion)
 	{
-		direccion = direccion >> 2;
-		if (direccion < 0 || direccion > entradas)
+		int marco = tablaPags.seleccionarMarco(direccion);
+		if (marco >= tablaPags.getMarcos().length)
 			return false;
 		
 		return true;
 	}
 	
-	// Me envían la dirección física, elimino los 2 últimos bits y leo la posición.
+	// Me envían la dirección física.
 	public int leerDato(int direccion)
 	{
-		return mem[direccion >> 2];
+		Pagina pag = seleccionarPagina(direccion);
+		return pag.leerDato(direccion);
 	}
 	
 	// Me envían la dirección física, elimino los 2 últimos bits y guardo la posición.
 	public void guardarDato(int direccion, int dato)
 	{
-		mem[direccion >> 2] = dato;
-		valid[direccion >> 2] = true;
+		Pagina pag = seleccionarPagina(direccion);
+		pag.guardarDato(direccion, dato);
 		
 		// Actualizar interfaz gráfica.
-		if (interfaz != null)
-		{
-			interfaz.setValueAt(String.valueOf(dato), direccion >> 2, 1);
-			interfaz.setValueAt(true, direccion >> 2, 2);
-		}
+		actualizarPaginaInterfaz(pag.getMarco());
 	}
 	
-	// Dirección física, hay que eliminar los 2 últimos bits.
-	private int getInicioBloque(int direccion, int tam_linea)
+	// Dirección de inicio de un marco.
+	private int getInicioMarco(int marco)
 	{
-		return (int) Math.floor((direccion >> 2) / tam_linea);
+		// Si los marcos son de 5 entradas (por ejemplo):
+		// Marco 0 -> 0
+		// Marco 1 -> 5
+		// Marco 2 -> 10
+		// etc...
+		return marco * tablaPags.getEntradasPagina();
 	}
 	
 	// Lee varias posiciones (tam_linea) a partir de una dirección
 	// Se usa para enviar una línea completa a caché
 	public int[] leerLinea(int direccion, int tam_linea)
 	{
-		Log.report(Flags.BLOCK_READ);
-		
-		int[] res =  new int[tam_linea];
-		int direccion_inicio = getInicioBloque(direccion, tam_linea) * tam_linea;
-		
-		//System.out.print("Dir: 0x" + Integer.toHexString(direccion_inicio<<2) + " Bl: " + getInicioBloque(direccion, tam_linea));
-		
-		for (int i = 0; i < tam_linea; i++)
-			res[i] = mem[direccion_inicio + i];
-		
-		return res;
+		Pagina pag = seleccionarPagina(direccion);
+		return pag.leerLinea(direccion, tam_linea);
 	}
 	
 	public void guardarLinea(int direccion, int[] linea) 
 	{
-		Log.report(Flags.BLOCK_WRITE);
-		
-		int tam_linea = linea.length;
-		int direccion_inicio = getInicioBloque(direccion, tam_linea) * tam_linea;
-		
-		for (int i = 0; i < tam_linea; i++)
-		{
-			mem[direccion_inicio + i] = linea[i];
-			valid[direccion_inicio + i] = true;
+		Pagina pag = seleccionarPagina(direccion);
+		pag.guardarLinea(direccion, linea);
 			
-			// Actualizar interfaz gráfica.
-			if (interfaz != null)
-			{
-				interfaz.setValueAt(String.valueOf(linea[i]), direccion_inicio + i, 1);
-				interfaz.setValueAt(true, direccion_inicio + i, 2);
-			}
-		}
+		// Actualizar interfaz gráfica.
+		actualizarPaginaInterfaz(pag.getMarco());
 	}
 	
 	// Temporal: De momento sale una lista con Dirección (hex) : Dato (dec)
 	// Faltaría poner una opción para que muestre los datos en otros formatos (dec, bin, oct, hex).
-	public String toString(boolean mostrarTodos)
+	public String toString()
 	{
 		StringBuilder strB = new StringBuilder();
-		for (int i = 0; i < entradas; i++)
+		for (Pagina pag : tablaPags.getMarcos())
 		{
-			if (mostrarTodos || valid[i])
+			if (pag != null)
 			{
-				// Dirección (hex) : Dato (dec)
-				strB.append(String.format("0x%2S", Integer.toHexString(i << 2)).replace(" ", "0")).append(" : ").append(mem[i]).append("\n");
+				strB.append("[" + pag.getMarco() + "]" + "Página " + pag.getId() + "\n");
+				strB.append(pag);
 			}
 		}
 		
@@ -132,7 +113,8 @@ public class MemoriaPrincipal
 
 	public boolean estaLibre(int direccion)
 	{
-		return !valid[direccion >> 2];
+		Pagina pag = seleccionarPagina(direccion);
+		return pag.estaLibre(direccion);
 	}
 	
 	
@@ -141,42 +123,98 @@ public class MemoriaPrincipal
 	 */
 	public String[] getColumnas()
 	{
-		return new String[]{"Dirección", "Dato", "Válida"};
+		return new String[]{"Página", "Dirección", "Dato", "Válida"};
 	}
 	
 	public Dimension[] getTamaños()
 	{
-		Dimension[] dim = new Dimension[3];
+		Dimension[] dim = new Dimension[4];
 		
-		dim[0] = new Dimension(Global.TAMAÑO_CELDA_NORMAL,0);
+		dim[0] = new Dimension(Global.TAMAÑO_CELDA_NORMAL/2,Global.TAMAÑO_CELDA_NORMAL);
 		dim[1] = new Dimension(Global.TAMAÑO_CELDA_NORMAL,0);
-		dim[2] = new Dimension(Global.TAMAÑO_CELDA_BOOLEAN, Global.TAMAÑO_CELDA_BOOLEAN*2);
+		dim[2] = new Dimension(Global.TAMAÑO_CELDA_NORMAL,0);
+		dim[3] = new Dimension(Global.TAMAÑO_CELDA_BOOLEAN, Global.TAMAÑO_CELDA_BOOLEAN*2);
 		
 		return dim;
 	}
 	
 	public Object[][] getDatos()
 	{
-		Object[][] datos = new Object[entradas][3];
+		Object[][] datos = new Object[entradas][4];
 		
-		for (int i = 0; i < entradas; i++)
+		int entrada = 0;
+		for (Pagina pag : tablaPags.getMarcos())
 		{
-			// Dirección, dato, valido
-			int direccion = i << 2;
-			Object[] linea = {String.format("0x%4S", Integer.toHexString(direccion)).replace(" ", "0"), String.valueOf(mem[i]), new Boolean(valid[i])};
-			datos[i] = linea;
+			if (pag != null)
+			{
+				Object[][] datos_pag = pag.getDatos();
+				
+				// Recorro la página, añadiendo los datos a nuestro Array.
+				for (int i = 0; i < datos_pag.length; i++)
+				{
+					int direccion = getDireccionFisica(i, pag.getMarco());
+					// Página, dirección, dato, valido
+					Object[] linea = {String.valueOf(pag.getId()), String.format("0x%4S", Integer.toHexString(direccion)).replace(" ", "0"), String.valueOf(datos_pag[i][1]), new Boolean(Boolean.valueOf(String.valueOf(datos_pag[i][2])))};
+				
+					datos[entrada] = linea;
+					entrada++;
+				}
+			}
+			else
+			{
+				// Creo una página "vacía".
+				for (int i = 0; i < tablaPags.getEntradasPagina(); i++)
+				{
+					// Página, dirección, dato, valido
+					Object[] linea = {"", "", "", new Boolean(false)};
+				
+					datos[entrada] = linea;
+					entrada++;
+				}
+			}
 		}
 		
 		return datos;
 	}
+	
+	public void actualizarPaginaInterfaz(int marco)
+	{
+		if (interfaz != null)
+		{
+			Pagina pag = tablaPags.getMarcos()[marco];
+			int posicion_inicio = getInicioMarco(marco);
+			if (pag != null)
+			{
+				Object[][] datos_pag = pag.getDatos();
+				// Recorro la página, añadiendo los datos a nuestro Array.
+				for (int i = 0; i < datos_pag.length; i++)
+				{
+					int pos = posicion_inicio + i;
+					int direccion = getDireccionFisica(pos, pag.getMarco());
 
+					interfaz.setValueAt(String.valueOf(pag.getId()), pos, 0);  // Página
+					interfaz.setValueAt(String.format("0x%4S", Integer.toHexString(direccion)).replace(" ", "0"), pos, 1);  // Dirección
+					interfaz.setValueAt(String.valueOf(datos_pag[i][1]), pos, 2);  // Dato
+					interfaz.setValueAt(new Boolean(Boolean.valueOf(String.valueOf(datos_pag[i][2]))), pos, 3);  // Válido
+				}
+			}
+		}
+	}
+	
+	private int getDireccionFisica(int direccion, int marco)
+	{
+		int offset = (int) Math.floor(direccion % tablaPags.getTamañoPagina());
+		int res = (marco << Global.bitsDireccionar(tablaPags.getTamañoPagina())) + offset;
+		return res << 2;
+	}
+	
 	public Tabla getInterfaz()
 	{
 		return interfaz;
 	}
-
-	public void setInterfaz(Tabla interfaz)
+	
+	public void setInterfaz(Tabla intf)
 	{
-		this.interfaz = interfaz;
+		interfaz = intf;
 	}
 }

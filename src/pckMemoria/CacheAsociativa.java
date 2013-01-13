@@ -10,7 +10,11 @@ import general.Global;
 import general.Global.TiposReemplazo;
 import general.MemoryException;
 
-
+/*
+ * 1024 entradas, 8 vías, 4 palabras por línea:
+ * (1024 / 8) * 4 = 128 * 4 = 512 palabras totales
+ * 512 palabras * 32 bits = 2048Bytes = 2KB
+ */
 public class CacheAsociativa implements Cache
 {
 	// Cada una de las vías se implementa como una caché directa.
