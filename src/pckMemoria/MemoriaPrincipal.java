@@ -123,54 +123,37 @@ public class MemoriaPrincipal
 	 */
 	public String[] getColumnas()
 	{
-		return new String[]{"Página", "Dirección", "Dato", "Válida"};
+		return new String[]{"ID Página", "Dirección Real", "Dirección Virtual", "Dato", "Válida"};
 	}
 	
 	public Dimension[] getTamaños()
 	{
-		Dimension[] dim = new Dimension[4];
+		Dimension[] dim = new Dimension[5];
 		
-		dim[0] = new Dimension(Global.TAMAÑO_CELDA_NORMAL/2,Global.TAMAÑO_CELDA_NORMAL);
+		dim[0] = new Dimension(Global.TAMAÑO_CELDA_NORMAL,Global.TAMAÑO_CELDA_NORMAL);
 		dim[1] = new Dimension(Global.TAMAÑO_CELDA_NORMAL,0);
 		dim[2] = new Dimension(Global.TAMAÑO_CELDA_NORMAL,0);
-		dim[3] = new Dimension(Global.TAMAÑO_CELDA_BOOLEAN, Global.TAMAÑO_CELDA_BOOLEAN*2);
+		dim[3] = new Dimension(Global.TAMAÑO_CELDA_NORMAL,0);
+		dim[4] = new Dimension(Global.TAMAÑO_CELDA_BOOLEAN, Global.TAMAÑO_CELDA_BOOLEAN*2);
 		
 		return dim;
 	}
 	
 	public Object[][] getDatos()
 	{
-		Object[][] datos = new Object[entradas][4];
+		Object[][] datos = new Object[entradas][5];
 		
 		int entrada = 0;
-		for (Pagina pag : tablaPags.getMarcos())
+		for (int pag = 0; pag < tablaPags.getMarcos().length; pag++)
 		{
-			if (pag != null)
+			// Creo una página "vacía".
+			for (int i = 0; i < tablaPags.getEntradasPagina(); i++)
 			{
-				Object[][] datos_pag = pag.getDatos();
-				
-				// Recorro la página, añadiendo los datos a nuestro Array.
-				for (int i = 0; i < datos_pag.length; i++)
-				{
-					int direccion = getDireccionFisica(i, pag.getMarco());
-					// Página, dirección, dato, valido
-					Object[] linea = {String.valueOf(pag.getId()), String.format("0x%4S", Integer.toHexString(direccion)).replace(" ", "0"), String.valueOf(datos_pag[i][1]), new Boolean(Boolean.valueOf(String.valueOf(datos_pag[i][2])))};
-				
-					datos[entrada] = linea;
-					entrada++;
-				}
-			}
-			else
-			{
-				// Creo una página "vacía".
-				for (int i = 0; i < tablaPags.getEntradasPagina(); i++)
-				{
-					// Página, dirección, dato, valido
-					Object[] linea = {"", "", "", new Boolean(false)};
-				
-					datos[entrada] = linea;
-					entrada++;
-				}
+				// Página, dirección, dato, valido
+				Object[] linea = {"", "", "", "", new Boolean(false)};
+			
+				datos[entrada] = linea;
+				entrada++;
 			}
 		}
 		
@@ -190,22 +173,31 @@ public class MemoriaPrincipal
 				for (int i = 0; i < datos_pag.length; i++)
 				{
 					int pos = posicion_inicio + i;
-					int direccion = getDireccionFisica(pos, pag.getMarco());
+					int direccion_r = getDireccionFisica(pos << 2, pag.getMarco());
+					int direccion_v = getDireccionVirtual(pos << 2, pag.getId());
 
 					interfaz.setValueAt(String.valueOf(pag.getId()), pos, 0);  // Página
-					interfaz.setValueAt(String.format("0x%4S", Integer.toHexString(direccion)).replace(" ", "0"), pos, 1);  // Dirección
-					interfaz.setValueAt(String.valueOf(datos_pag[i][1]), pos, 2);  // Dato
-					interfaz.setValueAt(new Boolean(Boolean.valueOf(String.valueOf(datos_pag[i][2]))), pos, 3);  // Válido
+					interfaz.setValueAt(String.format("0x%4S", Integer.toHexString(direccion_r)).replace(" ", "0"), pos, 1);  // Dirección
+					interfaz.setValueAt(String.format("0x%4S", Integer.toHexString(direccion_v)).replace(" ", "0"), pos, 2);  // Virtual
+					interfaz.setValueAt(String.valueOf(datos_pag[i][1]), pos, 3);  // Dato
+					interfaz.setValueAt(new Boolean(Boolean.valueOf(String.valueOf(datos_pag[i][2]))), pos, 4);  // Válido
 				}
 			}
 		}
+	}
+	
+	private int getDireccionVirtual(int direccion, int id)
+	{
+		int offset = (int) Math.floor(direccion % tablaPags.getTamañoPagina());
+		int res = (id << Global.bitsDireccionar(tablaPags.getTamañoPagina())) + offset;
+		return res;
 	}
 	
 	private int getDireccionFisica(int direccion, int marco)
 	{
 		int offset = (int) Math.floor(direccion % tablaPags.getTamañoPagina());
 		int res = (marco << Global.bitsDireccionar(tablaPags.getTamañoPagina())) + offset;
-		return res << 2;
+		return res;
 	}
 	
 	public Tabla getInterfaz()
