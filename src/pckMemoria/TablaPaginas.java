@@ -2,6 +2,7 @@ package pckMemoria;
 
 import general.Global;
 import general.Global.TiposReemplazo;
+import general.Log;
 import general.MemoryException;
 
 import java.util.ArrayList;
@@ -22,6 +23,8 @@ public class TablaPaginas {
 	private int num_paginas;
 	private int num_marcos;
 	private int palabras_linea;
+	
+	private JerarquiaMemoria jerarquia;
 	
 	public PoliticaReemplazo politica;
 	
@@ -77,7 +80,7 @@ public class TablaPaginas {
 	private Pagina crearPagina(int direccion) throws MemoryException
 	{
 		int id = calcularId(direccion);
-		System.out.println("Creando página id " + id);
+		Log.println(3, "Creando página " + id);
 		Pagina nueva = new Pagina(entradas_pagina, palabras_linea, id);
 		paginas.put(id, nueva);
 		return nueva;
@@ -103,10 +106,8 @@ public class TablaPaginas {
 		if (pag.getMarco() != -1)
 		{
 			// La página está en un marco, podemos traducir la dirección.
-			int offset = (int) Math.floor(direccion % tam_pagina);
-			int marco = pag.getMarco();
-			int res = (marco << Global.bitsDireccionar(tam_pagina)) + offset;
-			return res;
+			Log.println(3, "La página ya está en el marco " + pag.getMarco());
+			return calcularDireccion(direccion, pag.getMarco());
 		}
 		else
 		{
@@ -114,24 +115,41 @@ public class TablaPaginas {
 			int marco = buscarMarcoLibre();
 			if (marco != -1)
 			{
-				marcos[marco] = pag;
-				pag.asignarMarco(marco);
-				int offset = (int) Math.floor(direccion % tam_pagina);
-				int res = (marco << Global.bitsDireccionar(tam_pagina)) + offset;
-				System.out.println("offset " + offset);
-				System.out.println("Asignada a marco " + marco);
-				return res;
+				asignarPaginaMarco(pag, marco);
+				Log.println(3, "Página asignada al marco " + marco);
+				return calcularDireccion(direccion, marco);
 			}
 			else
 			{
 				marco = liberarMarco();
-				marcos[marco] = pag;
-				pag.asignarMarco(marco);
-				int offset = (int) Math.floor(direccion % tam_pagina);
-				int res = (marco << Global.bitsDireccionar(tam_pagina)) + offset;
-				return res;
+				asignarPaginaMarco(pag, marco);
+				Log.println(3, "Se ha reemplazado la página del marco " + marco);
+				return calcularDireccion(direccion, marco);
 			}
 		}
+	}
+	
+	// Traducción.
+	private int calcularDireccion(int direccion, int marco)
+	{
+		int offset = (int) Math.floor(direccion % tam_pagina);
+		int res = (marco << Global.bitsDireccionar(tam_pagina)) + offset;
+		Log.println(3, "Dirección 0x" + Integer.toHexString(direccion) + " traducida como 0x" + Integer.toHexString(res) + " [" + marco + "] " + offset);
+		return res;
+	}
+	
+	// Selecciona la página correspondiente a la dirección VIRTUAL.
+	public Pagina seleccionarPagina(int direccion) throws MemoryException
+	{
+		// Buscamos la página.
+		int id = calcularId(direccion);
+		Pagina pag = paginas.get(id);
+		
+		// Si la página no existe, la creamos.
+		if (pag == null)
+			pag = crearPagina(direccion);
+		
+		return pag;
 	}
 	
 	// Busca un marco libre donde insertar la página.
@@ -152,29 +170,46 @@ public class TablaPaginas {
 			return lista.get(r.nextInt(lista.size()));
 		}
 		else
-		{
 			return -1;
-		}
+	}
+	
+	private void asignarPaginaMarco(Pagina pag, int marco) throws MemoryException
+	{
+		if (marcos[marco] != null && marcos[marco].getMarco() != -1)
+			throw new MemoryException("Página asignada a marco en asignación.");
+		
+		if (marcos[marco] != null)
+			throw new MemoryException("Marco ocupado al asignar página.");
+		
+		marcos[marco] = pag;
+		pag.asignarMarco(marco);
+		politica.nuevaLinea(0, marco);
+		
+		// Actualizar la interfaz de memoria para este marco.
+		jerarquia.actualizarMarcoInterfazMemoria(marco);
 	}
 	
 	// Libera un marco (según política de reemplazo).
 	private int liberarMarco()
 	{
-		return -1;
+		int marco_libre = politica.elegirViaReemplazo(0);
+		
+		int id = marcos[marco_libre].getId();
+		
+		// Eliminar referencias de la página anterior.
+		marcos[marco_libre].asignarMarco(-1);
+		marcos[marco_libre] = null;
+		
+		// Eliminamos todas las referencias a la página anterior en caché.
+		jerarquia.invalidarPagina(id);
+		
+		return marco_libre;
 	}
 	
-	// Selecciona la página correspondiente a la dirección VIRTUAL.
-	public Pagina seleccionarPagina(int direccion) throws MemoryException
+	// Actualizar la política de reemplazo cuando se produce un acceso
+	public void accesoMarco(int marco)
 	{
-		// Buscamos la página.
-		int id = calcularId(direccion);
-		Pagina pag = paginas.get(id);
-		
-		// Si la página no existe, la creamos.
-		if (pag == null)
-			pag = crearPagina(direccion);
-		
-		return pag;
+		politica.accesoLinea(0, marco);
 	}
 	
 	// Selecciona el marco a partir de la dirección REAL
@@ -212,6 +247,11 @@ public class TablaPaginas {
 		strB.append("Número de páginas en total: " + paginas.size());
 		
 		return strB.toString();
+	}
+
+	public void setJerarquiaMemoria(JerarquiaMemoria jmem)
+	{
+		jerarquia = jmem;
 	}
 
 }

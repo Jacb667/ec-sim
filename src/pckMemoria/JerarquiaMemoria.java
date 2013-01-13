@@ -11,7 +11,7 @@ public class JerarquiaMemoria {
 	private MemoriaPrincipal memoria;
 	private int tam_linea;
 	
-	public JerarquiaMemoria(Cache[] _caches, MemoriaPrincipal _memoria)
+	public JerarquiaMemoria(TablaPaginas _tabla, Cache[] _caches, MemoriaPrincipal _memoria)
 	{
 		caches = new Cache[_caches.length];
 		for (int i = 0; i < _caches.length; i++)
@@ -180,7 +180,7 @@ public class JerarquiaMemoria {
 	// Actualizar línea desde el nivel actual.
 	// Actualiza todos los niveles superiores.
 	// Añadir un boolean para tipo de política.
-	public void actualizarLinea(LineaReemplazo linR, int nivel_act) throws MemoryException
+	private void actualizarLinea(LineaReemplazo linR, int nivel_act) throws MemoryException
 	{
 		int nivel_sig = nivel_act+1;
 		
@@ -199,5 +199,16 @@ public class JerarquiaMemoria {
 		Log.println(3, "Actualizo en memoria la dirección 0x" + Integer.toHexString(direccion));
 		Log.report(Flags.BLOCK_WRITE);
 		memoria.guardarLinea(direccion, linea);
+	}
+	
+	public void invalidarPagina(int pagina)
+	{
+		for (int i = 0; i < caches.length; i++)
+			caches[i].invalidarPagina(pagina);
+	}
+	
+	public void actualizarMarcoInterfazMemoria(int marco)
+	{
+		memoria.actualizarPaginaInterfaz(marco);
 	}
 }
