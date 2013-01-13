@@ -34,7 +34,7 @@ public class Pagina
 	// De momento no se usa. En un futuro podría usarse para controlar las peticiones de líneas.
 	//private int palabras_linea;
 	
-	public Pagina(int _entradas,int _palabras_linea, int id) throws MemoryException
+	public Pagina(int _entradas, int _palabras_linea, int _id) throws MemoryException
 	{
 		if (_entradas < 1 || _palabras_linea < 1 || _entradas % _palabras_linea != 0)
 			throw new MemoryException("Error en inicialización de memoria.");
@@ -44,33 +44,51 @@ public class Pagina
 		mem = new int[entradas];
 		valid = new boolean[entradas];
 		marco = -1;
+		id = _id;
+	}
+	
+	public Pagina(int _entradas, int _palabras_linea) throws MemoryException
+	{
+		if (_entradas < 1 || _palabras_linea < 1 || _entradas % _palabras_linea != 0)
+			throw new MemoryException("Error en inicialización de memoria.");
+			
+		// Entradas debe ser divisible entre palabras_linea.
+		entradas = _entradas;
+		mem = new int[entradas];
+		valid = new boolean[entradas];
+		marco = -1;
+		id = -1;
 	}
 	
 	public int getId() { return id; }
 	public void asignarMarco(int m) { marco = m; }
 	public int getMarco() { return marco; }
 	
-	// Compruebo si la dirección es válida.
-	public boolean existeDato(int direccion)
-	{
-		direccion = direccion >> 2;
-		if (direccion < 0 || direccion > entradas)
-			return false;
-		
-		return true;
-	}
-	
-	// Me envían la dirección física, elimino los 2 últimos bits y leo la posición.
+	// Me aseguro de que la dirección REAL que llega, es el offset sin la página.
 	public int leerDato(int direccion)
 	{
-		return mem[direccion >> 2];
+		//System.out.println("Pagina (" + id + ") leer: " + direccion);
+		int entrada = direccion >> 2;
+		entrada = (int) Math.floor(entrada % entradas);
+		/*System.out.println("Pagina (" + id + ") entrada: " + entrada);
+		System.out.println("Pagina (" + id + ") dato: " + mem[entrada]);
+		System.out.println("Pagina (" + id + ") datos: " + this);*/
+		return mem[entrada];
 	}
 	
 	// Me envían la dirección física, elimino los 2 últimos bits y guardo la posición.
 	public void guardarDato(int direccion, int dato)
 	{
-		mem[direccion >> 2] = dato;
-		valid[direccion >> 2] = true;
+		//System.out.println("Pagina (" + id + ") guardar: " + direccion);
+		int entrada = direccion >> 2;
+		entrada = (int) Math.floor(entrada % entradas);
+		
+		mem[entrada] = dato;
+		valid[entrada] = true;
+		
+		/*System.out.println("Pagina (" + id + ") entrada: " + entrada);
+		System.out.println("Pagina (" + id + ") dato: " + mem[entrada]);
+		System.out.println("Pagina (" + id + ") datos: " + this);*/
 		
 		// Actualizar interfaz gráfica.
 		if (interfaz != null)
@@ -90,8 +108,6 @@ public class Pagina
 	// Se usa para enviar una línea completa a caché
 	public int[] leerLinea(int direccion, int tam_linea)
 	{
-		Log.report(Flags.BLOCK_READ);
-		
 		int[] res =  new int[tam_linea];
 		int direccion_inicio = getInicioBloque(direccion, tam_linea) * tam_linea;
 		
@@ -105,8 +121,6 @@ public class Pagina
 	
 	public void guardarLinea(int direccion, int[] linea) 
 	{
-		Log.report(Flags.BLOCK_WRITE);
-		
 		int tam_linea = linea.length;
 		int direccion_inicio = getInicioBloque(direccion, tam_linea) * tam_linea;
 		
@@ -126,16 +140,13 @@ public class Pagina
 	
 	// Temporal: De momento sale una lista con Dirección (hex) : Dato (dec)
 	// Faltaría poner una opción para que muestre los datos en otros formatos (dec, bin, oct, hex).
-	public String toString(boolean mostrarTodos)
+	public String toString()
 	{
 		StringBuilder strB = new StringBuilder();
 		for (int i = 0; i < entradas; i++)
 		{
-			if (mostrarTodos || valid[i])
-			{
-				// Dirección (hex) : Dato (dec)
-				strB.append(String.format("0x%2S", Integer.toHexString(i << 2)).replace(" ", "0")).append(" : ").append(mem[i]).append("\n");
-			}
+			// Dirección (hex) : Dato (dec)
+			strB.append(String.format("0x%2S", Integer.toHexString(i << 2)).replace(" ", "0")).append(" : ").append(mem[i]).append("\n");
 		}
 		
 		return strB.toString();
