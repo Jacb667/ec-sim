@@ -124,7 +124,7 @@ public class CacheAsociativa implements Cache
 
 	// Si esto se ejecuta es porque sabemos que el bloque del dato está (en alguna vía).
 	// Compruebo en qué vía está y guardo el dato.
-	public void modificarDato(int direccion, int dato) throws MemoryException
+	public void modificarDato(int direccion, int pagina, int dato) throws MemoryException
 	{
 		for (int via = 0; via < vias.length; via++)
 		{
@@ -133,7 +133,7 @@ public class CacheAsociativa implements Cache
 				int pos = buscarPosicion(direccion);
 				int pal = vias[via].posicionPalabra(direccion);
 				politica.accesoLinea(pos, via);
-				vias[via].modificarDato(direccion, dato);
+				vias[via].modificarDato(direccion, pagina, dato);
 				
 				if (interfaz != null)
 					actualizarDatoInterfaz(dato, via, pos, pal);
@@ -161,14 +161,14 @@ public class CacheAsociativa implements Cache
 
 	// Guardar una línea.
 	// Si ejecutamos este método es porque al menos existe una vía libre donde guardarlo.
-	public void escribirLinea(int direccion, int[] linea) throws MemoryException
+	public void escribirLinea(int direccion, int pagina, int[] linea) throws MemoryException
 	{
 		for (int via = 0; via < vias.length; via++)
 		{
 			if (vias[via].lineaLibre(direccion))
 			{
 				int pos = buscarPosicion(direccion);
-				vias[via].escribirLinea(direccion, linea);
+				vias[via].escribirLinea(direccion, pagina, linea);
 				politica.nuevaLinea(pos, via);
 				
 				if (interfaz != null)
@@ -184,7 +184,7 @@ public class CacheAsociativa implements Cache
 	}
 	
 	// Actualizar una línea existente.
-	public void actualizarLinea(int direccion, int[] linea)
+	public void actualizarLinea(int direccion, int pagina, int[] linea)
 	{
 		for (int via = 0; via < vias.length; via++)
 		{
@@ -192,7 +192,7 @@ public class CacheAsociativa implements Cache
 			{
 				int pos = buscarPosicion(direccion);
 				politica.accesoLinea(pos, via);
-				vias[via].escribirLinea(direccion, linea);
+				vias[via].escribirLinea(direccion, pagina, linea);
 				
 				if (interfaz != null)
 					actualizarLineaInterfaz(linea, via, pos);
@@ -204,13 +204,16 @@ public class CacheAsociativa implements Cache
 	
 	// Reemplaza una línea por otra. Devuelve la línea anterior.
 	// Usará la política de reemplazo para determinar qué línea se elimina.
-	public LineaReemplazo reemplazarLinea(int direccion, int[] linea) throws MemoryException
+	public LineaReemplazo reemplazarLinea(int direccion, int pagina, int[] linea) throws MemoryException
 	{
 		int pos = buscarPosicion(direccion);
 		int via = politica.elegirViaReemplazo(pos);
 		
+		System.out.println("Elegida via " + via);
+		Global.sleep(5000);
+		
 		// Reemplazamos. Devolverá null si la línea no estaba sucia.
-		LineaReemplazo res = vias[via].reemplazarLinea(direccion, linea);
+		LineaReemplazo res = vias[via].reemplazarLinea(direccion, pagina, linea);
 		
 		politica.nuevaLinea(buscarPosicion(direccion), via);
 		

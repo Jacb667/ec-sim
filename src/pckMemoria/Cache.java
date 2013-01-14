@@ -27,13 +27,13 @@ public interface Cache {
 	
 	// Operaciones para datos individuales.
 	public int consultarDato(int direccion) throws MemoryException;
-	public void modificarDato(int direccion, int dato) throws MemoryException;
+	public void modificarDato(int direccion, int pagina, int dato) throws MemoryException;
 	
 	// Operaciones para líneas (cache)
 	public int[] leerLinea(int direccion) throws MemoryException;
-	public void escribirLinea(int direccion, int[] linea) throws MemoryException;
-	public void actualizarLinea(int direccion, int[] linea);
-	public LineaReemplazo reemplazarLinea(int direccion, int[] linea) throws MemoryException;
+	public void escribirLinea(int direccion, int pagina, int[] linea) throws MemoryException;
+	public void actualizarLinea(int direccion, int pagina, int[] linea);
+	public LineaReemplazo reemplazarLinea(int direccion, int pagina, int[] linea) throws MemoryException;
 	
 	// Funciones para JTable (interfaz gráfica)
 	public String[] getColumnas();

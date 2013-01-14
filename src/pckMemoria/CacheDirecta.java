@@ -115,11 +115,14 @@ public class CacheDirecta implements Cache
 		{
 			if (paginas[pos] == pagina_id)
 			{
+				if (dirty[pos])
+				{
+					LineaReemplazo LinR = new LineaReemplazo(getDireccionGuardadaEntrada(pos), paginas[pos], datos[pos]);
+					eliminadas.add(LinR);
+				}
+				
 				valid[pos] = false;
 				dirty[pos] = false;
-				
-				LineaReemplazo LinR = new LineaReemplazo(getDireccionGuardadaEntrada(pos), datos[pos]);
-				eliminadas.add(LinR);
 				
 				// Actualizar interfaz gráfica.
 				if (interfaz != null)
@@ -146,7 +149,7 @@ public class CacheDirecta implements Cache
 
 	// Guardamos el dato en su posición.
 	// Si se llama a este método es porque la línea correspondiente ya está cargada en esta caché.
-	public void modificarDato(int direccion, int dato)
+	public void modificarDato(int direccion, int pagina, int dato)
 	{
 		int pos = buscarPosicion(direccion);
 		int pal = posicionPalabra(direccion);
@@ -156,6 +159,7 @@ public class CacheDirecta implements Cache
 		datos[pos][pal] = dato;
 		valid[pos] = true;
 		dirty[pos] = true;
+		paginas[pos] = pagina;
 		
 		// Actualizar interfaz gráfica.
 		if (interfaz != null)
@@ -184,7 +188,7 @@ public class CacheDirecta implements Cache
 
 	// Escribe una línea en la caché.
 	// Este método guarda el dato en la línea especificada, no comprueba si ya estaba ocupado.
-	public void escribirLinea(int direccion, int[] linea)
+	public void escribirLinea(int direccion, int pagina, int[] linea)
 	{
 		int direccion_inicio = buscarPosicion(direccion);
 		int tag = extraerTag(direccion);
@@ -195,6 +199,7 @@ public class CacheDirecta implements Cache
 		
 		dirty[direccion_inicio] = false;
 		valid[direccion_inicio] = true;
+		paginas[direccion_inicio] = pagina;
 		
 		// Actualizar interfaz gráfica.
 		if (interfaz != null)
@@ -210,22 +215,22 @@ public class CacheDirecta implements Cache
 	}
 	
 	// Actualiza una línea existente.
-	public void actualizarLinea(int direccion, int[] linea)
+	public void actualizarLinea(int direccion, int pagina, int[] linea)
 	{
-		escribirLinea(direccion, linea);
+		escribirLinea(direccion, pagina, linea);
 	}
 	
 	// Reemplaza una línea en la caché por otra.
 	// Si la línea estaba "sucia", la devuelve para poder enviarla a otro nivel.
-	public LineaReemplazo reemplazarLinea(int direccion, int[] linea)
+	public LineaReemplazo reemplazarLinea(int direccion, int pagina, int[] linea)
 	{
 		LineaReemplazo res = null;
 		
 		// La devolvemos solamente si está "sucia".
 		if (lineaDirty(direccion))
-			res = new LineaReemplazo(getDireccionGuardada(direccion), leerLinea(direccion));
+			res = new LineaReemplazo(getDireccionGuardada(direccion), paginas[buscarPosicion(direccion)], leerLinea(direccion));
 		
-		escribirLinea(direccion, linea);
+		escribirLinea(direccion, pagina, linea);
 		
 		return res;
 	}

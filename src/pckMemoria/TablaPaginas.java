@@ -94,11 +94,11 @@ public class TablaPaginas {
 	
 	// Traduce una dirección virtual a una física.
 	// Si no le corresponde una dirección física deberá poner la página en un marco.
-	public int traducirDireccion(int direccion) throws MemoryException
+	public Direccion traducirDireccion(int direccion) throws MemoryException
 	{
 		if ((direccion >> 2) >= entrada_maxima)
-			throw new MemoryException("La dirección sobrepasa el límite de direccionamiento.");
-			
+			throw new MemoryException("La dirección 0x" + Integer.toHexString(direccion) + " sobrepasa el límite de direccionamiento.");
+		
 		// Primero buscamos en qué página debe estar la dirección.
 		Pagina pag = seleccionarPagina(direccion);
 		
@@ -106,7 +106,7 @@ public class TablaPaginas {
 		if (pag.getMarco() != -1)
 		{
 			// La página está en un marco, podemos traducir la dirección.
-			Log.println(3, "La página ya está en el marco " + pag.getMarco());
+			//Log.println(3, "La página ya está en el marco " + pag.getMarco());
 			return calcularDireccion(direccion, pag.getMarco());
 		}
 		else
@@ -130,12 +130,13 @@ public class TablaPaginas {
 	}
 	
 	// Traducción.
-	private int calcularDireccion(int direccion, int marco)
+	private Direccion calcularDireccion(int direccion, int marco)
 	{
 		int offset = (int) Math.floor(direccion % tam_pagina);
 		int res = (marco << Global.bitsDireccionar(tam_pagina)) + offset;
-		Log.println(3, "Dirección 0x" + Integer.toHexString(direccion) + " traducida como 0x" + Integer.toHexString(res) + " [" + marco + "] " + offset);
-		return res;
+		int id_pagina = calcularId(direccion);
+		//Log.println(3, "Dirección 0x" + Integer.toHexString(direccion) + " traducida como 0x" + Integer.toHexString(res) + " [" + marco + "] " + offset);
+		return new Direccion(direccion, res, id_pagina);
 	}
 	
 	// Selecciona la página correspondiente a la dirección VIRTUAL.
@@ -190,18 +191,18 @@ public class TablaPaginas {
 	}
 	
 	// Libera un marco (según política de reemplazo).
-	private int liberarMarco()
+	private int liberarMarco() throws MemoryException
 	{
 		int marco_libre = politica.elegirViaReemplazo(0);
 		
 		int id = marcos[marco_libre].getId();
 		
+		// Eliminamos todas las referencias a la página anterior en caché.
+		jerarquia.invalidarPagina(id);
+		
 		// Eliminar referencias de la página anterior.
 		marcos[marco_libre].asignarMarco(-1);
 		marcos[marco_libre] = null;
-		
-		// Eliminamos todas las referencias a la página anterior en caché.
-		jerarquia.invalidarPagina(id);
 		
 		return marco_libre;
 	}
