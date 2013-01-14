@@ -11,6 +11,12 @@ public class Log {
 	public static int accesosMemoria = 0;
 	public static int lecturasMemoria = 0;
 	public static int escriturasMemoria = 0;
+	public static int accesosPagina = 0;
+	public static int fallosPagina = 0;
+	public static int aciertosPagina = 0;
+	public static int accesosTlb = 0;
+	public static int fallosTlb = 0;
+	public static int aciertosTlb;
 	
 	// Flags por defecto para logs
 	public enum Flags
@@ -23,6 +29,8 @@ public class Log {
 		BLOCK_WRITE,
 		PAGE_FAULT,
 		PAGE_HIT,
+		TLB_HIT,
+		TLB_MISS,
 	}
 	
 	// 0 = no mostrar nada.
@@ -52,25 +60,40 @@ public class Log {
 	
 	public static void report(Flags f)
 	{
-		if (f == Flags.MEMORY_READ)
+		switch(f)
 		{
-			lecturasMemoria++;
-			accesosMemoria++;
-		}
-		else if (f == Flags.MEMORY_WRITE)
-		{
-			escriturasMemoria++;
-			accesosMemoria++;
-		}
-		else if (f == Flags.BLOCK_READ)
-		{
-			lecturasBloques++;
-			accesosBloques++;
-		}
-		else if (f == Flags.BLOCK_WRITE)
-		{
-			escriturasBloques++;
-			accesosBloques++;
+			case MEMORY_READ:
+				lecturasMemoria++;
+				accesosMemoria++;
+				break;
+			case MEMORY_WRITE:
+				escriturasMemoria++;
+				accesosMemoria++;
+				break;
+			case BLOCK_READ:
+				lecturasBloques++;
+				accesosBloques++;
+				break;
+			case BLOCK_WRITE:
+				escriturasBloques++;
+				accesosBloques++;
+				break;
+			case PAGE_FAULT:
+				fallosPagina++;
+				accesosPagina++;
+				break;
+			case PAGE_HIT:
+				aciertosPagina++;
+				accesosPagina++;
+				break;
+			case TLB_MISS:
+				fallosTlb++;
+				accesosTlb++;
+				break;
+			case TLB_HIT:
+				aciertosTlb++;
+				accesosTlb++;
+				break;
 		}
 	}
 	

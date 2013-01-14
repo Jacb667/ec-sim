@@ -209,9 +209,6 @@ public class CacheAsociativa implements Cache
 		int pos = buscarPosicion(direccion);
 		int via = politica.elegirViaReemplazo(pos);
 		
-		System.out.println("Elegida via " + via);
-		Global.sleep(5000);
-		
 		// Reemplazamos. Devolverá null si la línea no estaba sucia.
 		LineaReemplazo res = vias[via].reemplazarLinea(direccion, pagina, linea);
 		

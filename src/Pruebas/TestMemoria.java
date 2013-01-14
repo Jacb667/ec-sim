@@ -36,10 +36,13 @@ public class TestMemoria {
 		final int palabras_linea = 4;
 		final int entradas_cache1 = 8;
 		final int entradas_cache2 = 16;
-		final int entradas_cache3 = 16;
-		final int entradas_pagina = 512;	// 32 direcciones
-		final int max_entrada = 512;	// Última entrada permitida
-		final int max_ent_mem = 512;	// Última entrada en memoria (tamaño de memoria)
+		final int entradas_cache3 = 32;
+		final int vias_cache1 = 1;
+		final int vias_cache2 = 8;
+		final int vias_cache3 = 16;
+		final int entradas_pagina = 128;	// 32 direcciones
+		final int max_entrada = 16384;	// Última entrada permitida
+		final int max_ent_mem = 1024;	// Última entrada en memoria (tamaño de memoria)
 		
 		try
 		{
@@ -47,8 +50,8 @@ public class TestMemoria {
 			
 			// 2 niveles de cache directa
 			caches[0] = new CacheDirecta(entradas_cache1,palabras_linea);
-			caches[1] = new CacheAsociativa(entradas_cache2,palabras_linea,16,TiposReemplazo.LRU);
-			caches[2] = new CacheAsociativa(entradas_cache3,palabras_linea,16,TiposReemplazo.RANDOM);
+			caches[1] = new CacheAsociativa(entradas_cache2,palabras_linea,vias_cache2,TiposReemplazo.LRU);
+			caches[2] = new CacheAsociativa(entradas_cache3,palabras_linea,vias_cache3,TiposReemplazo.RANDOM);
 			
 			// Tabla de Páginas
 			TablaPaginas tablaPags = new TablaPaginas(entradas_pagina, palabras_linea, max_entrada, max_ent_mem, TiposReemplazo.LRU);
@@ -101,8 +104,6 @@ public class TestMemoria {
 			
 			System.out.println("Correctos: " + correctos + "/" + realizados);
 			
-			System.out.println(caches[2]);
-			
 			/*for (int i = 0; i < 10000; i++)
 			{
 				int dir = r.nextInt(max_entrada*4);
@@ -126,7 +127,7 @@ public class TestMemoria {
 				//Thread.sleep(100);
 			}*/
 			
-			/*float ratio_l0 = (float)(Log.cache_hits[0]*100) / (float)(Log.accesosMemoria);
+			float ratio_l0 = (float)(Log.cache_hits[0]*100) / (float)(Log.accesosMemoria);
 			float ratio_l1 = (float)(Log.cache_hits[1]*100) / (float)(Log.accesosMemoria-Log.cache_hits[0]);
 			float ratio_l2 = (float)(Log.cache_hits[2]*100) / (float)(Log.accesosMemoria-Log.cache_hits[0]-Log.cache_hits[1]);
 			
@@ -135,7 +136,7 @@ public class TestMemoria {
 			System.out.println("Accesos a bloques: " + Log.accesosBloques + " (" + 
 					Log.lecturasBloques + " leidos + " + Log.escriturasBloques + " escritos)");
 			System.out.printf("Cache hits: %s - Cache misses: %s \n", Arrays.toString(Log.cache_hits), Arrays.toString(Log.cache_misses));
-			System.out.printf("Ratio acierto: [%.2f%%, %.2f%%, %.2f%%] \n", ratio_l0, ratio_l1, ratio_l2);*/
+			System.out.printf("Ratio acierto: [%.2f%%, %.2f%%, %.2f%%] \n", ratio_l0, ratio_l1, ratio_l2);
 		}
 		catch (MemoryException e)
 		{
