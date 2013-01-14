@@ -21,6 +21,8 @@ public class Log {
 		MEMORY_READ,
 		BLOCK_READ,
 		BLOCK_WRITE,
+		PAGE_FAULT,
+		PAGE_HIT,
 	}
 	
 	// 0 = no mostrar nada.

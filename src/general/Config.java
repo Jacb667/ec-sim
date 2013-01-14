@@ -23,11 +23,12 @@ public class Config {
 		TIPO_MOSTRAR (2),			// Int: Tipo de datos a mostrar (bin, oct, dec, hex).
 		INICIO_INSTRUCCIONES (3),   // Int: Dirección de inicio de la memoria de instrucciones.
 		NUMERO_PAGINAS (4),			// Int: Número de páginas de memoria.
+		ENTRADAS_MEMORIA (5),		// Int: Número de entradas de la memoria principal (pd (2^32)/4 = 1073741824).
 		
 		
 		
 		
-		END_CONFIG (5);
+		END_CONFIG (6);
 		
 		private int index;   
 
