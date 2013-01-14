@@ -98,7 +98,7 @@ public class Aplicacion extends javax.swing.JFrame {
         
         // Main
         //new Test();
-    	new TestMemoria2();
+    	new TestMemoria();
     	//new TestCpu();
     	//new TestTraductor();
     }
