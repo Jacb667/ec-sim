@@ -33,25 +33,25 @@ public class TestMemoria {
 	
 	public TestMemoria()
 	{
-		final int palabras_linea = 4;
-		final int entradas_cache1 = 8;
-		final int entradas_cache2 = 16;
+		final int palabras_linea = 1;
+		final int entradas_cache1 = 2;
+		final int entradas_cache2 = 8;
 		final int entradas_cache3 = 32;
 		final int vias_cache1 = 1;
 		final int vias_cache2 = 8;
 		final int vias_cache3 = 16;
-		final int entradas_pagina = 128;	// 32 direcciones
-		final int max_entrada = 16384;	// Última entrada permitida
-		final int max_ent_mem = 1024;	// Última entrada en memoria (tamaño de memoria)
+		final int entradas_pagina = 4;
+		final int max_entrada = 32;	// Última entrada permitida
+		final int max_ent_mem = 16;	// Última entrada en memoria (tamaño de memoria)
 		
 		try
 		{
-			Cache[] caches = new Cache[3];
+			Cache[] caches = new Cache[2];
 			
 			// 2 niveles de cache directa
 			caches[0] = new CacheDirecta(entradas_cache1,palabras_linea);
 			caches[1] = new CacheAsociativa(entradas_cache2,palabras_linea,vias_cache2,TiposReemplazo.LRU);
-			caches[2] = new CacheAsociativa(entradas_cache3,palabras_linea,vias_cache3,TiposReemplazo.RANDOM);
+			//caches[2] = new CacheAsociativa(entradas_cache3,palabras_linea,vias_cache3,TiposReemplazo.RANDOM);
 			
 			// Tabla de Páginas
 			TablaPaginas tablaPags = new TablaPaginas(entradas_pagina, palabras_linea, max_entrada, max_ent_mem, TiposReemplazo.LRU);
@@ -66,8 +66,11 @@ public class TestMemoria {
 			inicializarInterfazMemoria(caches, memoria);
 			
 			// Inicialización de la memoria para hacer pruebas.
-			for (int i = 0; i < max_entrada*4; i+=4)
-				memoria.guardarDato(tablaPags.traducirDireccion(i).getReal(), i);
+			//for (int i = 0; i < max_entrada*4; i+=4)
+			//{
+				//memoria.guardarDato(tablaPags.traducirDireccion(i).getReal(), i);
+				//jmem.guardarDato(i, i);
+			//}
 			
 			Random r = new Random();
 			
@@ -87,7 +90,7 @@ public class TestMemoria {
 			int correctos = 0;
 			int realizados = 10000;
 			
-			for (int i = 0; i < realizados; i++)
+			/*for (int i = 0; i < realizados; i++)
 			{
 				int dir = r.nextInt(max_entrada*4);
 				int dato = jmem.leerDato(dir);
@@ -100,32 +103,34 @@ public class TestMemoria {
 				
 				if (dato == dir)
 					correctos++;
-			}
-			
-			System.out.println("Correctos: " + correctos + "/" + realizados);
-			
-			/*for (int i = 0; i < 10000; i++)
-			{
-				int dir = r.nextInt(max_entrada*4);
-				int dato = r.nextInt(1000000);
-				
-				System.out.println("Guardo dato " + dato + " en dirección 0x" + Integer.toHexString(dir));
-				jmem.guardarDato(dir, dato);
-				
-				System.out.println("-------------");
-				
-				//Thread.sleep(100);
-				
-				int dir2 = r.nextInt(max_entrada*4);
-				
-				System.out.print("Leo dirección 0x" + Integer.toHexString(dir2) + "  ");
-				int dato2 = jmem.leerDato(dir2);
-				System.out.println(dato2);
-				
-				System.out.println("-------------");
-				
-				//Thread.sleep(100);
 			}*/
+			
+			System.out.println("-->Guardo dato en dir: " + 1);
+			jmem.guardarDato(1, 1);
+			Thread.sleep(8000);
+			System.out.println("-->Guardo dato en dir: " + 2);
+			jmem.guardarDato(2, 2);
+			Thread.sleep(8000);
+			System.out.println("-->Guardo dato en dir: " + 3);
+			jmem.guardarDato(3, 3);
+			Thread.sleep(8000);
+			System.out.println("-->Guardo dato en dir: " + 4);
+			jmem.guardarDato(4, 4);
+			Thread.sleep(8000);
+			
+			System.out.println();
+			Thread.sleep(8000);
+			
+			System.out.println("-->Leo dato en dir: " + 1 + " - " + jmem.leerDato(1));
+			Thread.sleep(8000);
+			System.out.println("-->Leo dato en dir: " + 2 + " - " + jmem.leerDato(2));
+			Thread.sleep(8000);
+			System.out.println("-->Leo dato en dir: " + 3 + " - " + jmem.leerDato(3));
+			Thread.sleep(8000);
+			System.out.println("-->Leo dato en dir: " + 4 + " - " + jmem.leerDato(4));
+			Thread.sleep(8000);
+			
+			/*System.out.println("Correctos: " + correctos + "/" + realizados);
 			
 			float ratio_l0 = (float)(Log.cache_hits[0]*100) / (float)(Log.accesosMemoria);
 			float ratio_l1 = (float)(Log.cache_hits[1]*100) / (float)(Log.accesosMemoria-Log.cache_hits[0]);
@@ -136,7 +141,7 @@ public class TestMemoria {
 			System.out.println("Accesos a bloques: " + Log.accesosBloques + " (" + 
 					Log.lecturasBloques + " leidos + " + Log.escriturasBloques + " escritos)");
 			System.out.printf("Cache hits: %s - Cache misses: %s \n", Arrays.toString(Log.cache_hits), Arrays.toString(Log.cache_misses));
-			System.out.printf("Ratio acierto: [%.2f%%, %.2f%%, %.2f%%] \n", ratio_l0, ratio_l1, ratio_l2);
+			System.out.printf("Ratio acierto: [%.2f%%, %.2f%%, %.2f%%] \n", ratio_l0, ratio_l1, ratio_l2);*/
 		}
 		catch (MemoryException e)
 		{
@@ -169,6 +174,7 @@ public class TestMemoria {
 		
 		tablaCache1 = new Tabla(caches[0]);
 		frameCache1 = new VentanaLimitada();
+		//tablaCache1.setRenderTablaEnCelda();
 		JScrollPane jscroll2 = new JScrollPane(tablaCache1, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		frameCache1.setTitle("Cache L0");
 		frameCache1.setPreferredSize(new Dimension(600, 200) );
@@ -194,7 +200,7 @@ public class TestMemoria {
 		frameCache2.setVisible(true);
 		caches[1].setInterfaz(tablaCache2);
 		
-		tablaCache3 = new Tabla(caches[2]);
+		/*tablaCache3 = new Tabla(caches[2]);
 		tablaCache3.setRenderTablaEnCelda();
 		frameCache3 = new VentanaLimitada();
 		JScrollPane jscroll4 = new JScrollPane(tablaCache3, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -206,6 +212,6 @@ public class TestMemoria {
 		frameCache3.pack();
 		frameCache3.addWindowListener(new VentanaOculta(frameCache3));
 		frameCache3.setVisible(true);
-		caches[2].setInterfaz(tablaCache3);
+		caches[2].setInterfaz(tablaCache3);*/
 	}
 }
