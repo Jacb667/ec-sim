@@ -1,3 +1,6 @@
+/*
+ * NO FUNCIONA
+ */
 package Pruebas;
 
 import java.awt.Dimension;
@@ -12,7 +15,6 @@ import componentes.VentanaLimitada;
 import componentes.VentanaOculta;
 
 import pckMemoria.MemoriaPrincipal;
-import pckMemoria.Pagina;
 import pckMemoria.TablaPaginas;
 import general.Global.TiposReemplazo;
 import general.MemoryException;
@@ -30,7 +32,7 @@ public class TestTraductor {
 		try
 		{
 			//TablaPaginas tablaPags = new TablaPaginas(4096, palabras_linea, 4294967295l, 40960, TiposReemplazo.RANDOM);
-			TablaPaginas tablaPags = new TablaPaginas(entradas_pagina, palabras_linea, max_entrada, max_ent_mem, TiposReemplazo.RANDOM);
+			TablaPaginas tablaPags = new TablaPaginas(entradas_pagina, palabras_linea, max_entrada, max_ent_mem, TiposReemplazo.RANDOM, null);
 			System.out.println(tablaPags);
 			
 			// Direcciones entre 0 y 1024 -> Página 0
@@ -57,16 +59,16 @@ public class TestTraductor {
 			Thread.sleep(10000);
 			
 			
-			memoria.guardarDato(tablaPags.traducirDireccion(0x100), 100);
-			memoria.guardarDato(tablaPags.traducirDireccion(0x200), 200);
-			memoria.guardarDato(tablaPags.traducirDireccion(0x300), 300);
-			memoria.guardarDato(tablaPags.traducirDireccion(0x400), 400);
-			memoria.guardarDato(tablaPags.traducirDireccion(0x500), 500);
-			memoria.guardarDato(tablaPags.traducirDireccion(0x600), 600);
-			memoria.guardarDato(tablaPags.traducirDireccion(0x700), 700);
-			memoria.guardarDato(tablaPags.traducirDireccion(0x800), 800);
-			memoria.guardarDato(tablaPags.traducirDireccion(0x900), 900);
-			memoria.guardarDato(tablaPags.traducirDireccion(0x1000), 1000);
+			memoria.guardarDato(tablaPags.traducirDireccion(0x100).getReal(), 100);
+			memoria.guardarDato(tablaPags.traducirDireccion(0x200).getReal(), 200);
+			memoria.guardarDato(tablaPags.traducirDireccion(0x300).getReal(), 300);
+			memoria.guardarDato(tablaPags.traducirDireccion(0x400).getReal(), 400);
+			memoria.guardarDato(tablaPags.traducirDireccion(0x500).getReal(), 500);
+			memoria.guardarDato(tablaPags.traducirDireccion(0x600).getReal(), 600);
+			memoria.guardarDato(tablaPags.traducirDireccion(0x700).getReal(), 700);
+			memoria.guardarDato(tablaPags.traducirDireccion(0x800).getReal(), 800);
+			memoria.guardarDato(tablaPags.traducirDireccion(0x900).getReal(), 900);
+			memoria.guardarDato(tablaPags.traducirDireccion(0x1000).getReal(), 1000);
 
 			
 			System.out.println("0x100 traducida como: " + tablaPags.traducirDireccion(0x100));
@@ -80,16 +82,16 @@ public class TestTraductor {
 			System.out.println("0x900 traducida como: " + tablaPags.traducirDireccion(0x900));
 			System.out.println("0x1000 traducida como: " + tablaPags.traducirDireccion(0x1000));
 			
-			System.out.println(memoria.leerDato(tablaPags.traducirDireccion(0x100)));
-			System.out.println(memoria.leerDato(tablaPags.traducirDireccion(0x200)));
-			System.out.println(memoria.leerDato(tablaPags.traducirDireccion(0x300)));
-			System.out.println(memoria.leerDato(tablaPags.traducirDireccion(0x400)));
-			System.out.println(memoria.leerDato(tablaPags.traducirDireccion(0x500)));
-			System.out.println(memoria.leerDato(tablaPags.traducirDireccion(0x600)));
-			System.out.println(memoria.leerDato(tablaPags.traducirDireccion(0x700)));
-			System.out.println(memoria.leerDato(tablaPags.traducirDireccion(0x800)));
-			System.out.println(memoria.leerDato(tablaPags.traducirDireccion(0x900)));
-			System.out.println(memoria.leerDato(tablaPags.traducirDireccion(0x1000)));
+			System.out.println(memoria.leerDato(tablaPags.traducirDireccion(0x100).getReal()));
+			System.out.println(memoria.leerDato(tablaPags.traducirDireccion(0x200).getReal()));
+			System.out.println(memoria.leerDato(tablaPags.traducirDireccion(0x300).getReal()));
+			System.out.println(memoria.leerDato(tablaPags.traducirDireccion(0x400).getReal()));
+			System.out.println(memoria.leerDato(tablaPags.traducirDireccion(0x500).getReal()));
+			System.out.println(memoria.leerDato(tablaPags.traducirDireccion(0x600).getReal()));
+			System.out.println(memoria.leerDato(tablaPags.traducirDireccion(0x700).getReal()));
+			System.out.println(memoria.leerDato(tablaPags.traducirDireccion(0x800).getReal()));
+			System.out.println(memoria.leerDato(tablaPags.traducirDireccion(0x900).getReal()));
+			System.out.println(memoria.leerDato(tablaPags.traducirDireccion(0x1000).getReal()));
 			
 			System.out.println(memoria);
 		}

@@ -3,6 +3,7 @@ package pckMemoria;
 import general.Global;
 import general.Global.TiposReemplazo;
 import general.Log;
+import general.Log.Flags;
 import general.MemoryException;
 
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ public class TablaPaginas {
 	private int palabras_linea;
 	
 	private JerarquiaMemoria jerarquia;
+	private Tlb tlb_datos;
 	
 	public PoliticaReemplazo politica;
 	
@@ -49,7 +51,7 @@ public class TablaPaginas {
 	 */
 	
 	// Este constructor utiliza NUMERO DE ENTRADAS de cada tipo.
-	public TablaPaginas(int ent_pag, int pal_linea, int max_ent_mem, int ent_mem_princ, TiposReemplazo _Tpolitica)
+	public TablaPaginas(int ent_pag, int pal_linea, int max_ent_mem, int ent_mem_princ, TiposReemplazo _Tpolitica, Tlb tlb1)
 	{
 		// Max_memoria por defecto: 0xFFFFFFFF -> Max ent: 0xFFFFFFFF / 4
 		// Memoria principal por defecto: 2048 (64KB).
@@ -62,6 +64,8 @@ public class TablaPaginas {
 		entradas_pagina = ent_pag;
 		palabras_linea = pal_linea;
 		tam_pagina = entradas_pagina * 4;
+		
+		tlb_datos = tlb1;
 		
 		System.out.println("entrada_maxima: " + entrada_maxima);
 		System.out.println("tam_pagina: " + ent_pag);
@@ -105,12 +109,44 @@ public class TablaPaginas {
 		// Ya tenemos la página correspondiente, comprobamos si está en un marco.
 		if (pag.getMarco() != -1)
 		{
+			// Comprobamos si está en la TLB (en realidad no se utiliza para nada, sólo para ver si es HIT o MISS)
+			if (tlb_datos != null)
+			{
+				if (tlb_datos.existePagina(pag.getId()))
+				{
+					Log.report(Flags.TLB_HIT);
+					Log.println(2,"TLB HIT");
+				}
+				else
+				{
+					// MISS, la guardamos en TLB
+					tlb_datos.insertar(pag.getId(), pag.getMarco());
+					Log.report(Flags.TLB_MISS);
+					Log.println(2,"TLB MISS");
+				}
+			}
+			
+			// Si estamos aquí es porque se ha encontrado la página asociada a un marco.
+			// OJO! Puede ser PAGE HIT y TLB MISS.
+			Log.report(Flags.PAGE_HIT);
+			Log.println(2,"PAGE HIT");
+			
 			// La página está en un marco, podemos traducir la dirección.
 			//Log.println(3, "La página ya está en el marco " + pag.getMarco());
 			return calcularDireccion(direccion, pag.getMarco());
 		}
 		else
 		{
+			// MISS, la guardamos en TLB
+			if (tlb_datos != null)
+			{
+				tlb_datos.insertar(pag.getId(), pag.getMarco());
+				Log.report(Flags.TLB_MISS);
+				Log.println(2,"TLB MISS");
+			}
+			// Es PAGE FAULT
+			Log.report(Flags.PAGE_FAULT);
+			Log.println(2,"PAGE MISS");
 			// Tenemos que guardar la página en un marco.
 			int marco = buscarMarcoLibre();
 			if (marco != -1)
