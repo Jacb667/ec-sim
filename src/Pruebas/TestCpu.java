@@ -29,7 +29,6 @@ import pckMemoria.JerarquiaMemoria;
 import pckMemoria.MemoriaPrincipal;
 import pckMemoria.TablaPaginas;
 import pckMemoria.Tlb;
-import pckMemoria.Traductor;
 
 public class TestCpu {
 	
