@@ -1,7 +1,6 @@
 package pckCpu;
 
-import general.Config;
-import general.Config.Conf_Type;
+import general.Global;
 import general.Global.Opcode;
 import general.MemoryException;
 
@@ -18,34 +17,35 @@ public class Cpu {
 	private JerarquiaMemoria jmem;
 	private JerarquiaMemoria jinstr;
 	private BancoRegistros registros;
+	private int direccion_base;
 	
 	private SortedMap<Integer, Instruccion> instrucciones;
 	
-	public Cpu(JerarquiaMemoria j1, JerarquiaMemoria j2)
+	public Cpu(JerarquiaMemoria j1, JerarquiaMemoria j2, int dir_base)
 	{
 		jmem = j1;
 		jinstr = j2;
 		alu = new Alu();
 		registros = new BancoRegistros();
 		instrucciones = new TreeMap<Integer, Instruccion>();
+		direccion_base = dir_base;
 		
 		List<Instruccion> lista = Decoder.getInstrucciones();
-		int direccion_base = Config.get(Conf_Type.INICIO_INSTRUCCIONES);
 		
 		// Esto crea un mapa con la dirección real de la instrucción.
 		for (Instruccion inst : lista)
-			instrucciones.put(direccion_base+inst.getDireccion(), inst);
+			instrucciones.put(direccion_base + inst.getDireccion(), inst);
 	}
 	
 	// Ejecuta el código (monociclo).
-	public void ejecutarCodigoMonociclo() throws InterruptedException, MemoryException, CpuException
+	public void ejecutarCodigoMonociclo() throws MemoryException, CpuException
 	{
 		boolean terminado = false;
 		
 		while (!terminado)
 		{
 			ejecutarInstruccionMonociclo();
-			//Thread.sleep(30000);
+			Global.sleep(30000);
 		}
 	}
 	
@@ -124,12 +124,12 @@ public class Cpu {
 			case JAL:
 				System.out.println("Guardo PC+4 y modifico PC.");
 				registros.guardarDato(31, getPC()+4);
-				setPC(inst.getDireccionSalto());
+				setPC(calcularSalto(inst.getDireccionSalto()));
 				break;
 			// Si es un J, modifico PC
 			case J:
 				System.out.println("Modifico PC.");
-				setPC(inst.getDireccionSalto());
+				setPC(calcularSalto(inst.getDireccionSalto()));
 				break;
 			// Si es un JR, modifico PC
 			case JR:
@@ -142,7 +142,7 @@ public class Cpu {
 				if (flags[0])
 				{
 					System.out.println("Modifico PC.");
-					setPC(inst.getDireccionSalto());
+					setPC(calcularSalto(inst.getDireccionSalto()));
 				}
 				break;
 			// Si es un BNE, compruebo el flag zero de Alu antes de saltar.
@@ -151,7 +151,7 @@ public class Cpu {
 				if (flags[0])
 				{
 					System.out.println("Modifico PC.");
-					setPC(inst.getDireccionSalto());
+					setPC(calcularSalto(inst.getDireccionSalto()));
 				}
 				break;
 		}
@@ -162,9 +162,15 @@ public class Cpu {
 	// Ejecuta el código.
 	public void ejecutarCodigoSegmentado()
 	{
-		List<Instruccion> instrucciones = Decoder.getInstrucciones();
+		List<Instruccion> lista = Decoder.getInstrucciones();
 		
 		
+	}
+	
+	// Calcula la dirección de salto.
+	public int calcularSalto(int dir_relativa)
+	{
+		return direccion_base + dir_relativa;
 	}
 	
 	// Establece el valor de PC.
@@ -176,8 +182,4 @@ public class Cpu {
 	{
 		return instrucciones.get(dir);
 	}
-	
-	
-	
-	
 }

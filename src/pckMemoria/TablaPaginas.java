@@ -189,6 +189,13 @@ public class TablaPaginas {
 		return pag;
 	}
 	
+	// Busca una página por ID (si no existe no la crea).
+	public Pagina buscarPagina(int id) throws MemoryException
+	{
+		Pagina pag = paginas.get(id);
+		return pag;
+	}
+	
 	// Busca un marco libre donde insertar la página.
 	private int buscarMarcoLibre()
 	{
@@ -257,22 +264,16 @@ public class TablaPaginas {
 	}
 	
 	// Devuelve la lista de marcos.
-	public Pagina[] getMarcos()
-	{
-		return marcos;
-	}
+	public Pagina[] getMarcos() { return marcos; }
 	
 	// Devuelve el tamaño de página.
-	public int getTamañoPagina()
-	{
-		return tam_pagina;
-	}
+	public int getTamañoPagina() { return tam_pagina; }
 	
 	// Devuelve el tamaño de página.
-	public int getEntradasPagina()
-	{
-		return entradas_pagina;
-	}
+	public int getEntradasPagina() { return entradas_pagina; }
+	
+	// Devuelve el número de páginas.
+	public int getNumeroPaginas() { return num_paginas; }
 	
 	public String toString()
 	{
@@ -290,5 +291,14 @@ public class TablaPaginas {
 	{
 		jerarquia = jmem;
 	}
-
+	
+	// Este método inicializar en memoria virtual el contenido de la RAM.
+	// Se crea la página y se guarda el dato, pero sin asignarla a marco.
+	// La dirección recibida es VIRTUAL.
+	public void inicializarDatoMemoriaVirtual(int direccion_virtual, int dato) throws MemoryException
+	{
+		// Selecciono o creo la página si es necesario.
+		Pagina pag = seleccionarPagina(direccion_virtual);
+		pag.guardarLinea(direccion_virtual, new int[]{dato});
+	}
 }
