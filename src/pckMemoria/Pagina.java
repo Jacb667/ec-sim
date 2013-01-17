@@ -25,6 +25,7 @@ public class Pagina
 	private int entradas;
 	private int[] mem;
 	private boolean[] valid;
+	private boolean[] dirty;
 	private Tabla interfaz;
 	private int id;
 	private int marco;
@@ -41,6 +42,7 @@ public class Pagina
 		entradas = _entradas;
 		mem = new int[entradas];
 		valid = new boolean[entradas];
+		dirty = new boolean[entradas];
 		marco = -1;
 		id = _id;
 	}
@@ -78,6 +80,7 @@ public class Pagina
 		
 		mem[entrada] = dato;
 		valid[entrada] = true;
+		dirty[entrada] = true;
 		
 		// Actualizar interfaz gráfica.
 		if (interfaz != null)
@@ -123,6 +126,7 @@ public class Pagina
 		{
 			mem[direccion_inicio + i] = linea[i];
 			valid[direccion_inicio + i] = true;
+			dirty[entrada] = false;
 			
 			// Actualizar interfaz gráfica.
 			if (interfaz != null)
@@ -150,6 +154,17 @@ public class Pagina
 	public boolean estaLibre(int direccion)
 	{
 		return !valid[direccion >> 2];
+	}
+	
+	public boolean esDirty(int direccion)
+	{
+		return dirty[direccion >> 2];
+	}
+	
+	public void escribirDisco()
+	{
+		for (int i = 0; i < entradas; i++)
+			dirty[i] = false;
 	}
 	
 	
