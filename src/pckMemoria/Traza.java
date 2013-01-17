@@ -1,4 +1,4 @@
-package general;
+package pckMemoria;
 
 import java.util.*;
 

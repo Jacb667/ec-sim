@@ -1,4 +1,6 @@
-package general;
+package Pruebas;
+
+import pckMemoria.Traza;
 
 public class TestTraza {
 
