@@ -1,3 +1,6 @@
+/*
+ * NO FUNCIONA
+ */
 package Pruebas;
 
 import java.awt.Dimension;
@@ -101,9 +104,10 @@ public class TestCpu {
 		caches = new Cache[1];
 		
 		caches[0] = new CacheAsociativa(16,palabras_linea,4,TiposReemplazo.LRU);
-		memoria = new MemoriaPrincipal(256, palabras_linea);
+		// TODO: Cambiar esto
+		//memoria = new MemoriaPrincipal(256, palabras_linea);
 		
-		jmem = new JerarquiaMemoria(caches, memoria);
+		//jmem = new JerarquiaMemoria(caches, memoria);
 		
 		Cache tlb = new CacheDirecta(4,1);
 		

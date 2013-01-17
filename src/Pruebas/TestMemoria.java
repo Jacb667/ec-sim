@@ -43,10 +43,13 @@ public class TestMemoria {
 		final int entradas_pagina = 4;
 		final int max_entrada = 32;	// Última entrada permitida
 		final int max_ent_mem = 16;	// Última entrada en memoria (tamaño de memoria)
+		final int entradas_tlb = 4;
+		final int vias_tlb = 1;
 		
 		try
 		{
 			Cache[] caches = new Cache[2];
+			Tlb tlb = new Tlb(entradas_tlb);
 			
 			// 2 niveles de cache directa
 			caches[0] = new CacheDirecta(entradas_cache1,palabras_linea);
@@ -54,7 +57,7 @@ public class TestMemoria {
 			//caches[2] = new CacheAsociativa(entradas_cache3,palabras_linea,vias_cache3,TiposReemplazo.RANDOM);
 			
 			// Tabla de Páginas
-			TablaPaginas tablaPags = new TablaPaginas(entradas_pagina, palabras_linea, max_entrada, max_ent_mem, TiposReemplazo.LRU);
+			TablaPaginas tablaPags = new TablaPaginas(entradas_pagina, palabras_linea, max_entrada, max_ent_mem, TiposReemplazo.LRU, tlb);
 			
 			// Memoria principal con 128 posiciones.
 			MemoriaPrincipal memoria = new MemoriaPrincipal(tablaPags);
@@ -105,13 +108,20 @@ public class TestMemoria {
 					correctos++;
 			}*/
 			
-			System.out.println("-->Guardo dato en dir: " + 1);
-			jmem.guardarDato(1, 1);
+			System.out.println("-->Guardo dato en dir: " + 0);
+			jmem.guardarDato(0, 1);
 			Thread.sleep(8000);
-			System.out.println("-->Guardo dato en dir: " + 2);
-			jmem.guardarDato(2, 2);
+			System.out.println("-->Guardo dato en dir: " + 4);
+			jmem.guardarDato(4, 2);
 			Thread.sleep(8000);
-			System.out.println("-->Guardo dato en dir: " + 3);
+			System.out.println("-->Guardo dato en dir: " + 8);
+			jmem.guardarDato(8, 3);
+			Thread.sleep(8000);
+			System.out.println("-->Guardo dato en dir: " + 12);
+			jmem.guardarDato(12, 4);
+			Thread.sleep(8000);
+			
+			/*System.out.println("-->Guardo dato en dir: " + 3);
 			jmem.guardarDato(3, 3);
 			Thread.sleep(8000);
 			System.out.println("-->Guardo dato en dir: " + 4);
@@ -128,7 +138,7 @@ public class TestMemoria {
 			System.out.println("-->Leo dato en dir: " + 3 + " - " + jmem.leerDato(3));
 			Thread.sleep(8000);
 			System.out.println("-->Leo dato en dir: " + 4 + " - " + jmem.leerDato(4));
-			Thread.sleep(8000);
+			Thread.sleep(8000);*/
 			
 			/*System.out.println("Correctos: " + correctos + "/" + realizados);
 			
