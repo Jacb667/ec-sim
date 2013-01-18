@@ -100,7 +100,7 @@ public class Aplicacion extends javax.swing.JFrame {
         //new Test();
     	//new TestMemoria();
     	//new TestMemoria2();
-    	new TestCpu();
+    	new TestTraza();
     	//new TestTraductor();
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
