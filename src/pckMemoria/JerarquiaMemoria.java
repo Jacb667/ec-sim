@@ -233,4 +233,91 @@ public class JerarquiaMemoria {
 	{
 		memoria.actualizarPaginaInterfaz(marco);
 	}
+	
+	/*
+	 * Traza de memoria
+	 */
+	
+	// Simulación de lectura de dato (para TRAZA)
+	// Funciona con dirección VIRTUAL. Ya se encarga de traducirla.
+	public Direccion simularLeerDato(int direccion_virtual) throws MemoryException
+	{
+		// Traducir la dirección.
+		Direccion direccion = tablaPags.traducirDireccion(direccion_virtual);
+		
+		Log.report(Flags.MEMORY_READ);
+		Log.println(3, "Lectura en memoria 0x" + direccion.getRealHex());
+		
+		// Busco en caché L0. Si no está, debemos traer la línea completa.
+		Cache c = caches[0];
+		
+		if (c.existeDato(direccion.getReal()))
+		{
+			// Caché HIT L0
+			Log.println(2, "Dato encontrado en cache L0");
+			Log.report(Flags.CACHE_HIT, 0);
+			c.consultarDato(direccion.getReal());
+		}
+		else  // No existe el dato (MISS)
+		{
+			Log.println(3, "El dato NO existe en cache L0");
+			Log.report(Flags.CACHE_MISS, 0);
+			// Traemos la línea desde el siguiente nivel de caché.
+			traerLinea(0, direccion);
+
+			// El dato ya debería existir.
+			if (!c.existeDato(direccion.getReal()))
+				throw new MemoryException("No se ha podido localizar la dirección 0x" + direccion.getRealHex());
+				
+			// El dato ya está aquí. Lo devuelvo.
+			c.consultarDato(direccion.getReal());
+		}
+		
+		// Devuelvo la dirección para la traza.
+		return direccion;
+	}
+	
+	// Simulación de guardado de dato (para TRAZA)
+	// Se utiliza la política Write-Back y Write-Allocate
+	// Funciona con dirección VIRTUAL. Ya se encarga de traducirla.
+	public Direccion simularGuardarDato(int direccion_virtual, int dato) throws MemoryException
+	{
+		// Traducir la dirección.
+		Direccion direccion = tablaPags.traducirDireccion(direccion_virtual);
+		
+		Log.report(Flags.MEMORY_WRITE);
+		Log.println(3, "Guardado en memoria 0x" + direccion.getRealHex());
+		
+		// Siempre escribimos en la cache L0.
+		Cache c = caches[0];
+		
+		// Compruebo si existe el dato (HIT)
+		if (c.existeDato(direccion.getReal()))
+		{
+			Log.println(3, "El dato existe en cache L0");
+			Log.println(2, "Dato modificado en cache L0");
+			Log.report(Flags.CACHE_HIT, 0);
+			c.modificarDato(direccion.getReal(), direccion.getPagina(), dato);
+			// TODO: Write-Through.
+		}
+		else  // No existe el dato (MISS)
+		{
+			Log.println(3, "El dato NO existe en cache L0");
+			Log.report(Flags.CACHE_MISS, 0);
+			// Traemos la línea desde el siguiente nivel de caché.
+			traerLinea(0, direccion);
+				
+			// El dato ya debería existir.
+			if (!c.existeDato(direccion.getReal()))
+				throw new MemoryException("No se ha podido localizar la dirección 0x" + direccion.getRealHex());
+				
+			// El dato ya está aquí. Lo modifico.
+			Log.println(2, "Dato modificado en cache L0");
+			c.modificarDato(direccion.getReal(), direccion.getPagina(), dato);
+			// TODO: Write-Through.
+		}
+		
+		// Devuelvo la dirección para la traza.
+		return direccion;
+	}
 }
