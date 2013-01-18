@@ -229,6 +229,12 @@ public class JerarquiaMemoria {
 		}
 	}
 	
+	// Devuelve los niveles de caché.
+	public int getNivelesCache()
+	{
+		return caches.length;
+	}
+	
 	public void actualizarMarcoInterfazMemoria(int marco)
 	{
 		memoria.actualizarPaginaInterfaz(marco);
