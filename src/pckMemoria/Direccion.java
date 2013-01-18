@@ -7,16 +7,11 @@ public class Direccion {
 	private int real;
 	private int pagina;
 	
-	public Direccion(int vi)
-	{
-		setVirtual(vi);
-	}
-	
 	public Direccion(int vi, int re, int pa)
 	{
-		setVirtual(vi);
-		setReal(re);
-		setPagina(pa);
+		virtual = vi;
+		real = re;
+		pagina = pa;
 	}
 
 	public int getVirtual()
@@ -29,11 +24,6 @@ public class Direccion {
 		return Integer.toHexString(virtual);
 	}
 
-	public void setVirtual(int virtual)
-	{
-		this.virtual = virtual;
-	}
-
 	public int getReal()
 	{
 		return real;
@@ -44,18 +34,8 @@ public class Direccion {
 		return Integer.toHexString(real);
 	}
 
-	public void setReal(int real)
-	{
-		this.real = real;
-	}
-
 	public int getPagina()
 	{
 		return pagina;
-	}
-
-	public void setPagina(int pagina)
-	{
-		this.pagina = pagina;
 	}
 }
