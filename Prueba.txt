@@ -1,9 +1,26 @@
-# Programa de prueba.
-loop: add,$1,$1,$2
-sw $5, 100(R2)
-addi $6,$6,100
-j loop
-j 0
-subi $10,$5,-100
-beq $6,$1,loop
-JAL $31 0
+inicio: addi $20, $0, 1000
+sub $5, $0, $0
+suma: lw $10, 0($20)
+add $5, $5, $10
+addi $20, $20, -4
+bne $20, $0, suma
+trap
+
+
+
+
+
+;Guardo 100 en $1.
+addi $1,$1,100
+;Guardo 20 en $2
+ori $2 $2 20
+;Inicio bucle:
+;Guardo $1 en memoria posicion $2.
+loop: sw $1, 20($2)
+;Decremento $2 en 4.
+addi $2, $2, -4
+;Incremento $1 en 100
+addi $1,$1,100
+;Salto a bucle mientras $2 != 0
+bne $2, $0, loop
+trap

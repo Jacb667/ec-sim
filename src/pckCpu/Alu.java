@@ -111,15 +111,9 @@ public class Alu
 				res = dato1 >> constante;
 				break;
 			case BEQ:
+			case BNE:
 				// Si son iguales devuelve 0.
 				if (dato1 == dato2)
-					res = 0;
-				else
-					res = 1;
-				break;
-			case BNE:
-				// Si son distintos devuelve 0.
-				if (dato1 != dato2)
 					res = 0;
 				else
 					res = 1;
@@ -131,10 +125,8 @@ public class Alu
 				break;
 		}
 		
-		
 		// Flag zero.
-		if (res == 0)
-			flags[0] = true;
+		flags[0] = res == 0;
 		
 		return res;
 	}

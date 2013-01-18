@@ -45,6 +45,7 @@ public class Global {
 		J     (	"E","J",	'J',	0x2,	0		),		// Salto
 		JR    (	"R",		'R',	0,		0x8		),		// Vuelve a registro ($31)
 		JAL   (	"E", "J",	'J',	0x3,	0		),		// Salta y guarda PC+4 en registro ($31)
+		TRAP  ( "",			'I',	0x0,	0x0		),		// Fin del programa
 		;
 
 		/*

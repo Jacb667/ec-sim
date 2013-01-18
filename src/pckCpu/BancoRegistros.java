@@ -28,16 +28,21 @@ public class BancoRegistros {
 	public String toString()
 	{
 		StringBuilder strB = new StringBuilder();
-		for (int i = 0; i < datos.length; i++)
+		
+		for (int i = 0; i < datos.length;)
 		{
-			// Dirección (hex) : Dato (dec)
-			strB.append(i);
+			strB.append(String.format("%3d", i));
 			strB.append(" : ");
-			strB.append(datos[i]);
+			for (int j = 0; j < 8; j++)
+			{
+				strB.append(String.format("%4d", datos[i]));
+				if (j != 7)
+					strB.append(", ");
+				i++;
+			}
 			strB.append("\n");
 		}
 		
 		return strB.toString();
 	}
-
 }
