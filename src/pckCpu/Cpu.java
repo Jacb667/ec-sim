@@ -40,23 +40,30 @@ public class Cpu {
 	// Ejecuta el código (monociclo).
 	public void ejecutarCodigoMonociclo() throws MemoryException, CpuException
 	{
-		boolean terminado = false;
+		boolean ejecutando = true;
 		
-		while (!terminado)
+		while (ejecutando)
 		{
-			ejecutarInstruccionMonociclo();
-			Global.sleep(30000);
+			ejecutando = ejecutarInstruccionMonociclo();
+			Global.sleep(10);
 		}
+		
+		System.out.println("Fin de programa.");
 	}
 	
 	// Ejecutar siguiente instrucción (monociclo).
-	public void ejecutarInstruccionMonociclo() throws MemoryException, CpuException
+	private boolean ejecutarInstruccionMonociclo() throws MemoryException, CpuException
 	{
 		System.out.println("Fetch " + getPC());
 		/*
 		 *  Etapa Fetch
 		 */
 		Instruccion inst = getInstruccion(getPC());
+		
+		// Fin del programa.
+		if (inst.getOpcode() == Opcode.TRAP)
+			return false;
+		
 		if (jinstr != null)
 			jinstr.leerDato(getPC());
 		else
@@ -139,7 +146,7 @@ public class Cpu {
 			// Si es un BEQ, compruebo el flag zero de Alu antes de saltar.
 			case BEQ:
 				System.out.println("Compruebo si zero.");
-				if (flags[0])
+				if (flags[0] == true)
 				{
 					System.out.println("Modifico PC.");
 					setPC(calcularSalto(inst.getDireccionSalto()));
@@ -148,15 +155,16 @@ public class Cpu {
 			// Si es un BNE, compruebo el flag zero de Alu antes de saltar.
 			case BNE:
 				System.out.println("Compruebo si zero.");
-				if (flags[0])
+				if (flags[0] == false)
 				{
 					System.out.println("Modifico PC.");
 					setPC(calcularSalto(inst.getDireccionSalto()));
 				}
 				break;
 		}
-			
+		
 		System.out.println(registros);
+		return true;
 	}
 	
 	// Ejecuta el código.

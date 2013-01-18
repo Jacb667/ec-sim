@@ -59,9 +59,9 @@ public class TestCpu {
 	final int[] vias_caches = new int[]{1,4,4};
 	
 	// Páginas y memoria
-	final int entradas_pagina = 4;
-	final int max_entrada = 32;	// Última entrada permitida
-	final int max_ent_mem = 16;	// Última entrada en memoria (tamaño de memoria)
+	final int entradas_pagina = 16;
+	final int max_entrada = 512;	// Última entrada permitida
+	final int max_ent_mem = 128;	// Última entrada en memoria (tamaño de memoria)
 	final int entradas_tlb = 4;
 	final int vias_tlb = 1;
 	
@@ -86,6 +86,10 @@ public class TestCpu {
 			inicializarMemoria();
 			inicializarInterfaz();
 			inicializarCpu();
+			
+			// Guardo un 1 en todas las posiciones entre 0 y 1000.
+			for (int i = 0; i <= 1000; i+=4)
+				tablaPags.inicializarDatoMemoriaVirtual(i, 1);
 			
 			// Guardo las instrucciones en memoria.
 			for (Instruccion inst : Decoder.getInstrucciones())

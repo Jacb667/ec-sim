@@ -1,5 +1,7 @@
 package pckCpu;
 
+import general.Global.Opcode;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -11,9 +13,10 @@ public class Decoder
 	private static List<Instruccion> instrucciones = new ArrayList<Instruccion>();
 	private static int primera_instruccion = 0;
 	private static int ultima_instruccion = 0;
+	private static boolean tiene_trap = false;
 
 	final static public String SEPARADORES_ETIQUETAS = ":";
-	final static public String SEPARADORES_PARAMETROS = ",;() \t";
+	final static public String SEPARADORES_PARAMETROS = ",() \t";
 	final static public String[] ETIQUETAS_INICIO = new String[]{"INICIO","START","ENTRY"};
 	
 	// Procesa un archivo de texto en código ensamblador.
@@ -30,7 +33,7 @@ public class Decoder
 			while (linea != null)
 			{
 				// Las líneas que comienzan con el carácter # se consideran comentarios.
-				if (linea.charAt(0) != '#')
+				if (linea.length() > 0 && linea.charAt(0) != '#' && linea.charAt(0) != ';' && linea.charAt(0) != '/')
 					decodificarInstruccion(linea, i);
 				linea = br.readLine();
 				i++;
@@ -72,6 +75,9 @@ public class Decoder
 
 		// En caso contrario tenemos una instrucción normal.
 		Instruccion inst = new Instruccion(strEtiq.nextToken(), lin_fich, ultima_instruccion);
+		if (inst.getOpcode() == Opcode.TRAP)
+			tiene_trap = true;
+
 		ultima_instruccion += 4;
 		
 		if (etiqueta != null)
@@ -123,6 +129,9 @@ public class Decoder
 	// Valida el código ya decodificado.
 	public static void validarCodigo() throws CpuException
 	{
+		if (!tiene_trap)
+			throw new CpuException("No se ha encontrado ninguna instrucción TRAP para finalizar.");
+		
 		// Comprobamos todas las instrucciones buscando etiquetas de salto.
 		// Para cada etiqueta, comprobamos si existe o no.
 		// Además, asignamos a la instrucción la dirección real de salto.
@@ -146,7 +155,7 @@ public class Decoder
 					int direccion = inst.getDireccionSalto() + primera_instruccion;
 					
 					if (direccion < primera_instruccion || direccion > ultima_instruccion)
-						throw new CpuException("Dirección no válida " + direccion + " en línea " + inst.getLinea());
+						throw new CpuException("Dirección de salto no válida " + direccion + " en línea " + inst.getLinea());
 					
 					// Asignamos la nueva dirección de salto.
 					inst.setDireccionSalto(direccion);
@@ -170,6 +179,12 @@ public class Decoder
 	public static List<Instruccion> getInstrucciones()
 	{
 		return instrucciones;
+	}
+	
+	// Devuelve la posición de la última instrucción.
+	public static int getUltimaInstruccion()
+	{
+		return ultima_instruccion;
 	}
 	
 	// Devuelve información sobre las instrucciones encontradas (para debug).
