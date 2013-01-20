@@ -17,6 +17,7 @@ public class Instruccion {
 	private int linea;
 	private int direccion;
 	private int d_salto;
+	private boolean d_virtual;
 
 	public Instruccion(String dato, int lin_fich, int dir) throws CpuException
 	{
@@ -203,10 +204,21 @@ public class Instruccion {
 	public int getLinea() { return linea; }
 	public int getDireccion() { return direccion; }
 	public int getDireccionSalto() { return d_salto; }
+	public boolean esDireccionVirtual() { return d_virtual; }
+
+	public void setDireccion(int dir)
+	{
+		direccion = dir;
+	}
 	
 	public void setDireccionSalto(int pos)
 	{
 		d_salto = pos;
+	}
+	
+	public void setDireccionVirtual()
+	{
+		d_virtual = true;
 	}
 	
 	public String toString()
