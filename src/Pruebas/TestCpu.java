@@ -13,9 +13,6 @@ import componentes.Tabla;
 import componentes.VentanaLimitada;
 import componentes.VentanaOculta;
 
-import general.Config;
-import general.Config.Conf_Type;
-import general.Global;
 import general.Global.TiposReemplazo;
 import general.MemoryException;
 import pckCpu.Cpu;
@@ -89,18 +86,30 @@ public class TestCpu {
 			
 			// Guardo un 1 en todas las posiciones entre 0 y 1000.
 			for (int i = 0; i <= 1000; i+=4)
-				tablaPags.inicializarDatoMemoriaVirtual(i, 1);
+				tablaPags.inicializarDatoMemoriaVirtual(i, i);
 			
 			// Guardo las instrucciones en memoria.
 			for (Instruccion inst : Decoder.getInstrucciones())
 			{
-				System.out.println("++ Instruccion " + inst);
-				System.out.println("++ Dirección V " + (direccion_inst + inst.getDireccion()));
-				tablaPags.inicializarDatoMemoriaVirtual(direccion_inst + inst.getDireccion(), inst.codificarBinario());
+				if (inst.esDireccionVirtual())
+				{
+					System.out.println("++ Instruccion " + inst);
+					System.out.println("++ Dirección V " + (inst.getDireccion()));
+					tablaPags.inicializarDatoMemoriaVirtual(inst.getDireccion(), inst.codificarBinario());
+				}
+				else
+				{
+					System.out.println("++ Instruccion " + inst);
+					System.out.println("++ Dirección V " + (direccion_inst + inst.getDireccion()));
+					tablaPags.inicializarDatoMemoriaVirtual(direccion_inst + inst.getDireccion(), inst.codificarBinario());
+				}
 			}
 			
 			// Asignamos PC a la primera instrucción.
-			cpu.setPC(direccion_inst + Decoder.getPrimeraInstruccion());
+			if (Decoder.getPrimeraInstruccion().esDireccionVirtual())
+				cpu.setPC(Decoder.getPrimeraInstruccion().getDireccion());
+			else
+				cpu.setPC(direccion_inst + Decoder.getPrimeraInstruccion().getDireccion());
 			
 			// Una vez tenemos el código guardado en memoria, comenzamos la ejecución.
 			cpu.ejecutarCodigoMonociclo();

@@ -153,12 +153,16 @@ public class Pagina
 
 	public boolean estaLibre(int direccion)
 	{
-		return !valid[direccion >> 2];
+		int entrada = direccion >> 2;
+		entrada = (int) Math.floor(entrada % entradas);
+		return !valid[entrada];
 	}
 	
 	public boolean esDirty(int direccion)
 	{
-		return dirty[direccion >> 2];
+		int entrada = direccion >> 2;
+		entrada = (int) Math.floor(entrada % entradas);
+		return dirty[entrada];
 	}
 	
 	public void escribirDisco()

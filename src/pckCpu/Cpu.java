@@ -34,7 +34,12 @@ public class Cpu {
 		
 		// Esto crea un mapa con la dirección real de la instrucción.
 		for (Instruccion inst : lista)
-			instrucciones.put(direccion_base + inst.getDireccion(), inst);
+		{
+			if (inst.esDireccionVirtual())
+				instrucciones.put(inst.getDireccion(), inst);
+			else
+				instrucciones.put(direccion_base + inst.getDireccion(), inst);
+		}
 	}
 	
 	// Ejecuta el código (monociclo).
@@ -45,7 +50,7 @@ public class Cpu {
 		while (ejecutando)
 		{
 			ejecutando = ejecutarInstruccionMonociclo();
-			Global.sleep(10);
+			Global.sleep(10000);
 		}
 		
 		System.out.println("Fin de programa.");
@@ -131,12 +136,18 @@ public class Cpu {
 			case JAL:
 				System.out.println("Guardo PC+4 y modifico PC.");
 				registros.guardarDato(31, getPC()+4);
-				setPC(calcularSalto(inst.getDireccionSalto()));
+				if (inst.esDireccionVirtual())
+					setPC(inst.getDireccionSalto());
+				else
+					setPC(calcularSalto(inst.getDireccionSalto()));
 				break;
 			// Si es un J, modifico PC
 			case J:
 				System.out.println("Modifico PC.");
-				setPC(calcularSalto(inst.getDireccionSalto()));
+				if (inst.esDireccionVirtual())
+					setPC(inst.getDireccionSalto());
+				else
+					setPC(calcularSalto(inst.getDireccionSalto()));
 				break;
 			// Si es un JR, modifico PC
 			case JR:
@@ -149,7 +160,10 @@ public class Cpu {
 				if (flags[0] == true)
 				{
 					System.out.println("Modifico PC.");
-					setPC(calcularSalto(inst.getDireccionSalto()));
+					if (inst.esDireccionVirtual())
+						setPC(inst.getDireccionSalto());
+					else
+						setPC(calcularSalto(inst.getDireccionSalto()));
 				}
 				break;
 			// Si es un BNE, compruebo el flag zero de Alu antes de saltar.
@@ -158,7 +172,10 @@ public class Cpu {
 				if (flags[0] == false)
 				{
 					System.out.println("Modifico PC.");
-					setPC(calcularSalto(inst.getDireccionSalto()));
+					if (inst.esDireccionVirtual())
+						setPC(inst.getDireccionSalto());
+					else
+						setPC(calcularSalto(inst.getDireccionSalto()));
 				}
 				break;
 		}

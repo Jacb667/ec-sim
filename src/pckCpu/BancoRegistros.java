@@ -35,7 +35,7 @@ public class BancoRegistros {
 			strB.append(" : ");
 			for (int j = 0; j < 8; j++)
 			{
-				strB.append(String.format("%4d", datos[i]));
+				strB.append(String.format("%8d", datos[i]));
 				if (j != 7)
 					strB.append(", ");
 				i++;

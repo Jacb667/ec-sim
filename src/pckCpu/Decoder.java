@@ -14,6 +14,9 @@ public class Decoder
 	private static int primera_instruccion = 0;
 	private static int ultima_instruccion = 0;
 	private static boolean tiene_trap = false;
+	private static boolean tiene_direccion = false;
+	private static int instrucciones_ant = 0;
+	private static int primera_dir_v = 0;
 
 	final static public String SEPARADORES_ETIQUETAS = ":";
 	final static public String SEPARADORES_PARAMETROS = ",() \t";
@@ -32,9 +35,22 @@ public class Decoder
 			String linea = br.readLine();
 			while (linea != null)
 			{
-				// Las líneas que comienzan con el carácter # se consideran comentarios.
-				if (linea.length() > 0 && linea.charAt(0) != '#' && linea.charAt(0) != ';' && linea.charAt(0) != '/')
-					decodificarInstruccion(linea, i);
+				String linea_l = linea.trim();
+				if (linea_l.length() > 0)
+				{
+					// Líneas que se consideran comentarios.
+					if (linea_l.charAt(0) != '#' && linea_l.charAt(0) != ';' && linea_l.charAt(0) != '/')
+					{
+						// Línea que nos indica una dirección del código.
+						if (linea_l.charAt(0) == ':')
+							obtenerDireccion(linea_l, i);
+						else
+							decodificarInstruccion(linea_l, i);
+						
+						if (!tiene_direccion)
+							instrucciones_ant++;
+					}
+				}
 				linea = br.readLine();
 				i++;
 			}
@@ -57,6 +73,22 @@ public class Decoder
 		}
 	}
 	
+	// Modifica la dirección de instrucción.
+	private static void obtenerDireccion(String s, int lin_fich) throws CpuException
+	{
+		try
+		{
+			ultima_instruccion = Integer.parseInt(s.substring(1));
+			if (!tiene_direccion)
+				primera_dir_v = ultima_instruccion;
+			tiene_direccion = true;
+		}
+		catch (NumberFormatException e)
+		{
+			throw new CpuException("Error en formato de dirección en línea" + lin_fich);
+		}
+	}
+	
 	// Decodifica, crea y añade una instrucción.
 	private static void decodificarInstruccion(String s, int lin_fich) throws CpuException
 	{
@@ -75,6 +107,10 @@ public class Decoder
 
 		// En caso contrario tenemos una instrucción normal.
 		Instruccion inst = new Instruccion(strEtiq.nextToken(), lin_fich, ultima_instruccion);
+		
+		if (tiene_direccion)
+			inst.setDireccionVirtual();
+		
 		if (inst.getOpcode() == Opcode.TRAP)
 			tiene_trap = true;
 
@@ -132,6 +168,18 @@ public class Decoder
 		if (!tiene_trap)
 			throw new CpuException("No se ha encontrado ninguna instrucción TRAP para finalizar.");
 		
+		// Asignamos direcciones virtuales a todas las instrucciones en caso de que el usuario añadiera alguna.
+		if (tiene_direccion)
+		{
+			int primera_virtual = primera_dir_v - instrucciones_ant * 4;
+			for (int i = 0; i < instrucciones_ant; i++)
+			{
+				int direccion = primera_virtual + i*4;
+				instrucciones.get(i).setDireccionVirtual();
+				instrucciones.get(i).setDireccion(direccion);
+			}
+		}
+		
 		// Comprobamos todas las instrucciones buscando etiquetas de salto.
 		// Para cada etiqueta, comprobamos si existe o no.
 		// Además, asignamos a la instrucción la dirección real de salto.
@@ -165,14 +213,14 @@ public class Decoder
 	}
 	
 	// Devuelve la dirección de la primera instrucción.
-	public static int getPrimeraInstruccion()
+	public static Instruccion getPrimeraInstruccion()
 	{
-		int primera = getPosicionEtiqueta(ETIQUETAS_INICIO[0]);
+		Instruccion inst = etiquetas.get(ETIQUETAS_INICIO[0]);
 		
-		if (primera == -1)
-			primera = 0;
+		if (inst == null)
+			return instrucciones.get(0);
 		
-		return primera;
+		return inst;
 	}
 	
 	// Devuelve la lista de instrucciones.
@@ -205,5 +253,7 @@ public class Decoder
 		instrucciones = new ArrayList<Instruccion>();
 		primera_instruccion = 0;
 		ultima_instruccion = 0;
+		tiene_trap = false;
+		tiene_direccion = false;
 	}
 }

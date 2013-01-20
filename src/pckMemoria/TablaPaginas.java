@@ -299,6 +299,9 @@ public class TablaPaginas {
 	{
 		// Selecciono o creo la página si es necesario.
 		Pagina pag = seleccionarPagina(direccion_virtual);
-		pag.guardarLinea(direccion_virtual, new int[]{dato});
+		if (pag.estaLibre(direccion_virtual))
+			pag.guardarLinea(direccion_virtual, new int[]{dato});
+		else
+			throw new MemoryException("Sobreescribiendo dato en memoria al inicializar.");
 	}
 }
