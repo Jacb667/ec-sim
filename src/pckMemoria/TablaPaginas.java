@@ -302,6 +302,6 @@ public class TablaPaginas {
 		if (pag.estaLibre(direccion_virtual))
 			pag.guardarLinea(direccion_virtual, new int[]{dato});
 		else
-			throw new MemoryException("Sobreescribiendo dato en memoria al inicializar.");
+			throw new MemoryException("Se sobreescribe un dato en la dirección 0x" + Integer.toHexString(direccion_virtual));
 	}
 }
