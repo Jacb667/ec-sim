@@ -5,6 +5,7 @@ public class Log {
 	// Esta clase almacena y procesa información estadística del programa.
 	public static int[] cache_hits = new int[3];
 	public static int[] cache_misses = new int[3];
+	public static int[] cache_conflicts = new int[3];
 	public static int accesosBloques = 0;
 	public static int lecturasBloques = 0;
 	public static int escriturasBloques = 0;
@@ -14,9 +15,11 @@ public class Log {
 	public static int accesosPagina = 0;
 	public static int fallosPagina = 0;
 	public static int aciertosPagina = 0;
+	public static int conflictosPagina = 0;
 	public static int accesosTlb = 0;
 	public static int fallosTlb = 0;
-	public static int aciertosTlb;
+	public static int aciertosTlb = 0;
+	public static int conflictosTlb = 0;
 	
 	// Flags por defecto para logs
 	public enum Flags
