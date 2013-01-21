@@ -24,6 +24,7 @@ public class TablaPaginas {
 	private int num_paginas;
 	private int num_marcos;
 	private int palabras_linea;
+	private int bytes_palabra;
 	
 	private JerarquiaMemoria jerarquia1;
 	private JerarquiaMemoria jerarquia2;
@@ -70,9 +71,11 @@ public class TablaPaginas {
 		paginas = new TreeMap<Integer, Pagina>();
 		entradas_pagina = ent_pag;
 		palabras_linea = pal_linea;
-		tam_pagina = entradas_pagina * 4;
+		tam_pagina = entradas_pagina * _bytes_palabra;
+		bytes_palabra = _bytes_palabra;
 		
 		tlb_datos = tlb1;
+		tlb_inst = tlb2;
 		
 		System.out.println("entrada_maxima: " + entrada_maxima);
 		System.out.println("tam_pagina: " + ent_pag);
@@ -107,7 +110,7 @@ public class TablaPaginas {
 	// Si no le corresponde una dirección física deberá poner la página en un marco.
 	public Direccion traducirDireccion(int direccion) throws MemoryException
 	{
-		if ((direccion >> 2) >= entrada_maxima)
+		if ((direccion >> Global.bitsDireccionar(bytes_palabra)) >= entrada_maxima)
 			throw new MemoryException("La dirección 0x" + Integer.toHexString(direccion) + " sobrepasa el límite de direccionamiento.");
 		
 		// Primero buscamos en qué página debe estar la dirección.
@@ -153,7 +156,7 @@ public class TablaPaginas {
 			}
 			// Es PAGE FAULT
 			Log.report(Flags.PAGE_FAULT);
-			Log.println(2,"PAGE MISS");
+			Log.println(2,"PAGE FAULT");
 			// Tenemos que guardar la página en un marco.
 			int marco = buscarMarcoLibre();
 			if (marco != -1)
@@ -238,6 +241,8 @@ public class TablaPaginas {
 		
 		// Actualizar la interfaz de memoria para este marco.
 		jerarquia1.actualizarMarcoInterfazMemoria(marco);
+		if (jerarquia2 != null)
+			jerarquia2.actualizarMarcoInterfazMemoria(marco);
 	}
 	
 	// Libera un marco (según política de reemplazo).
@@ -249,6 +254,8 @@ public class TablaPaginas {
 		
 		// Eliminamos todas las referencias a la página anterior en caché.
 		jerarquia1.invalidarPagina(id);
+		if (jerarquia2 != null)
+			jerarquia2.invalidarPagina(id);
 		
 		// Eliminar referencias de la página anterior.
 		marcos[marco_libre].asignarMarco(-1);
