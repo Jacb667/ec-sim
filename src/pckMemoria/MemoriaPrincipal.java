@@ -20,14 +20,20 @@ public class MemoriaPrincipal
 	private TablaPaginas tablaPags;
 	private Tabla interfaz;
 	private int entradas;
+	private int bytes_palabra;
 	
 	// De momento no se usa. En un futuro podría usarse para controlar las peticiones de líneas.
 	//private int palabras_linea;
-
 	public MemoriaPrincipal(TablaPaginas tp)
+	{
+		this (tp, 4);
+	}
+
+	public MemoriaPrincipal(TablaPaginas tp, int _bytes_palabra)
 	{
 		tablaPags = tp;
 		entradas = tablaPags.getMarcos().length * tablaPags.getEntradasPagina();
+		bytes_palabra = _bytes_palabra;
 	}
 	
 	// Selecciona una página a partir de la dirección física recibida.
@@ -173,8 +179,8 @@ public class MemoriaPrincipal
 				for (int i = 0; i < datos_pag.length; i++)
 				{
 					int pos = posicion_inicio + i;
-					int direccion_r = getDireccionFisica(pos << 2, pag.getMarco());
-					int direccion_v = getDireccionVirtual(pos << 2, pag.getId());
+					int direccion_r = getDireccionFisica(pos << Global.bitsDireccionar(bytes_palabra), pag.getMarco());
+					int direccion_v = getDireccionVirtual(pos << Global.bitsDireccionar(bytes_palabra), pag.getId());
 
 					interfaz.setValueAt(String.valueOf(pag.getId()), pos, 0);  // Página
 					interfaz.setValueAt(String.format("0x%4S", Integer.toHexString(direccion_r)).replace(" ", "0"), pos, 1);  // Dirección
