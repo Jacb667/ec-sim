@@ -153,14 +153,16 @@ public class TestCpu {
 		tlb2 = null;
 
 		// Tabla de Páginas
-		tablaPags = new TablaPaginas(entradas_pagina, palabras_linea, max_entrada, max_ent_mem, TiposReemplazo.LRU, tlb1);
+		tablaPags = new TablaPaginas(entradas_pagina, palabras_linea, max_entrada, max_ent_mem, TiposReemplazo.LRU, tlb1, tlb2);
 		
 		// Memoria principal.
 		memoria = new MemoriaPrincipal(tablaPags);
 		
 		// Inicializar la Jerarquía de Memoria.
 		jmem = new JerarquiaMemoria(tablaPags, caches, memoria);
-
+		jmem2 = null;
+		
+		tablaPags.setJerarquiaMemoria(jmem, jmem2);
 	}
 	
 	// Inicializa la interfaz gráfica.

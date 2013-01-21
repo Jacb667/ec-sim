@@ -141,7 +141,7 @@ public class TestTraza {
 		tlb2 = null;
 
 		// Tabla de Páginas
-		tablaPags = new TablaPaginas(entradas_pagina, palabras_linea, max_entrada, max_ent_mem, TiposReemplazo.LRU, tlb1);
+		tablaPags = new TablaPaginas(entradas_pagina, palabras_linea, max_entrada, max_ent_mem, TiposReemplazo.LRU, tlb1, tlb2);
 		
 		// Memoria principal.
 		memoria = new MemoriaPrincipal(tablaPags);

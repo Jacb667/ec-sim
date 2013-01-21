@@ -32,7 +32,7 @@ public class TestTraductor {
 		try
 		{
 			//TablaPaginas tablaPags = new TablaPaginas(4096, palabras_linea, 4294967295l, 40960, TiposReemplazo.RANDOM);
-			TablaPaginas tablaPags = new TablaPaginas(entradas_pagina, palabras_linea, max_entrada, max_ent_mem, TiposReemplazo.RANDOM, null);
+			TablaPaginas tablaPags = new TablaPaginas(entradas_pagina, palabras_linea, max_entrada, max_ent_mem, TiposReemplazo.RANDOM, null, null);
 			System.out.println(tablaPags);
 			
 			// Direcciones entre 0 y 1024 -> Página 0
