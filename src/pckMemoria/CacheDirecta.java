@@ -23,9 +23,11 @@ public class CacheDirecta implements Cache
 {
 	private int palabras_linea;
 	private int entradas;
+	private int bytes_palabra;
 
 	private int bits_dir;
 	private int bits_pal;
+	private int bits_byte;
 
 	private int[] tags;
 	private int[] paginas;  // Al igual que el TAG, guardamos la página correspondiente.
@@ -34,22 +36,28 @@ public class CacheDirecta implements Cache
 	private int[/*lineas*/][/*palabras*/] datos;
 	
 	private Tabla interfaz;
-
+	
 	public CacheDirecta(int _entradas, int _palabras_linea) throws MemoryException
 	{
-		if (_entradas < 1 || _palabras_linea < 1)
+		this (_entradas, _palabras_linea, 4);
+	}
+
+	public CacheDirecta(int _entradas, int _palabras_linea, int _bytes_palabra) throws MemoryException
+	{
+		if (_entradas < 1 || _palabras_linea < 1 || _bytes_palabra < 1)
 			throw new MemoryException("Error en inicialización de caché.");
 		
 		palabras_linea = _palabras_linea;
 		entradas = _entradas;
+		bytes_palabra = _bytes_palabra;
 		
-		// Bits direccionamiento.
-		if (palabras_linea > 1)
-		{
-			bits_pal = Global.bitsDireccionar(palabras_linea);
-			// Eliminar bits palabra.
-		}
-		// Direccionar entradas
+		// Bits byte (b).
+		bits_byte = Global.bitsDireccionar(bytes_palabra);
+		
+		// Seleccionar palabra (w).
+		bits_pal = Global.bitsDireccionar(palabras_linea);
+
+		// Direccionar entradas (c).
 		bits_dir = Global.bitsDireccionar(entradas);
 		
 		tags = new int[entradas];
@@ -240,7 +248,7 @@ public class CacheDirecta implements Cache
 		StringBuilder strB = new StringBuilder();
 		for (int i = 0; i < datos.length; i++)
 		{
-			strB.append(String.format("0x%3S", Integer.toHexString(i << 2 << bits_pal)).replace(" ", "0"));
+			strB.append(String.format("0x%3S", Integer.toHexString(i << bits_byte << bits_pal)).replace(" ", "0"));
 			strB.append(" ("+paginas[i]+")");
 			strB.append(" -> ").append(Integer.toHexString(tags[i])).append(" : ").append(Arrays.toString(datos[i]));
 			strB.append(" ").append(valid[i]).append(" ").append(dirty[i]);
@@ -254,7 +262,7 @@ public class CacheDirecta implements Cache
 	public int posicionPalabra(int direccion)
 	{
 		// Primero hay que ignorar los 2 bits de offset:
-		int pos = direccion >> 2;
+		int pos = direccion >> bits_byte;
 		
 		// Los siguientes bits son de la palabra.
 		// La entrada será el módulo de palabras po línea.
@@ -266,7 +274,7 @@ public class CacheDirecta implements Cache
 	{
 		// Primero hay que ignorar los 2 bits de offset:
 		// Los últimos bits del final son para seleccionar palabra, los ignoramos:
-		int pos = direccion >> 2 >> bits_pal;
+		int pos = direccion >> bits_byte >> bits_pal;
 		
 		// Los siguientes bits son del índice.
 		// La entrada será el módulo del número de entradas.
@@ -286,7 +294,7 @@ public class CacheDirecta implements Cache
 		dir += posicion;
 		
 		// Añadimos bits de palabra y offset.
-		dir = dir << bits_pal << 2;
+		dir = dir << bits_pal << bits_byte;
 
 		return dir;
 	}
@@ -301,7 +309,7 @@ public class CacheDirecta implements Cache
 		dir += posicion;
 		
 		// Añadimos bits de palabra y offset.
-		dir = dir << bits_pal << 2;
+		dir = dir << bits_pal << bits_byte;
 		
 		return dir;
 	}
@@ -314,7 +322,7 @@ public class CacheDirecta implements Cache
 	// Extrae el tag de una dirección.
 	private int extraerTag(int direccion)
 	{
-		return direccion >> 2 >> bits_pal >> bits_dir;
+		return direccion >> bits_byte >> bits_pal >> bits_dir;
 	}
 	
 	
@@ -342,7 +350,7 @@ public class CacheDirecta implements Cache
 		
 		for (int i = 0; i < entradas; i++)
 		{
-			int direccion = i << 2 << bits_pal;
+			int direccion = i << bits_byte << bits_pal;
 			
 			Object[] linea = new Object[tamaño];
 			

@@ -23,6 +23,7 @@ public class CacheAsociativa implements Cache
 	
 	private int entradas;
 	private int palabras_linea;
+	private int bytes_palabra;
 	public PoliticaReemplazo politica;
 	
 	private Tabla interfaz;
@@ -32,11 +33,17 @@ public class CacheAsociativa implements Cache
 	// También se recomienda que entradas sea potencia de 2 (y divisible entre vías).
 	public CacheAsociativa(int _entradas, int _palabras_linea, int _vias, TiposReemplazo _Tpolitica) throws MemoryException
 	{
-		if (_vias < 1)
+		this (_entradas, _palabras_linea, _vias, _Tpolitica, 4);
+	}
+	
+	public CacheAsociativa(int _entradas, int _palabras_linea, int _vias, TiposReemplazo _Tpolitica, int _bytes_palabra) throws MemoryException
+	{
+		if (_vias < 1 || _bytes_palabra < 1)
 			throw new MemoryException("Error en inicialización de caché.");
 		
 		entradas = _entradas / _vias;
 		palabras_linea = _palabras_linea;
+		bytes_palabra = _bytes_palabra;
 		
 		if (entradas <= 0 || _entradas % _vias != 0 || _palabras_linea < 1)
 			throw new MemoryException("Error en inicialización de caché.");
@@ -46,7 +53,7 @@ public class CacheAsociativa implements Cache
 		
 		// Creamos las vías
 		for (int i = 0; i < _vias; i++)
-			vias[i] = new CacheDirecta(entradas, palabras_linea);
+			vias[i] = new CacheDirecta(entradas, palabras_linea, bytes_palabra);
 		
 		politica = new PoliticaReemplazo(_Tpolitica, entradas, vias.length);
 	}
@@ -259,7 +266,7 @@ public class CacheAsociativa implements Cache
 	{
 		// Primero hay que ignorar los 2 bits de offset:
 		// Los últimos bits del final son para seleccionar palabra, los ignoramos:
-		int pos = direccion >> 2 >> Global.bitsDireccionar(palabras_linea);;
+		int pos = direccion >> Global.bitsDireccionar(bytes_palabra) >> Global.bitsDireccionar(palabras_linea);;
 		
 		// Los siguientes bits son del índice.
 		// La entrada será el módulo del número de entradas.
