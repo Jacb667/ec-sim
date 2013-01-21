@@ -38,7 +38,7 @@ public class Test {
 			
 			// Memoria
 			System.out.println("--- Memoria --- \n");
-			Pagina m1 = new Pagina(32, 4);
+			/*Pagina m1 = new Pagina(32, 4);
 			Pagina m2 = new Pagina(16, 4);
 			
 			for (int i = 0; i < 128; i+=4)
@@ -50,7 +50,7 @@ public class Test {
 			
 			m2.guardarLinea(0, m1.leerLinea(0x40, 12));
 			
-			System.out.println(m2.toString());
+			System.out.println(m2.toString());*/
 			
 			/*Cache c = new CacheDirecta(16, 4);
 			for (int i = 0; i < 16*4*4; i+=4)
