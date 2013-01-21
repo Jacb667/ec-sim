@@ -24,7 +24,6 @@ public class JerarquiaMemoria {
 		tam_linea = caches[0].getTamanoLinea();
 		
 		tablaPags = _tabla;
-		tablaPags.setJerarquiaMemoria(this);
 	}
 	
 	// Leer un dato.

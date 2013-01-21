@@ -57,7 +57,7 @@ public class TestMemoria {
 			//caches[2] = new CacheAsociativa(entradas_cache3,palabras_linea,vias_cache3,TiposReemplazo.RANDOM);
 			
 			// Tabla de Páginas
-			TablaPaginas tablaPags = new TablaPaginas(entradas_pagina, palabras_linea, max_entrada, max_ent_mem, TiposReemplazo.LRU, tlb);
+			TablaPaginas tablaPags = new TablaPaginas(entradas_pagina, palabras_linea, max_entrada, max_ent_mem, TiposReemplazo.LRU, tlb, null);
 			
 			// Memoria principal con 128 posiciones.
 			MemoriaPrincipal memoria = new MemoriaPrincipal(tablaPags);

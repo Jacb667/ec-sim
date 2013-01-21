@@ -25,8 +25,10 @@ public class TablaPaginas {
 	private int num_marcos;
 	private int palabras_linea;
 	
-	private JerarquiaMemoria jerarquia;
+	private JerarquiaMemoria jerarquia1;
+	private JerarquiaMemoria jerarquia2;
 	private Tlb tlb_datos;
+	private Tlb tlb_inst;
 	
 	public PoliticaReemplazo politica;
 	
@@ -51,7 +53,12 @@ public class TablaPaginas {
 	 */
 	
 	// Este constructor utiliza NUMERO DE ENTRADAS de cada tipo.
-	public TablaPaginas(int ent_pag, int pal_linea, int max_ent_mem, int ent_mem_princ, TiposReemplazo _Tpolitica, Tlb tlb1)
+	public TablaPaginas(int ent_pag, int pal_linea, int max_ent_mem, int ent_mem_princ, TiposReemplazo _Tpolitica, Tlb tlb1, Tlb tlb2)
+	{
+		this (ent_pag, pal_linea, max_ent_mem, ent_mem_princ, 4, _Tpolitica, tlb1, tlb2);
+	}
+	
+	public TablaPaginas(int ent_pag, int pal_linea, int max_ent_mem, int ent_mem_princ, int _bytes_palabra, TiposReemplazo _Tpolitica, Tlb tlb1, Tlb tlb2)
 	{
 		// Max_memoria por defecto: 0xFFFFFFFF -> Max ent: 0xFFFFFFFF / 4
 		// Memoria principal por defecto: 2048 (64KB).
@@ -230,7 +237,7 @@ public class TablaPaginas {
 		politica.nuevaLinea(0, marco);
 		
 		// Actualizar la interfaz de memoria para este marco.
-		jerarquia.actualizarMarcoInterfazMemoria(marco);
+		jerarquia1.actualizarMarcoInterfazMemoria(marco);
 	}
 	
 	// Libera un marco (según política de reemplazo).
@@ -241,7 +248,7 @@ public class TablaPaginas {
 		int id = marcos[marco_libre].getId();
 		
 		// Eliminamos todas las referencias a la página anterior en caché.
-		jerarquia.invalidarPagina(id);
+		jerarquia1.invalidarPagina(id);
 		
 		// Eliminar referencias de la página anterior.
 		marcos[marco_libre].asignarMarco(-1);
@@ -287,9 +294,10 @@ public class TablaPaginas {
 		return strB.toString();
 	}
 
-	public void setJerarquiaMemoria(JerarquiaMemoria jmem)
+	public void setJerarquiaMemoria(JerarquiaMemoria jmem1, JerarquiaMemoria jmem2)
 	{
-		jerarquia = jmem;
+		jerarquia1 = jmem1;
+		jerarquia2 = jmem2;
 	}
 	
 	// Este método inicializar en memoria virtual el contenido de la RAM.
