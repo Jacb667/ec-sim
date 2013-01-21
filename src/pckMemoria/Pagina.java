@@ -23,6 +23,8 @@ import general.MemoryException;
 public class Pagina
 {
 	private int entradas;
+	private int bytes_palabra;
+	private int bits_byte;
 	private int[] mem;
 	private boolean[] valid;
 	private boolean[] dirty;
@@ -32,32 +34,25 @@ public class Pagina
 	
 	// De momento no se usa. En un futuro podría usarse para controlar las peticiones de líneas.
 	//private int palabras_linea;
-	
 	public Pagina(int _entradas, int _palabras_linea, int _id) throws MemoryException
 	{
-		if (_entradas < 1 || _palabras_linea < 1 || _entradas % _palabras_linea != 0)
+		this (_entradas, _palabras_linea, _id, 4);
+	}
+	
+	public Pagina(int _entradas, int _palabras_linea, int _id, int _bytes_palabra) throws MemoryException
+	{
+		if (_entradas < 1 || _palabras_linea < 1 || _entradas % _palabras_linea != 0 || _bytes_palabra < 1)
 			throw new MemoryException("Error en inicialización de memoria.");
 			
 		// Entradas debe ser divisible entre palabras_linea.
 		entradas = _entradas;
+		bytes_palabra = _bytes_palabra;
+		bits_byte = Global.bitsDireccionar(bytes_palabra);
 		mem = new int[entradas];
 		valid = new boolean[entradas];
 		dirty = new boolean[entradas];
 		marco = -1;
 		id = _id;
-	}
-	
-	public Pagina(int _entradas, int _palabras_linea) throws MemoryException
-	{
-		if (_entradas < 1 || _palabras_linea < 1 || _entradas % _palabras_linea != 0)
-			throw new MemoryException("Error en inicialización de memoria.");
-			
-		// Entradas debe ser divisible entre palabras_linea.
-		entradas = _entradas;
-		mem = new int[entradas];
-		valid = new boolean[entradas];
-		marco = -1;
-		id = -1;
 	}
 	
 	public int getId() { return id; }
@@ -67,7 +62,7 @@ public class Pagina
 	// Me aseguro de que la dirección REAL que llega, es el offset sin la página.
 	public int leerDato(int direccion)
 	{
-		int entrada = direccion >> 2;
+		int entrada = direccion >> bits_byte;
 		entrada = (int) Math.floor(entrada % entradas);
 		return mem[entrada];
 	}
@@ -75,7 +70,7 @@ public class Pagina
 	// Me envían la dirección física, elimino los 2 últimos bits y guardo la posición.
 	public void guardarDato(int direccion, int dato)
 	{
-		int entrada = direccion >> 2;
+		int entrada = direccion >> bits_byte;
 		entrada = (int) Math.floor(entrada % entradas);
 		
 		mem[entrada] = dato;
@@ -85,8 +80,8 @@ public class Pagina
 		// Actualizar interfaz gráfica.
 		if (interfaz != null)
 		{
-			interfaz.setValueAt(String.valueOf(dato), direccion >> 2, 1);
-			interfaz.setValueAt(true, direccion >> 2, 2);
+			interfaz.setValueAt(String.valueOf(dato), direccion >> bits_byte, 1);
+			interfaz.setValueAt(true, direccion >> bits_byte, 2);
 		}
 	}
 	
@@ -102,12 +97,10 @@ public class Pagina
 	{
 		int[] res = new int[tam_linea];
 		
-		int entrada = direccion >> 2;
+		int entrada = direccion >> bits_byte;
 		entrada = (int) Math.floor(entrada % entradas);
 		
 		int direccion_inicio = getInicioBloque(entrada, tam_linea) * tam_linea;
-		
-		//System.out.print("Dir: 0x" + Integer.toHexString(direccion_inicio<<2) + " Bl: " + getInicioBloque(direccion, tam_linea));
 		
 		for (int i = 0; i < tam_linea; i++)
 			res[i] = mem[direccion_inicio + i];
@@ -118,7 +111,7 @@ public class Pagina
 	public void guardarLinea(int direccion, int[] linea) 
 	{
 		int tam_linea = linea.length;
-		int entrada = direccion >> 2;
+		int entrada = direccion >> bits_byte;
 		entrada = (int) Math.floor(entrada % entradas);
 		int direccion_inicio = getInicioBloque(entrada, tam_linea) * tam_linea;
 		
@@ -153,14 +146,14 @@ public class Pagina
 
 	public boolean estaLibre(int direccion)
 	{
-		int entrada = direccion >> 2;
+		int entrada = direccion >> bits_byte;
 		entrada = (int) Math.floor(entrada % entradas);
 		return !valid[entrada];
 	}
 	
 	public boolean esDirty(int direccion)
 	{
-		int entrada = direccion >> 2;
+		int entrada = direccion >> bits_byte;
 		entrada = (int) Math.floor(entrada % entradas);
 		return dirty[entrada];
 	}
@@ -198,7 +191,7 @@ public class Pagina
 		for (int i = 0; i < entradas; i++)
 		{
 			// Dirección, dato, valido
-			int direccion = i << 2;
+			int direccion = i << bits_byte;
 			Object[] linea = {String.format("0x%4S", Integer.toHexString(direccion)).replace(" ", "0"), String.valueOf(mem[i]), new Boolean(valid[i])};
 			datos[i] = linea;
 		}
