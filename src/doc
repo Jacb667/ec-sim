@@ -12,3 +12,9 @@ En caché asociativa la división entradas/vías DEBE dar exacto (no decimales).
 También se recomienda que entradas sea potencia de 2 (y divisible entre vías).
 
 Si entradas == vias -> Completamente asociativa
+
+
+todo:
+
+subi
+hexadecimal

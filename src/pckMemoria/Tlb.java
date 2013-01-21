@@ -12,7 +12,7 @@ public class Tlb {
 	{
 		try
 		{
-			tlb = new CacheDirecta(entradas, 1);
+			tlb = new CacheDirecta(entradas, 1, 1);
 		}
 		catch (MemoryException e)
 		{
@@ -25,7 +25,7 @@ public class Tlb {
 	{
 		try
 		{
-			tlb = new CacheAsociativa(entradas, 1, vias, tipo);
+			tlb = new CacheAsociativa(entradas, 1, vias, tipo, 1);
 		}
 		catch (MemoryException e)
 		{
@@ -36,7 +36,7 @@ public class Tlb {
 	// Existe?
 	public boolean existePagina(int pagina)
 	{
-		if (tlb.existeDato(pagina << 2))
+		if (tlb.existeDato(pagina))
 			return true;
 		
 		return false;
@@ -45,14 +45,12 @@ public class Tlb {
 	// Insertar entrada
 	public void insertar(int pagina, int marco) throws MemoryException
 	{
-		// La "dirección" se desplaza 2 bits, ya que la caché lo desplaza 2.
-		tlb.escribirLinea(pagina << 2, 0, new int[]{marco});
+		tlb.escribirLinea(pagina, 0, new int[]{marco});
 	}
 	
 	// Consultar entrada
 	public int consultar(int pagina) throws MemoryException
 	{
-		// La "dirección" se desplaza 2 bits, ya que la caché lo desplaza 2.
-		return tlb.consultarDato(pagina << 2);
+		return tlb.consultarDato(pagina);
 	}
 }

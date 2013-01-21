@@ -3,15 +3,10 @@
  */
 package Pruebas;
 
-import general.Log;
 import general.MemoryException;
 import general.Global.TiposReemplazo;
 
 import java.awt.Dimension;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
-
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.UIManager;

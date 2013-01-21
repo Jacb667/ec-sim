@@ -150,6 +150,7 @@ public class TestTraza {
 		jmem = new JerarquiaMemoria(tablaPags, caches, memoria);
 		jmem2= new JerarquiaMemoria(tablaPags,cache2,memoria);
 
+		tablaPags.setJerarquiaMemoria(jmem, jmem2);
 	}
 	
 	// Inicializa la interfaz gráfica.
