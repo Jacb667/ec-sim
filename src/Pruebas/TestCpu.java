@@ -15,7 +15,7 @@ import componentes.VentanaOculta;
 
 import general.Global.TiposReemplazo;
 import general.MemoryException;
-import pckCpu.Cpu;
+import pckCpu.CpuMonociclo;
 import pckCpu.CpuException;
 import pckCpu.Decoder;
 import pckCpu.Instruccion;
@@ -43,7 +43,7 @@ public class TestCpu {
 	private Tlb tlb1;
 	private Tlb tlb2;
 	
-	private Cpu cpu;
+	private CpuMonociclo cpu;
 	private int direccion_inst = 0;
 	
 	// CPU
@@ -112,7 +112,7 @@ public class TestCpu {
 				cpu.setPC(direccion_inst + Decoder.getPrimeraInstruccion().getDireccion());
 			
 			// Una vez tenemos el código guardado en memoria, comenzamos la ejecución.
-			cpu.ejecutarCodigoMonociclo();
+			cpu.ejecutarCodigo();
 		}
 		catch (MemoryException e)
 		{
@@ -133,7 +133,7 @@ public class TestCpu {
 		int primera_pag_inst = tablaPags.getNumeroPaginas()-1 - paginas_instrucciones;
 		direccion_inst = primera_pag_inst * tablaPags.getEntradasPagina() * 4;
 					
-		cpu = new Cpu(jmem, null, direccion_inst);
+		cpu = new CpuMonociclo(jmem, null, direccion_inst);
 	}
 	
 	// Inicializa la Jerarquía de Memoria.
