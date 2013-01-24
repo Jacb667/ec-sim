@@ -10,7 +10,16 @@ import java.util.TreeMap;
 
 import pckMemoria.JerarquiaMemoria;
 
-public class Cpu {
+public class CpuSegmentado {
+	
+	private enum Etapa
+	{
+		FETCH,
+		DECODE,
+		EXECUTION,
+		MEMORY,
+		WRITEBACK,
+	}
 	
 	private int pc;
 	private Alu alu;
@@ -19,9 +28,11 @@ public class Cpu {
 	private BancoRegistros registros;
 	private int direccion_base;
 	
+	private RegistroSegmentacion[] registros_segmentacion;
+	
 	private SortedMap<Integer, Instruccion> instrucciones;
 	
-	public Cpu(JerarquiaMemoria j1, JerarquiaMemoria j2, int dir_base)
+	public CpuSegmentado(JerarquiaMemoria j1, JerarquiaMemoria j2, int dir_base)
 	{
 		jmem = j1;
 		jinstr = j2;
@@ -29,6 +40,8 @@ public class Cpu {
 		registros = new BancoRegistros();
 		instrucciones = new TreeMap<Integer, Instruccion>();
 		direccion_base = dir_base;
+		
+		registros_segmentacion = new RegistroSegmentacion[5];
 		
 		List<Instruccion> lista = Decoder.getInstrucciones();
 		
@@ -42,23 +55,43 @@ public class Cpu {
 		}
 	}
 	
-	// Ejecuta el código (monociclo).
-	public void ejecutarCodigoMonociclo() throws MemoryException, CpuException
+	// Ejecuta el código (segmentado).
+	/*
+	 * Tenemos 5 registros de segmentación. En cada paso ejecutamos una acción en cada instrucción, 
+	 * enviando al siguiente registro el resultado:
+	 * 		Registro 0 -> Siempre Fetch, que se almacena en Registro 1.
+	 * 		Registro 1 -> Siempre Decode, que se almacena en Registro 2.
+	 * 		Registro 2 -> Siempre Execution, que se almacena en Registro 3.
+	 * 		Registro 3 -> Siempre Memory, que se almacena en Registro 4.
+	 * 		Registro 4 -> Siempre WriteBack, no se almacena.
+	 * 
+	 * Para mantener la sincronización, se crean registros temporales, y después de la ejecución reemplazan
+	 * al array de registros (como si fuera un ciclo de reloj).
+	 */
+	public void ejecutarCodigo() throws MemoryException, CpuException
 	{
 		boolean ejecutando = true;
 		
 		while (ejecutando)
 		{
-			ejecutando = ejecutarInstruccionMonociclo();
-			Global.sleep(10000);
+			ejecutando = ejecutarInstruccion();
+			Global.sleep(10);
 		}
 		
 		System.out.println("Fin de programa.");
 	}
 	
-	// Ejecutar siguiente instrucción (monociclo).
-	private boolean ejecutarInstruccionMonociclo() throws MemoryException, CpuException
+	// Ejecuta una etapa de la instrucción.
+	private boolean ejecutarInstruccion(Etapa etapa) throws MemoryException, CpuException
 	{
+		switch(etapa)
+		{
+			case FETCH:
+				ejecutarFetch();
+				break;
+			case DE
+		}
+		
 		System.out.println("Fetch " + getPC());
 		/*
 		 *  Etapa Fetch
@@ -182,14 +215,6 @@ public class Cpu {
 		
 		System.out.println(registros);
 		return true;
-	}
-	
-	// Ejecuta el código.
-	public void ejecutarCodigoSegmentado()
-	{
-		List<Instruccion> lista = Decoder.getInstrucciones();
-		
-		
 	}
 	
 	// Calcula la dirección de salto.

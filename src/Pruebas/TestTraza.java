@@ -15,7 +15,7 @@ import componentes.Tabla;
 import componentes.VentanaLimitada;
 import componentes.VentanaOculta;
 
-import pckCpu.Cpu;
+import pckCpu.CpuMonociclo;
 import pckCpu.CpuException;
 import pckCpu.Decoder;
 import pckMemoria.Cache;
@@ -46,7 +46,7 @@ public class TestTraza {
 	private Tlb tlb1;
 	private Tlb tlb2;
 	
-	private Cpu cpu;
+	private CpuMonociclo cpu;
 	private int direccion_inst = 0;
 	
 	// CPU
@@ -112,7 +112,7 @@ public class TestTraza {
 		int primera_pag_inst = tablaPags.getNumeroPaginas()-1 - paginas_instrucciones;
 		direccion_inst = primera_pag_inst * tablaPags.getEntradasPagina() * 4;
 					
-		cpu = new Cpu(jmem, null, direccion_inst);
+		cpu = new CpuMonociclo(jmem, null, direccion_inst);
 	}
 	
 	// Inicializa la Jerarquía de Memoria.
