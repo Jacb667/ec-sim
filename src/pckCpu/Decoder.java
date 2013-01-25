@@ -78,7 +78,7 @@ public class Decoder
 	{
 		try
 		{
-			ultima_instruccion = Integer.parseInt(s.substring(1));
+			ultima_instruccion = Integer.decode(s.substring(1));
 			if (!tiene_direccion)
 				primera_dir_v = ultima_instruccion;
 			tiene_direccion = true;

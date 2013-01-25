@@ -119,7 +119,7 @@ public class Instruccion {
 						break;
 					case 'C':
 					case 'J':
-						v[i] = Integer.parseInt(token);
+						v[i] = Integer.decode(token);
 						break;
 					case 'E':
 						if (token == null || Global.esNumero(token))

@@ -1,4 +1,4 @@
-inicio: addi $20, $0, 1000
+inicio: addi $20, $0, 0x3E8
 sub $5, $0, $0
 suma: lw $10, 0($20)
 add $5, $5, $10
