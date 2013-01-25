@@ -17,4 +17,6 @@ Si entradas == vias -> Completamente asociativa
 todo:
 
 subi
-hexadecimal
+mostrar y leer datos hex, bin, dec, oct
+segmentacion
+

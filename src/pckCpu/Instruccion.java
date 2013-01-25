@@ -205,6 +205,7 @@ public class Instruccion {
 	public int getDireccion() { return direccion; }
 	public int getDireccionSalto() { return d_salto; }
 	public boolean esDireccionVirtual() { return d_virtual; }
+	public boolean modificaDestino() { return modifica; }
 
 	public void setDireccion(int dir)
 	{
