@@ -27,12 +27,16 @@ public class CpuSegmentado {
 	private JerarquiaMemoria jinstr;
 	private BancoRegistros registros;
 	private int direccion_base;
+	private boolean cortocircuitos;
+	private boolean fin_programa;
+	private boolean stall;
 	
 	private RegistroSegmentacion[] registros_segmentacion;
+	private RegistroSegmentacion[] registros_temporales;
 	
 	private SortedMap<Integer, Instruccion> instrucciones;
 	
-	public CpuSegmentado(JerarquiaMemoria j1, JerarquiaMemoria j2, int dir_base)
+	public CpuSegmentado(JerarquiaMemoria j1, JerarquiaMemoria j2, int dir_base, boolean corts)
 	{
 		jmem = j1;
 		jinstr = j2;
@@ -40,8 +44,13 @@ public class CpuSegmentado {
 		registros = new BancoRegistros();
 		instrucciones = new TreeMap<Integer, Instruccion>();
 		direccion_base = dir_base;
+		cortocircuitos = corts;
+		
+		fin_programa = false;
+		stall = false;
 		
 		registros_segmentacion = new RegistroSegmentacion[5];
+		registros_temporales = new RegistroSegmentacion[5];
 		
 		List<Instruccion> lista = Decoder.getInstrucciones();
 		
@@ -74,34 +83,88 @@ public class CpuSegmentado {
 		
 		while (ejecutando)
 		{
-			ejecutando = ejecutarInstruccion();
-			Global.sleep(10);
+			ejecutarInstruccion(Etapa.FETCH);
+			ejecutarInstruccion(Etapa.DECODE);
+			ejecutarInstruccion(Etapa.EXECUTION);
+			ejecutarInstruccion(Etapa.MEMORY);
+			ejecutarInstruccion(Etapa.WRITEBACK);
+			
+			sincronizarRegistros();
 		}
+		
+		finalizarEjecucion();
 		
 		System.out.println("Fin de programa.");
 	}
 	
+	private void sincronizarRegistros()
+	{
+		for (int i = 0; i < 5; i++)
+			registros_segmentacion[i] = registros_temporales[i];
+	}
+	
 	// Ejecuta una etapa de la instrucción.
-	private boolean ejecutarInstruccion(Etapa etapa) throws MemoryException, CpuException
+	private void ejecutarInstruccion(Etapa etapa) throws MemoryException, CpuException
 	{
 		switch(etapa)
 		{
 			case FETCH:
 				ejecutarFetch();
 				break;
-			case DE
+			case DECODE:
+				ejecutarDecode();
+				break;
+			case EXECUTION:
+				ejecutarExecution();
+				break;
+			case MEMORY:
+				ejecutarMemory();
+				break;
+			case WRITEBACK:
+				ejecutarWriteback();
+				break;
 		}
+	}
+	
+	// Se ha encontrado un TRAP en DECODE, se termina el cauce.
+	public void finalizarEjecucion() throws MemoryException, CpuException
+	{
+		ejecutarInstruccion(Etapa.DECODE);
+		ejecutarInstruccion(Etapa.EXECUTION);
+		ejecutarInstruccion(Etapa.MEMORY);
+		ejecutarInstruccion(Etapa.WRITEBACK);
 		
+		sincronizarRegistros();
+		
+		ejecutarInstruccion(Etapa.EXECUTION);
+		ejecutarInstruccion(Etapa.MEMORY);
+		ejecutarInstruccion(Etapa.WRITEBACK);
+		
+		sincronizarRegistros();
+		
+		ejecutarInstruccion(Etapa.MEMORY);
+		ejecutarInstruccion(Etapa.WRITEBACK);
+		
+		sincronizarRegistros();
+		
+		ejecutarInstruccion(Etapa.WRITEBACK);
+		
+		sincronizarRegistros();
+	}
+	
+	/*
+	 *  Etapa Fetch
+	 */
+	public void ejecutarFetch() throws MemoryException
+	{
 		System.out.println("Fetch " + getPC());
-		/*
-		 *  Etapa Fetch
-		 */
+		
 		Instruccion inst = getInstruccion(getPC());
 		
 		// Fin del programa.
 		if (inst.getOpcode() == Opcode.TRAP)
-			return false;
-		
+			fin_programa = true;
+	
 		if (jinstr != null)
 			jinstr.leerDato(getPC());
 		else
@@ -110,31 +173,41 @@ public class CpuSegmentado {
 		// PC+4
 		incPC();
 		
-		/*
-		 *  Etapa Decode
-		 */
+		// Fetch siempre ocurre en el paso 0:
+		registros_temporales[0].setInstruccion(inst);
+	}
+		
+	/*
+	 *  Etapa Decode
+	 */
+	public void ejecutarDecode()
+	{
+		// Decode siempre es la etapa 1.
+		Instruccion inst = registros_segmentacion[1].getInstruccion();
+		
 		System.out.println("Decode " + inst);
 		
 		// Leo los 2 registros de origen.
 		int dato1 = registros.leerDato(inst.getOrigen1());
 		int dato2 = registros.leerDato(inst.getOrigen2());
+	}
 		
-		System.out.println("Dato1 " + dato1);
-		System.out.println("Dato2 " + dato2);
-		
-		/*
-		 *  Etapa Execution
-		 */
-		
+	/*
+	 *  Etapa Execution
+	 */
+	public void ejecutarExecution()
+	{
 		int resultado = alu.ejecutar(inst, dato1, dato2);
 		boolean[] flags = alu.getFlags();
 		
 		System.out.println("resultado alu " + resultado);
-		
-		/*
-		 *  Etapa Memory
-		 */
-		
+	}
+	
+	/*
+	 *  Etapa Memory
+	 */
+	public void ejecutarMemory()
+	{
 		// Lee desde memoria.
 		if (inst.getOpcode() == Opcode.LW)
 		{
@@ -147,22 +220,24 @@ public class CpuSegmentado {
 			System.out.println("guardo en memoria");
 			jmem.guardarDato(resultado, dato1);
 		}
-		
-		
-		/*
-		 *  Etapa Writeback
-		 */
-		
+	}
+	
+	/*
+	 *  Etapa Writeback
+	 */
+	public void ejecutarWriteback()
+	{
 		// No hace escritura si es SW o un salto.
 		if (inst.getOpcode() != Opcode.SW && !Opcode.esSalto(inst.getOpcode()))
 			registros.guardarDato(inst.getDestino(), resultado);
-		
-		/*
-		 * Saltos
-		 */
-		
+	}
+	
+	/*
+	 * Saltos
+	 */
+	public void comprobarSaltos()
+	{
 		// Comprobamos saltos.
-		
 		switch (inst.getOpcode())
 		{
 			// Si es un JAL, guarda PC+4 en $31
@@ -214,7 +289,6 @@ public class CpuSegmentado {
 		}
 		
 		System.out.println(registros);
-		return true;
 	}
 	
 	// Calcula la dirección de salto.
