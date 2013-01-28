@@ -160,6 +160,15 @@ public class Global {
 		}
 	}
 	
+	public enum Etapa
+	{
+		FETCH,
+		DECODE,
+		EXECUTION,
+		MEMORY,
+		WRITEBACK,
+	}
+	
 	public enum TiposReemplazo
 	{
 		LRU,		// Menos usado recientemente - Reemplaza el bloque que hace más tiempo que no se ha usado.

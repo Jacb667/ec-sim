@@ -10,7 +10,7 @@ import java.util.TreeMap;
 
 import pckMemoria.JerarquiaMemoria;
 
-public class CpuMonociclo {
+public class CpuMonociclo implements Cpu {
 	
 	private int pc;
 	private Alu alu;
@@ -185,7 +185,7 @@ public class CpuMonociclo {
 	}
 	
 	// Calcula la dirección de salto.
-	public int calcularSalto(int dir_relativa)
+	private int calcularSalto(int dir_relativa)
 	{
 		return direccion_base + dir_relativa;
 	}
