@@ -772,7 +772,7 @@ public class Vista extends javax.swing.JPanel {
                     .addComponent(tip_tam_cache1_l)
                     .addComponent(tam_linea_l)
                     .addComponent(tam_linea_t, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addComponent(cache1_3_p, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
