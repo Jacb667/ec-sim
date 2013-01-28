@@ -6,6 +6,9 @@ public class Log {
 	public static int[] cache_hits = new int[3];
 	public static int[] cache_misses = new int[3];
 	public static int[] cache_conflicts = new int[3];
+	public static int[] cache_hits1 = new int[3];
+	public static int[] cache_misses1 = new int[3];
+	public static int[] cache_conflicts1 = new int[3];
 	public static int accesosBloques = 0;
 	public static int lecturasBloques = 0;
 	public static int escriturasBloques = 0;
@@ -20,6 +23,20 @@ public class Log {
 	public static int fallosTlb = 0;
 	public static int aciertosTlb = 0;
 	public static int conflictosTlb = 0;
+	public static int accesosBloques1 = 0;
+	public static int lecturasBloques1 = 0;
+	public static int escriturasBloques1 = 0;
+	public static int accesosMemoria1 = 0;
+	public static int lecturasMemoria1 = 0;
+	public static int escriturasMemoria1 = 0;
+	public static int accesosPagina1 = 0;
+	public static int fallosPagina1 = 0;
+	public static int aciertosPagina1 = 0;
+	public static int conflictosPagina1 = 0;
+	public static int accesosTlb1 = 0;
+	public static int fallosTlb1 = 0;
+	public static int aciertosTlb1 = 0;
+	public static int conflictosTlb1 = 0;
 	
 	// Flags por defecto para logs
 	public enum Flags
@@ -47,13 +64,21 @@ public class Log {
 	{
 		return nivel;
 	}
-
+	
 	public static void setNivel(int nivel)
 	{
 		Log.nivel = nivel;
 	}
 	
-	public static void report(Flags f, int data)
+	public static void report(Flags f, int data, boolean sec)
+	{
+		if (sec == true)
+			report1(f, data);
+		else
+			report(f, data);
+	}
+	
+	private static void report(Flags f, int data)
 	{
 		if (f == Flags.CACHE_HIT)
 			cache_hits[data]++;
@@ -61,7 +86,23 @@ public class Log {
 			cache_misses[data]++;
 	}
 	
-	public static void report(Flags f)
+	private static void report1(Flags f, int data)
+	{
+		if (f == Flags.CACHE_HIT)
+			cache_hits1[data]++;
+		else if (f == Flags.CACHE_MISS)
+			cache_misses1[data]++;
+	}
+	
+	public static void report(Flags f, boolean sec)
+	{
+		if (sec == true)
+			report1(f);
+		else
+			report(f);
+	}
+	
+	private static void report(Flags f)
 	{
 		switch(f)
 		{
@@ -96,6 +137,45 @@ public class Log {
 			case TLB_HIT:
 				aciertosTlb++;
 				accesosTlb++;
+				break;
+		}
+	}
+	
+	private static void report1(Flags f)
+	{
+		switch(f)
+		{
+			case MEMORY_READ:
+				lecturasMemoria1++;
+				accesosMemoria1++;
+				break;
+			case MEMORY_WRITE:
+				escriturasMemoria1++;
+				accesosMemoria1++;
+				break;
+			case BLOCK_READ:
+				lecturasBloques1++;
+				accesosBloques1++;
+				break;
+			case BLOCK_WRITE:
+				escriturasBloques1++;
+				accesosBloques1++;
+				break;
+			case PAGE_FAULT:
+				fallosPagina1++;
+				accesosPagina1++;
+				break;
+			case PAGE_HIT:
+				aciertosPagina1++;
+				accesosPagina1++;
+				break;
+			case TLB_MISS:
+				fallosTlb1++;
+				accesosTlb1++;
+				break;
+			case TLB_HIT:
+				aciertosTlb1++;
+				accesosTlb1++;
 				break;
 		}
 	}

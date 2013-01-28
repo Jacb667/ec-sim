@@ -29,7 +29,7 @@ public class TestTraductor {
 		final int max_entrada = 2048;	// 8192 direcciones
 		final int max_ent_mem = 128;	// 512 direcciones
 		
-		try
+		/*try
 		{
 			//TablaPaginas tablaPags = new TablaPaginas(4096, palabras_linea, 4294967295l, 40960, TiposReemplazo.RANDOM);
 			TablaPaginas tablaPags = new TablaPaginas(entradas_pagina, palabras_linea, max_entrada, max_ent_mem, TiposReemplazo.RANDOM, null, null);
@@ -114,6 +114,6 @@ public class TestTraductor {
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 	}
 }

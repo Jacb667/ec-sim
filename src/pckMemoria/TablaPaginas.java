@@ -108,7 +108,7 @@ public class TablaPaginas {
 	
 	// Traduce una dirección virtual a una física.
 	// Si no le corresponde una dirección física deberá poner la página en un marco.
-	public Direccion traducirDireccion(int direccion) throws MemoryException
+	public Direccion traducirDireccion(int direccion, boolean secundaria) throws MemoryException
 	{
 		if ((direccion >> Global.bitsDireccionar(bytes_palabra)) >= entrada_maxima)
 			throw new MemoryException("La dirección 0x" + Integer.toHexString(direccion) + " sobrepasa el límite de direccionamiento.");
@@ -124,21 +124,21 @@ public class TablaPaginas {
 			{
 				if (tlb_datos.existePagina(pag.getId()))
 				{
-					Log.report(Flags.TLB_HIT);
+					Log.report(Flags.TLB_HIT, secundaria);
 					Log.println(2,"TLB HIT");
 				}
 				else
 				{
 					// MISS, la guardamos en TLB
 					tlb_datos.insertar(pag.getId(), pag.getMarco());
-					Log.report(Flags.TLB_MISS);
+					Log.report(Flags.TLB_MISS, secundaria);
 					Log.println(2,"TLB MISS");
 				}
 			}
 			
 			// Si estamos aquí es porque se ha encontrado la página asociada a un marco.
 			// OJO! Puede ser PAGE HIT y TLB MISS.
-			Log.report(Flags.PAGE_HIT);
+			Log.report(Flags.PAGE_HIT, secundaria);
 			Log.println(2,"PAGE HIT");
 			
 			// La página está en un marco, podemos traducir la dirección.
@@ -151,11 +151,11 @@ public class TablaPaginas {
 			if (tlb_datos != null)
 			{
 				tlb_datos.insertar(pag.getId(), pag.getMarco());
-				Log.report(Flags.TLB_MISS);
+				Log.report(Flags.TLB_MISS, secundaria);
 				Log.println(2,"TLB MISS");
 			}
 			// Es PAGE FAULT
-			Log.report(Flags.PAGE_FAULT);
+			Log.report(Flags.PAGE_FAULT, secundaria);
 			Log.println(2,"PAGE FAULT");
 			// Tenemos que guardar la página en un marco.
 			int marco = buscarMarcoLibre();
