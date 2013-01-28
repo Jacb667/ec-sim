@@ -15,8 +15,10 @@ import componentes.VentanaOculta;
 
 import general.Global.TiposReemplazo;
 import general.MemoryException;
+import pckCpu.Cpu;
 import pckCpu.CpuMonociclo;
 import pckCpu.CpuException;
+import pckCpu.CpuSegmentado;
 import pckCpu.Decoder;
 import pckCpu.Instruccion;
 import pckMemoria.Cache;
@@ -43,12 +45,12 @@ public class TestCpu {
 	private Tlb tlb1;
 	private Tlb tlb2;
 	
-	private CpuMonociclo cpu;
+	private Cpu cpu;
 	private int direccion_inst = 0;
 	
 	// CPU
-	final String archivo = "Prueba.txt";
-	final boolean segmentado = false;
+	final String archivo = "Segmentado.txt";
+	final boolean segmentado = true;
 	
 	// Niveles de caché
 	final int niveles_cache = 2;
@@ -132,8 +134,11 @@ public class TestCpu {
 		int paginas_instrucciones = (int) Math.ceil(num_instrucciones / entradas_pagina);
 		int primera_pag_inst = tablaPags.getNumeroPaginas()-1 - paginas_instrucciones;
 		direccion_inst = primera_pag_inst * tablaPags.getEntradasPagina() * 4;
-					
-		cpu = new CpuMonociclo(jmem, null, direccion_inst);
+		
+		if (segmentado == true)
+			cpu = new CpuSegmentado(jmem, null, direccion_inst, false);
+		else
+			cpu = new CpuMonociclo(jmem, null, direccion_inst);
 	}
 	
 	// Inicializa la Jerarquía de Memoria.
