@@ -14,7 +14,13 @@ public class Global {
 	final static public int TAMAÑO_CELDA_BOOLEAN = 40;
 
 	
-	final static public String CBNCACHE = "Niveles de cache";
+	final static public String CBNCACHE = "CBNCACHE";
+	final static public String CBNCACHEI = "CBNCACHEI";
+	final static public String TLBDATA="TLBDATA";
+	final static public String TLBINST="TLBINST";
+	final static public String JSEP="JSEP";
+	final static public String CARGARC="CARGARC";
+	final static public String CARGART="CARGART";
 
 	public enum Opcode
 	{
