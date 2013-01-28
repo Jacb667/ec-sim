@@ -102,9 +102,9 @@ public class Traza {
 
 	private void generarEstadistica(Direccion d) {
 		
-		if(ultAT!=Log.accesosTlb)
+		if(ultAT!=Log.aciertosTlb)
 		{
-			ultAT=Log.accesosTlb;
+			ultAT=Log.aciertosTlb;
 			stb.append("TLB: HIT, ");
 			
 		}

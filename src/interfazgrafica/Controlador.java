@@ -211,31 +211,31 @@ public class Controlador implements ActionListener {
 		// A PARTIR DE AQUI LOS BOTONES DE CACHES Y MEM-----------------------------------------------------------------------------------------------
 		else if(comando.equals(Global.BCACHED1))
 		{
-			
+			//Algo
 		}
 		else if(comando.equals(Global.BCACHED2))
 		{
-			
+			//algo
 		}
 		else if(comando.equals(Global.BCACHED3))
 		{
-			
+			//algo
 		}
 		else if(comando.equals(Global.BCACHEI1))
 		{
-			
+			//algo
 		}
 		else if(comando.equals(Global.BCACHEI2))
 		{
-			
+			//algo
 		}
 		else if(comando.equals(Global.BCACHEI3))
 		{
-			
+			//algo
 		}
 		else if(comando.equals(Global.BMEM))
 		{
-			
+			//algo
 		}
 		
 	}

@@ -89,6 +89,8 @@ public class TestTraza {
 				Log.lecturasBloques + " leidos + " + Log.escriturasBloques + " escritos)");
 		System.out.printf("Cache hits: %s - Cache misses: %s \n", Arrays.toString(Log.cache_hits), Arrays.toString(Log.cache_misses));
 		System.out.printf("Ratio acierto: [%.2f%%, %.2f%%, %.2f%%] \n", ratio_l0, ratio_l1, ratio_l2);
+		
+		System.out.println("ACIERTOS TLB:"+Log.aciertosTlb);
 		}
 		catch (MemoryException e)
 		{
