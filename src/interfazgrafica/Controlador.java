@@ -83,7 +83,7 @@ public class Controlador implements ActionListener {
 		}
 		else if(comando.equals(Global.VALC))
 		{
-			//COMPLETO(?)
+			//COMPLETO(?)---TERMINAR PARA EJECUCION
 			Config.set(Conf_Type.TAMAÑO_PALABRA,v.getTamPal());
 			if(v.jsepCheck())
 			{
@@ -146,7 +146,7 @@ public class Controlador implements ActionListener {
 		}
 		else if(comando.equals(Global.VALT))
 		{
-			//COMPLETO(?)
+			//COMPLETO(?)-----TERMINAR PARA EJECUCION
 			Config.set(Conf_Type.TAMAÑO_PALABRA,v.getTamPal());
 			if(v.jsepCheck())
 			{
@@ -207,6 +207,35 @@ public class Controlador implements ActionListener {
 			 
 			 
 			v.enabledEjecutarT();
+		}
+		// A PARTIR DE AQUI LOS BOTONES DE CACHES Y MEM-----------------------------------------------------------------------------------------------
+		else if(comando.equals(Global.BCACHED1))
+		{
+			
+		}
+		else if(comando.equals(Global.BCACHED2))
+		{
+			
+		}
+		else if(comando.equals(Global.BCACHED3))
+		{
+			
+		}
+		else if(comando.equals(Global.BCACHEI1))
+		{
+			
+		}
+		else if(comando.equals(Global.BCACHEI2))
+		{
+			
+		}
+		else if(comando.equals(Global.BCACHEI3))
+		{
+			
+		}
+		else if(comando.equals(Global.BMEM))
+		{
+			
 		}
 		
 	}

@@ -1151,6 +1151,20 @@ public class Vista extends javax.swing.JPanel {
     	validar_c_b.addActionListener(ctr);
     	validar_t_b.setActionCommand(Global.VALT);
     	validar_t_b.addActionListener(ctr);
+    	cache_d1_b.setActionCommand(Global.BCACHED1);
+    	cache_d1_b.addActionListener(ctr);
+    	cache_d2_b.setActionCommand(Global.BCACHED2);
+    	cache_d2_b.addActionListener(ctr);
+    	cache_d3_b.setActionCommand(Global.BCACHED3);
+    	cache_d3_b.addActionListener(ctr);
+    	cache_i1_b.setActionCommand(Global.BCACHEI1);
+    	cache_i1_b.addActionListener(ctr);
+    	cache_i1_b.setActionCommand(Global.BCACHEI2);
+    	cache_i1_b.addActionListener(ctr);
+    	cache_i1_b.setActionCommand(Global.BCACHEI3);
+    	cache_i1_b.addActionListener(ctr);
+    	memoria_b.setActionCommand(Global.BMEM);
+    	memoria_b.addActionListener(ctr);
     	
     	
     }
