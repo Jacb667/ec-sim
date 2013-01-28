@@ -40,6 +40,8 @@ public class Vista extends javax.swing.JPanel {
         segmentado_l = new javax.swing.JLabel();
         jerarquias_separadas_chb = new javax.swing.JCheckBox();
         segmentado_chb = new javax.swing.JCheckBox();
+        log_cb = new javax.swing.JComboBox();
+        jLabel4 = new javax.swing.JLabel();
         memoria_p = new javax.swing.JPanel();
         m_entradas_p_pagina_l = new javax.swing.JLabel();
         m_entradas_p_pagina_t = new javax.swing.JTextField();
@@ -147,7 +149,7 @@ public class Vista extends javax.swing.JPanel {
             .addGap(0, 272, Short.MAX_VALUE)
         );
 
-        pal_p_linea_l.setText("Tama�oño de palabra: ");
+        pal_p_linea_l.setText("Tamaño de palabra: ");
 
         pal_p_linea_t.setText("32");
 
@@ -159,13 +161,17 @@ public class Vista extends javax.swing.JPanel {
 
         segmentado_chb.setText("Si/No");
 
+        log_cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nada", "Mínimo", "Normal", "Debug" }));
+
+        jLabel4.setText("Log");
+
         javax.swing.GroupLayout cpu_pLayout = new javax.swing.GroupLayout(cpu_p);
         cpu_p.setLayout(cpu_pLayout);
         cpu_pLayout.setHorizontalGroup(
             cpu_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(cpu_pLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(cpu_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(cpu_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(cpu_pLayout.createSequentialGroup()
                         .addComponent(pal_p_linea_l)
                         .addGap(23, 23, 23)
@@ -173,11 +179,13 @@ public class Vista extends javax.swing.JPanel {
                     .addGroup(cpu_pLayout.createSequentialGroup()
                         .addGroup(cpu_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jerarquias_separadas_l)
-                            .addComponent(segmentado_l))
+                            .addComponent(segmentado_l)
+                            .addComponent(jLabel4))
                         .addGap(18, 18, 18)
                         .addGroup(cpu_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(segmentado_chb)
-                            .addComponent(jerarquias_separadas_chb))))
+                            .addComponent(jerarquias_separadas_chb)
+                            .addComponent(log_cb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(406, Short.MAX_VALUE))
         );
         cpu_pLayout.setVerticalGroup(
@@ -195,7 +203,11 @@ public class Vista extends javax.swing.JPanel {
                 .addGroup(cpu_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(segmentado_l)
                     .addComponent(segmentado_chb))
-                .addContainerGap(214, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(cpu_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(log_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addContainerGap(176, Short.MAX_VALUE))
         );
 
         config_p1.addTab("CPU", cpu_p);
@@ -385,11 +397,11 @@ public class Vista extends javax.swing.JPanel {
             }
         });
 
-        tam_linea_l.setText("Tama�o de linea");
+        tam_linea_l.setText("Tamaño de linea");
 
-        tip_tam_cache1_l.setText("Tama�o de Cache en: ");
+        tip_tam_cache1_l.setText("Tamaño de Cache en: ");
 
-        tip_tam_cache1_cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bytes", "Numero de entradas" }));
+        tip_tam_cache1_cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bytes", "Número de entradas" }));
 
         n_entradas_c1_l.setText("Numero de entradas");
 
@@ -976,6 +988,7 @@ public class Vista extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -985,6 +998,7 @@ public class Vista extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JCheckBox jerarquias_separadas_chb;
     private javax.swing.JLabel jerarquias_separadas_l;
+    private javax.swing.JComboBox log_cb;
     private javax.swing.JLabel m_entradas_p_pagina_l;
     private javax.swing.JTextField m_entradas_p_pagina_t;
     private javax.swing.JTextField m_num_entradas_t;
@@ -1363,5 +1377,13 @@ public class Vista extends javax.swing.JPanel {
     public String getPRCI3()
     {
     	return politica_reemplazo_c3_i_cb.getSelectedItem().toString();
+    }
+    public void resTraza(String t)
+    {
+    	ejecucion_a.setText(t);
+    }
+    public void resEjec(String t)
+    {
+    	ejecucion_a1.setText(t);
     }
 }
