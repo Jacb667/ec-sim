@@ -21,6 +21,9 @@ public class Global {
 	final static public String JSEP="JSEP";
 	final static public String CARGARC="CARGARC";
 	final static public String CARGART="CARGART";
+	final static public String VALC="VALC";
+	final static public String VALT="VALT";
+	
 
 	public enum Opcode
 	{
