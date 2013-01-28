@@ -137,6 +137,13 @@ public class Vista extends javax.swing.JPanel {
         exportar_b1 = new javax.swing.JButton();
         cargar_codigo_b = new javax.swing.JButton();
         validar_c_b = new javax.swing.JButton();
+        cache_d1_b = new javax.swing.JButton();
+        cache_d2_b = new javax.swing.JButton();
+        cache_d3_b = new javax.swing.JButton();
+        cache_i1_b = new javax.swing.JButton();
+        cache_i2_b = new javax.swing.JButton();
+        cache_i3_b = new javax.swing.JButton();
+        memoria_b = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -865,6 +872,21 @@ public class Vista extends javax.swing.JPanel {
 
         validar_c_b.setText("Validar");
 
+        cache_d1_b.setText("Cache D1");
+
+        cache_d2_b.setText("Cache D2");
+
+        cache_d3_b.setText("Cache D3");
+
+        cache_i1_b.setText("Cache I1");
+
+        cache_i2_b.setText("Cache I2");
+
+        cache_i3_b.setText("Cache I3");
+     
+
+        memoria_b.setText("Memoria");
+
         javax.swing.GroupLayout ejecucion1Layout = new javax.swing.GroupLayout(ejecucion1);
         ejecucion1.setLayout(ejecucion1Layout);
         ejecucion1Layout.setHorizontalGroup(
@@ -874,17 +896,33 @@ public class Vista extends javax.swing.JPanel {
                 .addGroup(ejecucion1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 623, Short.MAX_VALUE)
                     .addGroup(ejecucion1Layout.createSequentialGroup()
-                        .addComponent(salvar_e, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(exportar_b1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ejecucion1Layout.createSequentialGroup()
-                        .addComponent(cargar_codigo_b)
-                        .addGap(18, 18, 18)
-                        .addComponent(validar_c_b)
-                        .addGap(18, 18, 18)
-                        .addComponent(ciclo_b1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(ejecutar_b1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(ejecucion1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(ejecucion1Layout.createSequentialGroup()
+                                .addComponent(cargar_codigo_b)
+                                .addGap(18, 18, 18)
+                                .addComponent(validar_c_b)
+                                .addGap(18, 18, 18)
+                                .addComponent(ciclo_b1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(ejecutar_b1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(ejecucion1Layout.createSequentialGroup()
+                                .addComponent(cache_d1_b)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cache_d2_b)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cache_d3_b)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cache_i1_b)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cache_i2_b)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cache_i3_b))
+                            .addGroup(ejecucion1Layout.createSequentialGroup()
+                                .addComponent(salvar_e, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(exportar_b1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(memoria_b)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -898,11 +936,20 @@ public class Vista extends javax.swing.JPanel {
                     .addComponent(ejecutar_b1)
                     .addComponent(validar_c_b))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(ejecucion1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cache_d1_b)
+                    .addComponent(cache_d2_b)
+                    .addComponent(cache_d3_b)
+                    .addComponent(cache_i1_b)
+                    .addComponent(cache_i2_b)
+                    .addComponent(cache_i3_b))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(ejecucion1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(salvar_e, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(exportar_b1))
+                    .addComponent(exportar_b1)
+                    .addComponent(memoria_b))
                 .addContainerGap())
         );
 
@@ -938,6 +985,11 @@ public class Vista extends javax.swing.JPanel {
         validar_t_b.setEnabled(false);
         ciclo_b1.setEnabled(false);
         ejecutar_b1.setEnabled(false);
+        cache_d2_b.setEnabled(false);
+        cache_d3_b.setEnabled(false);
+        cache_i1_b.setEnabled(false);
+        cache_i2_b.setEnabled(false);
+        cache_i3_b.setEnabled(false);
     }// </editor-fold>//GEN-END:initComponents
 
     private void niv_cache_data_cbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_niv_cache_data_cbActionPerformed
@@ -971,6 +1023,12 @@ public class Vista extends javax.swing.JPanel {
     private javax.swing.JPanel cache2_p;
     private javax.swing.JPanel cache3_i_p;
     private javax.swing.JPanel cache3_p;
+    private javax.swing.JButton cache_d1_b;
+    private javax.swing.JButton cache_d2_b;
+    private javax.swing.JButton cache_d3_b;
+    private javax.swing.JButton cache_i1_b;
+    private javax.swing.JButton cache_i2_b;
+    private javax.swing.JButton cache_i3_b;
     private javax.swing.JPanel caches_p;
     private javax.swing.JButton cargar_codigo_b;
     private javax.swing.JButton ciclo_b1;
@@ -1003,6 +1061,7 @@ public class Vista extends javax.swing.JPanel {
     private javax.swing.JTextField m_entradas_p_pagina_t;
     private javax.swing.JTextField m_num_entradas_t;
     private javax.swing.JLabel m_numero_entradas;
+    private javax.swing.JButton memoria_b;
     private javax.swing.JPanel memoria_p;
     private javax.swing.JTextField n_entradas_c1_i_t;
     private javax.swing.JLabel n_entradas_c1_l;
@@ -1148,12 +1207,16 @@ public class Vista extends javax.swing.JPanel {
     	{
     		cache1_3_p.setEnabledAt(1, false);
     		cache1_3_p.setEnabledAt(2, false);
+    		cache_d2_b.setEnabled(false);
+            cache_d3_b.setEnabled(false);
 
     	}
     	else if(n==2)
     	{
     		cache1_3_p.setEnabledAt(1, true);
     		cache1_3_p.setEnabledAt(2, false);
+    		cache_d2_b.setEnabled(true);
+            cache_d3_b.setEnabled(false);
  
 
     	}
@@ -1161,6 +1224,8 @@ public class Vista extends javax.swing.JPanel {
     	{
     		cache1_3_p.setEnabledAt(1, true);
     		cache1_3_p.setEnabledAt(2, true);
+    		cache_d2_b.setEnabled(true);
+            cache_d3_b.setEnabled(true);
 
     	}
     	cache1_3_p.setSelectedIndex(getnvCache()-1);
@@ -1171,12 +1236,16 @@ public class Vista extends javax.swing.JPanel {
     	{
     		cache1_3_p.setEnabledAt(4, false);
     		cache1_3_p.setEnabledAt(5, false);
+    		cache_i2_b.setEnabled(false);
+            cache_i3_b.setEnabled(false);
     		
     	}
     	else if(n==2)
     	{
     		cache1_3_p.setEnabledAt(4, true);
     		cache1_3_p.setEnabledAt(5, false);
+    		cache_i2_b.setEnabled(true);
+            cache_i3_b.setEnabled(false);
     	
 
     	}
@@ -1184,6 +1253,8 @@ public class Vista extends javax.swing.JPanel {
     	{
     		cache1_3_p.setEnabledAt(4, true);
     		cache1_3_p.setEnabledAt(5, true);
+    		cache_i2_b.setEnabled(true);
+            cache_i3_b.setEnabled(true);
  
     	}
     	cache1_3_p.setSelectedIndex(getnvCacheI()+2);
@@ -1199,14 +1270,20 @@ public class Vista extends javax.swing.JPanel {
         	cache1_3_p.setEnabledAt(4, b);
     		cache1_3_p.setEnabledAt(5, b);
     		cache1_3_p.setSelectedIndex(0);
+    		cache_i1_b.setEnabled(b);
+    		cache_i2_b.setEnabled(b);
+    		cache_i3_b.setEnabled(b);
+    		niv_cache_inst_cb.setSelectedIndex(0);
     		enabledTLBInst(b);
         }
         else
         {
-        	cache1_3_p.setEnabledAt(3, true);
+        	cache1_3_p.setEnabledAt(3, b);
         	niv_cache_inst_cb.setSelectedIndex(0);
-        	cache1_3_p.setEnabledAt(4, false);
-    		cache1_3_p.setEnabledAt(5, false);
+        	cache1_3_p.setEnabledAt(4, !b);
+    		cache1_3_p.setEnabledAt(5, !b);
+    		cache_i1_b.setEnabled(b);
+    		
         }
         
     }
