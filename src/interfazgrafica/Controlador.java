@@ -14,8 +14,8 @@ import javax.swing.plaf.FileChooserUI;
 public class Controlador implements ActionListener {
 	
 	private Vista v;
-	private String ArchivoTraza;
-	private String ArchivoCode;
+	private String ArchivoTraza="";
+	private String ArchivoCode="";
 	
 	public Controlador(Vista vista)
 	{
@@ -61,8 +61,11 @@ public class Controlador implements ActionListener {
 				
 			}
 			//TIENE QUE ACABARSE
+			if(!ArchivoCode.equals(""))
+			{
+				v.enabledValidarC();
+			}
 			
-			v.enabledValidarC();
 		}
 		else if(comando.equals(Global.CARGART))
 		{
@@ -79,7 +82,10 @@ public class Controlador implements ActionListener {
 				
 			}
 			//TIENE QUE ACABARSE
-			v.enabledValidarT();
+			if(!ArchivoTraza.equals(""))
+			{
+				v.enabledValidarT();
+			}
 		}
 		else if(comando.equals(Global.VALC))
 		{
