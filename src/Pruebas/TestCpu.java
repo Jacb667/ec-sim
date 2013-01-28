@@ -50,7 +50,7 @@ public class TestCpu {
 	
 	// CPU
 	final String archivo = "Segmentado.txt";
-	final boolean segmentado = true;
+	final boolean segmentado = false;
 	
 	// Niveles de caché
 	final int niveles_cache = 2;
@@ -136,7 +136,7 @@ public class TestCpu {
 		direccion_inst = primera_pag_inst * tablaPags.getEntradasPagina() * 4;
 		
 		if (segmentado == true)
-			cpu = new CpuSegmentado(jmem, null, direccion_inst, false);
+			cpu = new CpuSegmentado(jmem, null, direccion_inst);
 		else
 			cpu = new CpuMonociclo(jmem, null, direccion_inst);
 	}
