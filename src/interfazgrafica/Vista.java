@@ -156,11 +156,11 @@ public class Vista extends javax.swing.JPanel {
             .addGap(0, 272, Short.MAX_VALUE)
         );
 
-        pal_p_linea_l.setText("TamaÃ±o de palabra: ");
+        pal_p_linea_l.setText("Tamaño de palabra: ");
 
         pal_p_linea_t.setText("32");
 
-        jerarquias_separadas_l.setText("Jerarquias separadas");
+        jerarquias_separadas_l.setText("Jerarquías separadas");
 
         segmentado_l.setText("Segmentado");
 
@@ -168,9 +168,9 @@ public class Vista extends javax.swing.JPanel {
 
         segmentado_chb.setText("Si/No");
 
-        log_cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nada", "MÃ­nimo", "Normal", "Debug" }));
+        log_cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nada", "Mínimo", "Normal", "Debug" }));
 
-        jLabel4.setText("Log");
+        jLabel4.setText("Detalle log");
 
         javax.swing.GroupLayout cpu_pLayout = new javax.swing.GroupLayout(cpu_p);
         cpu_p.setLayout(cpu_pLayout);
@@ -219,15 +219,15 @@ public class Vista extends javax.swing.JPanel {
 
         config_p1.addTab("CPU", cpu_p);
 
-        m_entradas_p_pagina_l.setText("Entradas por pagina");
+        m_entradas_p_pagina_l.setText("Entradas por página");
 
-        m_numero_entradas.setText("Numero de entradas");
+        m_numero_entradas.setText("Número de entradas");
 
-        m_num_entradas_t.setText("3FFFFFFF");
+        m_num_entradas_t.setText("#3FFFFFFF");
 
-        jLabel2.setText("Maximo entradas de memoria");
+        jLabel2.setText("Máxima entrada de memoria");
 
-        jTextField1.setText("3FFF");
+        jTextField1.setText("#3FFF");
 
         tlb_data_chb.setText("TLB Data");
         tlb_data_chb.addActionListener(new java.awt.event.ActionListener() {
@@ -238,11 +238,11 @@ public class Vista extends javax.swing.JPanel {
 
         tlb_inst_chb.setText("TLB Inst");
 
-        n_entradas_c2_l4.setText("Numero de entradas");
+        n_entradas_c2_l4.setText("Número de entradas");
 
-        n_vias_c2_l4.setText("Numero de vias");
+        n_vias_c2_l4.setText("Número de vías");
 
-        politica_reemplazo_c1_l1.setText("Politica de reemplazo");
+        politica_reemplazo_c1_l1.setText("Política de reemplazo");
 
         politica_reemplazo_tlb_data_cb1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "LRU", "LFU", "FIFO", "AGING", "RANDOM" }));
 
@@ -288,9 +288,9 @@ public class Vista extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("TLB Data", jPanel1);
 
-        n_entradas_c2_l5.setText("Numero de entradas");
+        n_entradas_c2_l5.setText("Número de entradas");
 
-        n_vias_c2_l5.setText("Numero de vias");
+        n_vias_c2_l5.setText("Número de vías");
 
         n_vias_tlb_ins_t.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -298,7 +298,7 @@ public class Vista extends javax.swing.JPanel {
             }
         });
 
-        politica_reemplazo_c1_l2.setText("Politica de reemplazo");
+        politica_reemplazo_c1_l2.setText("Política de reemplazo");
 
         politica_reemplazo_tlb_ins_cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "LRU", "LFU", "FIFO", "AGING", "RANDOM" }));
 
@@ -404,17 +404,17 @@ public class Vista extends javax.swing.JPanel {
             }
         });
 
-        tam_linea_l.setText("TamaÃ±o de linea");
+        tam_linea_l.setText("Tamaño de línea");
 
-        tip_tam_cache1_l.setText("TamaÃ±o de Cache en: ");
+        tip_tam_cache1_l.setText("Tamaño de Cache en: ");
 
-        tip_tam_cache1_cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bytes", "NÃºmero de entradas" }));
+        tip_tam_cache1_cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bytes", "Número de entradas" }));
 
-        n_entradas_c1_l.setText("Numero de entradas");
+        n_entradas_c1_l.setText("Número de entradas");
 
-        n_vias_c1_l.setText("Numero de vias");
+        n_vias_c1_l.setText("Número de vias");
 
-        politica_reemplazo_c1_l.setText("Politica de reemplazo");
+        politica_reemplazo_c1_l.setText("Política de reemplazo");
 
         politica_reemplazo_c1_cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "LRU", "LFU", "FIFO", "AGING", "RANDOM" }));
 
@@ -455,11 +455,11 @@ public class Vista extends javax.swing.JPanel {
 
         cache1_3_p.addTab("Cache 1 Data", cache1_p);
 
-        n_entradas_c2_l.setText("Numero de entradas");
+        n_entradas_c2_l.setText("Número de entradas");
 
-        n_vias_c2_l.setText("Numero de vias");
+        n_vias_c2_l.setText("Número de vias");
 
-        plicita_reemplazo_c2_l.setText("Politica de reemplazo");
+        plicita_reemplazo_c2_l.setText("Política de reemplazo");
 
         politica_reemplazo_c2_cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "LRU", "LFU", "FIFO", "AGING", "RANDOM" }));
 
@@ -521,11 +521,11 @@ public class Vista extends javax.swing.JPanel {
 
         cache1_3_p.addTab("Cache 2 Data", cache2_p);
 
-        n_entradas_c3_l1.setText("Numero de entradas");
+        n_entradas_c3_l1.setText("Número de entradas");
 
-        n_vias_c3_l.setText("Numero de vias");
+        n_vias_c3_l.setText("Número de vías");
 
-        plicita_reemplazo_c3_l.setText("Politica de reemplazo");
+        plicita_reemplazo_c3_l.setText("Política de reemplazo");
 
         politica_reemplazo_c3_cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "LRU", "LFU", "FIFO", "AGING", "RANDOM" }));
 
@@ -587,11 +587,11 @@ public class Vista extends javax.swing.JPanel {
 
         cache1_3_p.addTab("Cache 3 Data", cache3_p);
 
-        n_entradas_c2_l1.setText("Numero de entradas");
+        n_entradas_c2_l1.setText("Número de entradas");
 
-        n_vias_c2_l1.setText("Numero de vias");
+        n_vias_c2_l1.setText("Número de vías");
 
-        plicita_reemplazo_c2_l1.setText("Politica de reemplazo");
+        plicita_reemplazo_c2_l1.setText("Política de reemplazo");
 
         politica_reemplazo_c1_i_cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "LRU", "LFU", "FIFO", "AGING", "RANDOM" }));
 
@@ -632,11 +632,11 @@ public class Vista extends javax.swing.JPanel {
 
         cache1_3_p.addTab("Cache 1 Inst", cache1_i_p);
 
-        n_entradas_c2_l2.setText("Numero de entradas");
+        n_entradas_c2_l2.setText("Número de entradas");
 
-        n_vias_c2_l2.setText("Numero de vias");
+        n_vias_c2_l2.setText("Número de vías");
 
-        plicita_reemplazo_c2_l2.setText("Politica de reemplazo");
+        plicita_reemplazo_c2_l2.setText("Política de reemplazo");
 
         politica_reemplazo_c2_i_cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "LRU", "LFU", "FIFO", "AGING", "RANDOM" }));
 
@@ -677,11 +677,11 @@ public class Vista extends javax.swing.JPanel {
 
         cache1_3_p.addTab("Cache 2 Inst", cache2_i_p);
 
-        n_entradas_c2_l3.setText("Numero de entradas");
+        n_entradas_c2_l3.setText("Número de entradas");
 
-        n_vias_c2_l3.setText("Numero de vias");
+        n_vias_c2_l3.setText("Número de vías");
 
-        plicita_reemplazo_c2_l3.setText("Politica de reemplazo");
+        plicita_reemplazo_c2_l3.setText("Política de reemplazo");
 
         politica_reemplazo_c3_i_cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "LRU", "LFU", "FIFO", "AGING", "RANDOM" }));
 
@@ -791,12 +791,12 @@ public class Vista extends javax.swing.JPanel {
                 .addComponent(config_p1))
         );
 
-        ejecucion_p.addTab("Configuracion", Configuracion);
+        ejecucion_p.addTab("Configuración", Configuracion);
 
         ejecucion_a.setEditable(false);
         ejecucion_a.setColumns(20);
         ejecucion_a.setRows(5);
-        ejecucion_a.setText("Aqui se montrara la traza");
+        ejecucion_a.setText("");
         jScrollPane1.setViewportView(ejecucion_a);
 
         ejecutar_b.setText("Ejecutar");
@@ -868,7 +868,7 @@ public class Vista extends javax.swing.JPanel {
 
         exportar_b1.setText("Exportar");
 
-        cargar_codigo_b.setText("Cargar Codigo");
+        cargar_codigo_b.setText("Cargar Código");
 
         validar_c_b.setText("Validar");
 
@@ -953,7 +953,7 @@ public class Vista extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        ejecucion_p.addTab("Ejecucion", ejecucion1);
+        ejecucion_p.addTab("Ejecución", ejecucion1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
