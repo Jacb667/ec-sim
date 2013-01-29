@@ -51,6 +51,10 @@ public class Log {
 		PAGE_HIT,
 		TLB_HIT,
 		TLB_MISS,
+		
+		CONFLICT_CACHE,
+		CONFLICT_TLB,
+		CONFLICT_PAGE,
 	}
 	
 	// 0 = no mostrar nada.
@@ -84,6 +88,8 @@ public class Log {
 			cache_hits[data]++;
 		else if (f == Flags.CACHE_MISS)
 			cache_misses[data]++;
+		else if (f == Flags.CONFLICT_CACHE)
+			cache_conflicts[data]++;
 	}
 	
 	private static void report1(Flags f, int data)
@@ -92,6 +98,8 @@ public class Log {
 			cache_hits1[data]++;
 		else if (f == Flags.CACHE_MISS)
 			cache_misses1[data]++;
+		else if (f == Flags.CONFLICT_CACHE)
+			cache_conflicts1[data]++;
 	}
 	
 	public static void report(Flags f, boolean sec)
@@ -138,6 +146,12 @@ public class Log {
 				aciertosTlb++;
 				accesosTlb++;
 				break;
+			case CONFLICT_TLB:
+				conflictosTlb++;
+				break;
+			case CONFLICT_PAGE:
+				conflictosPagina++;
+				break;
 		}
 	}
 	
@@ -176,6 +190,12 @@ public class Log {
 			case TLB_HIT:
 				aciertosTlb1++;
 				accesosTlb1++;
+				break;
+			case CONFLICT_TLB:
+				conflictosTlb1++;
+				break;
+			case CONFLICT_PAGE:
+				conflictosPagina1++;
 				break;
 		}
 	}
