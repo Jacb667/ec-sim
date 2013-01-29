@@ -292,6 +292,7 @@ public class Controlador implements ActionListener {
 		else if(comando.equals(Global.EJECUTART))
 		{
 			//Ejecutar Traza
+			
 		}
 		else if(comando.equals(Global.EJECUTARC))
 		{

@@ -1497,4 +1497,12 @@ public class Vista extends javax.swing.JPanel {
     {
     	ejecucion_a1.setText("");
     }
+    public String getTraza()
+    {
+    	return ejecucion_a.getText();
+    }
+    public String getEjec()
+    {
+    	return ejecucion_a1.getText();
+    }
 }
