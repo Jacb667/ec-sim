@@ -8,9 +8,14 @@ import java.awt.event.ActionListener;
 import java.io.File;
 
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.plaf.FileChooserUI;
+
+import pckCpu.ClasePrincipal;
+
+import componentes.Tabla;
 
 public class Controlador implements ActionListener {
 	
@@ -18,9 +23,12 @@ public class Controlador implements ActionListener {
 	private String ArchivoTraza="";
 	private String ArchivoCode="";
 	
+	public ClasePrincipal claseP;
+	
 	public Controlador(Vista vista)
 	{
 		v=vista;
+		Config.setCtr(this);
 	}
 
 	@Override
@@ -66,7 +74,6 @@ public class Controlador implements ActionListener {
 			{
 				v.enabledValidarC();
 			}
-			
 		}
 		else if(comando.equals(Global.CARGART))
 		{
@@ -179,10 +186,11 @@ public class Controlador implements ActionListener {
 			}
 			catch(NumberFormatException e1)
 			{
-				JOptionPane.showMessageDialog( v, "Error de formato al cargar los datos"+e1, "Error de formato", JOptionPane.ERROR_MESSAGE );
+				JOptionPane.showMessageDialog( v, "Error de formato al cargar los datos", "Error de formato", JOptionPane.ERROR_MESSAGE );
 			}
 			
-			
+			claseP = new ClasePrincipal();
+			claseP.validarCodigo();
 		}
 		else if(comando.equals(Global.VALT))
 		{
@@ -269,7 +277,7 @@ public class Controlador implements ActionListener {
 					 }
 					 	 
 				 }
-				 Config.set(Conf_Type_c.ARCHIVO_TRAZA,ArchivoTraza);
+				 Config.set(Conf_Type_c.ARCHIVO_TRAZA, ArchivoTraza);
 				 
 				 
 				v.enabledEjecutarT();
@@ -308,7 +316,7 @@ public class Controlador implements ActionListener {
 		}
 		else if(comando.equals(Global.BMEM))
 		{
-			//algo
+			claseP.frameMemoria.setVisible(true);
 		}
 		
 	}
