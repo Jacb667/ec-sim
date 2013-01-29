@@ -18,6 +18,7 @@ public class Vista extends javax.swing.JPanel {
      */
     public Vista() {
         initComponents();
+        Config.setVista(this);
     }
 
     /**
