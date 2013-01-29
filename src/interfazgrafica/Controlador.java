@@ -100,6 +100,7 @@ public class Controlador implements ActionListener {
 			//COMPLETO(?)---TERMINAR PARA EJECUCION
 			try
 			{
+				Config.ejecutando_codigo = true;
 				Config.set(Conf_Type.TAMAÑO_PALABRA,v.getTamPal());
 				if(v.jsepCheck())
 				{
@@ -197,6 +198,7 @@ public class Controlador implements ActionListener {
 			//COMPLETO(?)-----TERMINAR PARA EJECUCION
 			try
 			{
+				Config.ejecutando_codigo = false;
 				Config.set(Conf_Type.TAMAÑO_PALABRA,v.getTamPal());
 				if(v.jsepCheck())
 				{
@@ -291,45 +293,58 @@ public class Controlador implements ActionListener {
 		}
 		else if(comando.equals(Global.EJECUTART))
 		{
-			//Ejecutar Traza
+			Config.ejecutando_codigo = false;
+			//if (claseP != null)
+			//	claseP.ejecutarTraza();
 			
 		}
 		else if(comando.equals(Global.EJECUTARC))
 		{
-			//Ejecutar Codigo
+			Config.ejecutando_codigo = true;
+			if (claseP != null)
+				claseP.ejecutarCodigo();
 		}
 		else if (comando.equals(Global.CICLO))
 		{
-			//CICLO A CICLO
+			Config.ejecutando_codigo = true;
+			if (claseP != null)
+				claseP.ejecutarCicloCodigo();
 		}
 		// A PARTIR DE AQUI LOS BOTONES DE CACHES Y MEM-----------------------------------------------------------------------------------------------
 		else if(comando.equals(Global.BCACHED1))
 		{
-			//Algo
+			if (claseP != null && claseP.framesCache1[0] != null)
+				claseP.framesCache1[0].setVisible(true);
 		}
 		else if(comando.equals(Global.BCACHED2))
 		{
-			//algo
+			if (claseP != null && claseP.framesCache1[1] != null)
+				claseP.framesCache1[1].setVisible(true);
 		}
 		else if(comando.equals(Global.BCACHED3))
 		{
-			//algo
+			if (claseP != null && claseP.framesCache1[2] != null)
+				claseP.framesCache1[2].setVisible(true);
 		}
 		else if(comando.equals(Global.BCACHEI1))
 		{
-			//algo
+			if (claseP != null && claseP.framesCache2[0] != null)
+				claseP.framesCache2[0].setVisible(true);
 		}
 		else if(comando.equals(Global.BCACHEI2))
 		{
-			//algo
+			if (claseP != null && claseP.framesCache2[1] != null)
+				claseP.framesCache2[1].setVisible(true);
 		}
 		else if(comando.equals(Global.BCACHEI3))
 		{
-			//algo
+			if (claseP != null && claseP.framesCache2[2] != null)
+				claseP.framesCache2[2].setVisible(true);
 		}
 		else if(comando.equals(Global.BMEM))
 		{
-			claseP.frameMemoria.setVisible(true);
+			if (claseP != null && claseP.frameMemoria != null)
+				claseP.frameMemoria.setVisible(true);
 		}
 		
 	}

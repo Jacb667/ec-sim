@@ -11,6 +11,9 @@ public class Config {
 	private static String cadenas[] = new String[Conf_Type_c.END_CONFIG.index()];
 	private static Vista v;
 	private static Controlador ctr;
+	
+	public static boolean ejecutando_codigo;
+	
 	public static void set(Conf_Type config, int value)
 	{
 		enteros[config.index()] = value;

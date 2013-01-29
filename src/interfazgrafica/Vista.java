@@ -1,6 +1,7 @@
 package interfazgrafica;
 import general.*;
 
+import java.awt.Font;
 import java.awt.event.ActionListener;
 /*
  * To change this template, choose Tools | Templates
@@ -803,6 +804,7 @@ public class Vista extends javax.swing.JPanel {
         ejecucion_a.setColumns(20);
         ejecucion_a.setRows(5);
         ejecucion_a.setText("");
+        ejecucion_a1.setFont(new Font("Arial",0,10));
         jScrollPane1.setViewportView(ejecucion_a);
 
         ejecutar_b.setText("Ejecutar");
@@ -864,6 +866,7 @@ public class Vista extends javax.swing.JPanel {
         ejecucion_a1.setColumns(20);
         ejecucion_a1.setRows(5);
         ejecucion_a1.setText("");
+        ejecucion_a1.setFont(new Font("Arial",0,10));
         jScrollPane3.setViewportView(ejecucion_a1);
 
         ejecutar_b1.setText("Ejecutar");
@@ -1479,11 +1482,11 @@ public class Vista extends javax.swing.JPanel {
     }
     public void resTraza(String t)
     {
-    	ejecucion_a.setText(t);
+    	ejecucion_a.append(t);
     }
     public void resEjec(String t)
     {
-    	ejecucion_a1.setText(t);
+    	ejecucion_a1.append(t);
     }
     public void enabledConfig(boolean b)
     {
