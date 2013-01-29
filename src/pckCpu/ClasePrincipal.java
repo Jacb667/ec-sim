@@ -198,7 +198,7 @@ public class ClasePrincipal {
 	public void ejecutarTraza() throws MemoryException
 	{
 		//ejecutar(archivo_traza);
-		traza.decLine(t);
+		traza.readLines(t);
 		
 	}
 	public void setTraza(String s)

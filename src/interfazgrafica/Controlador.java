@@ -5,7 +5,11 @@ import general.Config.Conf_Type_c;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -22,6 +26,8 @@ public class Controlador implements ActionListener {
 	private Vista v;
 	private String ArchivoTraza="";
 	private String ArchivoCode="";
+	private BufferedReader br;
+	private FileReader fr;
 	
 	public ClasePrincipal claseP;
 	
@@ -289,13 +295,39 @@ public class Controlador implements ActionListener {
 			{
 				JOptionPane.showMessageDialog( v, "Error de formato al cargar los datos", "Error de formato", JOptionPane.ERROR_MESSAGE );
 			}
+			claseP = new ClasePrincipal();
+			//claseP.validarCodigo();
 			 
 		}
 		else if(comando.equals(Global.EJECUTART))
 		{
 			Config.ejecutando_codigo = false;
-			//if (claseP != null)
-			//	claseP.ejecutarTraza();
+			System.out.println("ENTRA2");
+			if (claseP != null)
+			{	
+				claseP.iniciarTraza();
+				String s=null;
+				System.out.println("ENTRA");
+				try {
+					s=bfOn();
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				claseP.setTraza(s);
+				try {
+					claseP.ejecutarTraza();
+					v.resTraza(claseP.resTraza());
+				} catch (MemoryException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			
+			}
 			
 		}
 		else if(comando.equals(Global.EJECUTARC))
@@ -346,6 +378,21 @@ public class Controlador implements ActionListener {
 			if (claseP != null && claseP.frameMemoria != null)
 				claseP.frameMemoria.setVisible(true);
 		}
+		
+	}
+	private String bfOn() throws IOException
+	{
+		StringBuilder sb = new StringBuilder("");
+		fr=new FileReader(ArchivoTraza);
+		br=new BufferedReader(fr);
+		String aux=br.readLine();
+		while(aux!=null)
+		{
+			sb.append(aux).append("\n");
+			aux=br.readLine();
+		}
+		System.out.println(sb.toString());
+		return sb.toString();
 		
 	}
 
