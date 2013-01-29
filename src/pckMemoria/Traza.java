@@ -66,7 +66,7 @@ public class Traza {
 			{
 				if(Config.getVista()!=null)
 				{
-					JOptionPane.showMessageDialog( Config.getVista(), "Error de formato en la linea "+contLines, "Error de fomato", JOptionPane.ERROR_MESSAGE );
+					JOptionPane.showMessageDialog( Config.getVista(), "Error de formato en la linea "+contLines, "Error de fomato tam 2", JOptionPane.ERROR_MESSAGE );
 				}
 				else
 				{
@@ -99,7 +99,7 @@ public class Traza {
 			{
 				if(Config.getVista()!=null)
 				{
-					JOptionPane.showMessageDialog( Config.getVista(), "Error de formato en la linea "+contLines, "Error de fomato", JOptionPane.ERROR_MESSAGE );
+					JOptionPane.showMessageDialog( Config.getVista(), "Error de formato en la linea "+contLines, "Error de fomato tam3", JOptionPane.ERROR_MESSAGE );
 				}
 				else
 				{
@@ -111,7 +111,7 @@ public class Traza {
 		{
 			if(Config.getVista()!=null)
 			{
-				JOptionPane.showMessageDialog( Config.getVista(), "Error de formato en la linea "+contLines, "Error de fomato", JOptionPane.ERROR_MESSAGE );
+				JOptionPane.showMessageDialog( Config.getVista(), "Error de formato en la linea "+contLines, "Error de fomato "+strcount, JOptionPane.ERROR_MESSAGE );
 			}
 			else
 			{
