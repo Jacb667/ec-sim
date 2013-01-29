@@ -1173,6 +1173,8 @@ public class Vista extends javax.swing.JPanel {
     	ejecutar_b.addActionListener(ctr);
     	ejecutar_b1.setActionCommand(Global.EJECUTARC);
     	ejecutar_b1.addActionListener(ctr);
+    	ciclo_b1.setActionCommand(Global.CICLO);
+    	ciclo_b1.addActionListener(ctr);
     	
     }
     public int getnvCache()
