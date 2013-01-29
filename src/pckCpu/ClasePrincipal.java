@@ -87,7 +87,7 @@ public class ClasePrincipal {
 	private TiposReemplazo tlb2_politica;
 	//Traza
 	private String t;
-	private Traza traza=new Traza(jmem,null);
+	private Traza traza;
 	
 	public ClasePrincipal()
 	{
@@ -171,9 +171,21 @@ public class ClasePrincipal {
 	{
 		t=s;
 	}
-	public String resTraza()
+	public String resTraza() throws MemoryException
 	{
-		return traza.getResult();
+		if(traza!=null)
+		{
+			return traza.getResult();
+		}
+		else
+		{
+			throw new MemoryException("Traza no creada");
+		}
+		
+	}
+	public void iniciarTraza()
+	{
+		traza=new Traza(jmem,jmem2);
 	}
 	
 	
