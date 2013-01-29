@@ -51,13 +51,27 @@ public class Traza {
 				func=str.nextToken().toUpperCase();
 				if((dirInst<0)||(dirMem<0))
 				{
-					throw new MemoryException("Error en la linea "+contLines+ " no se aceptan numeros negativos");
+					if(Config.getVista()!=null)
+					{
+						JOptionPane.showMessageDialog( Config.getVista(), "Error en la linea "+contLines+", no se aceptan numeros negativos", "Error ", JOptionPane.ERROR_MESSAGE );
+					}
+					else
+					{
+						throw new MemoryException("Error de formato en la linea "+contLines);
+					}
 				}
 				ejecutarLineaF(dirInst);
 			}
 			catch (NumberFormatException e)
 			{
-				throw new MemoryException("Error de formato en la linea "+contLines);
+				if(Config.getVista()!=null)
+				{
+					JOptionPane.showMessageDialog( Config.getVista(), "Error de formato en la linea "+contLines, "Error de fomato", JOptionPane.ERROR_MESSAGE );
+				}
+				else
+				{
+					throw new MemoryException("Error de formato en la linea "+contLines);
+				}
 			}
 		}
 		else if(strcount==3)
@@ -69,19 +83,41 @@ public class Traza {
 				dirMem=Integer.parseInt(str.nextToken());
 				if((dirInst<0)||(dirMem<0))
 				{
-					throw new MemoryException("Error en la linea "+contLines);
+					if(Config.getVista()!=null)
+					{
+						JOptionPane.showMessageDialog( Config.getVista(), "Error en la linea "+contLines+", no se aceptan numeros negativos", "Error ", JOptionPane.ERROR_MESSAGE );
+					}
+					else
+					{
+						throw new MemoryException("Error de formato en la linea "+contLines);
+					}
 				}
 				ejecutarLineaF(dirInst);
 				ejecutarLineaRW(dirMem, func);
 			}
 			catch (NumberFormatException e)
 			{
-				throw new MemoryException("Error de formato en la linea "+contLines);
+				if(Config.getVista()!=null)
+				{
+					JOptionPane.showMessageDialog( Config.getVista(), "Error de formato en la linea "+contLines, "Error de fomato", JOptionPane.ERROR_MESSAGE );
+				}
+				else
+				{
+					throw new MemoryException("Error de formato en la linea "+contLines);
+				}
 			}
 		}
 		else
 		{
-			throw new MemoryException("Error en la linea "+contLines +" formato no aceptado");
+			if(Config.getVista()!=null)
+			{
+				JOptionPane.showMessageDialog( Config.getVista(), "Error de formato en la linea "+contLines, "Error de fomato", JOptionPane.ERROR_MESSAGE );
+			}
+			else
+			{
+				throw new MemoryException("Error de formato en la linea "+contLines);
+			}
+			
 		}
 		
 		
