@@ -145,6 +145,7 @@ public class JerarquiaMemoria {
 			else  // Si no hay hueco.
 			{
 				LineaReemplazo linR = act.reemplazarLinea(direccion.getReal(), direccion.getPagina(), linea);
+				Log.report(Flags.CONFLICT_CACHE, nivel_sig, secundaria);
 				
 				// Si era dirty, tenemos que enviarla al siguiente nivel.
 				if (linR != null)
@@ -187,6 +188,7 @@ public class JerarquiaMemoria {
 			}
 			else  // Si no hay hueco.
 			{
+				Log.report(Flags.CONFLICT_CACHE, nivel_sig, secundaria);
 				LineaReemplazo linR = act.reemplazarLinea(direccion.getReal(), direccion.getPagina(), linea);
 				
 				// Si era dirty, tenemos que enviarla al siguiente nivel.

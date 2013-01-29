@@ -132,6 +132,8 @@ public class TablaPaginas {
 					else
 					{
 						// MISS, la guardamos en TLB
+						if (!tlb_datos.hayHueco(pag.getId()))
+							Log.report(Flags.CONFLICT_TLB, secundaria);
 						tlb_datos.insertar(pag.getId(), pag.getMarco());
 						Log.report(Flags.TLB_MISS, secundaria);
 						Log.println(2,"TLB MISS");
@@ -150,6 +152,8 @@ public class TablaPaginas {
 					else
 					{
 						// MISS, la guardamos en TLB
+						if (!tlb_inst.hayHueco(pag.getId()))
+							Log.report(Flags.CONFLICT_TLB, secundaria);
 						tlb_inst.insertar(pag.getId(), pag.getMarco());
 						Log.report(Flags.TLB_MISS, secundaria);
 						Log.println(2,"TLB MISS");
@@ -173,6 +177,8 @@ public class TablaPaginas {
 			{
 				if (tlb_datos != null)
 				{
+					if (!tlb_datos.hayHueco(pag.getId()))
+						Log.report(Flags.CONFLICT_TLB, secundaria);
 					tlb_datos.insertar(pag.getId(), pag.getMarco());
 					Log.report(Flags.TLB_MISS, secundaria);
 					Log.println(2,"TLB MISS");
@@ -182,7 +188,9 @@ public class TablaPaginas {
 			{
 				if (tlb_inst != null)
 				{
-					tlb_datos.insertar(pag.getId(), pag.getMarco());
+					if (!tlb_inst.hayHueco(pag.getId()))
+						Log.report(Flags.CONFLICT_TLB, secundaria);
+					tlb_inst.insertar(pag.getId(), pag.getMarco());
 					Log.report(Flags.TLB_MISS, secundaria);
 					Log.println(2,"TLB MISS");
 				}
@@ -284,6 +292,8 @@ public class TablaPaginas {
 		int marco_libre = politica.elegirViaReemplazo(0);
 		
 		int id = marcos[marco_libre].getId();
+		
+		Log.report(Flags.CONFLICT_PAGE, false);
 		
 		// Eliminamos todas las referencias a la página anterior en caché.
 		jerarquia1.invalidarPagina(id);

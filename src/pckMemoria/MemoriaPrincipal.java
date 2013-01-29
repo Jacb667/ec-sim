@@ -129,25 +129,25 @@ public class MemoriaPrincipal
 	 */
 	public String[] getColumnas()
 	{
-		return new String[]{"ID Página", "Dirección Real", "Dirección Virtual", "Dato", "Válida"};
+		return new String[]{"ID Página", "Dirección Real", "Dirección Virtual", "Dato"/*, "Válida"*/};
 	}
 	
 	public Dimension[] getTamaños()
 	{
-		Dimension[] dim = new Dimension[5];
+		Dimension[] dim = new Dimension[4];
 		
 		dim[0] = new Dimension(Global.TAMAÑO_CELDA_NORMAL,Global.TAMAÑO_CELDA_NORMAL);
 		dim[1] = new Dimension(Global.TAMAÑO_CELDA_NORMAL,0);
 		dim[2] = new Dimension(Global.TAMAÑO_CELDA_NORMAL,0);
 		dim[3] = new Dimension(Global.TAMAÑO_CELDA_NORMAL,0);
-		dim[4] = new Dimension(Global.TAMAÑO_CELDA_BOOLEAN, Global.TAMAÑO_CELDA_BOOLEAN*2);
+		//dim[4] = new Dimension(Global.TAMAÑO_CELDA_BOOLEAN, Global.TAMAÑO_CELDA_BOOLEAN*2);
 		
 		return dim;
 	}
 	
 	public Object[][] getDatos()
 	{
-		Object[][] datos = new Object[entradas][5];
+		Object[][] datos = new Object[entradas][4];
 		
 		int entrada = 0;
 		for (int pag = 0; pag < tablaPags.getMarcos().length; pag++)
@@ -156,7 +156,7 @@ public class MemoriaPrincipal
 			for (int i = 0; i < tablaPags.getEntradasPagina(); i++)
 			{
 				// Página, dirección, dato, valido
-				Object[] linea = {"", "", "", "", new Boolean(false)};
+				Object[] linea = {"", "", "", ""/*, new Boolean(false)*/};
 			
 				datos[entrada] = linea;
 				entrada++;
@@ -186,7 +186,7 @@ public class MemoriaPrincipal
 					interfaz.setValueAt(String.format("0x%4S", Integer.toHexString(direccion_r)).replace(" ", "0"), pos, 1);  // Dirección
 					interfaz.setValueAt(String.format("0x%4S", Integer.toHexString(direccion_v)).replace(" ", "0"), pos, 2);  // Virtual
 					interfaz.setValueAt(String.valueOf(datos_pag[i][1]), pos, 3);  // Dato
-					interfaz.setValueAt(new Boolean(Boolean.valueOf(String.valueOf(datos_pag[i][2]))), pos, 4);  // Válido
+					//interfaz.setValueAt(new Boolean(Boolean.valueOf(String.valueOf(datos_pag[i][2]))), pos, 4);  // Válido
 				}
 			}
 		}

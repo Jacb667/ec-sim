@@ -13,7 +13,11 @@ import componentes.Tabla;
 import componentes.VentanaLimitada;
 import componentes.VentanaOculta;
 
+import general.Config.Conf_Type;
+import general.Config.Conf_Type_c;
 import general.Global.TiposReemplazo;
+import general.Config;
+import general.Log;
 import general.MemoryException;
 import pckCpu.Cpu;
 import pckCpu.CpuMonociclo;
@@ -31,43 +35,68 @@ import pckMemoria.Tlb;
 
 public class TestCpu {
 	
-	final int palabras_linea = 4;
+	private int bytes_palabra;
+	private int palabras_linea;
 	
-	private JFrame[] framesMemoria;
-	private Tabla[] tablasMemoria;
+	private boolean jerarquiasSeparadas;
+	
+	public JFrame frameMemoria;
+	public Tabla tablaMemoria;
+	
+	public JFrame[] framesCache1;
+	public Tabla[] tablasCache1;
+	
+	public JFrame[] framesCache2;
+	public Tabla[] tablasCache2;
 	
 	private MemoriaPrincipal memoria;
 	private JerarquiaMemoria jmem;
 	private JerarquiaMemoria jmem2;  // Jerarquía de instrucciones.
-	private Cache[] caches;
-	private Cache[] cache2;  // Caché de instrucciones (por si se separan).
+	private Cache[] caches1;
+	private Cache[] caches2;  // Caché de instrucciones (por si se separan).
 	private TablaPaginas tablaPags;
 	private Tlb tlb1;
 	private Tlb tlb2;
 	
-	private Cpu cpu;
+	private CpuMonociclo cpu;
 	private int direccion_inst = 0;
 	
-	// CPU
-	final String archivo = "Segmentado.txt";
-	final boolean segmentado = false;
+	private int niveles_cache1;
+	private int niveles_cache2;
+	private int entradas_caches1[];
+	private int entradas_caches2[];
+	private int vias_caches1[];
+	private int vias_caches2[];
+	private TiposReemplazo politicas_caches1[];
+	private TiposReemplazo politicas_caches2[];
 	
-	// Niveles de caché
-	final int niveles_cache = 2;
-	final int[] entradas_caches = new int[]{4,8,8};
-	final int[] vias_caches = new int[]{1,4,4};
+	private boolean tlb_datos;
+	private boolean tlb_inst;
+	
+	private String archivo_cpu = "Prueba.txt";
+	private String archivo_traza;
 	
 	// Páginas y memoria
-	final int entradas_pagina = 16;
-	final int max_entrada = 512;	// Última entrada permitida
-	final int max_ent_mem = 128;	// Última entrada en memoria (tamaño de memoria)
-	final int entradas_tlb = 4;
-	final int vias_tlb = 1;
+	int entradas_pagina = 16;
+	int max_entrada = 512;	// Última entrada permitida
+	int max_ent_mem = 128;	// Última entrada en memoria (tamaño de memoria)
+	int entradas_tlb = 4;
+	int vias_tlb = 1;
+	
+	private int tlb1_entradas;
+	private int tlb1_vias;
+	private int tlb2_entradas;
+	private int tlb2_vias;
+	private TiposReemplazo tlb1_politica;
+	private TiposReemplazo tlb2_politica;
 	
 	public TestCpu()
 	{
+		leerConfig();
+		
+		
 		// Leo el código.
-		if (!Decoder.decodificarArchivo(archivo))
+		if (!Decoder.decodificarArchivo(archivo_cpu))
 		{
 			System.err.println("Error al decodificar el archivo.");
 			return;
@@ -115,6 +144,8 @@ public class TestCpu {
 			
 			// Una vez tenemos el código guardado en memoria, comenzamos la ejecución.
 			cpu.ejecutarCodigo();
+			
+			Log.generarEstadistica();
 		}
 		catch (MemoryException e)
 		{
@@ -126,36 +157,133 @@ public class TestCpu {
 		}
 	}
 	
+	// Leer configuración.
+	private void leerConfig()
+	{
+		bytes_palabra = Config.get(Conf_Type.TAMAÑO_PALABRA);
+		palabras_linea = Config.get(Conf_Type.TAMAÑO_LINEA);
+		
+		jerarquiasSeparadas = Config.get(Conf_Type.JERARQUIAS_SEPARADAS) == 1 ? true : false;
+		//segmentado = Config.get(Conf_Type.SEGMENTADO) == 1 ? true : false;
+		
+		entradas_pagina = Config.get(Conf_Type.ENTRADAS_PAGINA);
+		max_ent_mem = Config.get(Conf_Type.NUMERO_ENTRADAS_MEMORIA);
+		max_entrada = Config.get(Conf_Type.MAXIMA_ENTRADA_MEMORIA);
+		
+		archivo_cpu = Config.get(Conf_Type_c.ARCHIVO_CODIGO);
+		archivo_traza = Config.get(Conf_Type_c.ARCHIVO_TRAZA);
+		
+		// Niveles de caché
+		niveles_cache1 = Config.get(Conf_Type.NIVELES_CACHE_DATOS);
+		niveles_cache2 =  Config.get(Conf_Type.NIVELES_CACHE_INSTRUCCIONES);
+		
+		entradas_caches1 = new int[]{Config.get(Conf_Type.CACHE1_DATOS_ENTRADAS),Config.get(Conf_Type.CACHE2_DATOS_ENTRADAS),Config.get(Conf_Type.CACHE3_DATOS_ENTRADAS)};
+		vias_caches1 = new int[]{Config.get(Conf_Type.CACHE1_DATOS_VIAS),Config.get(Conf_Type.CACHE2_DATOS_VIAS),Config.get(Conf_Type.CACHE3_DATOS_VIAS)};	
+		entradas_caches2 = new int[]{Config.get(Conf_Type.CACHE1_INSTRUCCIONES_ENTRADAS),Config.get(Conf_Type.CACHE2_INSTRUCCIONES_ENTRADAS),Config.get(Conf_Type.CACHE3_INSTRUCCIONES_ENTRADAS)};
+		vias_caches2 = new int[]{Config.get(Conf_Type.CACHE1_INSTRUCCIONES_VIAS),Config.get(Conf_Type.CACHE2_INSTRUCCIONES_VIAS),Config.get(Conf_Type.CACHE3_INSTRUCCIONES_VIAS)};
+
+
+		politicas_caches1 = new TiposReemplazo[niveles_cache1];
+		if (niveles_cache1 > 0)
+			politicas_caches1[0] = TiposReemplazo.valueOf(Config.get(Conf_Type_c.CACHE1_DATOS_POLITICA));
+		if (niveles_cache1 > 1)
+			politicas_caches1[1] = TiposReemplazo.valueOf(Config.get(Conf_Type_c.CACHE2_DATOS_POLITICA));
+		if (niveles_cache1 > 2)
+			politicas_caches1[2] = TiposReemplazo.valueOf(Config.get(Conf_Type_c.CACHE3_DATOS_POLITICA));
+		
+		if (jerarquiasSeparadas)
+		{
+			politicas_caches2 = new TiposReemplazo[niveles_cache2];
+			if (niveles_cache2 > 0)
+				politicas_caches2[0] = TiposReemplazo.valueOf(Config.get(Conf_Type_c.CACHE1_INSTRUCCIONES_POLITICA));
+			if (niveles_cache2 > 1)
+				politicas_caches2[1] = TiposReemplazo.valueOf(Config.get(Conf_Type_c.CACHE2_INSTRUCCIONES_POLITICA));
+			if (niveles_cache2 > 2)
+				politicas_caches2[2] = TiposReemplazo.valueOf(Config.get(Conf_Type_c.CACHE3_INSTRUCCIONES_POLITICA));
+		}
+
+		tlb_datos = Config.get(Conf_Type.TLB_DATOS) == 1 ? true : false;
+		tlb_inst = Config.get(Conf_Type.TLB_INSTRUCCIONES) == 1 ? true : false;
+		
+		tlb1_entradas = Config.get(Conf_Type.TLB_DATOS_ENTRADAS);
+		tlb1_vias = Config.get(Conf_Type.TLB_DATOS_VIAS);
+		
+		if (tlb_datos)
+			tlb1_politica = TiposReemplazo.valueOf(Config.get(Conf_Type_c.TLB_DATOS_POLITICA));
+		
+		tlb2_entradas = Config.get(Conf_Type.TLB_INSTRUCCIONES_ENTRADAS);
+		tlb2_vias = Config.get(Conf_Type.TLB_INSTRUCCIONES_VIAS);
+		
+		if (tlb_inst)
+			tlb2_politica = TiposReemplazo.valueOf(Config.get(Conf_Type_c.TLB_INSTRUCCIONES_POLITICA));
+	}
+	
 	// Inicializa la Cpu.
-	private void inicializarCpu()
+	private void inicializarCpu() throws CpuException
 	{
 		// Calculo la dirección de memoria para instrucciones.
 		int num_instrucciones = Decoder.getInstrucciones().size();
 		int paginas_instrucciones = (int) Math.ceil(num_instrucciones / entradas_pagina);
-		int primera_pag_inst = tablaPags.getNumeroPaginas()-1 - paginas_instrucciones;
-		direccion_inst = primera_pag_inst * tablaPags.getEntradasPagina() * 4;
 		
-		if (segmentado == true)
-			cpu = new CpuSegmentado(jmem, null, direccion_inst);
+		
+		if (tablaPags.getNumeroPaginas() == 1)
+		{
+			int mitad = entradas_pagina / 2;
+			if (mitad < num_instrucciones)
+				throw new CpuException("No hay memoria suficiente para este código.");
+			
+			direccion_inst = mitad;
+		}
 		else
+		{
+			int primera_pag_inst = tablaPags.getNumeroPaginas()-1 - paginas_instrucciones;
+			direccion_inst = primera_pag_inst * tablaPags.getEntradasPagina() * 4;
+		}
+		
+		//if (segmentado == true)
+		//	cpu = new CpuSegmentado(jmem, null, direccion_inst);
+		//else
 			cpu = new CpuMonociclo(jmem, null, direccion_inst);
 	}
 	
 	// Inicializa la Jerarquía de Memoria.
 	private void inicializarMemoria() throws MemoryException, CpuException
 	{
-		caches = new Cache[niveles_cache];
-		
-		for (int i = 0; i < niveles_cache; i++)
+		caches1 = new Cache[niveles_cache1];
+		for (int i = 0; i < niveles_cache1; i++)
 		{
-			if (vias_caches[i] > 1)
-				caches[i] = new CacheAsociativa(entradas_caches[i], palabras_linea, vias_caches[i], TiposReemplazo.LRU);
+			if (vias_caches1[i] > 1)
+				caches1[i] = new CacheAsociativa(entradas_caches1[i], palabras_linea, vias_caches1[i], politicas_caches1[i], bytes_palabra);
 			else
-				caches[i] = new CacheDirecta(entradas_caches[i], palabras_linea);
+				caches1[i] = new CacheDirecta(entradas_caches1[i], palabras_linea, bytes_palabra);
 		}
 		
-		tlb1 = new Tlb(entradas_tlb);
-		tlb2 = null;
+		if (jerarquiasSeparadas)
+		{
+			caches2 = new Cache[niveles_cache2];
+			for (int i = 0; i < niveles_cache2; i++)
+			{
+				if (vias_caches2[i] > 1)
+					caches2[i] = new CacheAsociativa(entradas_caches2[i], palabras_linea, vias_caches2[i], politicas_caches2[i], bytes_palabra);
+				else
+					caches2[i] = new CacheDirecta(entradas_caches2[i], palabras_linea, bytes_palabra);
+			}
+		}
+		
+		if (tlb_datos)
+		{
+			if (tlb1_vias > 1)
+				tlb1 = new Tlb(tlb1_entradas, tlb1_vias, tlb1_politica);
+			else
+				tlb1 = new Tlb(tlb1_entradas);
+		}
+		if (tlb_inst)
+		{
+			if (tlb2_vias > 1)
+				tlb2 = new Tlb(tlb2_entradas, tlb2_vias, tlb2_politica);
+			else
+				tlb2 = new Tlb(tlb2_entradas);
+		}
 
 		// Tabla de Páginas
 		tablaPags = new TablaPaginas(entradas_pagina, palabras_linea, max_entrada, max_ent_mem, TiposReemplazo.LRU, tlb1, tlb2);
@@ -164,8 +292,9 @@ public class TestCpu {
 		memoria = new MemoriaPrincipal(tablaPags);
 		
 		// Inicializar la Jerarquía de Memoria.
-		jmem = new JerarquiaMemoria(tablaPags, caches, memoria);
-		jmem2 = null;
+		jmem = new JerarquiaMemoria(tablaPags, caches1, memoria);
+		if (jerarquiasSeparadas)
+			jmem2 = new JerarquiaMemoria(tablaPags, caches2, memoria);
 		
 		tablaPags.setJerarquiaMemoria(jmem, jmem2);
 	}
@@ -175,38 +304,65 @@ public class TestCpu {
 	{
 		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		
-		tablasMemoria = new Tabla[1 + niveles_cache];
-		framesMemoria = new JFrame[1 + niveles_cache];
+		tablaMemoria = new Tabla(memoria);
+		frameMemoria = new JFrame();
 		
-		tablasMemoria[0] = new Tabla(memoria);
-		framesMemoria[0] = new VentanaLimitada();
-		JScrollPane jscroll1 = new JScrollPane(tablasMemoria[0], JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		framesMemoria[0].setTitle("Memoria");
-		framesMemoria[0].setPreferredSize( new Dimension(245, 400) );
-		framesMemoria[0].setMinimumSize(new Dimension(250, 400));
-		framesMemoria[0].setMaximumSize(new Dimension(400, 2000));
-		framesMemoria[0].add( jscroll1 );
-		framesMemoria[0].pack();
-		framesMemoria[0].addWindowListener(new VentanaOculta(framesMemoria[0]));
-		framesMemoria[0].setVisible(true);
-		memoria.setInterfaz(tablasMemoria[0]);
+		tablaMemoria = new Tabla(memoria);
+		frameMemoria = new VentanaLimitada();
+		JScrollPane jscroll1 = new JScrollPane(tablaMemoria, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		frameMemoria.setTitle("Memoria");
+		frameMemoria.setPreferredSize( new Dimension(245, 400) );
+		frameMemoria.setMinimumSize(new Dimension(250, 400));
+		frameMemoria.setMaximumSize(new Dimension(400, 2000));
+		frameMemoria.add( jscroll1 );
+		frameMemoria.pack();
+		frameMemoria.addWindowListener(new VentanaOculta(frameMemoria));
+		frameMemoria.setVisible(true);
+		memoria.setInterfaz(tablaMemoria);
 		
-		for (int i = 1; i < 1 + niveles_cache; i++)
+		tablasCache1 = new Tabla[niveles_cache1];
+		framesCache1 = new JFrame[niveles_cache1];
+		
+		for (int i = 0; i < niveles_cache1; i++)
 		{
-			tablasMemoria[i] = new Tabla(caches[i-1]);
-			if (vias_caches[i-1] > 1)
-				tablasMemoria[i].setRenderTablaEnCelda();
-			framesMemoria[i] = new VentanaLimitada();
-			JScrollPane jscroll = new JScrollPane(tablasMemoria[i], JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-			framesMemoria[i].setTitle("Cache L"+(i-1));
-			framesMemoria[i].setPreferredSize( new Dimension(600, 200) );
-			framesMemoria[i].setMinimumSize(new Dimension(500, 200));
-			framesMemoria[i].setMaximumSize(new Dimension(2000, 2000));
-			framesMemoria[i].add( jscroll );
-			framesMemoria[i].pack();
-			framesMemoria[i].addWindowListener(new VentanaOculta(framesMemoria[i]));
-			framesMemoria[i].setVisible(true);
-			caches[i-1].setInterfaz(tablasMemoria[i]);
+			tablasCache1[i] = new Tabla(caches1[i]);
+			if (vias_caches1[i] > 1)
+				tablasCache1[i].setRenderTablaEnCelda();
+			framesCache1[i] = new VentanaLimitada();
+			JScrollPane jscroll = new JScrollPane(tablasCache1[i], JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+			framesCache1[i].setTitle("Cache Datos L"+(i));
+			framesCache1[i].setPreferredSize( new Dimension(600, 200) );
+			framesCache1[i].setMinimumSize(new Dimension(500, 200));
+			framesCache1[i].setMaximumSize(new Dimension(2000, 2000));
+			framesCache1[i].add( jscroll );
+			framesCache1[i].pack();
+			framesCache1[i].addWindowListener(new VentanaOculta(framesCache1[i]));
+			framesCache1[i].setVisible(true);
+			caches1[i].setInterfaz(tablasCache1[i]);
+		}
+		
+		if (jerarquiasSeparadas)
+		{
+			tablasCache2 = new Tabla[niveles_cache2];
+			framesCache2 = new JFrame[niveles_cache2];
+			
+			for (int i = 0; i < niveles_cache1; i++)
+			{
+				tablasCache2[i] = new Tabla(caches1[i]);
+				if (vias_caches2[i] > 1)
+					tablasCache2[i].setRenderTablaEnCelda();
+				framesCache2[i] = new VentanaLimitada();
+				JScrollPane jscroll = new JScrollPane(tablasCache2[i], JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+				framesCache2[i].setTitle("Cache Instrucciones L"+(i));
+				framesCache2[i].setPreferredSize( new Dimension(600, 200) );
+				framesCache2[i].setMinimumSize(new Dimension(500, 200));
+				framesCache2[i].setMaximumSize(new Dimension(2000, 2000));
+				framesCache2[i].add( jscroll );
+				framesCache2[i].pack();
+				framesCache2[i].addWindowListener(new VentanaOculta(framesCache2[i]));
+				framesCache2[i].setVisible(true);
+				caches1[i].setInterfaz(tablasCache2[i]);
+			}
 		}
 	}
 }
