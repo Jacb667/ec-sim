@@ -1,12 +1,16 @@
 package general;
 
+import interfazgrafica.Controlador;
+import interfazgrafica.Vista;
+
 // Archivo global para configuraciones del programa.
 
 public class Config {
 	
 	private static int enteros[] = new int[Conf_Type.END_CONFIG.index()];
 	private static String cadenas[] = new String[Conf_Type_c.END_CONFIG.index()];
-	
+	private static Vista v;
+	private static Controlador ctr;
 	public static void set(Conf_Type config, int value)
 	{
 		enteros[config.index()] = value;
@@ -93,5 +97,21 @@ public class Config {
 	    public int index() { 
 	        return index; 
 	    }
+	}
+	public static void setVista(Vista vi)
+	{
+		v=vi;
+	}
+	public static Vista getVista()
+	{
+		return v;
+	}
+	public static void setCtr(Controlador c)
+	{
+		ctr=c;
+	}
+	public static Controlador getCtr()
+	{
+		return ctr;
 	}
 }
