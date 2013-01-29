@@ -98,30 +98,35 @@ public class Log {
 		float ratio_l1 = (float)(Log.cache_hits[1]*100) / (float)(Log.accesosMemoria-Log.cache_hits[0]);
 		float ratio_l2 = (float)(Log.cache_hits[2]*100) / (float)(Log.accesosMemoria-Log.cache_hits[0]-Log.cache_hits[1]);
 		
-		System.out.println("Accesos a memoria: " + Log.accesosMemoria + " (" + 
+		println(1, "Accesos a memoria: " + Log.accesosMemoria + " (" + 
 				Log.lecturasMemoria + " lecturas + " + Log.escriturasMemoria + " escrituras)");
-		System.out.println("Accesos a bloques: " + Log.accesosBloques + " (" + 
+		println(1, "Accesos a bloques: " + Log.accesosBloques + " (" + 
 				Log.lecturasBloques + " leidos + " + Log.escriturasBloques + " escritos)");
 		
 		int niveles = Config.get(Conf_Type.NIVELES_CACHE_DATOS);
 		
 		if (niveles > 0)
 		{
-			System.out.println("Cache L0 -> " + Log.cache_hits[0] + " Hits - " + (Log.cache_misses[0]) + " Miss (" + Log.cache_conflicts[0] + ")");
-			System.out.println(String.format("%.2f%%", ratio_l0));
+			println(1, "Cache L0 -> " + Log.cache_hits[0] + " Hits - " + (Log.cache_misses[0]) + " Miss (" + Log.cache_conflicts[0] + ")");
+			println(1, String.format("%.2f%%", ratio_l0));
 		}
 		if (niveles > 1)
 		{
-			System.out.println("Cache L1 -> " + Log.cache_hits[1] + " Hits - " + Log.cache_misses[1] + " Miss (" + Log.cache_conflicts[1] + ")");
-			System.out.println(String.format("%.2f%%", ratio_l1));
+			println(1, "Cache L1 -> " + Log.cache_hits[1] + " Hits - " + Log.cache_misses[1] + " Miss (" + Log.cache_conflicts[1] + ")");
+			println(1, String.format("%.2f%%", ratio_l1));
 		}
 		if (niveles > 2)
 		{
-			System.out.println("Cache L2 -> " + Log.cache_hits[2] + " Hits - " + Log.cache_misses[2] + " Miss (" + Log.cache_conflicts[2] + ")");
-			System.out.println(String.format("%.2f%%", ratio_l2));
+			println(1, "Cache L2 -> " + Log.cache_hits[2] + " Hits - " + Log.cache_misses[2] + " Miss (" + Log.cache_conflicts[2] + ")");
+			println(1, String.format("%.2f%%", ratio_l2));
 		}
 		
-		if (Config.get(Conf_Type.JERARQUIAS_SEPARADAS) == 1)
+		println(1, "Páginas -> " + Log.accesosPagina + " Accesos - " + Log.aciertosPagina + " Hits - " + Log.fallosPagina + " Faults (" + Log.conflictosPagina + ")");
+		
+		if (Config.get(Conf_Type.TLB_DATOS) == 1)
+			println(1, "DTLB -> " + Log.aciertosTlb + " Hits - " + Log.fallosTlb + " Miss (" + Log.conflictosTlb + ")");
+		
+		/*if (Config.get(Conf_Type.JERARQUIAS_SEPARADAS) == 1)
 		{
 			println(1, "");
 			println(1, "--------------------------");
@@ -134,24 +139,32 @@ public class Log {
 			
 			println(1,"Accesos a memoria: " + Log.accesosMemoria1 + " (" + 
 					Log.lecturasMemoria1 + " lecturas + " + Log.escriturasMemoria1 + " escrituras)");
-			println(1,"Accesos a bloques: " + Log.accesosBloques + " (" + 
+			println(1,"Accesos a bloques: " + Log.accesosBloques1 + " (" + 
 					Log.lecturasBloques1 + " leidos + " + Log.escriturasBloques1 + " escritos)");
 			
 			niveles = Config.get(Conf_Type.NIVELES_CACHE_INSTRUCCIONES);
 			
-			switch(niveles)
+			if (niveles > 0)
 			{
-				case 1:
-					println(1,"Cache L0 -> " + Log.cache_hits1[0] + " Hits - " + Log.cache_misses1[0] + " Miss (" + Log.cache_conflicts1[0] + ")");
-					String.format("%.2f%%", ratio_l0);
-				case 2:
-					println(1,"Cache L1 -> " + Log.cache_hits1[1] + " Hits - " + Log.cache_misses1[1] + " Miss (" + Log.cache_conflicts1[1] + ")");
-					String.format("%.2f%%", ratio_l1);
-				case 3:
-					println(1,"Cache L2 -> " + Log.cache_hits1[2] + " Hits - " + Log.cache_misses1[2] + " Miss (" + Log.cache_conflicts1[2] + ")");
-					String.format("%.2f%%", ratio_l2);
+				println(1, "Cache L0 -> " + Log.cache_hits1[0] + " Hits - " + (Log.cache_misses1[0]) + " Miss (" + Log.cache_conflicts1[0] + ")");
+				println(1, String.format("%.2f%%", ratio_l0));
 			}
-		}
+			if (niveles > 1)
+			{
+				println(1, "Cache L1 -> " + Log.cache_hits1[1] + " Hits - " + Log.cache_misses1[1] + " Miss (" + Log.cache_conflicts1[1] + ")");
+				println(1, String.format("%.2f%%", ratio_l1));
+			}
+			if (niveles > 2)
+			{
+				println(1, "Cache L2 -> " + Log.cache_hits1[2] + " Hits - " + Log.cache_misses1[2] + " Miss (" + Log.cache_conflicts1[2] + ")");
+				println(1, String.format("%.2f%%", ratio_l2));
+			}
+			
+			println(1, "Páginas -> " + Log.accesosPagina1 + " Accesos - " + Log.aciertosPagina1 + " Hits - " + Log.fallosPagina1 + " Faults (" + Log.conflictosPagina1 + ")");
+			
+			if (Config.get(Conf_Type.TLB_INSTRUCCIONES) == 1)
+				println(1, "ITLB -> " + Log.aciertosTlb1 + " Hits - " + Log.fallosTlb1 + " Miss (" + Log.conflictosTlb1 + ")");
+		}*/
 	}
 	
 	private static void report(Flags f, int data)

@@ -50,7 +50,7 @@ public class TestTraza {
 	private int direccion_inst = 0;
 	
 	// CPU
-	final String archivo = "Prueba.txt";
+	final String archivo = "Traza.txt";
 	final boolean segmentado = false;
 	
 	// Niveles de caché

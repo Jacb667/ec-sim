@@ -294,6 +294,11 @@ public class TablaPaginas {
 		int id = marcos[marco_libre].getId();
 		
 		Log.report(Flags.CONFLICT_PAGE, false);
+		if (marcos[marco_libre].esDirty())
+		{
+			marcos[marco_libre].escribirDisco();
+			Log.println(3, "Se escribe la página " + id + " en disco.");
+		}
 		
 		// Eliminamos todas las referencias a la página anterior en caché.
 		jerarquia1.invalidarPagina(id);

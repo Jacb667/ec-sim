@@ -27,13 +27,13 @@ public class Aplicacion extends javax.swing.JFrame {
 
 	private static final long serialVersionUID = 1L;
 	
-	/*private static Controlador controlador;
-	private static Vista vista;*/
+	private static Controlador controlador;
+	private static Vista vista;
 	
     public static void main(String args[]) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException
     {
     	UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-    	/*vista = new Vista();
+    	vista = new Vista();
         JFrame ventana = new JFrame("Simulador MIPS v1.1");
         ventana.setMinimumSize(new Dimension(660,405));
         ventana.setPreferredSize(new Dimension(660,405));
@@ -42,10 +42,10 @@ public class Aplicacion extends javax.swing.JFrame {
         ventana.setContentPane(vista);
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ventana.pack();
-        ventana.setVisible(true);*/
+        ventana.setVisible(true);
     	
     	
-    	Config.set(Conf_Type.TAMAÑO_PALABRA, 4);
+    	/*Config.set(Conf_Type.TAMAÑO_PALABRA, 4);
 		Config.set(Conf_Type.TAMAÑO_LINEA, 4);
 		
 		Config.set(Conf_Type.JERARQUIAS_SEPARADAS, 0);
@@ -94,8 +94,8 @@ public class Aplicacion extends javax.swing.JFrame {
 		Config.set(Conf_Type.TLB_INSTRUCCIONES_ENTRADAS, 8);
 		Config.set(Conf_Type.TLB_INSTRUCCIONES_VIAS, 1);
 		
-		Config.set(Conf_Type_c.TLB_INSTRUCCIONES_POLITICA, "LRU");
+		Config.set(Conf_Type_c.TLB_INSTRUCCIONES_POLITICA, "LRU");*/
 
-    	new TestCpu();
+    	//new TestCpu();
     }
 }

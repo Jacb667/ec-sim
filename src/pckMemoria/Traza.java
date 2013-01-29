@@ -37,6 +37,7 @@ public class Traza {
 			decLine(str.nextToken());
 			
 		}
+		Log.generarEstadistica();
 	}
 	
 	public void decLine(String s) throws MemoryException

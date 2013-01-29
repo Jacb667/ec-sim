@@ -222,6 +222,18 @@ public class ClasePrincipal {
 	}
 	public void iniciarTraza()
 	{
+		try
+		{
+			inicializarMemoria();
+			inicializarInterfaz();
+			inicializarCpu();
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		
 		traza=new Traza(jmem,jmem2);
 	}
 	
@@ -414,7 +426,7 @@ public class ClasePrincipal {
 			tablasCache2 = new Tabla[niveles_cache2];
 			framesCache2 = new JFrame[niveles_cache2];
 			
-			for (int i = 0; i < niveles_cache1; i++)
+			for (int i = 0; i < niveles_cache2; i++)
 			{
 				tablasCache2[i] = new Tabla(caches1[i]);
 				if (vias_caches2[i] > 1)
