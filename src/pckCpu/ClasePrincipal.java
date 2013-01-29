@@ -112,10 +112,6 @@ public class ClasePrincipal {
 			inicializarInterfaz();
 			inicializarCpu();
 			
-			// Guardo un 1 en todas las posiciones entre 0 y 1000.
-			for (int i = 0; i <= 1000; i+=4)
-				tablaPags.inicializarDatoMemoriaVirtual(i, i);
-			
 			// Guardo las instrucciones en memoria.
 			for (Instruccion inst : Decoder.getInstrucciones())
 			{
@@ -187,28 +183,46 @@ public class ClasePrincipal {
 		// Niveles de caché
 		niveles_cache1 = Config.get(Conf_Type.NIVELES_CACHE_DATOS);
 		niveles_cache2 =  Config.get(Conf_Type.NIVELES_CACHE_INSTRUCCIONES);
-
-		entradas_caches1 = new int[]{Config.get(Conf_Type.CACHE1_DATOS_ENTRADAS),Config.get(Conf_Type.CACHE2_DATOS_ENTRADAS),Config.get(Conf_Type.CACHE3_DATOS_ENTRADAS)};
-		vias_caches1 = new int[]{Config.get(Conf_Type.CACHE1_DATOS_VIAS),Config.get(Conf_Type.CACHE2_DATOS_VIAS),Config.get(Conf_Type.CACHE3_DATOS_VIAS)};
-		politicas_caches1 = new TiposReemplazo[]{TiposReemplazo.valueOf(Config.get(Conf_Type_c.CACHE1_DATOS_POLITICA)),
-				TiposReemplazo.valueOf(Config.get(Conf_Type_c.CACHE2_DATOS_POLITICA)),TiposReemplazo.valueOf(Config.get(Conf_Type_c.CACHE3_DATOS_POLITICA))};
 		
+		entradas_caches1 = new int[]{Config.get(Conf_Type.CACHE1_DATOS_ENTRADAS),Config.get(Conf_Type.CACHE2_DATOS_ENTRADAS),Config.get(Conf_Type.CACHE3_DATOS_ENTRADAS)};
+		vias_caches1 = new int[]{Config.get(Conf_Type.CACHE1_DATOS_VIAS),Config.get(Conf_Type.CACHE2_DATOS_VIAS),Config.get(Conf_Type.CACHE3_DATOS_VIAS)};	
 		entradas_caches2 = new int[]{Config.get(Conf_Type.CACHE1_INSTRUCCIONES_ENTRADAS),Config.get(Conf_Type.CACHE2_INSTRUCCIONES_ENTRADAS),Config.get(Conf_Type.CACHE3_INSTRUCCIONES_ENTRADAS)};
 		vias_caches2 = new int[]{Config.get(Conf_Type.CACHE1_INSTRUCCIONES_VIAS),Config.get(Conf_Type.CACHE2_INSTRUCCIONES_VIAS),Config.get(Conf_Type.CACHE3_INSTRUCCIONES_VIAS)};
-		politicas_caches2 = new TiposReemplazo[]{TiposReemplazo.valueOf(Config.get(Conf_Type_c.CACHE1_INSTRUCCIONES_POLITICA)),
-				TiposReemplazo.valueOf(Config.get(Conf_Type_c.CACHE2_INSTRUCCIONES_POLITICA)),TiposReemplazo.valueOf(Config.get(Conf_Type_c.CACHE3_INSTRUCCIONES_POLITICA))};
+
+
+		politicas_caches1 = new TiposReemplazo[niveles_cache1];
+		if (niveles_cache1 > 0)
+			politicas_caches1[0] = TiposReemplazo.valueOf(Config.get(Conf_Type_c.CACHE1_DATOS_POLITICA));
+		if (niveles_cache1 > 1)
+			politicas_caches1[1] = TiposReemplazo.valueOf(Config.get(Conf_Type_c.CACHE2_DATOS_POLITICA));
+		if (niveles_cache1 > 2)
+			politicas_caches1[2] = TiposReemplazo.valueOf(Config.get(Conf_Type_c.CACHE3_DATOS_POLITICA));
 		
+		if (jerarquiasSeparadas)
+		{
+			politicas_caches2 = new TiposReemplazo[niveles_cache2];
+			if (niveles_cache2 > 0)
+				politicas_caches2[0] = TiposReemplazo.valueOf(Config.get(Conf_Type_c.CACHE1_INSTRUCCIONES_POLITICA));
+			if (niveles_cache2 > 1)
+				politicas_caches2[1] = TiposReemplazo.valueOf(Config.get(Conf_Type_c.CACHE2_INSTRUCCIONES_POLITICA));
+			if (niveles_cache2 > 2)
+				politicas_caches2[2] = TiposReemplazo.valueOf(Config.get(Conf_Type_c.CACHE3_INSTRUCCIONES_POLITICA));
+		}
 
 		tlb_datos = Config.get(Conf_Type.TLB_DATOS) == 1 ? true : false;
 		tlb_inst = Config.get(Conf_Type.TLB_INSTRUCCIONES) == 1 ? true : false;
 		
 		tlb1_entradas = Config.get(Conf_Type.TLB_DATOS_ENTRADAS);
 		tlb1_vias = Config.get(Conf_Type.TLB_DATOS_VIAS);
-		tlb1_politica = TiposReemplazo.valueOf(Config.get(Conf_Type_c.TLB_DATOS_POLITICA));
+		
+		if (tlb_datos)
+			tlb1_politica = TiposReemplazo.valueOf(Config.get(Conf_Type_c.TLB_DATOS_POLITICA));
 		
 		tlb2_entradas = Config.get(Conf_Type.TLB_INSTRUCCIONES_ENTRADAS);
 		tlb2_vias = Config.get(Conf_Type.TLB_INSTRUCCIONES_VIAS);
-		tlb2_politica = TiposReemplazo.valueOf(Config.get(Conf_Type_c.TLB_INSTRUCCIONES_POLITICA));
+		
+		if (tlb_inst)
+			tlb2_politica = TiposReemplazo.valueOf(Config.get(Conf_Type_c.TLB_INSTRUCCIONES_POLITICA));
 	}
 	
 	// Inicializa la Cpu.
@@ -305,12 +319,12 @@ public class ClasePrincipal {
 		
 		for (int i = 0; i < niveles_cache1; i++)
 		{
-			tablasCache1[i] = new Tabla(caches1[i-1]);
+			tablasCache1[i] = new Tabla(caches1[i]);
 			if (vias_caches1[i] > 1)
 				tablasCache1[i].setRenderTablaEnCelda();
 			framesCache1[i] = new VentanaLimitada();
 			JScrollPane jscroll = new JScrollPane(tablasCache1[i], JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-			framesCache1[i].setTitle("Cache L"+(i-1));
+			framesCache1[i].setTitle("Cache Datos L"+(i));
 			framesCache1[i].setPreferredSize( new Dimension(600, 200) );
 			framesCache1[i].setMinimumSize(new Dimension(500, 200));
 			framesCache1[i].setMaximumSize(new Dimension(2000, 2000));
@@ -318,7 +332,7 @@ public class ClasePrincipal {
 			framesCache1[i].pack();
 			framesCache1[i].addWindowListener(new VentanaOculta(framesCache1[i]));
 			framesCache1[i].setVisible(false);
-			caches1[i-1].setInterfaz(tablasCache1[i]);
+			caches1[i].setInterfaz(tablasCache1[i]);
 		}
 		
 		if (jerarquiasSeparadas)
@@ -326,14 +340,14 @@ public class ClasePrincipal {
 			tablasCache2 = new Tabla[niveles_cache2];
 			framesCache2 = new JFrame[niveles_cache2];
 			
-			for (int i = 1; i < 1 + niveles_cache1; i++)
+			for (int i = 0; i < niveles_cache1; i++)
 			{
-				tablasCache2[i] = new Tabla(caches1[i-1]);
+				tablasCache2[i] = new Tabla(caches1[i]);
 				if (vias_caches2[i] > 1)
 					tablasCache2[i].setRenderTablaEnCelda();
 				framesCache2[i] = new VentanaLimitada();
 				JScrollPane jscroll = new JScrollPane(tablasCache2[i], JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-				framesCache2[i].setTitle("Cache L"+(i-1));
+				framesCache2[i].setTitle("Cache Instrucciones L"+(i));
 				framesCache2[i].setPreferredSize( new Dimension(600, 200) );
 				framesCache2[i].setMinimumSize(new Dimension(500, 200));
 				framesCache2[i].setMaximumSize(new Dimension(2000, 2000));
@@ -341,7 +355,7 @@ public class ClasePrincipal {
 				framesCache2[i].pack();
 				framesCache2[i].addWindowListener(new VentanaOculta(framesCache2[i]));
 				framesCache2[i].setVisible(false);
-				caches1[i-1].setInterfaz(tablasCache2[i]);
+				caches1[i].setInterfaz(tablasCache2[i]);
 			}
 		}
 	}
