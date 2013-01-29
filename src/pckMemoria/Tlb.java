@@ -42,10 +42,21 @@ public class Tlb {
 		return false;
 	}
 	
+	public boolean hayHueco(int pagina)
+	{
+		if (tlb.lineaLibre(pagina))
+			return true;
+		
+		return false;
+	}
+	
 	// Insertar entrada
 	public void insertar(int pagina, int marco) throws MemoryException
 	{
-		tlb.escribirLinea(pagina, 0, new int[]{marco});
+		if (tlb.lineaLibre(pagina))
+			tlb.escribirLinea(pagina, 0, new int[]{marco});
+		else
+			tlb.reemplazarLinea(pagina, 0, new int[]{marco});
 	}
 	
 	// Consultar entrada

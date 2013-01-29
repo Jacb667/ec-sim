@@ -94,29 +94,31 @@ public class Log {
 			println(1, "Jerarquía de datos");
 		}
 		
-		
 		float ratio_l0 = (float)(Log.cache_hits[0]*100) / (float)(Log.accesosMemoria);
 		float ratio_l1 = (float)(Log.cache_hits[1]*100) / (float)(Log.accesosMemoria-Log.cache_hits[0]);
 		float ratio_l2 = (float)(Log.cache_hits[2]*100) / (float)(Log.accesosMemoria-Log.cache_hits[0]-Log.cache_hits[1]);
 		
-		println(1,"Accesos a memoria: " + Log.accesosMemoria + " (" + 
+		System.out.println("Accesos a memoria: " + Log.accesosMemoria + " (" + 
 				Log.lecturasMemoria + " lecturas + " + Log.escriturasMemoria + " escrituras)");
-		println(1,"Accesos a bloques: " + Log.accesosBloques + " (" + 
+		System.out.println("Accesos a bloques: " + Log.accesosBloques + " (" + 
 				Log.lecturasBloques + " leidos + " + Log.escriturasBloques + " escritos)");
 		
 		int niveles = Config.get(Conf_Type.NIVELES_CACHE_DATOS);
 		
-		switch(niveles)
+		if (niveles > 0)
 		{
-			case 1:
-				println(1,"Cache L0 -> " + Log.cache_hits[0] + " Hits - " + Log.cache_misses[0] + " Miss (" + Log.cache_conflicts[0] + ")");
-				println(1, String.format("%.2f%%", ratio_l0));
-			case 2:
-				println(1,"Cache L1 -> " + Log.cache_hits[1] + " Hits - " + Log.cache_misses[1] + " Miss (" + Log.cache_conflicts[1] + ")");
-				println(1, String.format("%.2f%%", ratio_l1));
-			case 3:
-				println(1,"Cache L2 -> " + Log.cache_hits[2] + " Hits - " + Log.cache_misses[2] + " Miss (" + Log.cache_conflicts[2] + ")");
-				println(1, String.format("%.2f%%", ratio_l2));
+			System.out.println("Cache L0 -> " + Log.cache_hits[0] + " Hits - " + (Log.cache_misses[0]) + " Miss (" + Log.cache_conflicts[0] + ")");
+			System.out.println(String.format("%.2f%%", ratio_l0));
+		}
+		if (niveles > 1)
+		{
+			System.out.println("Cache L1 -> " + Log.cache_hits[1] + " Hits - " + Log.cache_misses[1] + " Miss (" + Log.cache_conflicts[1] + ")");
+			System.out.println(String.format("%.2f%%", ratio_l1));
+		}
+		if (niveles > 2)
+		{
+			System.out.println("Cache L2 -> " + Log.cache_hits[2] + " Hits - " + Log.cache_misses[2] + " Miss (" + Log.cache_conflicts[2] + ")");
+			System.out.println(String.format("%.2f%%", ratio_l2));
 		}
 		
 		if (Config.get(Conf_Type.JERARQUIAS_SEPARADAS) == 1)
@@ -222,6 +224,16 @@ public class Log {
 			case CONFLICT_PAGE:
 				conflictosPagina++;
 				break;
+			case CACHE_HIT:
+			case CACHE_MISS:
+			case CONFLICT_CACHE:
+			try {
+				throw new MemoryException("ERROR AQUI");
+			} catch (MemoryException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				Global.sleep(10000);
+			}
 		}
 	}
 	
@@ -284,7 +296,7 @@ public class Log {
 				else
 					Config.getVista().resTraza(s+"\n");
 			}
-			System.out.println(n);
+			System.out.println(s);
 		}
 	}
 	

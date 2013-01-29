@@ -16,6 +16,7 @@ import general.Config.Conf_Type;
 import general.Config.Conf_Type_c;
 import general.Global.TiposReemplazo;
 import general.Config;
+import general.Log;
 import general.MemoryException;
 import pckCpu.Cpu;
 import pckCpu.CpuMonociclo;
@@ -149,14 +150,14 @@ public class ClasePrincipal {
 				System.err.println(e);
 			else
 				JOptionPane.showMessageDialog( v, e, "Se ha producido una excepción", JOptionPane.ERROR_MESSAGE );
+			e.printStackTrace();
 		}
 		catch (Exception e)
 		{
 			Vista v = Config.getVista();
-			if (v == null)
-				e.printStackTrace();
-			else
+			if (v != null)
 				JOptionPane.showMessageDialog( v, e, "Se ha producido una excepción", JOptionPane.ERROR_MESSAGE );
+			e.printStackTrace();
 		}
 	}
 	
@@ -175,6 +176,8 @@ public class ClasePrincipal {
 			else
 				JOptionPane.showMessageDialog( v, e, "Se ha producido una excepción", JOptionPane.ERROR_MESSAGE );
 		}
+		
+		Log.generarEstadistica();
 	}
 	
 	public void ejecutarCicloCodigo()

@@ -2,6 +2,7 @@ package pckCpu;
 
 import general.Global;
 import general.Global.Opcode;
+import general.Log;
 import general.MemoryException;
 
 import java.util.List;
@@ -50,7 +51,6 @@ public class CpuMonociclo implements Cpu {
 		while (ejecutando)
 		{
 			ejecutando = ejecutarInstruccion();
-			Global.sleep(10);
 		}
 		
 		System.out.println("Fin de programa.");
