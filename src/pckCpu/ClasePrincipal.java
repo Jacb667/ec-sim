@@ -27,6 +27,7 @@ import pckMemoria.JerarquiaMemoria;
 import pckMemoria.MemoriaPrincipal;
 import pckMemoria.TablaPaginas;
 import pckMemoria.Tlb;
+import pckMemoria.Traza;
 
 public class ClasePrincipal {
 	
@@ -84,6 +85,9 @@ public class ClasePrincipal {
 	private int tlb2_vias;
 	private TiposReemplazo tlb1_politica;
 	private TiposReemplazo tlb2_politica;
+	//Traza
+	private String t;
+	private Traza traza=new Traza(jmem,null);
 	
 	public ClasePrincipal()
 	{
@@ -157,9 +161,19 @@ public class ClasePrincipal {
 	}
 	
 	// Aquí el ejecutar traza
-	public void ejecutarTraza()
+	public void ejecutarTraza() throws MemoryException
 	{
 		//ejecutar(archivo_traza);
+		traza.decLine(t);
+		
+	}
+	public void setTraza(String s)
+	{
+		t=s;
+	}
+	public String resTraza()
+	{
+		return traza.getResult();
 	}
 	
 	
