@@ -180,14 +180,21 @@ public class Log {
 		}
 	}
 	
-	public static void println(int n, String s)
+	public static void println(int n, String s) throws MemoryException
 	{
 		// Filtramos el nivel de log.
 		if (n <= nivel)
 		{
 			// Llamamos al controlador para que muestre el mensaje en el lugar adecuado.
 			// TODO: De momento hacemos una llamada a System.out.
-			System.out.println(s);
+			if(Config.getVista()!=null)
+			{
+				Config.getVista().resTraza(s);
+			}
+			else
+			{
+				throw new MemoryException("VISTA NO GENERADA");
+			}
 		}
 	}
 	
