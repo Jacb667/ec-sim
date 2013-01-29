@@ -1481,4 +1481,12 @@ public class Vista extends javax.swing.JPanel {
     {
     	ejecucion_p.setEnabledAt(0, b);
     }
+    public void resetTraza()
+    {
+    	ejecucion_a.setText("");
+    }
+    public void resetEjec()
+    {
+    	ejecucion_a1.setText("");
+    }
 }
