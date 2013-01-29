@@ -175,10 +175,11 @@ public class Controlador implements ActionListener {
 			 }
 			 Config.set(Conf_Type_c.ARCHIVO_CODIGO,ArchivoCode);
 			 v.enabledEjecutarC();
+			 v.enabledConfig(false);
 			}
-			catch(NumberFormatException ex)
+			catch(NumberFormatException e1)
 			{
-				JOptionPane.showMessageDialog( v, "Error de formato al cargar los datos", "Error de formato", JOptionPane.ERROR_MESSAGE );
+				JOptionPane.showMessageDialog( v, "Error de formato al cargar los datos"+e1, "Error de formato", JOptionPane.ERROR_MESSAGE );
 			}
 			
 			
@@ -272,6 +273,7 @@ public class Controlador implements ActionListener {
 				 
 				 
 				v.enabledEjecutarT();
+				v.enabledConfig(false);
 			}
 			catch(NumberFormatException ex)
 			{

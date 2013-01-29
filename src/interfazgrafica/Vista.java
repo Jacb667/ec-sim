@@ -1477,4 +1477,8 @@ public class Vista extends javax.swing.JPanel {
     {
     	ejecucion_a1.setText(t);
     }
+    public void enabledConfig(boolean b)
+    {
+    	ejecucion_p.setEnabledAt(0, b);
+    }
 }
