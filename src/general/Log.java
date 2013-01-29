@@ -209,7 +209,10 @@ public class Log {
 			// TODO: De momento hacemos una llamada a System.out.
 			if(Config.getVista()!=null)
 			{
-				Config.getVista().resTraza(s);
+				if (Config.ejecutando_codigo)
+					Config.getVista().resEjec(s+"\n");
+				else
+					Config.getVista().resTraza(s+"\n");
 			}
 			else
 			{

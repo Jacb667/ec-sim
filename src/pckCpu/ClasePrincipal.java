@@ -1,9 +1,12 @@
 
 package pckCpu;
 
+import interfazgrafica.Vista;
+
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import componentes.Tabla;
 import componentes.VentanaLimitada;
@@ -141,24 +144,55 @@ public class ClasePrincipal {
 		}
 		catch (MemoryException e)
 		{
-			System.err.println(e);
+			Vista v = Config.getVista();
+			if (v == null)
+				System.err.println(e);
+			else
+				JOptionPane.showMessageDialog( v, e, "Se ha producido una excepción", JOptionPane.ERROR_MESSAGE );
 		}
 		catch (Exception e)
 		{
-			e.printStackTrace();
+			Vista v = Config.getVista();
+			if (v == null)
+				e.printStackTrace();
+			else
+				JOptionPane.showMessageDialog( v, e, "Se ha producido una excepción", JOptionPane.ERROR_MESSAGE );
 		}
 	}
 	
-	public void ejecutarCodigo() throws MemoryException, CpuException
+	public void ejecutarCodigo()
 	{
 		// Una vez tenemos el código guardado en memoria, comenzamos la ejecución.
-		cpu.ejecutarCodigo();
+		try
+		{
+			cpu.ejecutarCodigo();
+		}
+		catch (MemoryException | CpuException e)
+		{
+			Vista v = Config.getVista();
+			if (v == null)
+				System.err.println(e);
+			else
+				JOptionPane.showMessageDialog( v, e, "Se ha producido una excepción", JOptionPane.ERROR_MESSAGE );
+		}
 	}
 	
-	public void ejecutarCicloCodigo() throws MemoryException, CpuException
+	public void ejecutarCicloCodigo()
 	{
-		cpu.ejecutarInstruccion();
+		try
+		{
+			cpu.ejecutarInstruccion();
+		}
+		catch (MemoryException | CpuException e)
+		{
+			Vista v = Config.getVista();
+			if (v == null)
+				System.err.println(e);
+			else
+				JOptionPane.showMessageDialog( v, e, "Se ha producido una excepción", JOptionPane.ERROR_MESSAGE );
+		}
 	}
+	
 	
 	// Aquí el ejecutar traza
 	public void ejecutarTraza() throws MemoryException
@@ -187,8 +221,6 @@ public class ClasePrincipal {
 	{
 		traza=new Traza(jmem,jmem2);
 	}
-	
-	
 	
 	// Leer configuración.
 	private void leerConfig()
@@ -252,13 +284,26 @@ public class ClasePrincipal {
 	}
 	
 	// Inicializa la Cpu.
-	private void inicializarCpu()
+	private void inicializarCpu() throws CpuException
 	{
 		// Calculo la dirección de memoria para instrucciones.
 		int num_instrucciones = Decoder.getInstrucciones().size();
 		int paginas_instrucciones = (int) Math.ceil(num_instrucciones / entradas_pagina);
-		int primera_pag_inst = tablaPags.getNumeroPaginas()-1 - paginas_instrucciones;
-		direccion_inst = primera_pag_inst * tablaPags.getEntradasPagina() * 4;
+		
+		
+		if (tablaPags.getNumeroPaginas() == 1)
+		{
+			int mitad = entradas_pagina / 2;
+			if (mitad < num_instrucciones)
+				throw new CpuException("No hay memoria suficiente para este código.");
+			
+			direccion_inst = mitad;
+		}
+		else
+		{
+			int primera_pag_inst = tablaPags.getNumeroPaginas()-1 - paginas_instrucciones;
+			direccion_inst = primera_pag_inst * tablaPags.getEntradasPagina() * 4;
+		}
 		
 		//if (segmentado == true)
 		//	cpu = new CpuSegmentado(jmem, null, direccion_inst);
