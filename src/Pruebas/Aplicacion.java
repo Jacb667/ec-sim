@@ -4,6 +4,8 @@
  */
 package Pruebas;
 
+import java.awt.Dimension;
+
 import interfazgrafica.Controlador;
 import interfazgrafica.Vista;
 
@@ -14,23 +16,26 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
- * @author José Andrés
+ * @author José Andrés Cordero
+ * @author Manuel Álvarez
  */
 public class Aplicacion extends javax.swing.JFrame {
 
 	private static final long serialVersionUID = 1L;
 	
-    public static void main(String args[]) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
+    public static void main(String args[]) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException
+    {
     	UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-    	 Vista v=new Vista();
-         JFrame ventana = new JFrame("Simulador MIPS v1.1");
-         Controlador ctr = new Controlador(v);
-         v.controlador(ctr);
-         ventana.setContentPane(v);
-         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-         ventana.pack();
-         ventana.setVisible(true);
-         
+    	Vista v = new Vista();
+        JFrame ventana = new JFrame("Simulador MIPS v1.1");
+        ventana.setMinimumSize(new Dimension(660,405));
+        ventana.setPreferredSize(new Dimension(660,405));
+        Controlador ctr = new Controlador(v);
+        v.controlador(ctr);
+        ventana.setContentPane(v);
+        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ventana.pack();
+        ventana.setVisible(true);
         
         // Main
         //new Test();
@@ -40,8 +45,4 @@ public class Aplicacion extends javax.swing.JFrame {
     	//new TestTraza();
     	//new TestTraductor();
     }
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    // End of variables declaration//GEN-END:variables
 }
