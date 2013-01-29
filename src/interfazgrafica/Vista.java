@@ -158,7 +158,7 @@ public class Vista extends javax.swing.JPanel {
 
         pal_p_linea_l.setText("Tamaño de palabra: ");
 
-        pal_p_linea_t.setText("32");
+        pal_p_linea_t.setText("4");
 
         jerarquias_separadas_l.setText("Jerarquías separadas");
 
@@ -991,6 +991,8 @@ public class Vista extends javax.swing.JPanel {
         cache_i1_b.setEnabled(false);
         cache_i2_b.setEnabled(false);
         cache_i3_b.setEnabled(false);
+        tip_tam_cache1_cb.setSelectedIndex(1);
+        tip_tam_cache1_cb.setEnabled(false);
     }// </editor-fold>//GEN-END:initComponents
 
     private void niv_cache_data_cbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_niv_cache_data_cbActionPerformed
