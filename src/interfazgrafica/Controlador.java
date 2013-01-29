@@ -289,6 +289,14 @@ public class Controlador implements ActionListener {
 			}
 			 
 		}
+		else if(comando.equals(Global.EJECUTART))
+		{
+			//Ejecutar Traza
+		}
+		else if(comando.equals(Global.EJECUTARC))
+		{
+			//Ejecutar Codigo
+		}
 		// A PARTIR DE AQUI LOS BOTONES DE CACHES Y MEM-----------------------------------------------------------------------------------------------
 		else if(comando.equals(Global.BCACHED1))
 		{

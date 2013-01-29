@@ -30,6 +30,9 @@ public class Global {
 	final static public String BCACHEI2="BCACHEI2";
 	final static public String BCACHEI3="BCACHEI3";
 	final static public String BMEM="BMEM";
+	final static public String EJECUTART="EJECUTAR";
+	final static public String EJECUTARC="EJECUTAC";
+	
 	
 
 	public enum Opcode
