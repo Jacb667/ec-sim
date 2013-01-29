@@ -120,19 +120,40 @@ public class TablaPaginas {
 		if (pag.getMarco() != -1)
 		{
 			// Comprobamos si está en la TLB (en realidad no se utiliza para nada, sólo para ver si es HIT o MISS)
-			if (tlb_datos != null)
+			if (secundaria == false)
 			{
-				if (tlb_datos.existePagina(pag.getId()))
+				if (tlb_datos != null)
 				{
-					Log.report(Flags.TLB_HIT, secundaria);
-					Log.println(2,"TLB HIT");
+					if (tlb_datos.existePagina(pag.getId()))
+					{
+						Log.report(Flags.TLB_HIT, secundaria);
+						Log.println(2,"TLB HIT");
+					}
+					else
+					{
+						// MISS, la guardamos en TLB
+						tlb_datos.insertar(pag.getId(), pag.getMarco());
+						Log.report(Flags.TLB_MISS, secundaria);
+						Log.println(2,"TLB MISS");
+					}
 				}
-				else
+			}
+			else
+			{
+				if (tlb_inst != null)
 				{
-					// MISS, la guardamos en TLB
-					tlb_datos.insertar(pag.getId(), pag.getMarco());
-					Log.report(Flags.TLB_MISS, secundaria);
-					Log.println(2,"TLB MISS");
+					if (tlb_inst.existePagina(pag.getId()))
+					{
+						Log.report(Flags.TLB_HIT, secundaria);
+						Log.println(2,"TLB HIT");
+					}
+					else
+					{
+						// MISS, la guardamos en TLB
+						tlb_inst.insertar(pag.getId(), pag.getMarco());
+						Log.report(Flags.TLB_MISS, secundaria);
+						Log.println(2,"TLB MISS");
+					}
 				}
 			}
 			
@@ -148,11 +169,23 @@ public class TablaPaginas {
 		else
 		{
 			// MISS, la guardamos en TLB
-			if (tlb_datos != null)
+			if (secundaria == false)
 			{
-				tlb_datos.insertar(pag.getId(), pag.getMarco());
-				Log.report(Flags.TLB_MISS, secundaria);
-				Log.println(2,"TLB MISS");
+				if (tlb_datos != null)
+				{
+					tlb_datos.insertar(pag.getId(), pag.getMarco());
+					Log.report(Flags.TLB_MISS, secundaria);
+					Log.println(2,"TLB MISS");
+				}
+			}
+			else
+			{
+				if (tlb_inst != null)
+				{
+					tlb_datos.insertar(pag.getId(), pag.getMarco());
+					Log.report(Flags.TLB_MISS, secundaria);
+					Log.println(2,"TLB MISS");
+				}
 			}
 			// Es PAGE FAULT
 			Log.report(Flags.PAGE_FAULT, secundaria);
