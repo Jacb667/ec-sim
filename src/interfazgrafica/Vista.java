@@ -169,6 +169,7 @@ public class Vista extends javax.swing.JPanel {
         segmentado_chb.setText("Si/No");
 
         log_cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nada", "Mínimo", "Normal", "Debug" }));
+        log_cb.setSelectedIndex(2);
 
         jLabel4.setText("Detalle log");
 
@@ -220,6 +221,8 @@ public class Vista extends javax.swing.JPanel {
         config_p1.addTab("CPU", cpu_p);
 
         m_entradas_p_pagina_l.setText("Entradas por página");
+        
+        m_entradas_p_pagina_t.setText("1024");
 
         m_numero_entradas.setText("Número de entradas");
 
@@ -405,6 +408,8 @@ public class Vista extends javax.swing.JPanel {
         });
 
         tam_linea_l.setText("Tamaño de línea");
+        
+        tam_linea_t.setText("4");
 
         tip_tam_cache1_l.setText("Tamaño de Cache en: ");
 
@@ -1404,7 +1409,6 @@ public class Vista extends javax.swing.JPanel {
     {
     	return Integer.decode(n_entradas_c3_t.getText());
     }
-    
     public int getCI1NEntradas()
     {
     	return Integer.decode(n_entradas_c1_i_t.getText());
