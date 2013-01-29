@@ -193,7 +193,7 @@ public class Vista extends javax.swing.JPanel {
                             .addComponent(segmentado_chb)
                             .addComponent(jerarquias_separadas_chb)
                             .addComponent(log_cb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(406, Short.MAX_VALUE))
+                .addContainerGap(458, Short.MAX_VALUE))
         );
         cpu_pLayout.setVerticalGroup(
             cpu_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,7 +214,7 @@ public class Vista extends javax.swing.JPanel {
                 .addGroup(cpu_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(log_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addContainerGap(176, Short.MAX_VALUE))
+                .addContainerGap(193, Short.MAX_VALUE))
         );
 
         config_p1.addTab("CPU", cpu_p);
@@ -259,13 +259,13 @@ public class Vista extends javax.swing.JPanel {
                             .addComponent(n_vias_c2_l4))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(n_entradas_tlb_data_t, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                            .addComponent(n_vias_tlb_data_t, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE))
+                            .addComponent(n_entradas_tlb_data_t, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
+                            .addComponent(n_vias_tlb_data_t, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE))
                         .addGap(327, 327, 327))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(politica_reemplazo_c1_l1)
                         .addGap(18, 18, 18)
-                        .addComponent(politica_reemplazo_tlb_data_cb1, 0, 180, Short.MAX_VALUE)
+                        .addComponent(politica_reemplazo_tlb_data_cb1, 0, 232, Short.MAX_VALUE)
                         .addGap(325, 325, 325))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -283,7 +283,7 @@ public class Vista extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(politica_reemplazo_c1_l1)
                     .addComponent(politica_reemplazo_tlb_data_cb1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("TLB Data", jPanel1);
@@ -315,13 +315,13 @@ public class Vista extends javax.swing.JPanel {
                             .addComponent(n_vias_c2_l5))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(n_entradas_tlb_ins_t, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                            .addComponent(n_vias_tlb_ins_t, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE))
+                            .addComponent(n_entradas_tlb_ins_t, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
+                            .addComponent(n_vias_tlb_ins_t, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE))
                         .addGap(327, 327, 327))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(politica_reemplazo_c1_l2)
                         .addGap(18, 18, 18)
-                        .addComponent(politica_reemplazo_tlb_ins_cb, 0, 180, Short.MAX_VALUE)
+                        .addComponent(politica_reemplazo_tlb_ins_cb, 0, 232, Short.MAX_VALUE)
                         .addGap(325, 325, 325))))
         );
         jPanel3Layout.setVerticalGroup(
@@ -339,7 +339,7 @@ public class Vista extends javax.swing.JPanel {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(politica_reemplazo_c1_l2)
                     .addComponent(politica_reemplazo_tlb_ins_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("TLB Ins", jPanel3);
@@ -390,7 +390,7 @@ public class Vista extends javax.swing.JPanel {
                     .addComponent(tlb_data_chb)
                     .addComponent(tlb_inst_chb))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTabbedPane1))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE))
         );
 
         config_p1.addTab("Memoria", memoria_p);
@@ -433,7 +433,7 @@ public class Vista extends javax.swing.JPanel {
                     .addComponent(n_entradas_c1_t)
                     .addComponent(n_vias_c1_t)
                     .addComponent(politica_reemplazo_c1_cb, 0, 180, Short.MAX_VALUE))
-                .addContainerGap(319, Short.MAX_VALUE))
+                .addContainerGap(371, Short.MAX_VALUE))
         );
         cache1_pLayout.setVerticalGroup(
             cache1_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -450,7 +450,7 @@ public class Vista extends javax.swing.JPanel {
                 .addGroup(cache1_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(politica_reemplazo_c1_l)
                     .addComponent(politica_reemplazo_c1_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addContainerGap(106, Short.MAX_VALUE))
         );
 
         cache1_3_p.addTab("Cache 1 Data", cache1_p);
@@ -502,21 +502,21 @@ public class Vista extends javax.swing.JPanel {
         cache2_p.setLayout(cache2_pLayout);
         cache2_pLayout.setHorizontalGroup(
             cache2_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 633, Short.MAX_VALUE)
+            .addGap(0, 685, Short.MAX_VALUE)
+            .addGroup(cache2_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(cache2_pLayout.createSequentialGroup()
+                    .addGap(0, 30, Short.MAX_VALUE)
+                    .addComponent(cache1_p1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 30, Short.MAX_VALUE)))
+        );
+        cache2_pLayout.setVerticalGroup(
+            cache2_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 213, Short.MAX_VALUE)
             .addGroup(cache2_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(cache2_pLayout.createSequentialGroup()
                     .addGap(0, 4, Short.MAX_VALUE)
                     .addComponent(cache1_p1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 4, Short.MAX_VALUE)))
-        );
-        cache2_pLayout.setVerticalGroup(
-            cache2_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 205, Short.MAX_VALUE)
-            .addGroup(cache2_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(cache2_pLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(cache1_p1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         cache1_3_p.addTab("Cache 2 Data", cache2_p);
@@ -568,21 +568,21 @@ public class Vista extends javax.swing.JPanel {
         cache3_p.setLayout(cache3_pLayout);
         cache3_pLayout.setHorizontalGroup(
             cache3_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 633, Short.MAX_VALUE)
+            .addGap(0, 685, Short.MAX_VALUE)
+            .addGroup(cache3_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(cache3_pLayout.createSequentialGroup()
+                    .addGap(0, 30, Short.MAX_VALUE)
+                    .addComponent(cache1_p2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 30, Short.MAX_VALUE)))
+        );
+        cache3_pLayout.setVerticalGroup(
+            cache3_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 213, Short.MAX_VALUE)
             .addGroup(cache3_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(cache3_pLayout.createSequentialGroup()
                     .addGap(0, 4, Short.MAX_VALUE)
                     .addComponent(cache1_p2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 4, Short.MAX_VALUE)))
-        );
-        cache3_pLayout.setVerticalGroup(
-            cache3_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 205, Short.MAX_VALUE)
-            .addGroup(cache3_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(cache3_pLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(cache1_p2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         cache1_3_p.addTab("Cache 3 Data", cache3_p);
@@ -610,7 +610,7 @@ public class Vista extends javax.swing.JPanel {
                     .addComponent(n_entradas_c1_i_t)
                     .addComponent(n_vias_c1_i_t)
                     .addComponent(politica_reemplazo_c1_i_cb, 0, 180, Short.MAX_VALUE))
-                .addContainerGap(319, Short.MAX_VALUE))
+                .addContainerGap(371, Short.MAX_VALUE))
         );
         cache1_i_pLayout.setVerticalGroup(
             cache1_i_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -627,7 +627,7 @@ public class Vista extends javax.swing.JPanel {
                 .addGroup(cache1_i_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(plicita_reemplazo_c2_l1)
                     .addComponent(politica_reemplazo_c1_i_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addContainerGap(106, Short.MAX_VALUE))
         );
 
         cache1_3_p.addTab("Cache 1 Inst", cache1_i_p);
@@ -655,7 +655,7 @@ public class Vista extends javax.swing.JPanel {
                     .addComponent(n_entradas_c2_i_t)
                     .addComponent(n_vias_c2_i_t)
                     .addComponent(politica_reemplazo_c2_i_cb, 0, 180, Short.MAX_VALUE))
-                .addContainerGap(319, Short.MAX_VALUE))
+                .addContainerGap(371, Short.MAX_VALUE))
         );
         cache2_i_pLayout.setVerticalGroup(
             cache2_i_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -672,7 +672,7 @@ public class Vista extends javax.swing.JPanel {
                 .addGroup(cache2_i_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(plicita_reemplazo_c2_l2)
                     .addComponent(politica_reemplazo_c2_i_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addContainerGap(106, Short.MAX_VALUE))
         );
 
         cache1_3_p.addTab("Cache 2 Inst", cache2_i_p);
@@ -700,7 +700,7 @@ public class Vista extends javax.swing.JPanel {
                     .addComponent(n_entradas_c3_i_t)
                     .addComponent(n_vias_c3_i_t)
                     .addComponent(politica_reemplazo_c3_i_cb, 0, 180, Short.MAX_VALUE))
-                .addContainerGap(319, Short.MAX_VALUE))
+                .addContainerGap(371, Short.MAX_VALUE))
         );
         cache3_i_pLayout.setVerticalGroup(
             cache3_i_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -717,7 +717,7 @@ public class Vista extends javax.swing.JPanel {
                 .addGroup(cache3_i_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(plicita_reemplazo_c2_l3)
                     .addComponent(politica_reemplazo_c3_i_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addContainerGap(106, Short.MAX_VALUE))
         );
 
         cache1_3_p.addTab("Cache 3 Inst", cache3_i_p);
@@ -772,8 +772,8 @@ public class Vista extends javax.swing.JPanel {
                     .addComponent(tip_tam_cache1_l)
                     .addComponent(tam_linea_l)
                     .addComponent(tam_linea_t, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                .addComponent(cache1_3_p, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addComponent(cache1_3_p, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE))
         );
 
         config_p1.addTab("Caches", caches_p);
@@ -788,7 +788,7 @@ public class Vista extends javax.swing.JPanel {
             ConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ConfiguracionLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(config_p1))
+                .addComponent(config_p1, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE))
         );
 
         ejecucion_p.addTab("Configuración", Configuracion);
@@ -801,14 +801,14 @@ public class Vista extends javax.swing.JPanel {
 
         ejecutar_b.setText("Ejecutar");
 
-        traza_carga_b.setText("Cargar Taza");
+        traza_carga_b.setText("Cargar traza");
         traza_carga_b.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 traza_carga_bActionPerformed(evt);
             }
         });
 
-        salvar_t.setText("traza.txt");
+        salvar_t.setText("");
 
         exportar_b.setText("Exportar");
 
@@ -821,10 +821,10 @@ public class Vista extends javax.swing.JPanel {
             .addGroup(ejecucionLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(ejecucionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 623, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 675, Short.MAX_VALUE)
                     .addGroup(ejecucionLayout.createSequentialGroup()
                         .addComponent(salvar_t, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 195, Short.MAX_VALUE)
                         .addComponent(exportar_b, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ejecucionLayout.createSequentialGroup()
                         .addComponent(traza_carga_b, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -844,7 +844,7 @@ public class Vista extends javax.swing.JPanel {
                     .addComponent(ejecutar_b)
                     .addComponent(validar_t_b))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(ejecucionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(salvar_t, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -857,18 +857,18 @@ public class Vista extends javax.swing.JPanel {
         ejecucion_a1.setEditable(false);
         ejecucion_a1.setColumns(20);
         ejecucion_a1.setRows(5);
-        ejecucion_a1.setText("Aqui se montrara la ejecucion y resultados");
+        ejecucion_a1.setText("");
         jScrollPane3.setViewportView(ejecucion_a1);
 
         ejecutar_b1.setText("Ejecutar");
 
         ciclo_b1.setText("Ciclo");
 
-        salvar_e.setText("ejecucion.txt");
+        salvar_e.setText("");
 
         exportar_b1.setText("Exportar");
 
-        cargar_codigo_b.setText("Cargar Código");
+        cargar_codigo_b.setText("Cargar código");
 
         validar_c_b.setText("Validar");
 
@@ -894,7 +894,7 @@ public class Vista extends javax.swing.JPanel {
             .addGroup(ejecucion1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(ejecucion1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 623, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 675, Short.MAX_VALUE)
                     .addGroup(ejecucion1Layout.createSequentialGroup()
                         .addGroup(ejecucion1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(ejecucion1Layout.createSequentialGroup()
@@ -923,7 +923,7 @@ public class Vista extends javax.swing.JPanel {
                                 .addComponent(exportar_b1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(memoria_b)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 98, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         ejecucion1Layout.setVerticalGroup(
@@ -936,7 +936,7 @@ public class Vista extends javax.swing.JPanel {
                     .addComponent(ejecutar_b1)
                     .addComponent(validar_c_b))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(ejecucion1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cache_d1_b)
@@ -959,15 +959,11 @@ public class Vista extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(ejecucion_p, javax.swing.GroupLayout.PREFERRED_SIZE, 648, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(ejecucion_p, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(ejecucion_p, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(ejecucion_p, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         n_entradas_tlb_data_t.setEnabled(false);
         n_vias_tlb_data_t.setEnabled(false);
