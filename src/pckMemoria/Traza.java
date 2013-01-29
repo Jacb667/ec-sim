@@ -1,9 +1,12 @@
 package pckMemoria;
 
+import general.Config;
 import general.Log;
 import general.MemoryException;
 
 import java.util.*;
+
+import javax.swing.JOptionPane;
 
 public class Traza {
 	int TAM=3;
@@ -156,7 +159,7 @@ public class Traza {
 		}
 		else
 		{
-			throw new MemoryException("Parametro invalido: "+s+" En linea: "+contLines);
+			JOptionPane.showMessageDialog( Config.getVista(), "Parametro invalido: "+s+" En linea: "+contLines, "Parametro Invalido", JOptionPane.ERROR_MESSAGE );
 		}
 	}
 	
