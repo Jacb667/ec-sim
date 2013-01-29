@@ -228,11 +228,11 @@ public class Vista extends javax.swing.JPanel {
 
         m_numero_entradas.setText("Número de entradas");
 
-        m_num_entradas_t.setText("#3FFFFFFF");
+        m_num_entradas_t.setText("#3FFF");
 
         jLabel2.setText("Máxima entrada de memoria");
 
-        jTextField1.setText("#3FFF");
+        jTextField1.setText("#7FF");
 
         tlb_data_chb.setText("TLB Data");
         tlb_data_chb.addActionListener(new java.awt.event.ActionListener() {
@@ -418,8 +418,12 @@ public class Vista extends javax.swing.JPanel {
         tip_tam_cache1_cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bytes", "Número de entradas" }));
 
         n_entradas_c1_l.setText("Número de entradas");
+        
+        n_entradas_c1_t.setText("16");
 
         n_vias_c1_l.setText("Número de vias");
+        
+        n_vias_c1_t.setText("1");
 
         politica_reemplazo_c1_l.setText("Política de reemplazo");
 
@@ -804,7 +808,7 @@ public class Vista extends javax.swing.JPanel {
         ejecucion_a.setColumns(20);
         ejecucion_a.setRows(5);
         ejecucion_a.setText("");
-        ejecucion_a1.setFont(new Font("Arial",0,10));
+        ejecucion_a.setFont(new Font("Arial",0,10));
         jScrollPane1.setViewportView(ejecucion_a);
 
         ejecutar_b.setText("Ejecutar");
@@ -1166,10 +1170,10 @@ public class Vista extends javax.swing.JPanel {
     	cache_d3_b.addActionListener(ctr);
     	cache_i1_b.setActionCommand(Global.BCACHEI1);
     	cache_i1_b.addActionListener(ctr);
-    	cache_i1_b.setActionCommand(Global.BCACHEI2);
-    	cache_i1_b.addActionListener(ctr);
-    	cache_i1_b.setActionCommand(Global.BCACHEI3);
-    	cache_i1_b.addActionListener(ctr);
+    	cache_i2_b.setActionCommand(Global.BCACHEI2);
+    	cache_i2_b.addActionListener(ctr);
+    	cache_i3_b.setActionCommand(Global.BCACHEI3);
+    	cache_i3_b.addActionListener(ctr);
     	memoria_b.setActionCommand(Global.BMEM);
     	memoria_b.addActionListener(ctr);
     	ejecutar_b.setActionCommand(Global.EJECUTART);

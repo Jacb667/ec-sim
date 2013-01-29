@@ -120,6 +120,11 @@ public class Controlador implements ActionListener {
 				Config.set(Conf_Type.ENTRADAS_PAGINA,v.getEntradasPagina());
 				Config.set(Conf_Type.NUMERO_ENTRADAS_MEMORIA, v.getNumEntradasMem());
 				Config.set(Conf_Type.MAXIMA_ENTRADA_MEMORIA,v.getMaxNumEntradas());
+				
+				if (v.getMaxNumEntradas() > 0xFFFF)
+					throw new MemoryException("Aviso, no se puede mostrar la memoria si tiene más de " + 0xFFFF + " entradas.");
+				
+				
 				if(v.tlbDataCheck())
 				{
 					Config.set(Conf_Type.TLB_DATOS, 1);
@@ -194,6 +199,10 @@ public class Controlador implements ActionListener {
 			catch(NumberFormatException e1)
 			{
 				JOptionPane.showMessageDialog( v, "Error de formato al cargar los datos", "Error de formato", JOptionPane.ERROR_MESSAGE );
+			}
+			catch (MemoryException e2)
+			{
+				JOptionPane.showMessageDialog( v, e2, "Advertencia", JOptionPane.WARNING_MESSAGE );
 			}
 			
 			claseP = new ClasePrincipal();
@@ -302,12 +311,12 @@ public class Controlador implements ActionListener {
 		else if(comando.equals(Global.EJECUTART))
 		{
 			Config.ejecutando_codigo = false;
-			System.out.println("ENTRA2");
+			//System.out.println("ENTRA2");
 			if (claseP != null)
 			{	
 				claseP.iniciarTraza();
 				String s=null;
-				System.out.println("ENTRA");
+				//System.out.println("ENTRA");
 				try {
 					s=bfOn();
 				} catch (FileNotFoundException e1) {
@@ -328,13 +337,14 @@ public class Controlador implements ActionListener {
 				}
 			
 			}
-			
+			v.enabledConfig(true);
 		}
 		else if(comando.equals(Global.EJECUTARC))
 		{
 			Config.ejecutando_codigo = true;
 			if (claseP != null)
 				claseP.ejecutarCodigo();
+			v.enabledConfig(true);
 		}
 		else if (comando.equals(Global.CICLO))
 		{
