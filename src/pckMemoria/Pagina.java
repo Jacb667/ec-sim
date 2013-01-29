@@ -164,6 +164,16 @@ public class Pagina
 			dirty[i] = false;
 	}
 	
+	public boolean esDirty()
+	{
+		for (int i = 0; i < entradas; i++)
+		{
+			if (dirty[i] == true)
+				return true;
+		}
+		return false;
+	}
+	
 	
 	/*
 	 *  Funciones para JTable (interfaz gráfica).
