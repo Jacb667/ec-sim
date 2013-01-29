@@ -57,7 +57,7 @@ public class CpuMonociclo implements Cpu {
 	}
 	
 	// Ejecutar siguiente instrucción (monociclo).
-	private boolean ejecutarInstruccion() throws MemoryException, CpuException
+	public boolean ejecutarInstruccion() throws MemoryException, CpuException
 	{
 		System.out.println("Fetch " + getPC());
 		/*

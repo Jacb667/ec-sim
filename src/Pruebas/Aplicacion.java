@@ -23,26 +23,21 @@ public class Aplicacion extends javax.swing.JFrame {
 
 	private static final long serialVersionUID = 1L;
 	
+	private static Controlador controlador;
+	private static Vista vista;
+	
     public static void main(String args[]) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException
     {
     	UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-    	Vista v = new Vista();
+    	vista = new Vista();
         JFrame ventana = new JFrame("Simulador MIPS v1.1");
         ventana.setMinimumSize(new Dimension(660,405));
         ventana.setPreferredSize(new Dimension(660,405));
-        Controlador ctr = new Controlador(v);
-        v.controlador(ctr);
-        ventana.setContentPane(v);
+        controlador = new Controlador(vista);
+        vista.controlador(controlador);
+        ventana.setContentPane(vista);
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ventana.pack();
         ventana.setVisible(true);
-        
-        // Main
-        //new Test();
-    	//new TestMemoria();
-    	//new TestMemoria2();
-    	//new TestCpu();
-    	//new TestTraza();
-    	//new TestTraductor();
     }
 }
