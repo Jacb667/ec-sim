@@ -281,7 +281,7 @@ public class CacheAsociativa implements Cache
 	{
 		int tamaño = 4 + palabras_linea;
 		String[] columnas = new String[tamaño];
-		columnas[0] = "Línea";
+		columnas[0] = "Conjunto";
 		columnas[1] = "Tag";
 		columnas[tamaño-2] = "Válida";
 		columnas[tamaño-1] = "Dirty";

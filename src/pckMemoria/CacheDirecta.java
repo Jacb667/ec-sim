@@ -248,7 +248,7 @@ public class CacheDirecta implements Cache
 		StringBuilder strB = new StringBuilder();
 		for (int i = 0; i < datos.length; i++)
 		{
-			strB.append(String.format("0x%3S", Integer.toHexString(i << bits_byte << bits_pal)).replace(" ", "0"));
+			strB.append(String.format("0x%3S", Integer.toHexString(i /*<< bits_byte << bits_pal*/)).replace(" ", "0"));
 			strB.append(" ("+paginas[i]+")");
 			strB.append(" -> ").append(Integer.toHexString(tags[i])).append(" : ").append(Arrays.toString(datos[i]));
 			strB.append(" ").append(valid[i]).append(" ").append(dirty[i]);
@@ -333,7 +333,7 @@ public class CacheDirecta implements Cache
 	{
 		int tamaño = 4 + palabras_linea;
 		String[] columnas = new String[tamaño];
-		columnas[0] = "Línea";
+		columnas[0] = "Conjunto";
 		columnas[1] = "Tag";
 		columnas[tamaño-2] = "Válida";
 		columnas[tamaño-1] = "Dirty";
@@ -354,7 +354,7 @@ public class CacheDirecta implements Cache
 			
 			Object[] linea = new Object[tamaño];
 			
-			linea[0] = String.format("0x%4S", Integer.toHexString(direccion)).replace(" ", "0");
+			linea[0] = String.format("0x%4S", Integer.toHexString(i/*direccion*/)).replace(" ", "0");
 			linea[1] = String.valueOf(tags[i]);
 			linea[tamaño-1] = new Boolean(dirty[i]);
 			linea[tamaño-2] = new Boolean(valid[i]);
