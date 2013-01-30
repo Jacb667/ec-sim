@@ -79,9 +79,9 @@ public class ClasePrincipal {
 	//private boolean segmentado = false;
 	
 	// Páginas y memoria
-	private int entradas_pagina = 16;
-	private int max_entrada = 512;	// Última entrada permitida
-	private int max_ent_mem = 128;	// Última entrada en memoria (tamaño de memoria)
+	private int entradas_pagina;
+	private int max_entrada;
+	private int max_ent_mem;
 
 	private int tlb1_entradas;
 	private int tlb1_vias;
@@ -304,7 +304,6 @@ public class ClasePrincipal {
 		// Calculo la dirección de memoria para instrucciones.
 		int num_instrucciones = Decoder.getInstrucciones().size();
 		int paginas_instrucciones = (int) Math.ceil(num_instrucciones / entradas_pagina);
-		
 		
 		if (tablaPags.getNumeroPaginas() == 1)
 		{

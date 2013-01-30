@@ -126,7 +126,7 @@ public class Log {
 		if (Config.get(Conf_Type.TLB_DATOS) == 1)
 			println(1, "DTLB -> " + Log.aciertosTlb + " Hits - " + Log.fallosTlb + " Miss (" + Log.conflictosTlb + ")");
 		
-		/*if (Config.get(Conf_Type.JERARQUIAS_SEPARADAS) == 1)
+		if (Config.get(Conf_Type.JERARQUIAS_SEPARADAS) == 1)
 		{
 			println(1, "");
 			println(1, "--------------------------");
@@ -164,7 +164,7 @@ public class Log {
 			
 			if (Config.get(Conf_Type.TLB_INSTRUCCIONES) == 1)
 				println(1, "ITLB -> " + Log.aciertosTlb1 + " Hits - " + Log.fallosTlb1 + " Miss (" + Log.conflictosTlb1 + ")");
-		}*/
+		}
 	}
 	
 	private static void report(Flags f, int data)

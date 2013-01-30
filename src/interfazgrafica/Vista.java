@@ -49,8 +49,8 @@ public class Vista extends javax.swing.JPanel {
         m_entradas_p_pagina_t = new javax.swing.JTextField();
         m_numero_entradas = new javax.swing.JLabel();
         m_num_entradas_t = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        m_max_ent_mem = new javax.swing.JLabel();
+        m_max_ent_mem_t = new javax.swing.JTextField();
         tlb_data_chb = new javax.swing.JCheckBox();
         tlb_inst_chb = new javax.swing.JCheckBox();
         jTabbedPane1 = new javax.swing.JTabbedPane();
@@ -228,11 +228,11 @@ public class Vista extends javax.swing.JPanel {
 
         m_numero_entradas.setText("Número de entradas");
 
-        m_num_entradas_t.setText("#3FFF");
+        m_num_entradas_t.setText("#800");
 
-        jLabel2.setText("Máxima entrada de memoria");
+        m_max_ent_mem.setText("Máxima dirección virtual");
 
-        jTextField1.setText("#7FF");
+        m_max_ent_mem_t.setText("#4000");
 
         tlb_data_chb.setText("TLB Data");
         tlb_data_chb.addActionListener(new java.awt.event.ActionListener() {
@@ -366,12 +366,12 @@ public class Vista extends javax.swing.JPanel {
                             .addComponent(m_num_entradas_t, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(memoria_pLayout.createSequentialGroup()
                         .addGroup(memoria_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
+                            .addComponent(m_max_ent_mem)
                             .addComponent(tlb_data_chb))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(memoria_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tlb_inst_chb)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(m_max_ent_mem_t, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
             .addComponent(jTabbedPane1)
         );
@@ -388,8 +388,8 @@ public class Vista extends javax.swing.JPanel {
                     .addComponent(m_num_entradas_t, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(memoria_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(m_max_ent_mem)
+                    .addComponent(m_max_ent_mem_t, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(memoria_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tlb_data_chb)
@@ -1055,7 +1055,7 @@ public class Vista extends javax.swing.JPanel {
     private javax.swing.JButton exportar_b;
     private javax.swing.JButton exportar_b1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel m_max_ent_mem;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
@@ -1064,7 +1064,7 @@ public class Vista extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField m_max_ent_mem_t;
     private javax.swing.JCheckBox jerarquias_separadas_chb;
     private javax.swing.JLabel jerarquias_separadas_l;
     private javax.swing.JComboBox log_cb;
@@ -1378,7 +1378,7 @@ public class Vista extends javax.swing.JPanel {
     }
     public int getMaxNumEntradas()
     {
-    	return Integer.decode(jTextField1.getText());
+    	return Integer.decode(m_max_ent_mem_t.getText());
     }
     public int getTLBDNumEntradas()
     {
