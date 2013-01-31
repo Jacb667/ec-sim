@@ -198,15 +198,15 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="103" alignment="0" groupAlignment="1" attributes="0">
                                               <Component id="m_entradas_p_pagina_t" min="-2" pref="145" max="-2" attributes="0"/>
-                                              <Component id="m_num_entradas_t" min="-2" pref="145" max="-2" attributes="0"/>
+                                              <Component id="m_tam_memp_t" min="-2" pref="145" max="-2" attributes="0"/>
                                           </Group>
-                                          <Component id="jTextField1" alignment="0" min="-2" pref="144" max="-2" attributes="0"/>
+                                          <Component id="m_tam_virt_t" alignment="0" min="-2" pref="144" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jComboBox3" min="-2" pref="82" max="-2" attributes="0"/>
-                                          <Component id="jComboBox1" min="-2" pref="82" max="-2" attributes="0"/>
-                                          <Component id="jComboBox2" min="-2" pref="82" max="-2" attributes="0"/>
+                                          <Component id="cb_tam_virt" min="-2" pref="82" max="-2" attributes="0"/>
+                                          <Component id="cb_tam_pagina" min="-2" pref="82" max="-2" attributes="0"/>
+                                          <Component id="cb_tam_memp" min="-2" pref="82" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
@@ -230,19 +230,19 @@
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="m_entradas_p_pagina_l" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="m_entradas_p_pagina_t" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cb_tam_pagina" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="m_numero_entradas" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="m_num_entradas_t" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jComboBox2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="m_tam_memp_t" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cb_tam_memp" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jComboBox3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="m_tam_virt_t" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cb_tam_virt" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
@@ -268,7 +268,7 @@
                         <Property name="text" type="java.lang.String" value="Tama&#xf1;o memoria principal"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="m_num_entradas_t">
+                    <Component class="javax.swing.JTextField" name="m_tam_memp_t">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="3FFFFFFF"/>
                       </Properties>
@@ -278,7 +278,7 @@
                         <Property name="text" type="java.lang.String" value="Tama&#xf1;o memoria virtual"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField1">
+                    <Component class="javax.swing.JTextField" name="m_tam_virt_t">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="3FFF"/>
                       </Properties>
@@ -297,6 +297,9 @@
                       </Properties>
                     </Component>
                     <Container class="javax.swing.JTabbedPane" name="jTabbedPane1">
+                      <AccessibilityProperties>
+                        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="TLB"/>
+                      </AccessibilityProperties>
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
                       <SubComponents>
@@ -314,25 +317,39 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" attributes="0">
                                               <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="n_entradas_c2_l6" alignment="0" min="-2" max="-2" attributes="0"/>
                                                   <Component id="n_entradas_c2_l4" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="n_vias_c2_l4" alignment="0" min="-2" max="-2" attributes="0"/>
                                               </Group>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="n_entradas_tlb_data_t" pref="150" max="32767" attributes="0"/>
-                                                  <Component id="n_vias_tlb_data_t" max="32767" attributes="0"/>
-                                              </Group>
+                                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                                           </Group>
-                                          <Group type="102" alignment="0" attributes="0">
+                                          <Group type="102" alignment="1" attributes="0">
                                               <Component id="politica_reemplazo_c1_l1" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="politica_reemplazo_tlb_data_cb1" pref="148" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <EmptySpace pref="349" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                  <Component id="politica_reemplazo_tlb_data_cb1" max="32767" attributes="0"/>
+                                                  <Group type="102" attributes="0">
+                                                      <Component id="cb_tipo_tlb_datos" min="-2" pref="82" max="-2" attributes="0"/>
+                                                      <EmptySpace min="0" pref="66" max="32767" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                              <EmptySpace pref="18" max="32767" attributes="0"/>
+                                              <Component id="n_vias_c2_l4" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Component id="n_vias_tlb_data_t" min="-2" pref="80" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="159" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <Component id="n_entradas_tlb_data_t" min="-2" pref="150" max="-2" attributes="0"/>
+                                              <EmptySpace max="32767" attributes="0"/>
+                                          </Group>
+                                      </Group>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -344,17 +361,19 @@
                                           <Component id="n_entradas_c2_l4" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="n_entradas_tlb_data_t" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="n_entradas_c2_l6" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="cb_tipo_tlb_datos" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="n_vias_c2_l4" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="n_vias_tlb_data_t" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="politica_reemplazo_c1_l1" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="politica_reemplazo_tlb_data_cb1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="politica_reemplazo_c1_l1" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace pref="40" max="32767" attributes="0"/>
+                                      <EmptySpace pref="54" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -392,13 +411,31 @@
                                 </Property>
                               </Properties>
                             </Component>
+                            <Component class="javax.swing.JComboBox" name="cb_tipo_tlb_datos">
+                              <Properties>
+                                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                                  <StringArray count="2">
+                                    <StringItem index="0" value="Directa"/>
+                                    <StringItem index="1" value="Asociativa"/>
+                                  </StringArray>
+                                </Property>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_tipo_tlb_datosActionPerformed"/>
+                              </Events>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="n_entradas_c2_l6">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="Tipo"/>
+                              </Properties>
+                            </Component>
                           </SubComponents>
                         </Container>
-                        <Container class="javax.swing.JPanel" name="jPanel3">
+                        <Container class="javax.swing.JPanel" name="jPanel2">
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                              <JTabbedPaneConstraints tabName="TLB Ins">
-                                <Property name="tabTitle" type="java.lang.String" value="TLB Ins"/>
+                              <JTabbedPaneConstraints tabName="TLB Inst">
+                                <Property name="tabTitle" type="java.lang.String" value="TLB Inst"/>
                               </JTabbedPaneConstraints>
                             </Constraint>
                           </Constraints>
@@ -408,25 +445,39 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="n_entradas_c2_l5" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="n_vias_c2_l5" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="n_entradas_c2_l8" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="n_entradas_c2_l7" alignment="0" min="-2" max="-2" attributes="0"/>
                                               </Group>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="n_entradas_tlb_ins_t" pref="150" max="32767" attributes="0"/>
-                                                  <Component id="n_vias_tlb_ins_t" max="32767" attributes="0"/>
-                                              </Group>
+                                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                                           </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="politica_reemplazo_c1_l2" min="-2" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <Component id="politica_reemplazo_c1_l3" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="politica_reemplazo_tlb_ins_cb" pref="148" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <EmptySpace pref="349" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                  <Component id="politica_reemplazo_tlb_inst_cb" alignment="0" max="32767" attributes="0"/>
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <Component id="cb_tipo_tlb_inst" min="-2" pref="82" max="-2" attributes="0"/>
+                                                      <EmptySpace min="0" pref="66" max="32767" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                              <EmptySpace pref="18" max="32767" attributes="0"/>
+                                              <Component id="n_vias_c2_l6" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Component id="n_vias_tlb_inst_t" min="-2" pref="80" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="159" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="n_entradas_tlb_inst_t" min="-2" pref="150" max="-2" attributes="0"/>
+                                              <EmptySpace max="32767" attributes="0"/>
+                                          </Group>
+                                      </Group>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -435,48 +486,50 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="n_entradas_c2_l5" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="n_entradas_tlb_ins_t" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="n_entradas_c2_l7" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="n_entradas_tlb_inst_t" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="n_vias_c2_l5" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="n_vias_tlb_ins_t" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="n_entradas_c2_l8" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="cb_tipo_tlb_inst" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="n_vias_c2_l6" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="n_vias_tlb_inst_t" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="politica_reemplazo_c1_l2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="politica_reemplazo_tlb_ins_cb" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="politica_reemplazo_tlb_inst_cb" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="politica_reemplazo_c1_l3" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace pref="40" max="32767" attributes="0"/>
+                                      <EmptySpace pref="54" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
                           </Layout>
                           <SubComponents>
-                            <Component class="javax.swing.JLabel" name="n_entradas_c2_l5">
+                            <Component class="javax.swing.JLabel" name="n_entradas_c2_l7">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="N&#xfa;mero de entradas"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JTextField" name="n_entradas_tlb_ins_t">
+                            <Component class="javax.swing.JTextField" name="n_entradas_tlb_inst_t">
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="n_entradas_tlb_inst_tActionPerformed"/>
+                              </Events>
                             </Component>
-                            <Component class="javax.swing.JLabel" name="n_vias_c2_l5">
+                            <Component class="javax.swing.JLabel" name="n_vias_c2_l6">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="N&#xfa;mero de v&#xed;as"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JTextField" name="n_vias_tlb_ins_t">
-                              <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="n_vias_tlb_ins_tActionPerformed"/>
-                              </Events>
+                            <Component class="javax.swing.JTextField" name="n_vias_tlb_inst_t">
                             </Component>
-                            <Component class="javax.swing.JLabel" name="politica_reemplazo_c1_l2">
+                            <Component class="javax.swing.JLabel" name="politica_reemplazo_c1_l3">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="Pol&#xed;tica de reemplazo"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JComboBox" name="politica_reemplazo_tlb_ins_cb">
+                            <Component class="javax.swing.JComboBox" name="politica_reemplazo_tlb_inst_cb">
                               <Properties>
                                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                                   <StringArray count="5">
@@ -489,11 +542,29 @@
                                 </Property>
                               </Properties>
                             </Component>
+                            <Component class="javax.swing.JComboBox" name="cb_tipo_tlb_inst">
+                              <Properties>
+                                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                                  <StringArray count="2">
+                                    <StringItem index="0" value="Directa"/>
+                                    <StringItem index="1" value="Asociativa"/>
+                                  </StringArray>
+                                </Property>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_tipo_tlb_instActionPerformed"/>
+                              </Events>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="n_entradas_c2_l8">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="Tipo"/>
+                              </Properties>
+                            </Component>
                           </SubComponents>
                         </Container>
                       </SubComponents>
                     </Container>
-                    <Component class="javax.swing.JComboBox" name="jComboBox1">
+                    <Component class="javax.swing.JComboBox" name="cb_tam_pagina">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                           <StringArray count="3">
@@ -504,10 +575,10 @@
                         </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox1ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_tam_paginaActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JComboBox" name="jComboBox2">
+                    <Component class="javax.swing.JComboBox" name="cb_tam_memp">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                           <StringArray count="3">
@@ -518,10 +589,10 @@
                         </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox2ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_tam_mempActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JComboBox" name="jComboBox3">
+                    <Component class="javax.swing.JComboBox" name="cb_tam_virt">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                           <StringArray count="3">
@@ -532,7 +603,7 @@
                         </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox3ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_tam_virtActionPerformed"/>
                       </Events>
                     </Component>
                   </SubComponents>
@@ -557,7 +628,7 @@
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="tam_linea_t" min="-2" pref="100" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jComboBox10" min="-2" pref="82" max="-2" attributes="0"/>
+                                      <Component id="cb_tipo_tam_linea" min="-2" pref="82" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" attributes="0">
                                       <Component id="jLabel1" min="-2" pref="131" max="-2" attributes="0"/>
@@ -588,7 +659,7 @@
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="tam_linea_l" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="tam_linea_t" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jComboBox10" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cb_tipo_tam_linea" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="cache1_3_p" max="32767" attributes="0"/>
@@ -642,22 +713,31 @@
                           <Layout>
                             <DimensionLayout dim="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="n_vias_c1_l" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="politica_reemplazo_c1_l" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="n_entradas_c1_l" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="n_entradas_c1_l1" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="n_vias_c1_t" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="n_entradas_c1_t" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="politica_reemplazo_c1_cb" pref="150" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="cb_tam_cd4" min="-2" pref="82" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                              <Component id="n_entradas_c1_t" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="politica_reemplazo_c1_cb" pref="150" max="32767" attributes="0"/>
+                                          </Group>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jComboBox4" min="-2" pref="82" max="-2" attributes="0"/>
-                                      <EmptySpace pref="241" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="n_vias_c1_l" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace pref="24" max="32767" attributes="0"/>
+                                              <Component id="n_vias_c1_t" min="-2" pref="150" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="cb_tam_cd1" min="-2" pref="82" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -668,12 +748,14 @@
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="n_entradas_c1_l" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="n_entradas_c1_t" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jComboBox4" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="cb_tam_cd1" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="n_vias_c1_l" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="n_vias_c1_t" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="n_entradas_c1_l1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="cb_tam_cd4" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
@@ -692,6 +774,15 @@
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JTextField" name="n_entradas_c1_t">
+                              <Properties>
+                                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                                  <Color id="Text Cursor"/>
+                                </Property>
+                                <Property name="name" type="java.lang.String" value="" noResource="true"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="n_entradas_c1_tActionPerformed"/>
+                              </Events>
                             </Component>
                             <Component class="javax.swing.JLabel" name="n_vias_c1_l">
                               <Properties>
@@ -718,7 +809,7 @@
                                 </Property>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JComboBox" name="jComboBox4">
+                            <Component class="javax.swing.JComboBox" name="cb_tam_cd1">
                               <Properties>
                                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                                   <StringArray count="3">
@@ -729,7 +820,25 @@
                                 </Property>
                               </Properties>
                               <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox4ActionPerformed"/>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_tam_cd1ActionPerformed"/>
+                              </Events>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="n_entradas_c1_l1">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="Tipo"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JComboBox" name="cb_tam_cd4">
+                              <Properties>
+                                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                                  <StringArray count="2">
+                                    <StringItem index="0" value="Directa"/>
+                                    <StringItem index="1" value="Asociativa"/>
+                                  </StringArray>
+                                </Property>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_tam_cd4ActionPerformed"/>
                               </Events>
                             </Component>
                           </SubComponents>
@@ -778,7 +887,7 @@
                                               <Component id="politica_reemplazo_c2_cb" pref="150" max="32767" attributes="0"/>
                                           </Group>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="jComboBox5" min="-2" pref="82" max="-2" attributes="0"/>
+                                          <Component id="cb_tam_cd2" min="-2" pref="82" max="-2" attributes="0"/>
                                           <EmptySpace pref="241" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
@@ -790,7 +899,7 @@
                                           <Group type="103" groupAlignment="3" attributes="0">
                                               <Component id="n_entradas_c2_l" alignment="3" min="-2" max="-2" attributes="0"/>
                                               <Component id="n_entradas_c2_t" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jComboBox5" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="cb_tam_cd2" alignment="3" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="3" attributes="0">
@@ -840,7 +949,7 @@
                                     </Property>
                                   </Properties>
                                 </Component>
-                                <Component class="javax.swing.JComboBox" name="jComboBox5">
+                                <Component class="javax.swing.JComboBox" name="cb_tam_cd2">
                                   <Properties>
                                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                                       <StringArray count="3">
@@ -851,7 +960,7 @@
                                     </Property>
                                   </Properties>
                                   <Events>
-                                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox5ActionPerformed"/>
+                                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_tam_cd2ActionPerformed"/>
                                   </Events>
                                 </Component>
                               </SubComponents>
@@ -902,7 +1011,7 @@
                                               <Component id="politica_reemplazo_c3_cb" pref="150" max="32767" attributes="0"/>
                                           </Group>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="jComboBox6" min="-2" pref="82" max="-2" attributes="0"/>
+                                          <Component id="cb_tam_cd3" min="-2" pref="82" max="-2" attributes="0"/>
                                           <EmptySpace pref="241" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
@@ -914,7 +1023,7 @@
                                           <Group type="103" groupAlignment="3" attributes="0">
                                               <Component id="n_entradas_c3_l1" alignment="3" min="-2" max="-2" attributes="0"/>
                                               <Component id="n_entradas_c3_t" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jComboBox6" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="cb_tam_cd3" alignment="3" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="3" attributes="0">
@@ -964,7 +1073,7 @@
                                     </Property>
                                   </Properties>
                                 </Component>
-                                <Component class="javax.swing.JComboBox" name="jComboBox6">
+                                <Component class="javax.swing.JComboBox" name="cb_tam_cd3">
                                   <Properties>
                                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                                       <StringArray count="3">
@@ -975,7 +1084,7 @@
                                     </Property>
                                   </Properties>
                                   <Events>
-                                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox6ActionPerformed"/>
+                                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_tam_cd3ActionPerformed"/>
                                   </Events>
                                 </Component>
                               </SubComponents>
@@ -1008,7 +1117,7 @@
                                           <Component id="politica_reemplazo_c1_i_cb" pref="150" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jComboBox7" min="-2" pref="82" max="-2" attributes="0"/>
+                                      <Component id="cb_tam_ci1" min="-2" pref="82" max="-2" attributes="0"/>
                                       <EmptySpace pref="241" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
@@ -1020,7 +1129,7 @@
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="n_entradas_c2_l1" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="n_entradas_c1_i_t" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jComboBox7" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="cb_tam_ci1" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
@@ -1070,7 +1179,7 @@
                                 </Property>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JComboBox" name="jComboBox7">
+                            <Component class="javax.swing.JComboBox" name="cb_tam_ci1">
                               <Properties>
                                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                                   <StringArray count="3">
@@ -1081,7 +1190,7 @@
                                 </Property>
                               </Properties>
                               <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox7ActionPerformed"/>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_tam_ci1ActionPerformed"/>
                               </Events>
                             </Component>
                           </SubComponents>
@@ -1112,7 +1221,7 @@
                                           <Component id="politica_reemplazo_c2_i_cb" pref="150" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jComboBox8" min="-2" pref="82" max="-2" attributes="0"/>
+                                      <Component id="cb_tam_ci2" min="-2" pref="82" max="-2" attributes="0"/>
                                       <EmptySpace pref="241" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
@@ -1124,7 +1233,7 @@
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="n_entradas_c2_l2" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="n_entradas_c2_i_t" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jComboBox8" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="cb_tam_ci2" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
@@ -1174,7 +1283,7 @@
                                 </Property>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JComboBox" name="jComboBox8">
+                            <Component class="javax.swing.JComboBox" name="cb_tam_ci2">
                               <Properties>
                                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                                   <StringArray count="3">
@@ -1213,7 +1322,7 @@
                                           <Component id="politica_reemplazo_c3_i_cb" pref="150" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jComboBox9" min="-2" pref="82" max="-2" attributes="0"/>
+                                      <Component id="cb_tam_ci3" min="-2" pref="82" max="-2" attributes="0"/>
                                       <EmptySpace pref="241" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
@@ -1225,7 +1334,7 @@
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="n_entradas_c2_l3" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="n_entradas_c3_i_t" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jComboBox9" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="cb_tam_ci3" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
@@ -1275,7 +1384,7 @@
                                 </Property>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JComboBox" name="jComboBox9">
+                            <Component class="javax.swing.JComboBox" name="cb_tam_ci3">
                               <Properties>
                                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                                   <StringArray count="3">
@@ -1309,7 +1418,7 @@
                         <Property name="text" type="java.lang.String" value="Niveles de Cache Inst"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JComboBox" name="jComboBox10">
+                    <Component class="javax.swing.JComboBox" name="cb_tipo_tam_linea">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                           <StringArray count="2">
