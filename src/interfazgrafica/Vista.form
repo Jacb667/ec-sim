@@ -73,14 +73,17 @@
           </Layout>
           <SubComponents>
             <Container class="javax.swing.JTabbedPane" name="config_p1">
+              <AccessibilityProperties>
+                <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="General"/>
+              </AccessibilityProperties>
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
               <SubComponents>
                 <Container class="javax.swing.JPanel" name="cpu_p">
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                      <JTabbedPaneConstraints tabName="CPU">
-                        <Property name="tabTitle" type="java.lang.String" value="CPU"/>
+                      <JTabbedPaneConstraints tabName="General">
+                        <Property name="tabTitle" type="java.lang.String" value="General"/>
                       </JTabbedPaneConstraints>
                     </Constraint>
                   </Constraints>
@@ -91,22 +94,19 @@
                           <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="pal_p_linea_l" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                                      <Component id="pal_p_linea_t" min="-2" pref="100" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="97" max="-2" attributes="0"/>
-                                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="log_cb" min="-2" pref="101" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jerarquias_separadas_l" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jerarquias_separadas_chb" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="jerarquias_separadas_l" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="pal_p_linea_l" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="165" max="32767" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="pal_p_linea_t" pref="125" max="32767" attributes="0"/>
+                                  <Component id="caches_separadas_cb" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
+                              <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="log_cb" min="-2" pref="101" max="-2" attributes="0"/>
+                              <EmptySpace pref="156" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -120,12 +120,12 @@
                                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="log_cb" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jerarquias_separadas_l" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jerarquias_separadas_chb" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="caches_separadas_cb" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="250" max="32767" attributes="0"/>
+                              <EmptySpace pref="252" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -133,7 +133,7 @@
                   <SubComponents>
                     <Component class="javax.swing.JLabel" name="pal_p_linea_l">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Tama&#xf1;o de palabra: "/>
+                        <Property name="text" type="java.lang.String" value="Bytes por palabra:"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="pal_p_linea_t">
@@ -144,13 +144,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="jerarquias_separadas_l">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Jerarqu&#xed;as separadas"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JCheckBox" name="jerarquias_separadas_chb">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Si/No"/>
-                        <Property name="toolTipText" type="java.lang.String" value="Crea una jerarqu&#xed;a para datos y otra para instrucciones de forma independiente."/>
+                        <Property name="text" type="java.lang.String" value="Cach&#xe9; compartida desde:"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JComboBox" name="log_cb">
@@ -172,6 +166,19 @@
                         <Property name="text" type="java.lang.String" value="Log"/>
                       </Properties>
                     </Component>
+                    <Component class="javax.swing.JComboBox" name="caches_separadas_cb">
+                      <Properties>
+                        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                          <StringArray count="4">
+                            <StringItem index="0" value="Nivel 1"/>
+                            <StringItem index="1" value="Nivel 2"/>
+                            <StringItem index="2" value="Nivel 3"/>
+                            <StringItem index="3" value="Ninguno"/>
+                          </StringArray>
+                        </Property>
+                        <Property name="toolTipText" type="java.lang.String" value="Indica desde qu&#xe9; nivel las cach&#xe9;s de datos e instrucciones ser&#xe1;n compartidas."/>
+                      </Properties>
+                    </Component>
                   </SubComponents>
                 </Container>
                 <Container class="javax.swing.JPanel" name="memoria_p">
@@ -189,34 +196,31 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="m_entradas_p_pagina_l" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="m_numero_entradas" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                              <Component id="m_entradas_p_pagina_t" min="-2" pref="145" max="-2" attributes="0"/>
-                                              <Component id="m_tam_memp_t" min="-2" pref="145" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Component id="m_tam_virt_t" alignment="0" min="-2" pref="144" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="cb_tam_virt" min="-2" pref="82" max="-2" attributes="0"/>
-                                          <Component id="cb_tam_pagina" min="-2" pref="82" max="-2" attributes="0"/>
-                                          <Component id="cb_tam_memp" min="-2" pref="82" max="-2" attributes="0"/>
-                                      </Group>
+                                  <Component id="m_entradas_p_pagina_l" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="m_numero_entradas" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                      <Component id="m_entradas_p_pagina_t" min="-2" pref="145" max="-2" attributes="0"/>
+                                      <Component id="m_tam_memp_t" min="-2" pref="145" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="tlb_data_chb" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Component id="tlb_data_chb" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Component id="tlb_inst_chb" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="tlb_inst_chb" min="-2" max="-2" attributes="0"/>
+                                      <Component id="m_tam_virt_t" alignment="0" min="-2" pref="144" max="-2" attributes="0"/>
                                   </Group>
+                              </Group>
+                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="cb_tam_virt" min="-2" pref="82" max="-2" attributes="0"/>
+                                  <Component id="cb_tam_pagina" min="-2" pref="82" max="-2" attributes="0"/>
+                                  <Component id="cb_tam_memp" min="-2" pref="82" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
@@ -245,9 +249,12 @@
                                   <Component id="cb_tam_virt" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="tlb_data_chb" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="tlb_inst_chb" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="tlb_inst_chb" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                      <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="tlb_data_chb" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jTabbedPane1" max="32767" attributes="0"/>
@@ -258,29 +265,35 @@
                   <SubComponents>
                     <Component class="javax.swing.JLabel" name="m_entradas_p_pagina_l">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Tama&#xf1;o de p&#xe1;gina"/>
+                        <Property name="text" type="java.lang.String" value="Tama&#xf1;o de p&#xe1;gina:"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="m_entradas_p_pagina_t">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="4"/>
+                        <Property name="toolTipText" type="java.lang.String" value="Tama&#xf1;o de p&#xe1;gina."/>
+                      </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="m_numero_entradas">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Tama&#xf1;o memoria principal"/>
+                        <Property name="text" type="java.lang.String" value="Tama&#xf1;o memoria principal:"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="m_tam_memp_t">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="3FFFFFFF"/>
+                        <Property name="text" type="java.lang.String" value="32"/>
+                        <Property name="toolTipText" type="java.lang.String" value="Tama&#xf1;o de la memoria principal."/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel2">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Tama&#xf1;o memoria virtual"/>
+                        <Property name="text" type="java.lang.String" value="Tama&#xf1;o memoria virtual:"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="m_tam_virt_t">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="3FFF"/>
+                        <Property name="text" type="java.lang.String" value="256"/>
+                        <Property name="toolTipText" type="java.lang.String" value="Tama&#xf1;o de la memoria virtual."/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JCheckBox" name="tlb_data_chb">
@@ -330,26 +343,19 @@
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="politica_reemplazo_tlb_data_cb1" max="32767" attributes="0"/>
                                           <Group type="102" attributes="0">
-                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="politica_reemplazo_tlb_data_cb1" max="32767" attributes="0"/>
-                                                  <Group type="102" attributes="0">
-                                                      <Component id="cb_tipo_tlb_datos" min="-2" pref="82" max="-2" attributes="0"/>
-                                                      <EmptySpace min="0" pref="66" max="32767" attributes="0"/>
-                                                  </Group>
-                                              </Group>
-                                              <EmptySpace pref="18" max="32767" attributes="0"/>
-                                              <Component id="n_vias_c2_l4" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="n_vias_tlb_data_t" min="-2" pref="80" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="159" max="-2" attributes="0"/>
+                                              <Component id="cb_tipo_tlb_datos" min="-2" pref="82" max="-2" attributes="0"/>
+                                              <EmptySpace min="0" pref="66" max="32767" attributes="0"/>
                                           </Group>
-                                          <Group type="102" attributes="0">
-                                              <Component id="n_entradas_tlb_data_t" min="-2" pref="150" max="-2" attributes="0"/>
-                                              <EmptySpace max="32767" attributes="0"/>
-                                          </Group>
+                                          <Component id="n_entradas_tlb_data_t" alignment="0" max="32767" attributes="0"/>
                                       </Group>
+                                      <EmptySpace pref="18" max="32767" attributes="0"/>
+                                      <Component id="n_vias_c2_l4" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="n_vias_tlb_data_t" min="-2" pref="128" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="111" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -458,26 +464,19 @@
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="politica_reemplazo_tlb_inst_cb" alignment="0" max="32767" attributes="0"/>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="politica_reemplazo_tlb_inst_cb" alignment="0" max="32767" attributes="0"/>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="cb_tipo_tlb_inst" min="-2" pref="82" max="-2" attributes="0"/>
-                                                      <EmptySpace min="0" pref="66" max="32767" attributes="0"/>
-                                                  </Group>
-                                              </Group>
-                                              <EmptySpace pref="18" max="32767" attributes="0"/>
-                                              <Component id="n_vias_c2_l6" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="n_vias_tlb_inst_t" min="-2" pref="80" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="159" max="-2" attributes="0"/>
+                                              <Component id="cb_tipo_tlb_inst" min="-2" pref="82" max="-2" attributes="0"/>
+                                              <EmptySpace min="0" pref="66" max="32767" attributes="0"/>
                                           </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="n_entradas_tlb_inst_t" min="-2" pref="150" max="-2" attributes="0"/>
-                                              <EmptySpace max="32767" attributes="0"/>
-                                          </Group>
+                                          <Component id="n_entradas_tlb_inst_t" max="32767" attributes="0"/>
                                       </Group>
+                                      <EmptySpace pref="18" max="32767" attributes="0"/>
+                                      <Component id="n_vias_c2_l6" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="n_vias_tlb_inst_t" min="-2" pref="128" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="111" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -573,6 +572,7 @@
                             <StringItem index="2" value="MBytes"/>
                           </StringArray>
                         </Property>
+                        <Property name="selectedIndex" type="int" value="1"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_tam_paginaActionPerformed"/>
@@ -587,6 +587,7 @@
                             <StringItem index="2" value="MBytes"/>
                           </StringArray>
                         </Property>
+                        <Property name="selectedIndex" type="int" value="2"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_tam_mempActionPerformed"/>
@@ -601,18 +602,24 @@
                             <StringItem index="2" value="MBytes"/>
                           </StringArray>
                         </Property>
+                        <Property name="selectedIndex" type="int" value="2"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_tam_virtActionPerformed"/>
                       </Events>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabel5">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Configuraci&#xf3;n de TLB:"/>
+                      </Properties>
                     </Component>
                   </SubComponents>
                 </Container>
                 <Container class="javax.swing.JPanel" name="caches_p">
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                      <JTabbedPaneConstraints tabName="Caches">
-                        <Property name="tabTitle" type="java.lang.String" value="Caches"/>
+                      <JTabbedPaneConstraints tabName="Cache">
+                        <Property name="tabTitle" type="java.lang.String" value="Cache"/>
                       </JTabbedPaneConstraints>
                     </Constraint>
                   </Constraints>
@@ -623,22 +630,25 @@
                           <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="tam_linea_l" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="tam_linea_t" min="-2" pref="100" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="cb_tipo_tam_linea" min="-2" pref="82" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel1" min="-2" pref="131" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="niv_cache_data_cb" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="tam_linea_l" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="tam_linea_t" min="-2" pref="147" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
                                       <Component id="jLabel3" min="-2" pref="119" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="niv_cache_inst_cb" min="-2" max="-2" attributes="0"/>
                                   </Group>
+                                  <Component id="cb_tipo_tam_linea" min="-2" pref="82" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
@@ -670,7 +680,7 @@
                   <SubComponents>
                     <Component class="javax.swing.JLabel" name="jLabel1">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Niveles de Cache Data"/>
+                        <Property name="text" type="java.lang.String" value="Niveles de Cache Data:"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JComboBox" name="niv_cache_data_cb">
@@ -689,12 +699,12 @@
                     </Component>
                     <Component class="javax.swing.JTextField" name="tam_linea_t">
                       <Properties>
-                        <Property name="toolTipText" type="java.lang.String" value="Tama&#xf1;o de bloque."/>
+                        <Property name="toolTipText" type="java.lang.String" value="Tama&#xf1;o de cada bloque."/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="tam_linea_l">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Tama&#xf1;o de l&#xed;nea"/>
+                        <Property name="text" type="java.lang.String" value="Tama&#xf1;o de l&#xed;nea:"/>
                       </Properties>
                     </Component>
                     <Container class="javax.swing.JTabbedPane" name="cache1_3_p">
@@ -718,11 +728,11 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="politica_reemplazo_c1_l" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="n_entradas_c1_l" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="n_entradas_c1_l1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="n_tipo_c1_l" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="cb_tam_cd4" min="-2" pref="82" max="-2" attributes="0"/>
+                                          <Component id="cb_tipo_cd1" min="-2" pref="82" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                               <Component id="n_entradas_c1_t" alignment="0" max="32767" attributes="0"/>
                                               <Component id="politica_reemplazo_c1_cb" pref="150" max="32767" attributes="0"/>
@@ -732,7 +742,7 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" attributes="0">
                                               <Component id="n_vias_c1_l" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace pref="24" max="32767" attributes="0"/>
+                                              <EmptySpace pref="16" max="32767" attributes="0"/>
                                               <Component id="n_vias_c1_t" min="-2" pref="150" max="-2" attributes="0"/>
                                           </Group>
                                           <Component id="cb_tam_cd1" min="-2" pref="82" max="-2" attributes="0"/>
@@ -754,8 +764,8 @@
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="n_vias_c1_l" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="n_vias_c1_t" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="n_entradas_c1_l1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="cb_tam_cd4" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="n_tipo_c1_l" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="cb_tipo_cd1" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
@@ -770,11 +780,12 @@
                           <SubComponents>
                             <Component class="javax.swing.JLabel" name="n_entradas_c1_l">
                               <Properties>
-                                <Property name="text" type="java.lang.String" value="Tama&#xf1;o"/>
+                                <Property name="text" type="java.lang.String" value="Tama&#xf1;o:"/>
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JTextField" name="n_entradas_c1_t">
                               <Properties>
+                                <Property name="toolTipText" type="java.lang.String" value="Tama&#xf1;o de la cach&#xe9;."/>
                                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                                   <Color id="Text Cursor"/>
                                 </Property>
@@ -786,14 +797,17 @@
                             </Component>
                             <Component class="javax.swing.JLabel" name="n_vias_c1_l">
                               <Properties>
-                                <Property name="text" type="java.lang.String" value="N&#xfa;mero de v&#xed;as"/>
+                                <Property name="text" type="java.lang.String" value="N&#xfa;mero de v&#xed;as:"/>
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JTextField" name="n_vias_c1_t">
+                              <Properties>
+                                <Property name="toolTipText" type="java.lang.String" value="N&#xfa;mero de v&#xed;as para cach&#xe9;s asociativas."/>
+                              </Properties>
                             </Component>
                             <Component class="javax.swing.JLabel" name="politica_reemplazo_c1_l">
                               <Properties>
-                                <Property name="text" type="java.lang.String" value="Pol&#xed;tica de reemplazo"/>
+                                <Property name="text" type="java.lang.String" value="Pol&#xed;tica de reemplazo:"/>
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JComboBox" name="politica_reemplazo_c1_cb">
@@ -807,6 +821,7 @@
                                     <StringItem index="4" value="RANDOM"/>
                                   </StringArray>
                                 </Property>
+                                <Property name="toolTipText" type="java.lang.String" value="Pol&#xed;tica de reemplazo para cach&#xe9;s asociativas."/>
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JComboBox" name="cb_tam_cd1">
@@ -823,12 +838,12 @@
                                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_tam_cd1ActionPerformed"/>
                               </Events>
                             </Component>
-                            <Component class="javax.swing.JLabel" name="n_entradas_c1_l1">
+                            <Component class="javax.swing.JLabel" name="n_tipo_c1_l">
                               <Properties>
-                                <Property name="text" type="java.lang.String" value="Tipo"/>
+                                <Property name="text" type="java.lang.String" value="Tipo:"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JComboBox" name="cb_tam_cd4">
+                            <Component class="javax.swing.JComboBox" name="cb_tipo_cd1">
                               <Properties>
                                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                                   <StringArray count="2">
@@ -836,9 +851,10 @@
                                     <StringItem index="1" value="Asociativa"/>
                                   </StringArray>
                                 </Property>
+                                <Property name="toolTipText" type="java.lang.String" value="Tipo de cach&#xe9;."/>
                               </Properties>
                               <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_tam_cd4ActionPerformed"/>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_tipo_cd1ActionPerformed"/>
                               </Events>
                             </Component>
                           </SubComponents>
@@ -856,115 +872,139 @@
                             <DimensionLayout dim="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="cache1_p1" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="politica_reemplazo_c2_l" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="n_entradas_c2_l" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="n_tipo_c2_l" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="cb_tipo_cd2" alignment="0" min="-2" pref="82" max="-2" attributes="0"/>
+                                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                              <Component id="n_entradas_c2_t" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="politica_reemplazo_c2_cb" alignment="1" min="-2" pref="150" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="n_vias_c2_l" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace pref="16" max="32767" attributes="0"/>
+                                              <Component id="n_vias_c2_t" min="-2" pref="150" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="cb_tam_cd2" alignment="0" min="-2" pref="82" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
                             <DimensionLayout dim="1">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="cache1_p1" alignment="1" max="32767" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="n_entradas_c2_l" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="n_entradas_c2_t" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="cb_tam_cd2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="n_vias_c2_l" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="n_vias_c2_t" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="n_tipo_c2_l" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="cb_tipo_cd2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="politica_reemplazo_c2_l" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="politica_reemplazo_c2_cb" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace pref="104" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
                             </DimensionLayout>
                           </Layout>
                           <SubComponents>
-                            <Container class="javax.swing.JPanel" name="cache1_p1">
-
-                              <Layout>
-                                <DimensionLayout dim="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="n_entradas_c2_l" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="n_vias_c2_l" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="plicita_reemplazo_c2_l" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                              <Component id="n_vias_c2_t" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="n_entradas_c2_t" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="politica_reemplazo_c2_cb" pref="150" max="32767" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="cb_tam_cd2" min="-2" pref="82" max="-2" attributes="0"/>
-                                          <EmptySpace pref="241" max="32767" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                </DimensionLayout>
-                                <DimensionLayout dim="1">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="n_entradas_c2_l" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="n_entradas_c2_t" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="cb_tam_cd2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="n_vias_c2_l" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="n_vias_c2_t" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="plicita_reemplazo_c2_l" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="politica_reemplazo_c2_cb" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace pref="104" max="32767" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                </DimensionLayout>
-                              </Layout>
-                              <SubComponents>
-                                <Component class="javax.swing.JLabel" name="n_entradas_c2_l">
-                                  <Properties>
-                                    <Property name="text" type="java.lang.String" value="Tama&#xf1;o"/>
-                                  </Properties>
-                                </Component>
-                                <Component class="javax.swing.JTextField" name="n_entradas_c2_t">
-                                </Component>
-                                <Component class="javax.swing.JLabel" name="n_vias_c2_l">
-                                  <Properties>
-                                    <Property name="text" type="java.lang.String" value="N&#xfa;mero de v&#xed;as"/>
-                                  </Properties>
-                                </Component>
-                                <Component class="javax.swing.JTextField" name="n_vias_c2_t">
-                                </Component>
-                                <Component class="javax.swing.JLabel" name="plicita_reemplazo_c2_l">
-                                  <Properties>
-                                    <Property name="text" type="java.lang.String" value="Pol&#xed;tica de reemplazo"/>
-                                  </Properties>
-                                </Component>
-                                <Component class="javax.swing.JComboBox" name="politica_reemplazo_c2_cb">
-                                  <Properties>
-                                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                                      <StringArray count="5">
-                                        <StringItem index="0" value="LRU"/>
-                                        <StringItem index="1" value="LFU"/>
-                                        <StringItem index="2" value="FIFO"/>
-                                        <StringItem index="3" value="AGING"/>
-                                        <StringItem index="4" value="RANDOM"/>
-                                      </StringArray>
-                                    </Property>
-                                  </Properties>
-                                </Component>
-                                <Component class="javax.swing.JComboBox" name="cb_tam_cd2">
-                                  <Properties>
-                                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                                      <StringArray count="3">
-                                        <StringItem index="0" value="Bytes"/>
-                                        <StringItem index="1" value="KBytes"/>
-                                        <StringItem index="2" value="MBytes"/>
-                                      </StringArray>
-                                    </Property>
-                                  </Properties>
-                                  <Events>
-                                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_tam_cd2ActionPerformed"/>
-                                  </Events>
-                                </Component>
-                              </SubComponents>
-                            </Container>
+                            <Component class="javax.swing.JLabel" name="n_entradas_c2_l">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="Tama&#xf1;o:"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JTextField" name="n_entradas_c2_t">
+                              <Properties>
+                                <Property name="toolTipText" type="java.lang.String" value="Tama&#xf1;o de la cach&#xe9;."/>
+                                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                                  <Color id="Text Cursor"/>
+                                </Property>
+                                <Property name="name" type="java.lang.String" value="" noResource="true"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="n_entradas_c2_tActionPerformed"/>
+                              </Events>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="n_vias_c2_l">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="N&#xfa;mero de v&#xed;as:"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JTextField" name="n_vias_c2_t">
+                              <Properties>
+                                <Property name="toolTipText" type="java.lang.String" value="N&#xfa;mero de v&#xed;as para cach&#xe9;s asociativas."/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="politica_reemplazo_c2_l">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="Pol&#xed;tica de reemplazo:"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JComboBox" name="politica_reemplazo_c2_cb">
+                              <Properties>
+                                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                                  <StringArray count="5">
+                                    <StringItem index="0" value="LRU"/>
+                                    <StringItem index="1" value="LFU"/>
+                                    <StringItem index="2" value="FIFO"/>
+                                    <StringItem index="3" value="AGING"/>
+                                    <StringItem index="4" value="RANDOM"/>
+                                  </StringArray>
+                                </Property>
+                                <Property name="toolTipText" type="java.lang.String" value="Pol&#xed;tica de reemplazo para cach&#xe9;s asociativas."/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JComboBox" name="cb_tam_cd2">
+                              <Properties>
+                                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                                  <StringArray count="3">
+                                    <StringItem index="0" value="Bytes"/>
+                                    <StringItem index="1" value="KBytes"/>
+                                    <StringItem index="2" value="MBytes"/>
+                                  </StringArray>
+                                </Property>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_tam_cd2ActionPerformed"/>
+                              </Events>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="n_tipo_c2_l">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="Tipo:"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JComboBox" name="cb_tipo_cd2">
+                              <Properties>
+                                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                                  <StringArray count="2">
+                                    <StringItem index="0" value="Directa"/>
+                                    <StringItem index="1" value="Asociativa"/>
+                                  </StringArray>
+                                </Property>
+                                <Property name="toolTipText" type="java.lang.String" value="Tipo de cach&#xe9;."/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_tipo_cd2ActionPerformed"/>
+                              </Events>
+                            </Component>
                           </SubComponents>
                         </Container>
                         <Container class="javax.swing.JPanel" name="cache3_p">
@@ -980,115 +1020,139 @@
                             <DimensionLayout dim="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="cache1_p2" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="politica_reemplazo_c3_l" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="n_entradas_c3_l" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="n_tipo_c3_l" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="cb_tipo_cd3" alignment="0" min="-2" pref="82" max="-2" attributes="0"/>
+                                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                              <Component id="n_entradas_c3_t" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="politica_reemplazo_c3_cb" alignment="1" min="-2" pref="150" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="n_vias_c3_l" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace pref="16" max="32767" attributes="0"/>
+                                              <Component id="n_vias_c3_t" min="-2" pref="150" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="cb_tam_cd3" alignment="0" min="-2" pref="82" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
                             <DimensionLayout dim="1">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="cache1_p2" alignment="1" max="32767" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="n_entradas_c3_l" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="n_entradas_c3_t" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="cb_tam_cd3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="n_vias_c3_l" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="n_vias_c3_t" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="n_tipo_c3_l" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="cb_tipo_cd3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="politica_reemplazo_c3_l" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="politica_reemplazo_c3_cb" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace pref="104" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
                             </DimensionLayout>
                           </Layout>
                           <SubComponents>
-                            <Container class="javax.swing.JPanel" name="cache1_p2">
-
-                              <Layout>
-                                <DimensionLayout dim="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="n_entradas_c3_l1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="n_vias_c3_l" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="plicita_reemplazo_c3_l" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                              <Component id="n_vias_c3_t" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="n_entradas_c3_t" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="politica_reemplazo_c3_cb" pref="150" max="32767" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="cb_tam_cd3" min="-2" pref="82" max="-2" attributes="0"/>
-                                          <EmptySpace pref="241" max="32767" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                </DimensionLayout>
-                                <DimensionLayout dim="1">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="n_entradas_c3_l1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="n_entradas_c3_t" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="cb_tam_cd3" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="n_vias_c3_l" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="n_vias_c3_t" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="plicita_reemplazo_c3_l" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="politica_reemplazo_c3_cb" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace pref="104" max="32767" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                </DimensionLayout>
-                              </Layout>
-                              <SubComponents>
-                                <Component class="javax.swing.JLabel" name="n_entradas_c3_l1">
-                                  <Properties>
-                                    <Property name="text" type="java.lang.String" value="Tama&#xf1;o"/>
-                                  </Properties>
-                                </Component>
-                                <Component class="javax.swing.JTextField" name="n_entradas_c3_t">
-                                </Component>
-                                <Component class="javax.swing.JLabel" name="n_vias_c3_l">
-                                  <Properties>
-                                    <Property name="text" type="java.lang.String" value="N&#xfa;mero de v&#xed;as"/>
-                                  </Properties>
-                                </Component>
-                                <Component class="javax.swing.JTextField" name="n_vias_c3_t">
-                                </Component>
-                                <Component class="javax.swing.JLabel" name="plicita_reemplazo_c3_l">
-                                  <Properties>
-                                    <Property name="text" type="java.lang.String" value="Pol&#xed;tica de reemplazo"/>
-                                  </Properties>
-                                </Component>
-                                <Component class="javax.swing.JComboBox" name="politica_reemplazo_c3_cb">
-                                  <Properties>
-                                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                                      <StringArray count="5">
-                                        <StringItem index="0" value="LRU"/>
-                                        <StringItem index="1" value="LFU"/>
-                                        <StringItem index="2" value="FIFO"/>
-                                        <StringItem index="3" value="AGING"/>
-                                        <StringItem index="4" value="RANDOM"/>
-                                      </StringArray>
-                                    </Property>
-                                  </Properties>
-                                </Component>
-                                <Component class="javax.swing.JComboBox" name="cb_tam_cd3">
-                                  <Properties>
-                                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                                      <StringArray count="3">
-                                        <StringItem index="0" value="Bytes"/>
-                                        <StringItem index="1" value="KBytes"/>
-                                        <StringItem index="2" value="MBytes"/>
-                                      </StringArray>
-                                    </Property>
-                                  </Properties>
-                                  <Events>
-                                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_tam_cd3ActionPerformed"/>
-                                  </Events>
-                                </Component>
-                              </SubComponents>
-                            </Container>
+                            <Component class="javax.swing.JLabel" name="n_entradas_c3_l">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="Tama&#xf1;o:"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JTextField" name="n_entradas_c3_t">
+                              <Properties>
+                                <Property name="toolTipText" type="java.lang.String" value="Tama&#xf1;o de la cach&#xe9;."/>
+                                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                                  <Color id="Text Cursor"/>
+                                </Property>
+                                <Property name="name" type="java.lang.String" value="" noResource="true"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="n_entradas_c3_tActionPerformed"/>
+                              </Events>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="n_vias_c3_l">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="N&#xfa;mero de v&#xed;as:"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JTextField" name="n_vias_c3_t">
+                              <Properties>
+                                <Property name="toolTipText" type="java.lang.String" value="N&#xfa;mero de v&#xed;as para cach&#xe9;s asociativas."/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="politica_reemplazo_c3_l">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="Pol&#xed;tica de reemplazo:"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JComboBox" name="politica_reemplazo_c3_cb">
+                              <Properties>
+                                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                                  <StringArray count="5">
+                                    <StringItem index="0" value="LRU"/>
+                                    <StringItem index="1" value="LFU"/>
+                                    <StringItem index="2" value="FIFO"/>
+                                    <StringItem index="3" value="AGING"/>
+                                    <StringItem index="4" value="RANDOM"/>
+                                  </StringArray>
+                                </Property>
+                                <Property name="toolTipText" type="java.lang.String" value="Pol&#xed;tica de reemplazo para cach&#xe9;s asociativas."/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JComboBox" name="cb_tam_cd3">
+                              <Properties>
+                                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                                  <StringArray count="3">
+                                    <StringItem index="0" value="Bytes"/>
+                                    <StringItem index="1" value="KBytes"/>
+                                    <StringItem index="2" value="MBytes"/>
+                                  </StringArray>
+                                </Property>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_tam_cd3ActionPerformed"/>
+                              </Events>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="n_tipo_c3_l">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="Tipo:"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JComboBox" name="cb_tipo_cd3">
+                              <Properties>
+                                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                                  <StringArray count="2">
+                                    <StringItem index="0" value="Directa"/>
+                                    <StringItem index="1" value="Asociativa"/>
+                                  </StringArray>
+                                </Property>
+                                <Property name="toolTipText" type="java.lang.String" value="Tipo de cach&#xe9;."/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_tipo_cd3ActionPerformed"/>
+                              </Events>
+                            </Component>
                           </SubComponents>
                         </Container>
                         <Container class="javax.swing.JPanel" name="cache1_i_p">
@@ -1106,19 +1170,28 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="n_entradas_c2_l1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="n_vias_c2_l1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="plicita_reemplazo_c2_l1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="politica_reemplazo_c4_l" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="n_entradas_c4_l" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="n_tipo_c4_l" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="n_vias_c1_i_t" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="n_entradas_c1_i_t" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="politica_reemplazo_c1_i_cb" pref="150" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="cb_tipo_cd4" alignment="0" min="-2" pref="82" max="-2" attributes="0"/>
+                                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                              <Component id="n_entradas_c4_t" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="politica_reemplazo_c4_cb" alignment="1" min="-2" pref="150" max="-2" attributes="0"/>
+                                          </Group>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="cb_tam_ci1" min="-2" pref="82" max="-2" attributes="0"/>
-                                      <EmptySpace pref="241" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="n_vias_c4_l" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace pref="16" max="32767" attributes="0"/>
+                                              <Component id="n_vias_c4_t" min="-2" pref="150" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="cb_tam_cd4" alignment="0" min="-2" pref="82" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -1127,19 +1200,21 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="n_entradas_c2_l1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="n_entradas_c1_i_t" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="cb_tam_ci1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="n_entradas_c4_l" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="n_entradas_c4_t" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="cb_tam_cd4" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="n_vias_c2_l1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="n_vias_c1_i_t" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="n_vias_c4_l" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="n_vias_c4_t" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="n_tipo_c4_l" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="cb_tipo_cd4" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="plicita_reemplazo_c2_l1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="politica_reemplazo_c1_i_cb" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="politica_reemplazo_c4_l" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="politica_reemplazo_c4_cb" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace pref="104" max="32767" attributes="0"/>
                                   </Group>
@@ -1147,26 +1222,39 @@
                             </DimensionLayout>
                           </Layout>
                           <SubComponents>
-                            <Component class="javax.swing.JLabel" name="n_entradas_c2_l1">
+                            <Component class="javax.swing.JLabel" name="n_entradas_c4_l">
                               <Properties>
-                                <Property name="text" type="java.lang.String" value="Tama&#xf1;o"/>
+                                <Property name="text" type="java.lang.String" value="Tama&#xf1;o:"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JTextField" name="n_entradas_c1_i_t">
-                            </Component>
-                            <Component class="javax.swing.JLabel" name="n_vias_c2_l1">
+                            <Component class="javax.swing.JTextField" name="n_entradas_c4_t">
                               <Properties>
-                                <Property name="text" type="java.lang.String" value="N&#xfa;mero de v&#xed;as"/>
+                                <Property name="toolTipText" type="java.lang.String" value="Tama&#xf1;o de la cach&#xe9;."/>
+                                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                                  <Color id="Text Cursor"/>
+                                </Property>
+                                <Property name="name" type="java.lang.String" value="" noResource="true"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="n_entradas_c4_tActionPerformed"/>
+                              </Events>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="n_vias_c4_l">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="N&#xfa;mero de v&#xed;as:"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JTextField" name="n_vias_c1_i_t">
-                            </Component>
-                            <Component class="javax.swing.JLabel" name="plicita_reemplazo_c2_l1">
+                            <Component class="javax.swing.JTextField" name="n_vias_c4_t">
                               <Properties>
-                                <Property name="text" type="java.lang.String" value="Pol&#xed;tica de reemplazo"/>
+                                <Property name="toolTipText" type="java.lang.String" value="N&#xfa;mero de v&#xed;as para cach&#xe9;s asociativas."/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JComboBox" name="politica_reemplazo_c1_i_cb">
+                            <Component class="javax.swing.JLabel" name="politica_reemplazo_c4_l">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="Pol&#xed;tica de reemplazo:"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JComboBox" name="politica_reemplazo_c4_cb">
                               <Properties>
                                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                                   <StringArray count="5">
@@ -1177,9 +1265,10 @@
                                     <StringItem index="4" value="RANDOM"/>
                                   </StringArray>
                                 </Property>
+                                <Property name="toolTipText" type="java.lang.String" value="Pol&#xed;tica de reemplazo para cach&#xe9;s asociativas."/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JComboBox" name="cb_tam_ci1">
+                            <Component class="javax.swing.JComboBox" name="cb_tam_cd4">
                               <Properties>
                                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                                   <StringArray count="3">
@@ -1190,7 +1279,26 @@
                                 </Property>
                               </Properties>
                               <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_tam_ci1ActionPerformed"/>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_tam_cd4ActionPerformed"/>
+                              </Events>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="n_tipo_c4_l">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="Tipo:"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JComboBox" name="cb_tipo_cd4">
+                              <Properties>
+                                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                                  <StringArray count="2">
+                                    <StringItem index="0" value="Directa"/>
+                                    <StringItem index="1" value="Asociativa"/>
+                                  </StringArray>
+                                </Property>
+                                <Property name="toolTipText" type="java.lang.String" value="Tipo de cach&#xe9;."/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_tipo_cd4ActionPerformed"/>
                               </Events>
                             </Component>
                           </SubComponents>
@@ -1210,19 +1318,28 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="n_entradas_c2_l2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="n_vias_c2_l2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="plicita_reemplazo_c2_l2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="politica_reemplazo_c5_l" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="n_entradas_c5_l" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="n_tipo_c5_l" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="n_vias_c2_i_t" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="n_entradas_c2_i_t" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="politica_reemplazo_c2_i_cb" pref="150" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="cb_tipo_cd5" alignment="0" min="-2" pref="82" max="-2" attributes="0"/>
+                                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                              <Component id="n_entradas_c5_t" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="politica_reemplazo_c5_cb" alignment="1" min="-2" pref="150" max="-2" attributes="0"/>
+                                          </Group>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="cb_tam_ci2" min="-2" pref="82" max="-2" attributes="0"/>
-                                      <EmptySpace pref="241" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="n_vias_c5_l" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace pref="16" max="32767" attributes="0"/>
+                                              <Component id="n_vias_c5_t" min="-2" pref="150" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="cb_tam_cd5" alignment="0" min="-2" pref="82" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -1231,19 +1348,21 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="n_entradas_c2_l2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="n_entradas_c2_i_t" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="cb_tam_ci2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="n_entradas_c5_l" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="n_entradas_c5_t" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="cb_tam_cd5" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="n_vias_c2_l2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="n_vias_c2_i_t" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="n_vias_c5_l" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="n_vias_c5_t" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="n_tipo_c5_l" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="cb_tipo_cd5" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="plicita_reemplazo_c2_l2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="politica_reemplazo_c2_i_cb" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="politica_reemplazo_c5_l" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="politica_reemplazo_c5_cb" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace pref="104" max="32767" attributes="0"/>
                                   </Group>
@@ -1251,26 +1370,39 @@
                             </DimensionLayout>
                           </Layout>
                           <SubComponents>
-                            <Component class="javax.swing.JLabel" name="n_entradas_c2_l2">
+                            <Component class="javax.swing.JLabel" name="n_entradas_c5_l">
                               <Properties>
-                                <Property name="text" type="java.lang.String" value="Tama&#xf1;o"/>
+                                <Property name="text" type="java.lang.String" value="Tama&#xf1;o:"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JTextField" name="n_entradas_c2_i_t">
-                            </Component>
-                            <Component class="javax.swing.JLabel" name="n_vias_c2_l2">
+                            <Component class="javax.swing.JTextField" name="n_entradas_c5_t">
                               <Properties>
-                                <Property name="text" type="java.lang.String" value="N&#xfa;mero de v&#xed;as"/>
+                                <Property name="toolTipText" type="java.lang.String" value="Tama&#xf1;o de la cach&#xe9;."/>
+                                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                                  <Color id="Text Cursor"/>
+                                </Property>
+                                <Property name="name" type="java.lang.String" value="" noResource="true"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="n_entradas_c5_tActionPerformed"/>
+                              </Events>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="n_vias_c5_l">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="N&#xfa;mero de v&#xed;as:"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JTextField" name="n_vias_c2_i_t">
-                            </Component>
-                            <Component class="javax.swing.JLabel" name="plicita_reemplazo_c2_l2">
+                            <Component class="javax.swing.JTextField" name="n_vias_c5_t">
                               <Properties>
-                                <Property name="text" type="java.lang.String" value="Pol&#xed;tica de reemplazo"/>
+                                <Property name="toolTipText" type="java.lang.String" value="N&#xfa;mero de v&#xed;as para cach&#xe9;s asociativas."/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JComboBox" name="politica_reemplazo_c2_i_cb">
+                            <Component class="javax.swing.JLabel" name="politica_reemplazo_c5_l">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="Pol&#xed;tica de reemplazo:"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JComboBox" name="politica_reemplazo_c5_cb">
                               <Properties>
                                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                                   <StringArray count="5">
@@ -1281,9 +1413,10 @@
                                     <StringItem index="4" value="RANDOM"/>
                                   </StringArray>
                                 </Property>
+                                <Property name="toolTipText" type="java.lang.String" value="Pol&#xed;tica de reemplazo para cach&#xe9;s asociativas."/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JComboBox" name="cb_tam_ci2">
+                            <Component class="javax.swing.JComboBox" name="cb_tam_cd5">
                               <Properties>
                                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                                   <StringArray count="3">
@@ -1293,6 +1426,28 @@
                                   </StringArray>
                                 </Property>
                               </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_tam_cd5ActionPerformed"/>
+                              </Events>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="n_tipo_c5_l">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="Tipo:"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JComboBox" name="cb_tipo_cd5">
+                              <Properties>
+                                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                                  <StringArray count="2">
+                                    <StringItem index="0" value="Directa"/>
+                                    <StringItem index="1" value="Asociativa"/>
+                                  </StringArray>
+                                </Property>
+                                <Property name="toolTipText" type="java.lang.String" value="Tipo de cach&#xe9;."/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_tipo_cd5ActionPerformed"/>
+                              </Events>
                             </Component>
                           </SubComponents>
                         </Container>
@@ -1311,19 +1466,28 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="n_entradas_c2_l3" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="n_vias_c2_l3" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="plicita_reemplazo_c2_l3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="politica_reemplazo_c6_l" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="n_entradas_c6_l" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="n_tipo_c6_l" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="n_vias_c3_i_t" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="n_entradas_c3_i_t" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="politica_reemplazo_c3_i_cb" pref="150" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="cb_tipo_cd6" alignment="0" min="-2" pref="82" max="-2" attributes="0"/>
+                                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                              <Component id="n_entradas_c6_t" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="politica_reemplazo_c6_cb" alignment="1" min="-2" pref="150" max="-2" attributes="0"/>
+                                          </Group>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="cb_tam_ci3" min="-2" pref="82" max="-2" attributes="0"/>
-                                      <EmptySpace pref="241" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="n_vias_c6_l" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace pref="16" max="32767" attributes="0"/>
+                                              <Component id="n_vias_c6_t" min="-2" pref="150" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="cb_tam_cd6" alignment="0" min="-2" pref="82" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -1332,19 +1496,21 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="n_entradas_c2_l3" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="n_entradas_c3_i_t" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="cb_tam_ci3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="n_entradas_c6_l" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="n_entradas_c6_t" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="cb_tam_cd6" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="n_vias_c2_l3" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="n_vias_c3_i_t" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="n_vias_c6_l" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="n_vias_c6_t" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="n_tipo_c6_l" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="cb_tipo_cd6" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="plicita_reemplazo_c2_l3" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="politica_reemplazo_c3_i_cb" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="politica_reemplazo_c6_l" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="politica_reemplazo_c6_cb" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace pref="104" max="32767" attributes="0"/>
                                   </Group>
@@ -1352,26 +1518,39 @@
                             </DimensionLayout>
                           </Layout>
                           <SubComponents>
-                            <Component class="javax.swing.JLabel" name="n_entradas_c2_l3">
+                            <Component class="javax.swing.JLabel" name="n_entradas_c6_l">
                               <Properties>
-                                <Property name="text" type="java.lang.String" value="Tama&#xf1;o"/>
+                                <Property name="text" type="java.lang.String" value="Tama&#xf1;o:"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JTextField" name="n_entradas_c3_i_t">
-                            </Component>
-                            <Component class="javax.swing.JLabel" name="n_vias_c2_l3">
+                            <Component class="javax.swing.JTextField" name="n_entradas_c6_t">
                               <Properties>
-                                <Property name="text" type="java.lang.String" value="N&#xfa;mero de v&#xed;as"/>
+                                <Property name="toolTipText" type="java.lang.String" value="Tama&#xf1;o de la cach&#xe9;."/>
+                                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                                  <Color id="Text Cursor"/>
+                                </Property>
+                                <Property name="name" type="java.lang.String" value="" noResource="true"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="n_entradas_c6_tActionPerformed"/>
+                              </Events>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="n_vias_c6_l">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="N&#xfa;mero de v&#xed;as:"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JTextField" name="n_vias_c3_i_t">
-                            </Component>
-                            <Component class="javax.swing.JLabel" name="plicita_reemplazo_c2_l3">
+                            <Component class="javax.swing.JTextField" name="n_vias_c6_t">
                               <Properties>
-                                <Property name="text" type="java.lang.String" value="Pol&#xed;tica de reemplazo"/>
+                                <Property name="toolTipText" type="java.lang.String" value="N&#xfa;mero de v&#xed;as para cach&#xe9;s asociativas."/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JComboBox" name="politica_reemplazo_c3_i_cb">
+                            <Component class="javax.swing.JLabel" name="politica_reemplazo_c6_l">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="Pol&#xed;tica de reemplazo:"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JComboBox" name="politica_reemplazo_c6_cb">
                               <Properties>
                                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                                   <StringArray count="5">
@@ -1382,9 +1561,10 @@
                                     <StringItem index="4" value="RANDOM"/>
                                   </StringArray>
                                 </Property>
+                                <Property name="toolTipText" type="java.lang.String" value="Pol&#xed;tica de reemplazo para cach&#xe9;s asociativas."/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JComboBox" name="cb_tam_ci3">
+                            <Component class="javax.swing.JComboBox" name="cb_tam_cd6">
                               <Properties>
                                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                                   <StringArray count="3">
@@ -1394,6 +1574,28 @@
                                   </StringArray>
                                 </Property>
                               </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_tam_cd6ActionPerformed"/>
+                              </Events>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="n_tipo_c6_l">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="Tipo:"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JComboBox" name="cb_tipo_cd6">
+                              <Properties>
+                                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                                  <StringArray count="2">
+                                    <StringItem index="0" value="Directa"/>
+                                    <StringItem index="1" value="Asociativa"/>
+                                  </StringArray>
+                                </Property>
+                                <Property name="toolTipText" type="java.lang.String" value="Tipo de cach&#xe9;."/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_tipo_cd6ActionPerformed"/>
+                              </Events>
                             </Component>
                           </SubComponents>
                         </Container>
@@ -1415,7 +1617,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel3">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Niveles de Cache Inst"/>
+                        <Property name="text" type="java.lang.String" value="Niveles de Cache Inst:"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JComboBox" name="cb_tipo_tam_linea">
@@ -1451,18 +1653,19 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jScrollPane1" pref="615" max="32767" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Component id="salvar_t" min="-2" pref="390" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="salvar_t" max="32767" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="exportar_b" min="-2" pref="90" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="traza_carga_b" min="-2" pref="108" max="-2" attributes="0"/>
+                              <Component id="traza_carga_b" min="-2" pref="110" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="validar_t_b" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="ejecutar_b" min="-2" pref="90" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="limpiar_t_b" min="-2" pref="90" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -1477,6 +1680,7 @@
                           <Component id="traza_carga_b" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="ejecutar_b" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="validar_t_b" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="limpiar_t_b" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jScrollPane1" pref="252" max="32767" attributes="0"/>
@@ -1518,7 +1722,10 @@
             </Component>
             <Component class="javax.swing.JButton" name="traza_carga_b">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Cargar Taza"/>
+                <Property name="text" type="java.lang.String" value="Cargar traza"/>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[100, 23]"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="traza_carga_bActionPerformed"/>
@@ -1526,7 +1733,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="salvar_t">
               <Properties>
-                <Property name="text" type="java.lang.String" value="traza.txt"/>
+                <Property name="text" type="java.lang.String" value="resultado_traza.txt"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="exportar_b">
@@ -1537,6 +1744,11 @@
             <Component class="javax.swing.JButton" name="validar_t_b">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Validar"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="limpiar_t_b">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Limpiar"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -1557,16 +1769,22 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jScrollPane3" alignment="0" pref="615" max="32767" attributes="0"/>
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="cargar_codigo_b" min="-2" pref="110" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="validar_c_b" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="ejecutar_b1" min="-2" pref="90" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="ciclo_b1" min="-2" pref="90" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="limpiar_ej_b" min="-2" pref="90" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Component id="cargar_codigo_b" min="-2" max="-2" attributes="0"/>
+                                      <Component id="salvar_e" max="32767" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="validar_c_b" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="ciclo_b1" min="-2" pref="90" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="ejecutar_b1" min="-2" pref="90" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="cache_d1_b" min="-2" max="-2" attributes="0"/>
@@ -1580,16 +1798,13 @@
                                       <Component id="cache_i2_b" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="cache_i3_b" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="salvar_e" min="-2" pref="390" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="exportar_b1" min="-2" pref="90" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="memoria_b" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="exportar_b1" pref="90" max="32767" attributes="0"/>
+                                  <Component id="memoria_b" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -1605,6 +1820,7 @@
                           <Component id="ciclo_b1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="ejecutar_b1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="validar_c_b" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="limpiar_ej_b" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jScrollPane3" pref="218" max="32767" attributes="0"/>
@@ -1616,12 +1832,12 @@
                           <Component id="cache_i1_b" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="cache_i2_b" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="cache_i3_b" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="memoria_b" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="salvar_e" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="exportar_b1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="memoria_b" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -1661,7 +1877,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="salvar_e">
               <Properties>
-                <Property name="text" type="java.lang.String" value="ejecucion.txt"/>
+                <Property name="text" type="java.lang.String" value="resultado_ejecucion.txt"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="exportar_b1">
@@ -1718,6 +1934,11 @@
             <Component class="javax.swing.JButton" name="memoria_b">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Memoria"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="limpiar_ej_b">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Limpiar"/>
               </Properties>
             </Component>
           </SubComponents>

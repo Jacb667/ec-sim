@@ -39,9 +39,9 @@ public class Vista extends javax.swing.JPanel {
         pal_p_linea_l = new javax.swing.JLabel();
         pal_p_linea_t = new javax.swing.JTextField();
         jerarquias_separadas_l = new javax.swing.JLabel();
-        jerarquias_separadas_chb = new javax.swing.JCheckBox();
         log_cb = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
+        caches_separadas_cb = new javax.swing.JComboBox();
         memoria_p = new javax.swing.JPanel();
         m_entradas_p_pagina_l = new javax.swing.JLabel();
         m_entradas_p_pagina_t = new javax.swing.JTextField();
@@ -73,6 +73,7 @@ public class Vista extends javax.swing.JPanel {
         cb_tam_pagina = new javax.swing.JComboBox();
         cb_tam_memp = new javax.swing.JComboBox();
         cb_tam_virt = new javax.swing.JComboBox();
+        jLabel5 = new javax.swing.JLabel();
         caches_p = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         niv_cache_data_cb = new javax.swing.JComboBox();
@@ -87,50 +88,58 @@ public class Vista extends javax.swing.JPanel {
         politica_reemplazo_c1_l = new javax.swing.JLabel();
         politica_reemplazo_c1_cb = new javax.swing.JComboBox();
         cb_tam_cd1 = new javax.swing.JComboBox();
-        n_entradas_c1_l1 = new javax.swing.JLabel();
-        cb_tam_cd4 = new javax.swing.JComboBox();
+        n_tipo_c1_l = new javax.swing.JLabel();
+        cb_tipo_cd1 = new javax.swing.JComboBox();
         cache2_p = new javax.swing.JPanel();
-        cache1_p1 = new javax.swing.JPanel();
         n_entradas_c2_l = new javax.swing.JLabel();
         n_entradas_c2_t = new javax.swing.JTextField();
         n_vias_c2_l = new javax.swing.JLabel();
         n_vias_c2_t = new javax.swing.JTextField();
-        plicita_reemplazo_c2_l = new javax.swing.JLabel();
+        politica_reemplazo_c2_l = new javax.swing.JLabel();
         politica_reemplazo_c2_cb = new javax.swing.JComboBox();
         cb_tam_cd2 = new javax.swing.JComboBox();
+        n_tipo_c2_l = new javax.swing.JLabel();
+        cb_tipo_cd2 = new javax.swing.JComboBox();
         cache3_p = new javax.swing.JPanel();
-        cache1_p2 = new javax.swing.JPanel();
-        n_entradas_c3_l1 = new javax.swing.JLabel();
+        n_entradas_c3_l = new javax.swing.JLabel();
         n_entradas_c3_t = new javax.swing.JTextField();
         n_vias_c3_l = new javax.swing.JLabel();
         n_vias_c3_t = new javax.swing.JTextField();
-        plicita_reemplazo_c3_l = new javax.swing.JLabel();
+        politica_reemplazo_c3_l = new javax.swing.JLabel();
         politica_reemplazo_c3_cb = new javax.swing.JComboBox();
         cb_tam_cd3 = new javax.swing.JComboBox();
+        n_tipo_c3_l = new javax.swing.JLabel();
+        cb_tipo_cd3 = new javax.swing.JComboBox();
         cache1_i_p = new javax.swing.JPanel();
-        n_entradas_c2_l1 = new javax.swing.JLabel();
-        n_entradas_c1_i_t = new javax.swing.JTextField();
-        n_vias_c2_l1 = new javax.swing.JLabel();
-        n_vias_c1_i_t = new javax.swing.JTextField();
-        plicita_reemplazo_c2_l1 = new javax.swing.JLabel();
-        politica_reemplazo_c1_i_cb = new javax.swing.JComboBox();
-        cb_tam_ci1 = new javax.swing.JComboBox();
+        n_entradas_c4_l = new javax.swing.JLabel();
+        n_entradas_c4_t = new javax.swing.JTextField();
+        n_vias_c4_l = new javax.swing.JLabel();
+        n_vias_c4_t = new javax.swing.JTextField();
+        politica_reemplazo_c4_l = new javax.swing.JLabel();
+        politica_reemplazo_c4_cb = new javax.swing.JComboBox();
+        cb_tam_cd4 = new javax.swing.JComboBox();
+        n_tipo_c4_l = new javax.swing.JLabel();
+        cb_tipo_cd4 = new javax.swing.JComboBox();
         cache2_i_p = new javax.swing.JPanel();
-        n_entradas_c2_l2 = new javax.swing.JLabel();
-        n_entradas_c2_i_t = new javax.swing.JTextField();
-        n_vias_c2_l2 = new javax.swing.JLabel();
-        n_vias_c2_i_t = new javax.swing.JTextField();
-        plicita_reemplazo_c2_l2 = new javax.swing.JLabel();
-        politica_reemplazo_c2_i_cb = new javax.swing.JComboBox();
-        cb_tam_ci2 = new javax.swing.JComboBox();
+        n_entradas_c5_l = new javax.swing.JLabel();
+        n_entradas_c5_t = new javax.swing.JTextField();
+        n_vias_c5_l = new javax.swing.JLabel();
+        n_vias_c5_t = new javax.swing.JTextField();
+        politica_reemplazo_c5_l = new javax.swing.JLabel();
+        politica_reemplazo_c5_cb = new javax.swing.JComboBox();
+        cb_tam_cd5 = new javax.swing.JComboBox();
+        n_tipo_c5_l = new javax.swing.JLabel();
+        cb_tipo_cd5 = new javax.swing.JComboBox();
         cache3_i_p = new javax.swing.JPanel();
-        n_entradas_c2_l3 = new javax.swing.JLabel();
-        n_entradas_c3_i_t = new javax.swing.JTextField();
-        n_vias_c2_l3 = new javax.swing.JLabel();
-        n_vias_c3_i_t = new javax.swing.JTextField();
-        plicita_reemplazo_c2_l3 = new javax.swing.JLabel();
-        politica_reemplazo_c3_i_cb = new javax.swing.JComboBox();
-        cb_tam_ci3 = new javax.swing.JComboBox();
+        n_entradas_c6_l = new javax.swing.JLabel();
+        n_entradas_c6_t = new javax.swing.JTextField();
+        n_vias_c6_l = new javax.swing.JLabel();
+        n_vias_c6_t = new javax.swing.JTextField();
+        politica_reemplazo_c6_l = new javax.swing.JLabel();
+        politica_reemplazo_c6_cb = new javax.swing.JComboBox();
+        cb_tam_cd6 = new javax.swing.JComboBox();
+        n_tipo_c6_l = new javax.swing.JLabel();
+        cb_tipo_cd6 = new javax.swing.JComboBox();
         niv_cache_inst_cb = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
         cb_tipo_tam_linea = new javax.swing.JComboBox();
@@ -142,6 +151,7 @@ public class Vista extends javax.swing.JPanel {
         salvar_t = new javax.swing.JTextField();
         exportar_b = new javax.swing.JButton();
         validar_t_b = new javax.swing.JButton();
+        limpiar_t_b = new javax.swing.JButton();
         ejecucion1 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         ejecucion_a1 = new javax.swing.JTextArea();
@@ -158,6 +168,7 @@ public class Vista extends javax.swing.JPanel {
         cache_i2_b = new javax.swing.JButton();
         cache_i3_b = new javax.swing.JButton();
         memoria_b = new javax.swing.JButton();
+        limpiar_ej_b = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -170,21 +181,21 @@ public class Vista extends javax.swing.JPanel {
             .addGap(0, 272, Short.MAX_VALUE)
         );
 
-        pal_p_linea_l.setText("Tamaño de palabra: ");
+        pal_p_linea_l.setText("Bytes por palabra:");
 
         pal_p_linea_t.setText("4");
         pal_p_linea_t.setToolTipText("Tamaño de palabra (en bytes)");
 
-        jerarquias_separadas_l.setText("Jerarquías separadas");
-
-        jerarquias_separadas_chb.setText("Si/No");
-        jerarquias_separadas_chb.setToolTipText("Crea una jerarquía para datos y otra para instrucciones de forma independiente.");
+        jerarquias_separadas_l.setText("Caché compartida desde:");
 
         log_cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nada", "Mínimo", "Normal", "Debug" }));
         log_cb.setSelectedIndex(2);
         log_cb.setToolTipText("Nivel de detalle que aparecerá en el log de ejecución.");
 
         jLabel4.setText("Log");
+
+        caches_separadas_cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nivel 1", "Nivel 2", "Nivel 3", "Ninguno" }));
+        caches_separadas_cb.setToolTipText("Indica desde qué nivel las cachés de datos e instrucciones serán compartidas.");
 
         javax.swing.GroupLayout cpu_pLayout = new javax.swing.GroupLayout(cpu_p);
         cpu_p.setLayout(cpu_pLayout);
@@ -193,19 +204,17 @@ public class Vista extends javax.swing.JPanel {
             .addGroup(cpu_pLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(cpu_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(cpu_pLayout.createSequentialGroup()
-                        .addComponent(pal_p_linea_l)
-                        .addGap(23, 23, 23)
-                        .addComponent(pal_p_linea_t, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(97, 97, 97)
-                        .addComponent(jLabel4)
-                        .addGap(18, 18, 18)
-                        .addComponent(log_cb, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(cpu_pLayout.createSequentialGroup()
-                        .addComponent(jerarquias_separadas_l)
-                        .addGap(18, 18, 18)
-                        .addComponent(jerarquias_separadas_chb)))
-                .addContainerGap(165, Short.MAX_VALUE))
+                    .addComponent(jerarquias_separadas_l)
+                    .addComponent(pal_p_linea_l))
+                .addGap(18, 18, 18)
+                .addGroup(cpu_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(pal_p_linea_t, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+                    .addComponent(caches_separadas_cb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(63, 63, 63)
+                .addComponent(jLabel4)
+                .addGap(18, 18, 18)
+                .addComponent(log_cb, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(156, Short.MAX_VALUE))
         );
         cpu_pLayout.setVerticalGroup(
             cpu_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,24 +225,29 @@ public class Vista extends javax.swing.JPanel {
                     .addComponent(pal_p_linea_t, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
                     .addComponent(log_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
+                .addGap(13, 13, 13)
                 .addGroup(cpu_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jerarquias_separadas_l)
-                    .addComponent(jerarquias_separadas_chb))
-                .addContainerGap(250, Short.MAX_VALUE))
+                    .addComponent(caches_separadas_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(252, Short.MAX_VALUE))
         );
 
-        config_p1.addTab("CPU", cpu_p);
+        config_p1.addTab("General", cpu_p);
 
-        m_entradas_p_pagina_l.setText("Tamaño de página");
+        m_entradas_p_pagina_l.setText("Tamaño de página:");
 
-        m_numero_entradas.setText("Tamaño memoria principal");
+        m_entradas_p_pagina_t.setText("4");
+        m_entradas_p_pagina_t.setToolTipText("Tamaño de página.");
 
-        m_tam_memp_t.setText("3FFFFFFF");
+        m_numero_entradas.setText("Tamaño memoria principal:");
 
-        jLabel2.setText("Tamaño memoria virtual");
+        m_tam_memp_t.setText("32");
+        m_tam_memp_t.setToolTipText("Tamaño de la memoria principal.");
 
-        m_tam_virt_t.setText("3FFF");
+        jLabel2.setText("Tamaño memoria virtual:");
+
+        m_tam_virt_t.setText("256");
+        m_tam_virt_t.setToolTipText("Tamaño de la memoria virtual.");
 
         tlb_data_chb.setText("TLB Data");
         tlb_data_chb.addActionListener(new java.awt.event.ActionListener() {
@@ -276,21 +290,17 @@ public class Vista extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(politica_reemplazo_c1_l1)
                         .addGap(18, 18, 18)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(politica_reemplazo_tlb_data_cb1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(politica_reemplazo_tlb_data_cb1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(cb_tipo_tlb_datos, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 66, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                        .addComponent(n_vias_c2_l4)
-                        .addGap(18, 18, 18)
-                        .addComponent(n_vias_tlb_data_t, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(159, 159, 159))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(n_entradas_tlb_data_t, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(cb_tipo_tlb_datos, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 66, Short.MAX_VALUE))
+                    .addComponent(n_entradas_tlb_data_t))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addComponent(n_vias_c2_l4)
+                .addGap(18, 18, 18)
+                .addComponent(n_vias_tlb_data_t, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(111, 111, 111))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -352,21 +362,17 @@ public class Vista extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(politica_reemplazo_c1_l3)
                         .addGap(18, 18, 18)))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(politica_reemplazo_tlb_inst_cb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(politica_reemplazo_tlb_inst_cb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(cb_tipo_tlb_inst, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 66, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                        .addComponent(n_vias_c2_l6)
-                        .addGap(18, 18, 18)
-                        .addComponent(n_vias_tlb_inst_t, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(159, 159, 159))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(n_entradas_tlb_inst_t, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(cb_tipo_tlb_inst, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 66, Short.MAX_VALUE))
+                    .addComponent(n_entradas_tlb_inst_t))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addComponent(n_vias_c2_l6)
+                .addGap(18, 18, 18)
+                .addComponent(n_vias_tlb_inst_t, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(111, 111, 111))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -391,6 +397,7 @@ public class Vista extends javax.swing.JPanel {
         jTabbedPane1.addTab("TLB Inst", jPanel2);
 
         cb_tam_pagina.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bytes", "KBytes", "MBytes" }));
+        cb_tam_pagina.setSelectedIndex(1);
         cb_tam_pagina.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_tam_paginaActionPerformed(evt);
@@ -398,6 +405,7 @@ public class Vista extends javax.swing.JPanel {
         });
 
         cb_tam_memp.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bytes", "KBytes", "MBytes" }));
+        cb_tam_memp.setSelectedIndex(2);
         cb_tam_memp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_tam_mempActionPerformed(evt);
@@ -405,11 +413,14 @@ public class Vista extends javax.swing.JPanel {
         });
 
         cb_tam_virt.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bytes", "KBytes", "MBytes" }));
+        cb_tam_virt.setSelectedIndex(2);
         cb_tam_virt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_tam_virtActionPerformed(evt);
             }
         });
+
+        jLabel5.setText("Configuración de TLB:");
 
         javax.swing.GroupLayout memoria_pLayout = new javax.swing.GroupLayout(memoria_p);
         memoria_p.setLayout(memoria_pLayout);
@@ -418,27 +429,26 @@ public class Vista extends javax.swing.JPanel {
             .addGroup(memoria_pLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(memoria_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(memoria_pLayout.createSequentialGroup()
-                        .addGroup(memoria_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(m_entradas_p_pagina_l)
-                            .addComponent(m_numero_entradas))
-                        .addGap(18, 18, 18)
-                        .addGroup(memoria_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(memoria_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(m_entradas_p_pagina_t, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(m_tam_memp_t, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(m_tam_virt_t, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(27, 27, 27)
-                        .addGroup(memoria_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cb_tam_virt, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cb_tam_pagina, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cb_tam_memp, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(memoria_pLayout.createSequentialGroup()
-                        .addGroup(memoria_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(tlb_data_chb))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tlb_inst_chb)))
+                    .addComponent(m_entradas_p_pagina_l)
+                    .addComponent(m_numero_entradas)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel5))
+                .addGap(18, 18, 18)
+                .addGroup(memoria_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(memoria_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(m_entradas_p_pagina_t, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(m_tam_memp_t, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(memoria_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(memoria_pLayout.createSequentialGroup()
+                            .addComponent(tlb_data_chb)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(tlb_inst_chb))
+                        .addComponent(m_tam_virt_t, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(27, 27, 27)
+                .addGroup(memoria_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cb_tam_virt, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cb_tam_pagina, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cb_tam_memp, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
             .addComponent(jTabbedPane1)
         );
@@ -461,9 +471,11 @@ public class Vista extends javax.swing.JPanel {
                     .addComponent(m_tam_virt_t, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cb_tam_virt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(memoria_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tlb_data_chb)
-                    .addComponent(tlb_inst_chb))
+                .addGroup(memoria_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tlb_inst_chb)
+                    .addGroup(memoria_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel5)
+                        .addComponent(tlb_data_chb)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTabbedPane1))
         );
@@ -472,7 +484,7 @@ public class Vista extends javax.swing.JPanel {
 
         config_p1.addTab("Memoria", memoria_p);
 
-        jLabel1.setText("Niveles de Cache Data");
+        jLabel1.setText("Niveles de Cache Data:");
 
         niv_cache_data_cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3" }));
         niv_cache_data_cb.addActionListener(new java.awt.event.ActionListener() {
@@ -481,12 +493,13 @@ public class Vista extends javax.swing.JPanel {
             }
         });
 
-        tam_linea_t.setToolTipText("Tamaño de bloque.");
+        tam_linea_t.setToolTipText("Tamaño de cada bloque.");
 
-        tam_linea_l.setText("Tamaño de línea");
+        tam_linea_l.setText("Tamaño de línea:");
 
-        n_entradas_c1_l.setText("Tamaño");
+        n_entradas_c1_l.setText("Tamaño:");
 
+        n_entradas_c1_t.setToolTipText("Tamaño de la caché.");
         n_entradas_c1_t.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         n_entradas_c1_t.setName(""); // NOI18N
         n_entradas_c1_t.addActionListener(new java.awt.event.ActionListener() {
@@ -495,11 +508,14 @@ public class Vista extends javax.swing.JPanel {
             }
         });
 
-        n_vias_c1_l.setText("Número de vías");
+        n_vias_c1_l.setText("Número de vías:");
 
-        politica_reemplazo_c1_l.setText("Política de reemplazo");
+        n_vias_c1_t.setToolTipText("Número de vías para cachés asociativas.");
+
+        politica_reemplazo_c1_l.setText("Política de reemplazo:");
 
         politica_reemplazo_c1_cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "LRU", "LFU", "FIFO", "AGING", "RANDOM" }));
+        politica_reemplazo_c1_cb.setToolTipText("Política de reemplazo para cachés asociativas.");
 
         cb_tam_cd1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bytes", "KBytes", "MBytes" }));
         cb_tam_cd1.addActionListener(new java.awt.event.ActionListener() {
@@ -508,12 +524,13 @@ public class Vista extends javax.swing.JPanel {
             }
         });
 
-        n_entradas_c1_l1.setText("Tipo");
+        n_tipo_c1_l.setText("Tipo:");
 
-        cb_tam_cd4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Directa", "Asociativa" }));
-        cb_tam_cd4.addActionListener(new java.awt.event.ActionListener() {
+        cb_tipo_cd1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Directa", "Asociativa" }));
+        cb_tipo_cd1.setToolTipText("Tipo de caché.");
+        cb_tipo_cd1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cb_tam_cd4ActionPerformed(evt);
+                cb_tipo_cd1ActionPerformed(evt);
             }
         });
 
@@ -526,10 +543,10 @@ public class Vista extends javax.swing.JPanel {
                 .addGroup(cache1_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(politica_reemplazo_c1_l)
                     .addComponent(n_entradas_c1_l)
-                    .addComponent(n_entradas_c1_l1))
+                    .addComponent(n_tipo_c1_l))
                 .addGap(24, 24, 24)
                 .addGroup(cache1_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cb_tam_cd4, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cb_tipo_cd1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(cache1_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(n_entradas_c1_t, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(politica_reemplazo_c1_cb, 0, 150, Short.MAX_VALUE)))
@@ -537,7 +554,7 @@ public class Vista extends javax.swing.JPanel {
                 .addGroup(cache1_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(cache1_pLayout.createSequentialGroup()
                         .addComponent(n_vias_c1_l)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                         .addComponent(n_vias_c1_t, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(cb_tam_cd1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(75, 75, 75))
@@ -554,8 +571,8 @@ public class Vista extends javax.swing.JPanel {
                 .addGroup(cache1_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(n_vias_c1_l)
                     .addComponent(n_vias_c1_t, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(n_entradas_c1_l1)
-                    .addComponent(cb_tam_cd4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(n_tipo_c1_l)
+                    .addComponent(cb_tipo_cd1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(cache1_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(politica_reemplazo_c1_l)
@@ -565,13 +582,25 @@ public class Vista extends javax.swing.JPanel {
 
         cache1_3_p.addTab("Cache 1 Data", cache1_p);
 
-        n_entradas_c2_l.setText("Tamaño");
+        n_entradas_c2_l.setText("Tamaño:");
 
-        n_vias_c2_l.setText("Número de vías");
+        n_entradas_c2_t.setToolTipText("Tamaño de la caché.");
+        n_entradas_c2_t.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        n_entradas_c2_t.setName(""); // NOI18N
+        n_entradas_c2_t.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                n_entradas_c2_tActionPerformed(evt);
+            }
+        });
 
-        plicita_reemplazo_c2_l.setText("Política de reemplazo");
+        n_vias_c2_l.setText("Número de vías:");
+
+        n_vias_c2_t.setToolTipText("Número de vías para cachés asociativas.");
+
+        politica_reemplazo_c2_l.setText("Política de reemplazo:");
 
         politica_reemplazo_c2_cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "LRU", "LFU", "FIFO", "AGING", "RANDOM" }));
+        politica_reemplazo_c2_cb.setToolTipText("Política de reemplazo para cachés asociativas.");
 
         cb_tam_cd2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bytes", "KBytes", "MBytes" }));
         cb_tam_cd2.addActionListener(new java.awt.event.ActionListener() {
@@ -580,66 +609,83 @@ public class Vista extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout cache1_p1Layout = new javax.swing.GroupLayout(cache1_p1);
-        cache1_p1.setLayout(cache1_p1Layout);
-        cache1_p1Layout.setHorizontalGroup(
-            cache1_p1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(cache1_p1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(cache1_p1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(n_entradas_c2_l)
-                    .addComponent(n_vias_c2_l)
-                    .addComponent(plicita_reemplazo_c2_l))
-                .addGap(24, 24, 24)
-                .addGroup(cache1_p1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(n_vias_c2_t, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(n_entradas_c2_t, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(politica_reemplazo_c2_cb, 0, 150, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(cb_tam_cd2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(241, Short.MAX_VALUE))
-        );
-        cache1_p1Layout.setVerticalGroup(
-            cache1_p1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(cache1_p1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(cache1_p1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(n_entradas_c2_l)
-                    .addComponent(n_entradas_c2_t, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cb_tam_cd2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(cache1_p1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(n_vias_c2_l)
-                    .addComponent(n_vias_c2_t, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(cache1_p1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(plicita_reemplazo_c2_l)
-                    .addComponent(politica_reemplazo_c2_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(104, Short.MAX_VALUE))
-        );
+        n_tipo_c2_l.setText("Tipo:");
+
+        cb_tipo_cd2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Directa", "Asociativa" }));
+        cb_tipo_cd2.setToolTipText("Tipo de caché.");
+        cb_tipo_cd2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_tipo_cd2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout cache2_pLayout = new javax.swing.GroupLayout(cache2_p);
         cache2_p.setLayout(cache2_pLayout);
         cache2_pLayout.setHorizontalGroup(
             cache2_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(cache2_pLayout.createSequentialGroup()
-                .addComponent(cache1_p1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(cache2_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(politica_reemplazo_c2_l)
+                    .addComponent(n_entradas_c2_l)
+                    .addComponent(n_tipo_c2_l))
+                .addGap(24, 24, 24)
+                .addGroup(cache2_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cb_tipo_cd2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(cache2_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(n_entradas_c2_t, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(politica_reemplazo_c2_cb, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(cache2_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(cache2_pLayout.createSequentialGroup()
+                        .addComponent(n_vias_c2_l)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                        .addComponent(n_vias_c2_t, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cb_tam_cd2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(75, 75, 75))
         );
         cache2_pLayout.setVerticalGroup(
             cache2_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(cache1_p1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(cache2_pLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(cache2_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(n_entradas_c2_l)
+                    .addComponent(n_entradas_c2_t, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cb_tam_cd2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(cache2_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(n_vias_c2_l)
+                    .addComponent(n_vias_c2_t, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(n_tipo_c2_l)
+                    .addComponent(cb_tipo_cd2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(cache2_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(politica_reemplazo_c2_l)
+                    .addComponent(politica_reemplazo_c2_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(104, Short.MAX_VALUE))
         );
 
         cache1_3_p.addTab("Cache 2 Data", cache2_p);
 
-        n_entradas_c3_l1.setText("Tamaño");
+        n_entradas_c3_l.setText("Tamaño:");
 
-        n_vias_c3_l.setText("Número de vías");
+        n_entradas_c3_t.setToolTipText("Tamaño de la caché.");
+        n_entradas_c3_t.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        n_entradas_c3_t.setName(""); // NOI18N
+        n_entradas_c3_t.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                n_entradas_c3_tActionPerformed(evt);
+            }
+        });
 
-        plicita_reemplazo_c3_l.setText("Política de reemplazo");
+        n_vias_c3_l.setText("Número de vías:");
+
+        n_vias_c3_t.setToolTipText("Número de vías para cachés asociativas.");
+
+        politica_reemplazo_c3_l.setText("Política de reemplazo:");
 
         politica_reemplazo_c3_cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "LRU", "LFU", "FIFO", "AGING", "RANDOM" }));
+        politica_reemplazo_c3_cb.setToolTipText("Política de reemplazo para cachés asociativas.");
 
         cb_tam_cd3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bytes", "KBytes", "MBytes" }));
         cb_tam_cd3.addActionListener(new java.awt.event.ActionListener() {
@@ -648,71 +694,98 @@ public class Vista extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout cache1_p2Layout = new javax.swing.GroupLayout(cache1_p2);
-        cache1_p2.setLayout(cache1_p2Layout);
-        cache1_p2Layout.setHorizontalGroup(
-            cache1_p2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(cache1_p2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(cache1_p2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(n_entradas_c3_l1)
-                    .addComponent(n_vias_c3_l)
-                    .addComponent(plicita_reemplazo_c3_l))
-                .addGap(24, 24, 24)
-                .addGroup(cache1_p2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(n_vias_c3_t, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(n_entradas_c3_t, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(politica_reemplazo_c3_cb, 0, 150, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(cb_tam_cd3, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(241, Short.MAX_VALUE))
-        );
-        cache1_p2Layout.setVerticalGroup(
-            cache1_p2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(cache1_p2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(cache1_p2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(n_entradas_c3_l1)
-                    .addComponent(n_entradas_c3_t, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cb_tam_cd3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(cache1_p2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(n_vias_c3_l)
-                    .addComponent(n_vias_c3_t, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(cache1_p2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(plicita_reemplazo_c3_l)
-                    .addComponent(politica_reemplazo_c3_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(104, Short.MAX_VALUE))
-        );
+        n_tipo_c3_l.setText("Tipo:");
+
+        cb_tipo_cd3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Directa", "Asociativa" }));
+        cb_tipo_cd3.setToolTipText("Tipo de caché.");
+        cb_tipo_cd3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_tipo_cd3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout cache3_pLayout = new javax.swing.GroupLayout(cache3_p);
         cache3_p.setLayout(cache3_pLayout);
         cache3_pLayout.setHorizontalGroup(
             cache3_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(cache3_pLayout.createSequentialGroup()
-                .addComponent(cache1_p2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(cache3_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(politica_reemplazo_c3_l)
+                    .addComponent(n_entradas_c3_l)
+                    .addComponent(n_tipo_c3_l))
+                .addGap(24, 24, 24)
+                .addGroup(cache3_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cb_tipo_cd3, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(cache3_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(n_entradas_c3_t, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(politica_reemplazo_c3_cb, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(cache3_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(cache3_pLayout.createSequentialGroup()
+                        .addComponent(n_vias_c3_l)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                        .addComponent(n_vias_c3_t, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cb_tam_cd3, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(75, 75, 75))
         );
         cache3_pLayout.setVerticalGroup(
             cache3_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(cache1_p2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(cache3_pLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(cache3_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(n_entradas_c3_l)
+                    .addComponent(n_entradas_c3_t, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cb_tam_cd3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(cache3_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(n_vias_c3_l)
+                    .addComponent(n_vias_c3_t, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(n_tipo_c3_l)
+                    .addComponent(cb_tipo_cd3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(cache3_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(politica_reemplazo_c3_l)
+                    .addComponent(politica_reemplazo_c3_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(104, Short.MAX_VALUE))
         );
 
         cache1_3_p.addTab("Cache 3 Data", cache3_p);
 
-        n_entradas_c2_l1.setText("Tamaño");
+        n_entradas_c4_l.setText("Tamaño:");
 
-        n_vias_c2_l1.setText("Número de vías");
-
-        plicita_reemplazo_c2_l1.setText("Política de reemplazo");
-
-        politica_reemplazo_c1_i_cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "LRU", "LFU", "FIFO", "AGING", "RANDOM" }));
-
-        cb_tam_ci1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bytes", "KBytes", "MBytes" }));
-        cb_tam_ci1.addActionListener(new java.awt.event.ActionListener() {
+        n_entradas_c4_t.setToolTipText("Tamaño de la caché.");
+        n_entradas_c4_t.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        n_entradas_c4_t.setName(""); // NOI18N
+        n_entradas_c4_t.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cb_tam_ci1ActionPerformed(evt);
+                n_entradas_c4_tActionPerformed(evt);
+            }
+        });
+
+        n_vias_c4_l.setText("Número de vías:");
+
+        n_vias_c4_t.setToolTipText("Número de vías para cachés asociativas.");
+
+        politica_reemplazo_c4_l.setText("Política de reemplazo:");
+
+        politica_reemplazo_c4_cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "LRU", "LFU", "FIFO", "AGING", "RANDOM" }));
+        politica_reemplazo_c4_cb.setToolTipText("Política de reemplazo para cachés asociativas.");
+
+        cb_tam_cd4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bytes", "KBytes", "MBytes" }));
+        cb_tam_cd4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_tam_cd4ActionPerformed(evt);
+            }
+        });
+
+        n_tipo_c4_l.setText("Tipo:");
+
+        cb_tipo_cd4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Directa", "Asociativa" }));
+        cb_tipo_cd4.setToolTipText("Tipo de caché.");
+        cb_tipo_cd4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_tipo_cd4ActionPerformed(evt);
             }
         });
 
@@ -723,48 +796,83 @@ public class Vista extends javax.swing.JPanel {
             .addGroup(cache1_i_pLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(cache1_i_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(n_entradas_c2_l1)
-                    .addComponent(n_vias_c2_l1)
-                    .addComponent(plicita_reemplazo_c2_l1))
+                    .addComponent(politica_reemplazo_c4_l)
+                    .addComponent(n_entradas_c4_l)
+                    .addComponent(n_tipo_c4_l))
                 .addGap(24, 24, 24)
-                .addGroup(cache1_i_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(n_vias_c1_i_t, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(n_entradas_c1_i_t, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(politica_reemplazo_c1_i_cb, 0, 150, Short.MAX_VALUE))
+                .addGroup(cache1_i_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cb_tipo_cd4, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(cache1_i_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(n_entradas_c4_t, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(politica_reemplazo_c4_cb, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addComponent(cb_tam_ci1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(241, Short.MAX_VALUE))
+                .addGroup(cache1_i_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(cache1_i_pLayout.createSequentialGroup()
+                        .addComponent(n_vias_c4_l)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                        .addComponent(n_vias_c4_t, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cb_tam_cd4, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(75, 75, 75))
         );
         cache1_i_pLayout.setVerticalGroup(
             cache1_i_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(cache1_i_pLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(cache1_i_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(n_entradas_c2_l1)
-                    .addComponent(n_entradas_c1_i_t, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cb_tam_ci1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(n_entradas_c4_l)
+                    .addComponent(n_entradas_c4_t, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cb_tam_cd4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(cache1_i_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(n_vias_c2_l1)
-                    .addComponent(n_vias_c1_i_t, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(n_vias_c4_l)
+                    .addComponent(n_vias_c4_t, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(n_tipo_c4_l)
+                    .addComponent(cb_tipo_cd4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(cache1_i_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(plicita_reemplazo_c2_l1)
-                    .addComponent(politica_reemplazo_c1_i_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(politica_reemplazo_c4_l)
+                    .addComponent(politica_reemplazo_c4_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(104, Short.MAX_VALUE))
         );
 
         cache1_3_p.addTab("Cache 1 Inst", cache1_i_p);
 
-        n_entradas_c2_l2.setText("Tamaño");
+        n_entradas_c5_l.setText("Tamaño:");
 
-        n_vias_c2_l2.setText("Número de vías");
+        n_entradas_c5_t.setToolTipText("Tamaño de la caché.");
+        n_entradas_c5_t.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        n_entradas_c5_t.setName(""); // NOI18N
+        n_entradas_c5_t.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                n_entradas_c5_tActionPerformed(evt);
+            }
+        });
 
-        plicita_reemplazo_c2_l2.setText("Política de reemplazo");
+        n_vias_c5_l.setText("Número de vías:");
 
-        politica_reemplazo_c2_i_cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "LRU", "LFU", "FIFO", "AGING", "RANDOM" }));
+        n_vias_c5_t.setToolTipText("Número de vías para cachés asociativas.");
 
-        cb_tam_ci2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bytes", "KBytes", "MBytes" }));
+        politica_reemplazo_c5_l.setText("Política de reemplazo:");
+
+        politica_reemplazo_c5_cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "LRU", "LFU", "FIFO", "AGING", "RANDOM" }));
+        politica_reemplazo_c5_cb.setToolTipText("Política de reemplazo para cachés asociativas.");
+
+        cb_tam_cd5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bytes", "KBytes", "MBytes" }));
+        cb_tam_cd5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_tam_cd5ActionPerformed(evt);
+            }
+        });
+
+        n_tipo_c5_l.setText("Tipo:");
+
+        cb_tipo_cd5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Directa", "Asociativa" }));
+        cb_tipo_cd5.setToolTipText("Tipo de caché.");
+        cb_tipo_cd5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_tipo_cd5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout cache2_i_pLayout = new javax.swing.GroupLayout(cache2_i_p);
         cache2_i_p.setLayout(cache2_i_pLayout);
@@ -773,48 +881,83 @@ public class Vista extends javax.swing.JPanel {
             .addGroup(cache2_i_pLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(cache2_i_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(n_entradas_c2_l2)
-                    .addComponent(n_vias_c2_l2)
-                    .addComponent(plicita_reemplazo_c2_l2))
+                    .addComponent(politica_reemplazo_c5_l)
+                    .addComponent(n_entradas_c5_l)
+                    .addComponent(n_tipo_c5_l))
                 .addGap(24, 24, 24)
-                .addGroup(cache2_i_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(n_vias_c2_i_t, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(n_entradas_c2_i_t, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(politica_reemplazo_c2_i_cb, 0, 150, Short.MAX_VALUE))
+                .addGroup(cache2_i_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cb_tipo_cd5, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(cache2_i_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(n_entradas_c5_t, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(politica_reemplazo_c5_cb, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addComponent(cb_tam_ci2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(241, Short.MAX_VALUE))
+                .addGroup(cache2_i_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(cache2_i_pLayout.createSequentialGroup()
+                        .addComponent(n_vias_c5_l)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                        .addComponent(n_vias_c5_t, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cb_tam_cd5, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(75, 75, 75))
         );
         cache2_i_pLayout.setVerticalGroup(
             cache2_i_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(cache2_i_pLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(cache2_i_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(n_entradas_c2_l2)
-                    .addComponent(n_entradas_c2_i_t, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cb_tam_ci2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(n_entradas_c5_l)
+                    .addComponent(n_entradas_c5_t, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cb_tam_cd5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(cache2_i_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(n_vias_c2_l2)
-                    .addComponent(n_vias_c2_i_t, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(n_vias_c5_l)
+                    .addComponent(n_vias_c5_t, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(n_tipo_c5_l)
+                    .addComponent(cb_tipo_cd5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(cache2_i_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(plicita_reemplazo_c2_l2)
-                    .addComponent(politica_reemplazo_c2_i_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(politica_reemplazo_c5_l)
+                    .addComponent(politica_reemplazo_c5_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(104, Short.MAX_VALUE))
         );
 
         cache1_3_p.addTab("Cache 2 Inst", cache2_i_p);
 
-        n_entradas_c2_l3.setText("Tamaño");
+        n_entradas_c6_l.setText("Tamaño:");
 
-        n_vias_c2_l3.setText("Número de vías");
+        n_entradas_c6_t.setToolTipText("Tamaño de la caché.");
+        n_entradas_c6_t.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        n_entradas_c6_t.setName(""); // NOI18N
+        n_entradas_c6_t.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                n_entradas_c6_tActionPerformed(evt);
+            }
+        });
 
-        plicita_reemplazo_c2_l3.setText("Política de reemplazo");
+        n_vias_c6_l.setText("Número de vías:");
 
-        politica_reemplazo_c3_i_cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "LRU", "LFU", "FIFO", "AGING", "RANDOM" }));
+        n_vias_c6_t.setToolTipText("Número de vías para cachés asociativas.");
 
-        cb_tam_ci3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bytes", "KBytes", "MBytes" }));
+        politica_reemplazo_c6_l.setText("Política de reemplazo:");
+
+        politica_reemplazo_c6_cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "LRU", "LFU", "FIFO", "AGING", "RANDOM" }));
+        politica_reemplazo_c6_cb.setToolTipText("Política de reemplazo para cachés asociativas.");
+
+        cb_tam_cd6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bytes", "KBytes", "MBytes" }));
+        cb_tam_cd6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_tam_cd6ActionPerformed(evt);
+            }
+        });
+
+        n_tipo_c6_l.setText("Tipo:");
+
+        cb_tipo_cd6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Directa", "Asociativa" }));
+        cb_tipo_cd6.setToolTipText("Tipo de caché.");
+        cb_tipo_cd6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_tipo_cd6ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout cache3_i_pLayout = new javax.swing.GroupLayout(cache3_i_p);
         cache3_i_p.setLayout(cache3_i_pLayout);
@@ -823,34 +966,42 @@ public class Vista extends javax.swing.JPanel {
             .addGroup(cache3_i_pLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(cache3_i_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(n_entradas_c2_l3)
-                    .addComponent(n_vias_c2_l3)
-                    .addComponent(plicita_reemplazo_c2_l3))
+                    .addComponent(politica_reemplazo_c6_l)
+                    .addComponent(n_entradas_c6_l)
+                    .addComponent(n_tipo_c6_l))
                 .addGap(24, 24, 24)
-                .addGroup(cache3_i_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(n_vias_c3_i_t, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(n_entradas_c3_i_t, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(politica_reemplazo_c3_i_cb, 0, 150, Short.MAX_VALUE))
+                .addGroup(cache3_i_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cb_tipo_cd6, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(cache3_i_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(n_entradas_c6_t, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(politica_reemplazo_c6_cb, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addComponent(cb_tam_ci3, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(241, Short.MAX_VALUE))
+                .addGroup(cache3_i_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(cache3_i_pLayout.createSequentialGroup()
+                        .addComponent(n_vias_c6_l)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                        .addComponent(n_vias_c6_t, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cb_tam_cd6, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(75, 75, 75))
         );
         cache3_i_pLayout.setVerticalGroup(
             cache3_i_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(cache3_i_pLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(cache3_i_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(n_entradas_c2_l3)
-                    .addComponent(n_entradas_c3_i_t, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cb_tam_ci3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(n_entradas_c6_l)
+                    .addComponent(n_entradas_c6_t, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cb_tam_cd6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(cache3_i_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(n_vias_c2_l3)
-                    .addComponent(n_vias_c3_i_t, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(n_vias_c6_l)
+                    .addComponent(n_vias_c6_t, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(n_tipo_c6_l)
+                    .addComponent(cb_tipo_cd6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(cache3_i_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(plicita_reemplazo_c2_l3)
-                    .addComponent(politica_reemplazo_c3_i_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(politica_reemplazo_c6_l)
+                    .addComponent(politica_reemplazo_c6_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(104, Short.MAX_VALUE))
         );
 
@@ -863,7 +1014,7 @@ public class Vista extends javax.swing.JPanel {
             }
         });
 
-        jLabel3.setText("Niveles de Cache Inst");
+        jLabel3.setText("Niveles de Cache Inst:");
 
         cb_tipo_tam_linea.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bytes", "Palabras" }));
         cb_tipo_tam_linea.setToolTipText("");
@@ -876,19 +1027,20 @@ public class Vista extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(caches_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(caches_pLayout.createSequentialGroup()
-                        .addComponent(tam_linea_l)
-                        .addGap(18, 18, 18)
-                        .addComponent(tam_linea_t, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(cb_tipo_tam_linea, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(caches_pLayout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(niv_cache_data_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(95, 95, 95)
+                        .addComponent(niv_cache_data_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(caches_pLayout.createSequentialGroup()
+                        .addComponent(tam_linea_l)
+                        .addGap(18, 18, 18)
+                        .addComponent(tam_linea_t, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(caches_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(caches_pLayout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(niv_cache_inst_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(niv_cache_inst_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cb_tipo_tam_linea, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
             .addComponent(cache1_3_p)
         );
@@ -910,7 +1062,7 @@ public class Vista extends javax.swing.JPanel {
                 .addComponent(cache1_3_p))
         );
 
-        config_p1.addTab("Caches", caches_p);
+        config_p1.addTab("Cache", caches_p);
 
         javax.swing.GroupLayout ConfiguracionLayout = new javax.swing.GroupLayout(Configuracion);
         Configuracion.setLayout(ConfiguracionLayout);
@@ -925,6 +1077,8 @@ public class Vista extends javax.swing.JPanel {
                 .addComponent(config_p1))
         );
 
+        config_p1.getAccessibleContext().setAccessibleName("General");
+
         ejecucion_p.addTab("Configuración", Configuracion);
 
         ejecucion_a.setEditable(false);
@@ -936,18 +1090,21 @@ public class Vista extends javax.swing.JPanel {
 
         ejecutar_b.setText("Ejecutar");
 
-        traza_carga_b.setText("Cargar Taza");
+        traza_carga_b.setText("Cargar traza");
+        traza_carga_b.setPreferredSize(new java.awt.Dimension(100, 23));
         traza_carga_b.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 traza_carga_bActionPerformed(evt);
             }
         });
 
-        salvar_t.setText("traza.txt");
+        salvar_t.setText("resultado_traza.txt");
 
         exportar_b.setText("Exportar");
 
         validar_t_b.setText("Validar");
+
+        limpiar_t_b.setText("Limpiar");
 
         javax.swing.GroupLayout ejecucionLayout = new javax.swing.GroupLayout(ejecucion);
         ejecucion.setLayout(ejecucionLayout);
@@ -958,16 +1115,17 @@ public class Vista extends javax.swing.JPanel {
                 .addGroup(ejecucionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 615, Short.MAX_VALUE)
                     .addGroup(ejecucionLayout.createSequentialGroup()
-                        .addComponent(salvar_t, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(salvar_t)
+                        .addGap(18, 18, 18)
                         .addComponent(exportar_b, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ejecucionLayout.createSequentialGroup()
-                        .addComponent(traza_carga_b, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(traza_carga_b, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(validar_t_b)
                         .addGap(18, 18, 18)
                         .addComponent(ejecutar_b, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(limpiar_t_b, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         ejecucionLayout.setVerticalGroup(
@@ -975,9 +1133,10 @@ public class Vista extends javax.swing.JPanel {
             .addGroup(ejecucionLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addGroup(ejecucionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(traza_carga_b)
+                    .addComponent(traza_carga_b, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ejecutar_b)
-                    .addComponent(validar_t_b))
+                    .addComponent(validar_t_b)
+                    .addComponent(limpiar_t_b))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
@@ -1000,7 +1159,7 @@ public class Vista extends javax.swing.JPanel {
 
         ciclo_b1.setText("Ciclo");
 
-        salvar_e.setText("ejecucion.txt");
+        salvar_e.setText("resultado_ejecucion.txt");
 
         exportar_b1.setText("Exportar");
 
@@ -1032,6 +1191,8 @@ public class Vista extends javax.swing.JPanel {
 
         memoria_b.setText("Memoria");
 
+        limpiar_ej_b.setText("Limpiar");
+
         javax.swing.GroupLayout ejecucion1Layout = new javax.swing.GroupLayout(ejecucion1);
         ejecucion1.setLayout(ejecucion1Layout);
         ejecucion1Layout.setHorizontalGroup(
@@ -1041,15 +1202,20 @@ public class Vista extends javax.swing.JPanel {
                 .addGroup(ejecucion1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 615, Short.MAX_VALUE)
                     .addGroup(ejecucion1Layout.createSequentialGroup()
+                        .addComponent(cargar_codigo_b, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(validar_c_b)
+                        .addGap(18, 18, 18)
+                        .addComponent(ejecutar_b1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(ciclo_b1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(limpiar_ej_b, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ejecucion1Layout.createSequentialGroup()
                         .addGroup(ejecucion1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(ejecucion1Layout.createSequentialGroup()
-                                .addComponent(cargar_codigo_b)
-                                .addGap(18, 18, 18)
-                                .addComponent(validar_c_b)
-                                .addGap(18, 18, 18)
-                                .addComponent(ciclo_b1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(ejecutar_b1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(salvar_e)
+                                .addGap(18, 18, 18))
                             .addGroup(ejecucion1Layout.createSequentialGroup()
                                 .addComponent(cache_d1_b)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1061,14 +1227,11 @@ public class Vista extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(cache_i2_b)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cache_i3_b))
-                            .addGroup(ejecucion1Layout.createSequentialGroup()
-                                .addComponent(salvar_e, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(exportar_b1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(memoria_b)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(cache_i3_b)
+                                .addGap(13, 13, 13)))
+                        .addGroup(ejecucion1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(exportar_b1, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+                            .addComponent(memoria_b, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         ejecucion1Layout.setVerticalGroup(
@@ -1079,7 +1242,8 @@ public class Vista extends javax.swing.JPanel {
                     .addComponent(cargar_codigo_b)
                     .addComponent(ciclo_b1)
                     .addComponent(ejecutar_b1)
-                    .addComponent(validar_c_b))
+                    .addComponent(validar_c_b)
+                    .addComponent(limpiar_ej_b))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
@@ -1089,12 +1253,12 @@ public class Vista extends javax.swing.JPanel {
                     .addComponent(cache_d3_b)
                     .addComponent(cache_i1_b)
                     .addComponent(cache_i2_b)
-                    .addComponent(cache_i3_b))
+                    .addComponent(cache_i3_b)
+                    .addComponent(memoria_b))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(ejecucion1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(salvar_e, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(exportar_b1)
-                    .addComponent(memoria_b))
+                    .addComponent(exportar_b1))
                 .addContainerGap())
         );
 
@@ -1148,18 +1312,6 @@ public class Vista extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_cb_tam_cd1ActionPerformed
 
-    private void cb_tam_cd2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tam_cd2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cb_tam_cd2ActionPerformed
-
-    private void cb_tam_cd3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tam_cd3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cb_tam_cd3ActionPerformed
-
-    private void cb_tam_ci1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tam_ci1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cb_tam_ci1ActionPerformed
-
     private void cb_tipo_tlb_datosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tipo_tlb_datosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cb_tipo_tlb_datosActionPerformed
@@ -1168,9 +1320,9 @@ public class Vista extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_cb_tipo_tlb_instActionPerformed
 
-    private void cb_tam_cd4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tam_cd4ActionPerformed
+    private void cb_tipo_cd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tipo_cd1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cb_tam_cd4ActionPerformed
+    }//GEN-LAST:event_cb_tipo_cd1ActionPerformed
 
     private void n_entradas_c1_tActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_n_entradas_c1_tActionPerformed
         // TODO add your handling code here:
@@ -1180,13 +1332,71 @@ public class Vista extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_n_entradas_tlb_inst_tActionPerformed
 
+    private void cb_tipo_cd2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tipo_cd2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cb_tipo_cd2ActionPerformed
+
+    private void cb_tam_cd2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tam_cd2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cb_tam_cd2ActionPerformed
+
+    private void n_entradas_c2_tActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_n_entradas_c2_tActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_n_entradas_c2_tActionPerformed
+
+    private void n_entradas_c3_tActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_n_entradas_c3_tActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_n_entradas_c3_tActionPerformed
+
+    private void cb_tam_cd3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tam_cd3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cb_tam_cd3ActionPerformed
+
+    private void cb_tipo_cd3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tipo_cd3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cb_tipo_cd3ActionPerformed
+
+    private void n_entradas_c4_tActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_n_entradas_c4_tActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_n_entradas_c4_tActionPerformed
+
+    private void cb_tam_cd4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tam_cd4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cb_tam_cd4ActionPerformed
+
+    private void cb_tipo_cd4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tipo_cd4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cb_tipo_cd4ActionPerformed
+
+    private void n_entradas_c5_tActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_n_entradas_c5_tActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_n_entradas_c5_tActionPerformed
+
+    private void cb_tam_cd5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tam_cd5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cb_tam_cd5ActionPerformed
+
+    private void cb_tipo_cd5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tipo_cd5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cb_tipo_cd5ActionPerformed
+
+    private void n_entradas_c6_tActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_n_entradas_c6_tActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_n_entradas_c6_tActionPerformed
+
+    private void cb_tam_cd6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tam_cd6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cb_tam_cd6ActionPerformed
+
+    private void cb_tipo_cd6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tipo_cd6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cb_tipo_cd6ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Configuracion;
     private javax.swing.JTabbedPane cache1_3_p;
     private javax.swing.JPanel cache1_i_p;
     private javax.swing.JPanel cache1_p;
-    private javax.swing.JPanel cache1_p1;
-    private javax.swing.JPanel cache1_p2;
     private javax.swing.JPanel cache2_i_p;
     private javax.swing.JPanel cache2_p;
     private javax.swing.JPanel cache3_i_p;
@@ -1198,17 +1408,23 @@ public class Vista extends javax.swing.JPanel {
     private javax.swing.JButton cache_i2_b;
     private javax.swing.JButton cache_i3_b;
     private javax.swing.JPanel caches_p;
+    private javax.swing.JComboBox caches_separadas_cb;
     private javax.swing.JButton cargar_codigo_b;
     private javax.swing.JComboBox cb_tam_cd1;
     private javax.swing.JComboBox cb_tam_cd2;
     private javax.swing.JComboBox cb_tam_cd3;
     private javax.swing.JComboBox cb_tam_cd4;
-    private javax.swing.JComboBox cb_tam_ci1;
-    private javax.swing.JComboBox cb_tam_ci2;
-    private javax.swing.JComboBox cb_tam_ci3;
+    private javax.swing.JComboBox cb_tam_cd5;
+    private javax.swing.JComboBox cb_tam_cd6;
     private javax.swing.JComboBox cb_tam_memp;
     private javax.swing.JComboBox cb_tam_pagina;
     private javax.swing.JComboBox cb_tam_virt;
+    private javax.swing.JComboBox cb_tipo_cd1;
+    private javax.swing.JComboBox cb_tipo_cd2;
+    private javax.swing.JComboBox cb_tipo_cd3;
+    private javax.swing.JComboBox cb_tipo_cd4;
+    private javax.swing.JComboBox cb_tipo_cd5;
+    private javax.swing.JComboBox cb_tipo_cd6;
     private javax.swing.JComboBox cb_tipo_tam_linea;
     private javax.swing.JComboBox cb_tipo_tlb_datos;
     private javax.swing.JComboBox cb_tipo_tlb_inst;
@@ -1228,14 +1444,16 @@ public class Vista extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JCheckBox jerarquias_separadas_chb;
     private javax.swing.JLabel jerarquias_separadas_l;
+    private javax.swing.JButton limpiar_ej_b;
+    private javax.swing.JButton limpiar_t_b;
     private javax.swing.JComboBox log_cb;
     private javax.swing.JLabel m_entradas_p_pagina_l;
     private javax.swing.JTextField m_entradas_p_pagina_t;
@@ -1244,59 +1462,64 @@ public class Vista extends javax.swing.JPanel {
     private javax.swing.JTextField m_tam_virt_t;
     private javax.swing.JButton memoria_b;
     private javax.swing.JPanel memoria_p;
-    private javax.swing.JTextField n_entradas_c1_i_t;
     private javax.swing.JLabel n_entradas_c1_l;
-    private javax.swing.JLabel n_entradas_c1_l1;
     private javax.swing.JTextField n_entradas_c1_t;
-    private javax.swing.JTextField n_entradas_c2_i_t;
     private javax.swing.JLabel n_entradas_c2_l;
-    private javax.swing.JLabel n_entradas_c2_l1;
-    private javax.swing.JLabel n_entradas_c2_l2;
-    private javax.swing.JLabel n_entradas_c2_l3;
     private javax.swing.JLabel n_entradas_c2_l4;
     private javax.swing.JLabel n_entradas_c2_l6;
     private javax.swing.JLabel n_entradas_c2_l7;
     private javax.swing.JLabel n_entradas_c2_l8;
     private javax.swing.JTextField n_entradas_c2_t;
-    private javax.swing.JTextField n_entradas_c3_i_t;
-    private javax.swing.JLabel n_entradas_c3_l1;
+    private javax.swing.JLabel n_entradas_c3_l;
     private javax.swing.JTextField n_entradas_c3_t;
+    private javax.swing.JLabel n_entradas_c4_l;
+    private javax.swing.JTextField n_entradas_c4_t;
+    private javax.swing.JLabel n_entradas_c5_l;
+    private javax.swing.JTextField n_entradas_c5_t;
+    private javax.swing.JLabel n_entradas_c6_l;
+    private javax.swing.JTextField n_entradas_c6_t;
     private javax.swing.JTextField n_entradas_tlb_data_t;
     private javax.swing.JTextField n_entradas_tlb_inst_t;
-    private javax.swing.JTextField n_vias_c1_i_t;
+    private javax.swing.JLabel n_tipo_c1_l;
+    private javax.swing.JLabel n_tipo_c2_l;
+    private javax.swing.JLabel n_tipo_c3_l;
+    private javax.swing.JLabel n_tipo_c4_l;
+    private javax.swing.JLabel n_tipo_c5_l;
+    private javax.swing.JLabel n_tipo_c6_l;
     private javax.swing.JLabel n_vias_c1_l;
     private javax.swing.JTextField n_vias_c1_t;
-    private javax.swing.JTextField n_vias_c2_i_t;
     private javax.swing.JLabel n_vias_c2_l;
-    private javax.swing.JLabel n_vias_c2_l1;
-    private javax.swing.JLabel n_vias_c2_l2;
-    private javax.swing.JLabel n_vias_c2_l3;
     private javax.swing.JLabel n_vias_c2_l4;
     private javax.swing.JLabel n_vias_c2_l6;
     private javax.swing.JTextField n_vias_c2_t;
-    private javax.swing.JTextField n_vias_c3_i_t;
     private javax.swing.JLabel n_vias_c3_l;
     private javax.swing.JTextField n_vias_c3_t;
+    private javax.swing.JLabel n_vias_c4_l;
+    private javax.swing.JTextField n_vias_c4_t;
+    private javax.swing.JLabel n_vias_c5_l;
+    private javax.swing.JTextField n_vias_c5_t;
+    private javax.swing.JLabel n_vias_c6_l;
+    private javax.swing.JTextField n_vias_c6_t;
     private javax.swing.JTextField n_vias_tlb_data_t;
     private javax.swing.JTextField n_vias_tlb_inst_t;
     private javax.swing.JComboBox niv_cache_data_cb;
     private javax.swing.JComboBox niv_cache_inst_cb;
     private javax.swing.JLabel pal_p_linea_l;
     private javax.swing.JTextField pal_p_linea_t;
-    private javax.swing.JLabel plicita_reemplazo_c2_l;
-    private javax.swing.JLabel plicita_reemplazo_c2_l1;
-    private javax.swing.JLabel plicita_reemplazo_c2_l2;
-    private javax.swing.JLabel plicita_reemplazo_c2_l3;
-    private javax.swing.JLabel plicita_reemplazo_c3_l;
     private javax.swing.JComboBox politica_reemplazo_c1_cb;
-    private javax.swing.JComboBox politica_reemplazo_c1_i_cb;
     private javax.swing.JLabel politica_reemplazo_c1_l;
     private javax.swing.JLabel politica_reemplazo_c1_l1;
     private javax.swing.JLabel politica_reemplazo_c1_l3;
     private javax.swing.JComboBox politica_reemplazo_c2_cb;
-    private javax.swing.JComboBox politica_reemplazo_c2_i_cb;
+    private javax.swing.JLabel politica_reemplazo_c2_l;
     private javax.swing.JComboBox politica_reemplazo_c3_cb;
-    private javax.swing.JComboBox politica_reemplazo_c3_i_cb;
+    private javax.swing.JLabel politica_reemplazo_c3_l;
+    private javax.swing.JComboBox politica_reemplazo_c4_cb;
+    private javax.swing.JLabel politica_reemplazo_c4_l;
+    private javax.swing.JComboBox politica_reemplazo_c5_cb;
+    private javax.swing.JLabel politica_reemplazo_c5_l;
+    private javax.swing.JComboBox politica_reemplazo_c6_cb;
+    private javax.swing.JLabel politica_reemplazo_c6_l;
     private javax.swing.JComboBox politica_reemplazo_tlb_data_cb1;
     private javax.swing.JComboBox politica_reemplazo_tlb_inst_cb;
     private javax.swing.JTextField salvar_e;
