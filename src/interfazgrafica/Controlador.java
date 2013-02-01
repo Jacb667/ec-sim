@@ -35,67 +35,7 @@ public class Controlador implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		String comando = e.getActionCommand();
 		
-		if(comando.equals(Global.CBNCACHE))
-		{
-			v.nvCacheData(v.getnvCache());
-		}
-		else if(comando.equals(Global.TLBDATA))
-		{
-			v.enabledTLBData(v.tlbDataCheck());
-		}
-		else if(comando.equals(Global.TLBINST))
-		{
-			v.enabledTLBInst(v.tlbInstCheck());
-		}
-		else if(comando.equals(Global.JSEP))
-		{
-				v.enabledJSEP(v.jsepCheck());
-		}
-		else if(comando.equals(Global.CBNCACHEI))
-		{
-			v.nvCacheInst(v.getnvCacheI());
-		}
-		else if(comando.equals(Global.CARGARC))
-		{
-			JFileChooser chooser= new JFileChooser();
-			FileNameExtensionFilter filtro = new FileNameExtensionFilter("" +
-					"*.txt","txt");
-			FileNameExtensionFilter filtro2 = new FileNameExtensionFilter("*.asm","asm");
-			chooser.setFileFilter(filtro2);
-			chooser.setFileFilter(filtro);
-			int returnVal=chooser.showOpenDialog(v);
-			if(returnVal==JFileChooser.APPROVE_OPTION)
-			{
-				ArchivoCode=chooser.getSelectedFile().toString();
-				
-			}
-			//TIENE QUE ACABARSE
-			if(!ArchivoCode.equals(""))
-			{
-				v.enabledValidarC();
-			}
-		}
-		else if(comando.equals(Global.CARGART))
-		{
-			JFileChooser chooser= new JFileChooser();
-			FileNameExtensionFilter filtro = new FileNameExtensionFilter("" +
-					"*.txt","txt");
-			FileNameExtensionFilter filtro2 = new FileNameExtensionFilter("*.asm","asm");
-			chooser.setFileFilter(filtro2);
-			chooser.setFileFilter(filtro);
-			int returnVal=chooser.showOpenDialog(v);
-			if(returnVal==JFileChooser.APPROVE_OPTION)
-			{
-				ArchivoTraza=chooser.getSelectedFile().toString();
-				
-			}
-			//TIENE QUE ACABARSE
-			if(!ArchivoTraza.equals(""))
-			{
-				v.enabledValidarT();
-			}
-		}
-		else if(comando.equals(Global.VALC))
+                if(comando.equals(Global.VALC))
 		{
 			//COMPLETO(?)---TERMINAR PARA EJECUCION
 			try
