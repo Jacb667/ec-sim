@@ -14,21 +14,8 @@ public class Global {
 	final static public int TAMAÑO_CELDA_BOOLEAN = 40;
 
 	
-	final static public String CBNCACHE = "CBNCACHE";
-	final static public String CBNCACHEI = "CBNCACHEI";
-	final static public String TLBDATA="TLBDATA";
-	final static public String TLBINST="TLBINST";
-	final static public String JSEP="JSEP";
-	final static public String CARGARC="CARGARC";
-	final static public String CARGART="CARGART";
 	final static public String VALC="VALC";
 	final static public String VALT="VALT";
-	final static public String BCACHED1="BCACHED1";
-	final static public String BCACHED2="BCACHED2";
-	final static public String BCACHED3="BCACHED3";
-	final static public String BCACHEI1="BCACHEI1";
-	final static public String BCACHEI2="BCACHEI2";
-	final static public String BCACHEI3="BCACHEI3";
 	final static public String BMEM="BMEM";
 	final static public String EJECUTART="EJECUTAR";
 	final static public String EJECUTARC="EJECUTAC";
