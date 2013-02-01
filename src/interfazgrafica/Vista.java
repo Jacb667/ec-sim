@@ -235,6 +235,11 @@ public class Vista extends JPanel {
 
         pal_p_linea_t.setText("4");
         pal_p_linea_t.setToolTipText("Tamaño de palabra (en bytes)");
+        pal_p_linea_t.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                pal_p_linea_tFocusLost(evt);
+            }
+        });
 
         jerarquias_separadas_l.setText("Caché compartida desde:");
 
@@ -325,6 +330,11 @@ public class Vista extends JPanel {
 
         m_entradas_p_pagina_t.setText("4");
         m_entradas_p_pagina_t.setToolTipText("Tamaño de página.");
+        m_entradas_p_pagina_t.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                m_entradas_p_pagina_tFocusLost(evt);
+            }
+        });
 
         m_numero_entradas.setText("Tamaño memoria principal:");
 
@@ -340,6 +350,11 @@ public class Vista extends JPanel {
 
         m_tam_virt_t.setText("256");
         m_tam_virt_t.setToolTipText("Tamaño de la memoria virtual.");
+        m_tam_virt_t.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                m_tam_virt_tFocusLost(evt);
+            }
+        });
 
         tlb_data_chb.setText("TLB Data");
         tlb_data_chb.addActionListener(new java.awt.event.ActionListener() {
@@ -357,7 +372,19 @@ public class Vista extends JPanel {
 
         n_entradas_c2_l4.setText("Número de entradas");
 
+        n_entradas_tlb_data_t.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                n_entradas_tlb_data_tFocusLost(evt);
+            }
+        });
+
         n_vias_c2_l4.setText("Número de vías");
+
+        n_vias_tlb_data_t.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                n_vias_tlb_data_tFocusLost(evt);
+            }
+        });
 
         politica_reemplazo_c1_l1.setText("Política de reemplazo");
 
@@ -421,7 +448,19 @@ public class Vista extends JPanel {
 
         n_entradas_c2_l7.setText("Número de entradas");
 
+        n_entradas_tlb_inst_t.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                n_entradas_tlb_inst_tFocusLost(evt);
+            }
+        });
+
         n_vias_c2_l6.setText("Número de vías");
+
+        n_vias_tlb_inst_t.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                n_vias_tlb_inst_tFocusLost(evt);
+            }
+        });
 
         politica_reemplazo_c1_l3.setText("Política de reemplazo");
 
@@ -566,6 +605,11 @@ public class Vista extends JPanel {
         });
 
         tam_linea_t.setToolTipText("Tamaño de cada bloque.");
+        tam_linea_t.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tam_linea_tFocusLost(evt);
+            }
+        });
 
         tam_linea_l.setText("Tamaño de línea:");
 
@@ -574,10 +618,20 @@ public class Vista extends JPanel {
         n_entradas_c1_t.setToolTipText("Tamaño de la caché.");
         n_entradas_c1_t.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         n_entradas_c1_t.setName(""); // NOI18N
+        n_entradas_c1_t.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                n_entradas_c1_tFocusLost(evt);
+            }
+        });
 
         n_vias_c1_l.setText("Número de vías:");
 
         n_vias_c1_t.setToolTipText("Número de vías para cachés asociativas.");
+        n_vias_c1_t.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                n_vias_c1_tFocusLost(evt);
+            }
+        });
 
         politica_reemplazo_c1_l.setText("Política de reemplazo:");
 
@@ -656,10 +710,20 @@ public class Vista extends JPanel {
         n_entradas_c2_t.setToolTipText("Tamaño de la caché.");
         n_entradas_c2_t.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         n_entradas_c2_t.setName(""); // NOI18N
+        n_entradas_c2_t.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                n_entradas_c2_tFocusLost(evt);
+            }
+        });
 
         n_vias_c2_l.setText("Número de vías:");
 
         n_vias_c2_t.setToolTipText("Número de vías para cachés asociativas.");
+        n_vias_c2_t.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                n_vias_c2_tFocusLost(evt);
+            }
+        });
 
         politica_reemplazo_c2_l.setText("Política de reemplazo:");
 
@@ -738,10 +802,20 @@ public class Vista extends JPanel {
         n_entradas_c3_t.setToolTipText("Tamaño de la caché.");
         n_entradas_c3_t.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         n_entradas_c3_t.setName(""); // NOI18N
+        n_entradas_c3_t.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                n_entradas_c3_tFocusLost(evt);
+            }
+        });
 
         n_vias_c3_l.setText("Número de vías:");
 
         n_vias_c3_t.setToolTipText("Número de vías para cachés asociativas.");
+        n_vias_c3_t.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                n_vias_c3_tFocusLost(evt);
+            }
+        });
 
         politica_reemplazo_c3_l.setText("Política de reemplazo:");
 
@@ -812,10 +886,20 @@ public class Vista extends JPanel {
         n_entradas_c4_t.setToolTipText("Tamaño de la caché.");
         n_entradas_c4_t.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         n_entradas_c4_t.setName(""); // NOI18N
+        n_entradas_c4_t.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                n_entradas_c4_tFocusLost(evt);
+            }
+        });
 
         n_vias_c4_l.setText("Número de vías:");
 
         n_vias_c4_t.setToolTipText("Número de vías para cachés asociativas.");
+        n_vias_c4_t.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                n_vias_c4_tFocusLost(evt);
+            }
+        });
 
         politica_reemplazo_c4_l.setText("Política de reemplazo:");
 
@@ -886,10 +970,20 @@ public class Vista extends JPanel {
         n_entradas_c5_t.setToolTipText("Tamaño de la caché.");
         n_entradas_c5_t.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         n_entradas_c5_t.setName(""); // NOI18N
+        n_entradas_c5_t.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                n_entradas_c5_tFocusLost(evt);
+            }
+        });
 
         n_vias_c5_l.setText("Número de vías:");
 
         n_vias_c5_t.setToolTipText("Número de vías para cachés asociativas.");
+        n_vias_c5_t.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                n_vias_c5_tFocusLost(evt);
+            }
+        });
 
         politica_reemplazo_c5_l.setText("Política de reemplazo:");
 
@@ -960,10 +1054,20 @@ public class Vista extends JPanel {
         n_entradas_c6_t.setToolTipText("Tamaño de la caché.");
         n_entradas_c6_t.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         n_entradas_c6_t.setName(""); // NOI18N
+        n_entradas_c6_t.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                n_entradas_c6_tFocusLost(evt);
+            }
+        });
 
         n_vias_c6_l.setText("Número de vías:");
 
         n_vias_c6_t.setToolTipText("Número de vías para cachés asociativas.");
+        n_vias_c6_t.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                n_vias_c6_tFocusLost(evt);
+            }
+        });
 
         politica_reemplazo_c6_l.setText("Política de reemplazo:");
 
@@ -1394,6 +1498,86 @@ public class Vista extends JPanel {
 		JOptionPane.showMessageDialog( this, "Valor incorrecto, sólo se aceptan valores numéricos o hexadecimales comenzando por # o 0x.", "Error de formato", JOptionPane.ERROR_MESSAGE );
 	}
     }//GEN-LAST:event_m_tam_memp_tFocusLost
+
+    private void pal_p_linea_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pal_p_linea_tFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pal_p_linea_tFocusLost
+
+    private void m_entradas_p_pagina_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_m_entradas_p_pagina_tFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_m_entradas_p_pagina_tFocusLost
+
+    private void m_tam_virt_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_m_tam_virt_tFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_m_tam_virt_tFocusLost
+
+    private void n_entradas_tlb_data_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_entradas_tlb_data_tFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_n_entradas_tlb_data_tFocusLost
+
+    private void n_vias_tlb_data_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_vias_tlb_data_tFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_n_vias_tlb_data_tFocusLost
+
+    private void n_entradas_tlb_inst_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_entradas_tlb_inst_tFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_n_entradas_tlb_inst_tFocusLost
+
+    private void n_vias_tlb_inst_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_vias_tlb_inst_tFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_n_vias_tlb_inst_tFocusLost
+
+    private void tam_linea_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tam_linea_tFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tam_linea_tFocusLost
+
+    private void n_entradas_c1_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_entradas_c1_tFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_n_entradas_c1_tFocusLost
+
+    private void n_vias_c1_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_vias_c1_tFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_n_vias_c1_tFocusLost
+
+    private void n_entradas_c2_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_entradas_c2_tFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_n_entradas_c2_tFocusLost
+
+    private void n_vias_c2_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_vias_c2_tFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_n_vias_c2_tFocusLost
+
+    private void n_entradas_c3_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_entradas_c3_tFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_n_entradas_c3_tFocusLost
+
+    private void n_vias_c3_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_vias_c3_tFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_n_vias_c3_tFocusLost
+
+    private void n_entradas_c4_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_entradas_c4_tFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_n_entradas_c4_tFocusLost
+
+    private void n_vias_c4_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_vias_c4_tFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_n_vias_c4_tFocusLost
+
+    private void n_entradas_c5_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_entradas_c5_tFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_n_entradas_c5_tFocusLost
+
+    private void n_vias_c5_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_vias_c5_tFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_n_vias_c5_tFocusLost
+
+    private void n_entradas_c6_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_entradas_c6_tFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_n_entradas_c6_tFocusLost
+
+    private void n_vias_c6_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_vias_c6_tFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_n_vias_c6_tFocusLost
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Configuracion;
