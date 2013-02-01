@@ -174,6 +174,9 @@
                         <Property name="text" type="java.lang.String" value="4"/>
                         <Property name="toolTipText" type="java.lang.String" value="Tama&#xf1;o de palabra (en bytes)"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="pal_p_linea_tFocusLost"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jerarquias_separadas_l">
                       <Properties>
@@ -331,6 +334,9 @@
                         <Property name="text" type="java.lang.String" value="4"/>
                         <Property name="toolTipText" type="java.lang.String" value="Tama&#xf1;o de p&#xe1;gina."/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="m_entradas_p_pagina_tFocusLost"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="m_numero_entradas">
                       <Properties>
@@ -356,6 +362,9 @@
                         <Property name="text" type="java.lang.String" value="256"/>
                         <Property name="toolTipText" type="java.lang.String" value="Tama&#xf1;o de la memoria virtual."/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="m_tam_virt_tFocusLost"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JCheckBox" name="tlb_data_chb">
                       <Properties>
@@ -452,6 +461,9 @@
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JTextField" name="n_entradas_tlb_data_t">
+                              <Events>
+                                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="n_entradas_tlb_data_tFocusLost"/>
+                              </Events>
                             </Component>
                             <Component class="javax.swing.JLabel" name="n_vias_c2_l4">
                               <Properties>
@@ -459,6 +471,9 @@
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JTextField" name="n_vias_tlb_data_t">
+                              <Events>
+                                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="n_vias_tlb_data_tFocusLost"/>
+                              </Events>
                             </Component>
                             <Component class="javax.swing.JLabel" name="politica_reemplazo_c1_l1">
                               <Properties>
@@ -571,6 +586,9 @@
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JTextField" name="n_entradas_tlb_inst_t">
+                              <Events>
+                                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="n_entradas_tlb_inst_tFocusLost"/>
+                              </Events>
                             </Component>
                             <Component class="javax.swing.JLabel" name="n_vias_c2_l6">
                               <Properties>
@@ -578,6 +596,9 @@
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JTextField" name="n_vias_tlb_inst_t">
+                              <Events>
+                                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="n_vias_tlb_inst_tFocusLost"/>
+                              </Events>
                             </Component>
                             <Component class="javax.swing.JLabel" name="politica_reemplazo_c1_l3">
                               <Properties>
@@ -749,6 +770,9 @@
                       <Properties>
                         <Property name="toolTipText" type="java.lang.String" value="Tama&#xf1;o de cada bloque."/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tam_linea_tFocusLost"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="tam_linea_l">
                       <Properties>
@@ -849,6 +873,9 @@
                                 </Property>
                                 <Property name="name" type="java.lang.String" value="" noResource="true"/>
                               </Properties>
+                              <Events>
+                                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="n_entradas_c1_tFocusLost"/>
+                              </Events>
                             </Component>
                             <Component class="javax.swing.JLabel" name="n_vias_c1_l">
                               <Properties>
@@ -859,6 +886,9 @@
                               <Properties>
                                 <Property name="toolTipText" type="java.lang.String" value="N&#xfa;mero de v&#xed;as para cach&#xe9;s asociativas."/>
                               </Properties>
+                              <Events>
+                                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="n_vias_c1_tFocusLost"/>
+                              </Events>
                             </Component>
                             <Component class="javax.swing.JLabel" name="politica_reemplazo_c1_l">
                               <Properties>
@@ -1002,6 +1032,9 @@
                                 </Property>
                                 <Property name="name" type="java.lang.String" value="" noResource="true"/>
                               </Properties>
+                              <Events>
+                                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="n_entradas_c2_tFocusLost"/>
+                              </Events>
                             </Component>
                             <Component class="javax.swing.JLabel" name="n_vias_c2_l">
                               <Properties>
@@ -1012,6 +1045,9 @@
                               <Properties>
                                 <Property name="toolTipText" type="java.lang.String" value="N&#xfa;mero de v&#xed;as para cach&#xe9;s asociativas."/>
                               </Properties>
+                              <Events>
+                                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="n_vias_c2_tFocusLost"/>
+                              </Events>
                             </Component>
                             <Component class="javax.swing.JLabel" name="politica_reemplazo_c2_l">
                               <Properties>
@@ -1143,6 +1179,9 @@
                                 </Property>
                                 <Property name="name" type="java.lang.String" value="" noResource="true"/>
                               </Properties>
+                              <Events>
+                                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="n_entradas_c3_tFocusLost"/>
+                              </Events>
                             </Component>
                             <Component class="javax.swing.JLabel" name="n_vias_c3_l">
                               <Properties>
@@ -1153,6 +1192,9 @@
                               <Properties>
                                 <Property name="toolTipText" type="java.lang.String" value="N&#xfa;mero de v&#xed;as para cach&#xe9;s asociativas."/>
                               </Properties>
+                              <Events>
+                                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="n_vias_c3_tFocusLost"/>
+                              </Events>
                             </Component>
                             <Component class="javax.swing.JLabel" name="politica_reemplazo_c3_l">
                               <Properties>
@@ -1284,6 +1326,9 @@
                                 </Property>
                                 <Property name="name" type="java.lang.String" value="" noResource="true"/>
                               </Properties>
+                              <Events>
+                                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="n_entradas_c4_tFocusLost"/>
+                              </Events>
                             </Component>
                             <Component class="javax.swing.JLabel" name="n_vias_c4_l">
                               <Properties>
@@ -1294,6 +1339,9 @@
                               <Properties>
                                 <Property name="toolTipText" type="java.lang.String" value="N&#xfa;mero de v&#xed;as para cach&#xe9;s asociativas."/>
                               </Properties>
+                              <Events>
+                                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="n_vias_c4_tFocusLost"/>
+                              </Events>
                             </Component>
                             <Component class="javax.swing.JLabel" name="politica_reemplazo_c4_l">
                               <Properties>
@@ -1425,6 +1473,9 @@
                                 </Property>
                                 <Property name="name" type="java.lang.String" value="" noResource="true"/>
                               </Properties>
+                              <Events>
+                                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="n_entradas_c5_tFocusLost"/>
+                              </Events>
                             </Component>
                             <Component class="javax.swing.JLabel" name="n_vias_c5_l">
                               <Properties>
@@ -1435,6 +1486,9 @@
                               <Properties>
                                 <Property name="toolTipText" type="java.lang.String" value="N&#xfa;mero de v&#xed;as para cach&#xe9;s asociativas."/>
                               </Properties>
+                              <Events>
+                                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="n_vias_c5_tFocusLost"/>
+                              </Events>
                             </Component>
                             <Component class="javax.swing.JLabel" name="politica_reemplazo_c5_l">
                               <Properties>
@@ -1566,6 +1620,9 @@
                                 </Property>
                                 <Property name="name" type="java.lang.String" value="" noResource="true"/>
                               </Properties>
+                              <Events>
+                                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="n_entradas_c6_tFocusLost"/>
+                              </Events>
                             </Component>
                             <Component class="javax.swing.JLabel" name="n_vias_c6_l">
                               <Properties>
@@ -1576,6 +1633,9 @@
                               <Properties>
                                 <Property name="toolTipText" type="java.lang.String" value="N&#xfa;mero de v&#xed;as para cach&#xe9;s asociativas."/>
                               </Properties>
+                              <Events>
+                                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="n_vias_c6_tFocusLost"/>
+                              </Events>
                             </Component>
                             <Component class="javax.swing.JLabel" name="politica_reemplazo_c6_l">
                               <Properties>
