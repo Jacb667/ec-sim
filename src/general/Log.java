@@ -87,7 +87,8 @@ public class Log {
 	
 	public static void generarEstadistica()
 	{
-		if (Config.get(Conf_Type.JERARQUIAS_SEPARADAS) == 1)
+		// Mayor que 1 significa que las jerarquías están separadas.
+		if (Config.get(Conf_Type.NIVEL_JERARQUIAS_SEPARADAS) > 1)
 		{
 			println(1, "");
 			println(1, "------------------");
@@ -126,7 +127,7 @@ public class Log {
 		if (Config.get(Conf_Type.TLB_DATOS) == 1)
 			println(1, "DTLB -> " + Log.aciertosTlb + " Hits - " + Log.fallosTlb + " Miss (" + Log.conflictosTlb + ")");
 		
-		if (Config.get(Conf_Type.JERARQUIAS_SEPARADAS) == 1)
+		if (Config.get(Conf_Type.NIVEL_JERARQUIAS_SEPARADAS) > 1)
 		{
 			println(1, "");
 			println(1, "--------------------------");
