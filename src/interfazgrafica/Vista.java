@@ -1781,11 +1781,11 @@ public class Vista extends JPanel {
         validar_t_b.setEnabled(false);
         ciclo_b1.setEnabled(false);
         ejecutar_b1.setEnabled(false);
-        cache_d2_b.setEnabled(false);
-        cache_d3_b.setEnabled(false);
-        cache_i1_b.setEnabled(false);
-        cache_i2_b.setEnabled(false);
-        cache_i3_b.setEnabled(false);
+        cache_d2_b.setVisible(false);
+        cache_d3_b.setVisible(false);
+        cache_i1_b.setVisible(false);
+        cache_i2_b.setVisible(false);
+        cache_i3_b.setVisible(false);
         
         paneles_caches = new JPanel[6];
         for (int i = 0; i < 6; i++)
