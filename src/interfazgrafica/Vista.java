@@ -1,9 +1,11 @@
 package interfazgrafica;
 import general.*;
+import java.awt.Component;
 
-import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 import javax.swing.JFileChooser;
+import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 /*
  * To change this template, choose Tools | Templates
@@ -15,10 +17,11 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author Manuel
  * @author José Andrés
  */
-public class Vista extends javax.swing.JPanel {
+public class Vista extends JPanel {
     
     private boolean cachesUnificadas;
 
+    private JPanel[] paneles_cache;
     
     // Traza
     private String archivoTraza;
@@ -27,6 +30,7 @@ public class Vista extends javax.swing.JPanel {
     // Código
     private String archivoCodigo;
     private String resultadoCodigo;
+    private JPanel[] paneles_caches;
     
     // Calcula el valor multiplicador seleccionado en un comboBox.
     /*
@@ -1395,16 +1399,12 @@ public class Vista extends javax.swing.JPanel {
     }//GEN-LAST:event_traza_carga_bActionPerformed
 
     private void niv_cache_inst_cbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_niv_cache_inst_cbActionPerformed
-        int nivel = niv_cache_data_cb.getSelectedIndex()+1;
-        interfazCacheInstNivel(nivel);
+        actualizarInterfazCache();
     }//GEN-LAST:event_niv_cache_inst_cbActionPerformed
 
     private void niv_cache_data_cbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_niv_cache_data_cbActionPerformed
        
-        int nivel = niv_cache_data_cb.getSelectedIndex()+1;
-        if (cacheSepNivel() < 4)
-            niv_cache_inst_cb.setSelectedIndex(nivel-1);
-        interfazCacheDatosNivel(nivel);
+        actualizarInterfazCache();
     }//GEN-LAST:event_niv_cache_data_cbActionPerformed
 
     private void cb_tam_paginaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tam_paginaActionPerformed
@@ -1520,7 +1520,9 @@ public class Vista extends javax.swing.JPanel {
 
     private void caches_separadas_cbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_caches_separadas_cbActionPerformed
         
-        int primer_nivel_compartido = cacheSepNivel();
+        actualizarInterfazCache();
+        
+        /*int primer_nivel_compartido = cacheSepNivel();
         
         niv_cache_data_cb.setSelectedIndex(0);
         niv_cache_inst_cb.setSelectedIndex(0);
@@ -1574,7 +1576,7 @@ public class Vista extends javax.swing.JPanel {
             panelesCaches.setEnabledAt(4, false);
             panelesCaches.setEnabledAt(5, false);
             cache_i1_b.setEnabled(true);
-        }
+        }*/
     }//GEN-LAST:event_caches_separadas_cbActionPerformed
 
     private void cache_i3_bActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cache_i3_bActionPerformed
@@ -1796,6 +1798,12 @@ public class Vista extends javax.swing.JPanel {
         cache_i1_b.setEnabled(false);
         cache_i2_b.setEnabled(false);
         cache_i3_b.setEnabled(false);
+        
+        paneles_caches = new JPanel[6];
+        for (int i = 0; i < 6; i++)
+            paneles_caches[i] = (JPanel) panelesCaches.getComponentAt(i);
+
+        actualizarInterfazCache();
     }
     
     // Niveles de caché de datos.
@@ -1841,103 +1849,310 @@ public class Vista extends javax.swing.JPanel {
         
     	return result;
     }
-    public void interfazCacheDatosNivel(int n)
+    
+    public void crearPestañas()
     {
-        int primer_nivel_compartido = cacheSepNivel();
-        if (primer_nivel_compartido < 4)
+        panelesCaches.removeAll();
+        for (int i = 0; i < 6; i++)
+            panelesCaches.addTab("Cache " + i, paneles_caches[i]);
+    }
+    
+    public void eliminarPestañas()
+    {
+        int limite = panelesCaches.getComponentCount();
+        int i = 0;
+        while (i < limite)
         {
-            if (primer_nivel_compartido == 1)
+            if (!panelesCaches.isEnabledAt(i))
             {
-                panelesCaches.setEnabledAt(3, false);
-                panelesCaches.setEnabledAt(4, false);
-                panelesCaches.setEnabledAt(5, false);
+                panelesCaches.remove(i);
+                limite = panelesCaches.getComponentCount();
+            }
+            else
+                i++;
+        }
+    }
+    
+    public void actualizarInterfazCache()
+    {
+        int nivel_compartido = cacheSepNivel();
+        if (nivel_compartido < 4)
+        {
+            // Ambas tendrán entonces los mismos niveles.
+            niv_cache_inst_cb.setSelectedIndex(niv_cache_data_cb.getSelectedIndex());
+            niv_cache_inst_cb.setEnabled(false);
+            
+            if (nivel_compartido == 1)
+            {
+                // Todas son compartidas, en tal caso sólo hay una jerarquía.
+                crearPestañas();
+                
+                if (getnvCacheD() == 1)
+                {
+                    panelesCaches.setEnabledAt(0, true);
+                    panelesCaches.setEnabledAt(1, false);
+                    panelesCaches.setEnabledAt(2, false);
+                    panelesCaches.setEnabledAt(3, false);
+                    panelesCaches.setEnabledAt(4, false);
+                    panelesCaches.setEnabledAt(5, false);
+                    cache_d1_b.setVisible(true);
+                    cache_d2_b.setVisible(false);
+                    cache_d3_b.setVisible(false);
+                    cache_i1_b.setVisible(false);
+                    cache_i2_b.setVisible(false);
+                    cache_i3_b.setVisible(false);
+                }
+                else if (getnvCacheD() == 2)
+                {
+                    panelesCaches.setEnabledAt(0, true);
+                    panelesCaches.setEnabledAt(1, true);
+                    panelesCaches.setEnabledAt(2, false);
+                    panelesCaches.setEnabledAt(3, false);
+                    panelesCaches.setEnabledAt(4, false);
+                    panelesCaches.setEnabledAt(5, false);
+                    cache_d1_b.setVisible(true);
+                    cache_d2_b.setVisible(true);
+                    cache_d3_b.setVisible(false);
+                    cache_i1_b.setVisible(false);
+                    cache_i2_b.setVisible(false);
+                    cache_i3_b.setVisible(false);
+                }
+                else
+                {
+                    panelesCaches.setEnabledAt(0, true);
+                    panelesCaches.setEnabledAt(1, true);
+                    panelesCaches.setEnabledAt(2, true);
+                    panelesCaches.setEnabledAt(3, false);
+                    panelesCaches.setEnabledAt(4, false);
+                    panelesCaches.setEnabledAt(5, false);
+                    cache_d1_b.setVisible(true);
+                    cache_d2_b.setVisible(true);
+                    cache_d3_b.setVisible(true);
+                    cache_i1_b.setVisible(false);
+                    cache_i2_b.setVisible(false);
+                    cache_i3_b.setVisible(false);
+                }
+                
+                panelesCaches.setTitleAt(0, "Cache 1 Comp");
+                panelesCaches.setTitleAt(1, "Cache 2 Comp");
+                panelesCaches.setTitleAt(2, "Cache 3 Comp");
+                
+                eliminarPestañas();
                 
                 panelesCaches.setSelectedIndex(0);
-                cache_i1_b.setEnabled(false);
-                cache_i2_b.setEnabled(false);
-                cache_i3_b.setEnabled(false);
-                enabledTLBInst(false);
+                
+                tlb_inst_chb.setEnabled(false);
             }
-            else if (primer_nivel_compartido == 2)
+            else if (nivel_compartido == 2)
             {
-                panelesCaches.setEnabledAt(3, true);
-                panelesCaches.setEnabledAt(4, false);
-                panelesCaches.setEnabledAt(5, false);
-                cache_i1_b.setEnabled(true);
-                cache_i2_b.setEnabled(false);
-                cache_i3_b.setEnabled(false);
-                enabledTLBInst(true);
+                // Compartidas todas excepto la primera.
+                // El combobox de Instrucciones está desactivado.
+                crearPestañas();
+                
+                if (getnvCacheD() == 1)
+                {
+                    panelesCaches.setEnabledAt(0, true);
+                    panelesCaches.setEnabledAt(1, false);
+                    panelesCaches.setEnabledAt(2, false);
+                    panelesCaches.setEnabledAt(3, true);
+                    panelesCaches.setEnabledAt(4, false);
+                    panelesCaches.setEnabledAt(5, false);
+                    cache_d1_b.setVisible(true);
+                    cache_d2_b.setVisible(false);
+                    cache_d3_b.setVisible(false);
+                    cache_i1_b.setVisible(true);
+                    cache_i2_b.setVisible(false);
+                    cache_i3_b.setVisible(false);
+                }
+                else if (getnvCacheD() == 2)
+                {
+                    panelesCaches.setEnabledAt(0, true);
+                    panelesCaches.setEnabledAt(1, true);
+                    panelesCaches.setEnabledAt(2, false);
+                    panelesCaches.setEnabledAt(3, true);
+                    panelesCaches.setEnabledAt(4, false);
+                    panelesCaches.setEnabledAt(5, false);
+                    cache_d1_b.setVisible(true);
+                    cache_d2_b.setVisible(true);
+                    cache_d3_b.setVisible(false);
+                    cache_i1_b.setVisible(true);
+                    cache_i2_b.setVisible(false);
+                    cache_i3_b.setVisible(false);
+                 }
+                else
+                {
+                    panelesCaches.setEnabledAt(0, true);
+                    panelesCaches.setEnabledAt(1, true);
+                    panelesCaches.setEnabledAt(2, true);
+                    panelesCaches.setEnabledAt(3, true);
+                    panelesCaches.setEnabledAt(4, false);
+                    panelesCaches.setEnabledAt(5, false);
+                    cache_d1_b.setVisible(true);
+                    cache_d2_b.setVisible(true);
+                    cache_d3_b.setVisible(true);
+                    cache_i1_b.setVisible(true);
+                    cache_i2_b.setVisible(false);
+                    cache_i3_b.setVisible(false);
+                }
+                
+                panelesCaches.setTitleAt(0, "Cache 1 Datos");
+                panelesCaches.setTitleAt(1, "Cache 2 Comp");
+                panelesCaches.setTitleAt(2, "Cache 3 Comp");
+                panelesCaches.setTitleAt(3, "Cache 1 Inst");
+                  
+                eliminarPestañas();
+                
+                panelesCaches.setSelectedIndex(0);
+                
+                tlb_inst_chb.setEnabled(true);
             }
             else
             {
-                panelesCaches.setEnabledAt(3, true);
-                panelesCaches.setEnabledAt(4, true);
-                panelesCaches.setEnabledAt(5, false);
-                cache_i1_b.setEnabled(true);
-                cache_i2_b.setEnabled(true);
-                cache_i3_b.setEnabled(false);
-                enabledTLBInst(true);
+                // Sólo compartida la tercera.
+                // El combobox de Instrucciones está desactivado.
+                crearPestañas();
+                
+                if (getnvCacheD() == 1)
+                {
+                    panelesCaches.setEnabledAt(0, true);
+                    panelesCaches.setEnabledAt(1, false);
+                    panelesCaches.setEnabledAt(2, false);
+                    panelesCaches.setEnabledAt(3, true);
+                    panelesCaches.setEnabledAt(4, false);
+                    panelesCaches.setEnabledAt(5, false);
+                    cache_d1_b.setVisible(true);
+                    cache_d2_b.setVisible(false);
+                    cache_d3_b.setVisible(false);
+                    cache_i1_b.setVisible(true);
+                    cache_i2_b.setVisible(false);
+                    cache_i3_b.setVisible(false);
+                }
+                else if (getnvCacheD() == 2)
+                {
+                    panelesCaches.setEnabledAt(0, true);
+                    panelesCaches.setEnabledAt(1, true);
+                    panelesCaches.setEnabledAt(2, false);
+                    panelesCaches.setEnabledAt(3, true);
+                    panelesCaches.setEnabledAt(4, true);
+                    panelesCaches.setEnabledAt(5, false);
+                    cache_d1_b.setVisible(true);
+                    cache_d2_b.setVisible(true);
+                    cache_d3_b.setVisible(false);
+                    cache_i1_b.setVisible(true);
+                    cache_i2_b.setVisible(true);
+                    cache_i3_b.setVisible(false);
+                 }
+                else
+                {
+                    panelesCaches.setEnabledAt(0, true);
+                    panelesCaches.setEnabledAt(1, true);
+                    panelesCaches.setEnabledAt(2, true);
+                    panelesCaches.setEnabledAt(3, true);
+                    panelesCaches.setEnabledAt(4, true);
+                    panelesCaches.setEnabledAt(5, false);
+                    cache_d1_b.setVisible(true);
+                    cache_d2_b.setVisible(true);
+                    cache_d3_b.setVisible(true);
+                    cache_i1_b.setVisible(true);
+                    cache_i2_b.setVisible(true);
+                    cache_i3_b.setVisible(false);
+                }
+                
+                panelesCaches.setTitleAt(0, "Cache 1 Datos");
+                panelesCaches.setTitleAt(1, "Cache 2 Datos");
+                panelesCaches.setTitleAt(2, "Cache 3 Comp");
+                panelesCaches.setTitleAt(3, "Cache 1 Inst");
+                panelesCaches.setTitleAt(4, "Cache 2 Inst");
+                  
+                eliminarPestañas();
+                
+                panelesCaches.setSelectedIndex(0);
+                
+                tlb_inst_chb.setEnabled(true);
             }
 
-            cache_i1_b.setEnabled(true);
         }
         else
         {
-            if(n==1)
+            niv_cache_inst_cb.setEnabled(true);
+            
+            // Independientes datos y instrucciones.
+            crearPestañas();
+            
+            panelesCaches.setTitleAt(0, "Cache 1 Datos");
+            panelesCaches.setTitleAt(1, "Cache 2 Datos");
+            panelesCaches.setTitleAt(2, "Cache 3 Datos");
+            panelesCaches.setTitleAt(3, "Cache 1 Inst");
+            panelesCaches.setTitleAt(4, "Cache 2 Inst");
+            panelesCaches.setTitleAt(5, "Cache 3 Inst");
+            
+            if(getnvCacheD() == 1)
             {
+                    panelesCaches.setEnabledAt(0, true);
                     panelesCaches.setEnabledAt(1, false);
                     panelesCaches.setEnabledAt(2, false);
-                    cache_d2_b.setEnabled(false);
-                    cache_d3_b.setEnabled(false);
+                    cache_d1_b.setVisible(true);
+                    cache_d2_b.setVisible(false);
+                    cache_d3_b.setVisible(false);
             }
-            else if(n==2)
+            else if(getnvCacheD() == 2)
             {
+                    panelesCaches.setEnabledAt(0, true);
                     panelesCaches.setEnabledAt(1, true);
                     panelesCaches.setEnabledAt(2, false);
-                    cache_d2_b.setEnabled(true);
-                    cache_d3_b.setEnabled(false);
+                    cache_d1_b.setVisible(true);
+                    cache_d2_b.setVisible(true);
+                    cache_d3_b.setVisible(false);
             }
-            else if (n==3)
+            else if (getnvCacheD() == 3)
             {
+                    panelesCaches.setEnabledAt(0, true);
                     panelesCaches.setEnabledAt(1, true);
                     panelesCaches.setEnabledAt(2, true);
-                    cache_d2_b.setEnabled(true);
-                    cache_d3_b.setEnabled(true);
+                    cache_d1_b.setVisible(true);
+                    cache_d2_b.setVisible(true);
+                    cache_d3_b.setVisible(true);
             }
-            panelesCaches.setSelectedIndex(getnvCacheD()-1);
+            
+            if(getnvCacheI() == 1)
+            {
+                    panelesCaches.setEnabledAt(3, true);
+                    panelesCaches.setEnabledAt(4, false);
+                    panelesCaches.setEnabledAt(5, false);
+                    cache_i1_b.setVisible(true);
+                    cache_i2_b.setVisible(false);
+                    cache_i3_b.setVisible(false);
+            }
+            else if(getnvCacheI() == 2)
+            {
+                    panelesCaches.setEnabledAt(3, true);
+                    panelesCaches.setEnabledAt(4, true);
+                    panelesCaches.setEnabledAt(5, false);
+                    cache_i1_b.setVisible(true);
+                    cache_i2_b.setVisible(true);
+                    cache_i3_b.setVisible(false);
+            }
+            else if (getnvCacheI() == 3)
+            {
+                    panelesCaches.setEnabledAt(3, true);
+                    panelesCaches.setEnabledAt(4, true);
+                    panelesCaches.setEnabledAt(5, true);
+                    cache_i1_b.setVisible(true);
+                    cache_i2_b.setVisible(true);
+                    cache_i3_b.setVisible(true);
+            }
+            
+            eliminarPestañas();
+                
+            panelesCaches.setSelectedIndex(0);
+                
+            tlb_inst_chb.setEnabled(true);
         }
-    }
-    public void interfazCacheInstNivel(int n)
-    {
-    	if(n==1)
-    	{
-		panelesCaches.setEnabledAt(4, false);
-		panelesCaches.setEnabledAt(5, false);
-		cache_i2_b.setEnabled(false);
-		cache_i3_b.setEnabled(false);
-    	}
-    	else if(n==2)
-    	{
-		panelesCaches.setEnabledAt(4, true);
-		panelesCaches.setEnabledAt(5, false);
-		cache_i2_b.setEnabled(true);
-		cache_i3_b.setEnabled(false);
-    	}
-    	else if (n==3)
-    	{
-		panelesCaches.setEnabledAt(4, true);
-		panelesCaches.setEnabledAt(5, true);
-		cache_i2_b.setEnabled(true);
-		cache_i3_b.setEnabled(true);
-    	}
-    	panelesCaches.setSelectedIndex(getnvCacheI()+2);
     }
     public void enabledTLBInst(boolean b)
     {
     	panelesTLBs.setEnabledAt(1, b);
-    	if(b)
-		panelesTLBs.setSelectedIndex(1);
-    	else
+    	if(!b)
     		panelesTLBs.setSelectedIndex(0);
     	
     }
