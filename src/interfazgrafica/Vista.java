@@ -5,6 +5,7 @@ import java.awt.Component;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 /*
@@ -329,6 +330,11 @@ public class Vista extends JPanel {
 
         m_tam_memp_t.setText("32");
         m_tam_memp_t.setToolTipText("Tamaño de la memoria principal.");
+        m_tam_memp_t.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                m_tam_memp_tFocusLost(evt);
+            }
+        });
 
         jLabel2.setText("Tamaño memoria virtual:");
 
@@ -352,12 +358,6 @@ public class Vista extends JPanel {
         n_entradas_c2_l4.setText("Número de entradas");
 
         n_vias_c2_l4.setText("Número de vías");
-
-        n_vias_tlb_data_t.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                n_vias_tlb_data_tActionPerformed(evt);
-            }
-        });
 
         politica_reemplazo_c1_l1.setText("Política de reemplazo");
 
@@ -420,12 +420,6 @@ public class Vista extends JPanel {
         panelesTLBs.addTab("TLB Data", jPanel1);
 
         n_entradas_c2_l7.setText("Número de entradas");
-
-        n_entradas_tlb_inst_t.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                n_entradas_tlb_inst_tActionPerformed(evt);
-            }
-        });
 
         n_vias_c2_l6.setText("Número de vías");
 
@@ -491,27 +485,12 @@ public class Vista extends JPanel {
 
         cb_tam_pagina.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bytes", "KBytes", "MBytes" }));
         cb_tam_pagina.setSelectedIndex(1);
-        cb_tam_pagina.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cb_tam_paginaActionPerformed(evt);
-            }
-        });
 
         cb_tam_memp.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bytes", "KBytes", "MBytes" }));
         cb_tam_memp.setSelectedIndex(2);
-        cb_tam_memp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cb_tam_mempActionPerformed(evt);
-            }
-        });
 
         cb_tam_virt.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bytes", "KBytes", "MBytes" }));
         cb_tam_virt.setSelectedIndex(2);
-        cb_tam_virt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cb_tam_virtActionPerformed(evt);
-            }
-        });
 
         jLabel5.setText("Configuración de TLB:");
 
@@ -595,11 +574,6 @@ public class Vista extends JPanel {
         n_entradas_c1_t.setToolTipText("Tamaño de la caché.");
         n_entradas_c1_t.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         n_entradas_c1_t.setName(""); // NOI18N
-        n_entradas_c1_t.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                n_entradas_c1_tActionPerformed(evt);
-            }
-        });
 
         n_vias_c1_l.setText("Número de vías:");
 
@@ -611,11 +585,6 @@ public class Vista extends JPanel {
         politica_reemplazo_c1_cb.setToolTipText("Política de reemplazo para cachés asociativas.");
 
         cb_tam_cd1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bytes", "KBytes", "MBytes" }));
-        cb_tam_cd1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cb_tam_cd1ActionPerformed(evt);
-            }
-        });
 
         n_tipo_c1_l.setText("Tipo:");
 
@@ -687,11 +656,6 @@ public class Vista extends JPanel {
         n_entradas_c2_t.setToolTipText("Tamaño de la caché.");
         n_entradas_c2_t.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         n_entradas_c2_t.setName(""); // NOI18N
-        n_entradas_c2_t.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                n_entradas_c2_tActionPerformed(evt);
-            }
-        });
 
         n_vias_c2_l.setText("Número de vías:");
 
@@ -703,11 +667,6 @@ public class Vista extends JPanel {
         politica_reemplazo_c2_cb.setToolTipText("Política de reemplazo para cachés asociativas.");
 
         cb_tam_cd2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bytes", "KBytes", "MBytes" }));
-        cb_tam_cd2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cb_tam_cd2ActionPerformed(evt);
-            }
-        });
 
         n_tipo_c2_l.setText("Tipo:");
 
@@ -779,11 +738,6 @@ public class Vista extends JPanel {
         n_entradas_c3_t.setToolTipText("Tamaño de la caché.");
         n_entradas_c3_t.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         n_entradas_c3_t.setName(""); // NOI18N
-        n_entradas_c3_t.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                n_entradas_c3_tActionPerformed(evt);
-            }
-        });
 
         n_vias_c3_l.setText("Número de vías:");
 
@@ -795,11 +749,6 @@ public class Vista extends JPanel {
         politica_reemplazo_c3_cb.setToolTipText("Política de reemplazo para cachés asociativas.");
 
         cb_tam_cd3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bytes", "KBytes", "MBytes" }));
-        cb_tam_cd3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cb_tam_cd3ActionPerformed(evt);
-            }
-        });
 
         n_tipo_c3_l.setText("Tipo:");
 
@@ -863,11 +812,6 @@ public class Vista extends JPanel {
         n_entradas_c4_t.setToolTipText("Tamaño de la caché.");
         n_entradas_c4_t.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         n_entradas_c4_t.setName(""); // NOI18N
-        n_entradas_c4_t.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                n_entradas_c4_tActionPerformed(evt);
-            }
-        });
 
         n_vias_c4_l.setText("Número de vías:");
 
@@ -879,11 +823,6 @@ public class Vista extends JPanel {
         politica_reemplazo_c4_cb.setToolTipText("Política de reemplazo para cachés asociativas.");
 
         cb_tam_cd4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bytes", "KBytes", "MBytes" }));
-        cb_tam_cd4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cb_tam_cd4ActionPerformed(evt);
-            }
-        });
 
         n_tipo_c4_l.setText("Tipo:");
 
@@ -947,11 +886,6 @@ public class Vista extends JPanel {
         n_entradas_c5_t.setToolTipText("Tamaño de la caché.");
         n_entradas_c5_t.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         n_entradas_c5_t.setName(""); // NOI18N
-        n_entradas_c5_t.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                n_entradas_c5_tActionPerformed(evt);
-            }
-        });
 
         n_vias_c5_l.setText("Número de vías:");
 
@@ -963,11 +897,6 @@ public class Vista extends JPanel {
         politica_reemplazo_c5_cb.setToolTipText("Política de reemplazo para cachés asociativas.");
 
         cb_tam_cd5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bytes", "KBytes", "MBytes" }));
-        cb_tam_cd5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cb_tam_cd5ActionPerformed(evt);
-            }
-        });
 
         n_tipo_c5_l.setText("Tipo:");
 
@@ -1031,11 +960,6 @@ public class Vista extends JPanel {
         n_entradas_c6_t.setToolTipText("Tamaño de la caché.");
         n_entradas_c6_t.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         n_entradas_c6_t.setName(""); // NOI18N
-        n_entradas_c6_t.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                n_entradas_c6_tActionPerformed(evt);
-            }
-        });
 
         n_vias_c6_l.setText("Número de vías:");
 
@@ -1047,11 +971,6 @@ public class Vista extends JPanel {
         politica_reemplazo_c6_cb.setToolTipText("Política de reemplazo para cachés asociativas.");
 
         cb_tam_cd6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bytes", "KBytes", "MBytes" }));
-        cb_tam_cd6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cb_tam_cd6ActionPerformed(evt);
-            }
-        });
 
         n_tipo_c6_l.setText("Tipo:");
 
@@ -1403,21 +1322,8 @@ public class Vista extends JPanel {
     }//GEN-LAST:event_niv_cache_inst_cbActionPerformed
 
     private void niv_cache_data_cbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_niv_cache_data_cbActionPerformed
-       
         actualizarInterfazCache();
     }//GEN-LAST:event_niv_cache_data_cbActionPerformed
-
-    private void cb_tam_paginaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tam_paginaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cb_tam_paginaActionPerformed
-
-    private void cb_tam_mempActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tam_mempActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cb_tam_mempActionPerformed
-
-    private void cb_tam_virtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tam_virtActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cb_tam_virtActionPerformed
 
     private void cargar_codigo_bActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargar_codigo_bActionPerformed
         JFileChooser chooser= new JFileChooser();
@@ -1434,10 +1340,6 @@ public class Vista extends JPanel {
 	}
     }//GEN-LAST:event_cargar_codigo_bActionPerformed
 
-    private void cb_tam_cd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tam_cd1ActionPerformed
-        // Nada
-    }//GEN-LAST:event_cb_tam_cd1ActionPerformed
-
     private void cb_tipo_tlb_datosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tipo_tlb_datosActionPerformed
         // Nada
     }//GEN-LAST:event_cb_tipo_tlb_datosActionPerformed
@@ -1450,146 +1352,48 @@ public class Vista extends JPanel {
         // Nada
     }//GEN-LAST:event_cb_tipo_cd1ActionPerformed
 
-    private void n_entradas_c1_tActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_n_entradas_c1_tActionPerformed
-        // Nada
-    }//GEN-LAST:event_n_entradas_c1_tActionPerformed
-
-    private void n_entradas_tlb_inst_tActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_n_entradas_tlb_inst_tActionPerformed
-        // Nada
-    }//GEN-LAST:event_n_entradas_tlb_inst_tActionPerformed
-
     private void cb_tipo_cd2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tipo_cd2ActionPerformed
         // Nada
     }//GEN-LAST:event_cb_tipo_cd2ActionPerformed
-
-    private void cb_tam_cd2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tam_cd2ActionPerformed
-        // Nada
-    }//GEN-LAST:event_cb_tam_cd2ActionPerformed
-
-    private void n_entradas_c2_tActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_n_entradas_c2_tActionPerformed
-        // Nada
-    }//GEN-LAST:event_n_entradas_c2_tActionPerformed
-
-    private void n_entradas_c3_tActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_n_entradas_c3_tActionPerformed
-        // Nada
-    }//GEN-LAST:event_n_entradas_c3_tActionPerformed
-
-    private void cb_tam_cd3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tam_cd3ActionPerformed
-        // Nada
-    }//GEN-LAST:event_cb_tam_cd3ActionPerformed
 
     private void cb_tipo_cd3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tipo_cd3ActionPerformed
         // Nada
     }//GEN-LAST:event_cb_tipo_cd3ActionPerformed
 
-    private void n_entradas_c4_tActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_n_entradas_c4_tActionPerformed
-        // Nada
-    }//GEN-LAST:event_n_entradas_c4_tActionPerformed
-
-    private void cb_tam_cd4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tam_cd4ActionPerformed
-        // Nada
-    }//GEN-LAST:event_cb_tam_cd4ActionPerformed
-
     private void cb_tipo_cd4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tipo_cd4ActionPerformed
         // Nada
     }//GEN-LAST:event_cb_tipo_cd4ActionPerformed
 
-    private void n_entradas_c5_tActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_n_entradas_c5_tActionPerformed
-        // Nada
-    }//GEN-LAST:event_n_entradas_c5_tActionPerformed
-
-    private void cb_tam_cd5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tam_cd5ActionPerformed
-        // Nada
-    }//GEN-LAST:event_cb_tam_cd5ActionPerformed
-
     private void cb_tipo_cd5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tipo_cd5ActionPerformed
         // Nada
     }//GEN-LAST:event_cb_tipo_cd5ActionPerformed
-
-    private void n_entradas_c6_tActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_n_entradas_c6_tActionPerformed
-        // Nada
-    }//GEN-LAST:event_n_entradas_c6_tActionPerformed
-
-    private void cb_tam_cd6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tam_cd6ActionPerformed
-        // Nada
-    }//GEN-LAST:event_cb_tam_cd6ActionPerformed
 
     private void cb_tipo_cd6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tipo_cd6ActionPerformed
         // Nada
     }//GEN-LAST:event_cb_tipo_cd6ActionPerformed
 
     private void caches_separadas_cbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_caches_separadas_cbActionPerformed
-        
         actualizarInterfazCache();
-        
-        /*int primer_nivel_compartido = cacheSepNivel();
-        
-        niv_cache_data_cb.setSelectedIndex(0);
-        niv_cache_inst_cb.setSelectedIndex(0);
-        
-        if (primer_nivel_compartido < 4)
-        {
-            cachesUnificadas = true;
-            
-            if (primer_nivel_compartido == 1)
-            {
-                panelesCaches.setEnabledAt(3, false);
-                panelesCaches.setEnabledAt(4, false);
-                panelesCaches.setEnabledAt(5, false);
-                
-                panelesCaches.setSelectedIndex(0);
-                cache_i1_b.setEnabled(false);
-                cache_i2_b.setEnabled(false);
-                cache_i3_b.setEnabled(false);
-                enabledTLBInst(false);
-            }
-            else if (primer_nivel_compartido == 2)
-            {
-                panelesCaches.setEnabledAt(3, true);
-                panelesCaches.setEnabledAt(4, false);
-                panelesCaches.setEnabledAt(5, false);
-                cache_i1_b.setEnabled(true);
-                cache_i2_b.setEnabled(false);
-                cache_i3_b.setEnabled(false);
-                enabledTLBInst(true);
-            }
-            else
-            {
-                panelesCaches.setEnabledAt(3, true);
-                panelesCaches.setEnabledAt(4, true);
-                panelesCaches.setEnabledAt(5, false);
-                cache_i1_b.setEnabled(true);
-                cache_i2_b.setEnabled(true);
-                cache_i3_b.setEnabled(false);
-                enabledTLBInst(true);
-            }
-
-            cache_i1_b.setEnabled(true);
-        }
-        else
-        {
-            // No se comparten (cachés separadas).
-            niv_cache_inst_cb.setEnabled(true);
-            tlb_inst_chb.setEnabled(true);
-            
-            panelesCaches.setEnabledAt(3, true);
-            panelesCaches.setEnabledAt(4, false);
-            panelesCaches.setEnabledAt(5, false);
-            cache_i1_b.setEnabled(true);
-        }*/
     }//GEN-LAST:event_caches_separadas_cbActionPerformed
 
     private void cache_i3_bActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cache_i3_bActionPerformed
         // Nada
     }//GEN-LAST:event_cache_i3_bActionPerformed
 
-    private void n_vias_tlb_data_tActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_n_vias_tlb_data_tActionPerformed
-        // Nada
-    }//GEN-LAST:event_n_vias_tlb_data_tActionPerformed
-
     private void tlb_inst_chbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tlb_inst_chbActionPerformed
         enabledTLBInst(tlb_inst_chb.isSelected());
     }//GEN-LAST:event_tlb_inst_chbActionPerformed
+
+    private void m_tam_memp_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_m_tam_memp_tFocusLost
+        try
+        {
+            Integer.decode(m_tam_memp_t.getText());
+        }
+        catch(NumberFormatException e1)
+	{
+		JOptionPane.showMessageDialog( this, "Valor incorrecto, sólo se aceptan valores numéricos o hexadecimales comenzando por # o 0x.", "Error de formato", JOptionPane.ERROR_MESSAGE );
+	}
+    }//GEN-LAST:event_m_tam_memp_tFocusLost
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Configuracion;
