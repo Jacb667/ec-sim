@@ -1,5 +1,7 @@
 package interfazgrafica;
 import general.*;
+
+import java.awt.Color;
 import java.awt.Component;
 
 import java.awt.event.ActionListener;
@@ -10,7 +12,12 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyleContext;
 import javax.swing.text.StyledDocument;
 /*
  * To change this template, choose Tools | Templates
@@ -198,17 +205,15 @@ public class Vista extends JPanel {
         jLabel3 = new javax.swing.JLabel();
         cb_tipo_tam_linea = new javax.swing.JComboBox();
         ejecucion = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        ejecucion_a = new javax.swing.JTextArea();
         ejecutar_b = new javax.swing.JButton();
         traza_carga_b = new javax.swing.JButton();
         salvar_t = new javax.swing.JTextField();
         exportar_b = new javax.swing.JButton();
         validar_t_b = new javax.swing.JButton();
         limpiar_t_b = new javax.swing.JButton();
-        ejecucion1 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        ejecucion_a1 = new javax.swing.JTextArea();
+        ejecucion_a = new javax.swing.JTextPane();
+        ejecucion1 = new javax.swing.JPanel();
         ejecutar_b1 = new javax.swing.JButton();
         ciclo_b1 = new javax.swing.JButton();
         salvar_e = new javax.swing.JTextField();
@@ -223,6 +228,8 @@ public class Vista extends JPanel {
         memoria_b = new javax.swing.JButton();
         limpiar_ej_b = new javax.swing.JButton();
         cache_i3_b = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        ejecucion_a1 = new javax.swing.JTextPane();
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -278,7 +285,6 @@ public class Vista extends JPanel {
                 .addGroup(cpu_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(cpu_pLayout.createSequentialGroup()
-                        .addGap(0, 0, 0)
                         .addGroup(cpu_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jerarquias_separadas_l)
                             .addComponent(pal_p_linea_l))
@@ -1218,13 +1224,6 @@ public class Vista extends JPanel {
 
         ejecucion_p.addTab("Configuración", Configuracion);
 
-        ejecucion_a.setEditable(false);
-        ejecucion_a.setColumns(20);
-        ejecucion_a.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-        ejecucion_a.setRows(15);
-        ejecucion_a.setTabSize(100);
-        jScrollPane1.setViewportView(ejecucion_a);
-
         ejecutar_b.setText("Ejecutar");
 
         traza_carga_b.setText("Cargar traza");
@@ -1243,6 +1242,9 @@ public class Vista extends JPanel {
 
         limpiar_t_b.setText("Limpiar");
 
+        ejecucion_a.setEditable(false);
+        jScrollPane3.setViewportView(ejecucion_a);
+
         javax.swing.GroupLayout ejecucionLayout = new javax.swing.GroupLayout(ejecucion);
         ejecucion.setLayout(ejecucionLayout);
         ejecucionLayout.setHorizontalGroup(
@@ -1250,7 +1252,7 @@ public class Vista extends JPanel {
             .addGroup(ejecucionLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(ejecucionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 615, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3)
                     .addGroup(ejecucionLayout.createSequentialGroup()
                         .addComponent(salvar_t)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1261,7 +1263,7 @@ public class Vista extends JPanel {
                         .addComponent(validar_t_b)
                         .addGap(18, 18, 18)
                         .addComponent(ejecutar_b, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 224, Short.MAX_VALUE)
                         .addComponent(limpiar_t_b, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -1275,7 +1277,7 @@ public class Vista extends JPanel {
                     .addComponent(validar_t_b)
                     .addComponent(limpiar_t_b))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(ejecucionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(salvar_t, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1284,13 +1286,6 @@ public class Vista extends JPanel {
         );
 
         ejecucion_p.addTab("Traza", ejecucion);
-
-        ejecucion_a1.setEditable(false);
-        ejecucion_a1.setColumns(20);
-        ejecucion_a1.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-        ejecucion_a1.setRows(15);
-        ejecucion_a1.setTabSize(100);
-        jScrollPane3.setViewportView(ejecucion_a1);
 
         ejecutar_b1.setText("Ejecutar");
 
@@ -1330,6 +1325,9 @@ public class Vista extends JPanel {
             }
         });
 
+        ejecucion_a1.setEditable(false);
+        jScrollPane2.setViewportView(ejecucion_a1);
+
         javax.swing.GroupLayout ejecucion1Layout = new javax.swing.GroupLayout(ejecucion1);
         ejecucion1.setLayout(ejecucion1Layout);
         ejecucion1Layout.setHorizontalGroup(
@@ -1337,7 +1335,7 @@ public class Vista extends JPanel {
             .addGroup(ejecucion1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(ejecucion1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 615, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2)
                     .addGroup(ejecucion1Layout.createSequentialGroup()
                         .addComponent(cargar_codigo_b, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -1363,7 +1361,7 @@ public class Vista extends JPanel {
                                 .addComponent(cache_i2_b)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(cache_i3_b)
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGap(0, 3, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(ejecucion1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(exportar_b1, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
@@ -1381,7 +1379,7 @@ public class Vista extends JPanel {
                     .addComponent(validar_c_b)
                     .addComponent(limpiar_ej_b))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(ejecucion1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cache_d1_b)
@@ -1634,8 +1632,8 @@ public class Vista extends JPanel {
     private javax.swing.JPanel cpu_p;
     private javax.swing.JPanel ejecucion;
     private javax.swing.JPanel ejecucion1;
-    private javax.swing.JTextArea ejecucion_a;
-    private javax.swing.JTextArea ejecucion_a1;
+    private javax.swing.JTextPane ejecucion_a;
+    private javax.swing.JTextPane ejecucion_a1;
     private javax.swing.JTabbedPane ejecucion_p;
     private javax.swing.JButton ejecutar_b;
     private javax.swing.JButton ejecutar_b1;
@@ -1653,7 +1651,7 @@ public class Vista extends JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel jerarquias_separadas_l;
@@ -2336,11 +2334,36 @@ public class Vista extends JPanel {
     }
     public void resTraza(String t)
     {
-    	ejecucion_a.append(t);
+        try {
+            Document doc = ejecucion_a.getDocument();
+            doc.insertString(doc.getLength(), t, null);
+         } catch(BadLocationException exc) {
+            //exc.printStackTrace();
+         }
     }
+    /*public void resEjec(String t)
+    {
+        try {
+            Document doc = ejecucion_a1.getDocument();
+            doc.insertString(doc.getLength(), t, null);
+         } catch(BadLocationException exc) {
+            //exc.printStackTrace();
+         }
+    }*/
     public void resEjec(String t)
     {
-    	ejecucion_a1.append(t);
+        try {
+            Document doc = ejecucion_a1.getDocument();
+            
+            
+            StyleContext sc = StyleContext.getDefaultStyleContext();
+            AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY,StyleConstants.Foreground, Color.RED);
+            
+            doc.insertString(doc.getLength(), t, aset);
+            
+         } catch(BadLocationException exc) {
+            //exc.printStackTrace();
+         }
     }
     public void enabledConfig(boolean b)
     {
@@ -2348,19 +2371,19 @@ public class Vista extends JPanel {
     }
     public void resetTraza()
     {
-    	jTextPane1.setText("");
+    	ejecucion_a.setText("");
     }
     public void resetEjec()
     {
-    	jTextPane1.setText("");
+    	ejecucion_a1.setText("");
     }
     public String getTraza()
     {
-    	return jTextPane1.getText();
+    	return ejecucion_a.getText();
     }
     public String getEjec()
     {
-    	return jTextPane1.getText();
+    	return ejecucion_a1.getText();
     }
 
 
