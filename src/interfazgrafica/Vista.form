@@ -331,7 +331,7 @@
                     </Component>
                     <Component class="javax.swing.JTextField" name="m_entradas_p_pagina_t">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="4"/>
+                        <Property name="text" type="java.lang.String" value="512"/>
                         <Property name="toolTipText" type="java.lang.String" value="Tama&#xf1;o de p&#xe1;gina."/>
                       </Properties>
                       <Events>
@@ -587,6 +587,7 @@
                             </Component>
                             <Component class="javax.swing.JTextField" name="n_entradas_tlb_inst_t">
                               <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="n_entradas_tlb_inst_tActionPerformed"/>
                                 <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="n_entradas_tlb_inst_tFocusLost"/>
                               </Events>
                             </Component>
@@ -650,7 +651,6 @@
                             <StringItem index="2" value="MBytes"/>
                           </StringArray>
                         </Property>
-                        <Property name="selectedIndex" type="int" value="1"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JComboBox" name="cb_tam_memp">
@@ -662,7 +662,7 @@
                             <StringItem index="2" value="MBytes"/>
                           </StringArray>
                         </Property>
-                        <Property name="selectedIndex" type="int" value="2"/>
+                        <Property name="selectedIndex" type="int" value="1"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JComboBox" name="cb_tam_virt">
@@ -674,7 +674,7 @@
                             <StringItem index="2" value="MBytes"/>
                           </StringArray>
                         </Property>
-                        <Property name="selectedIndex" type="int" value="2"/>
+                        <Property name="selectedIndex" type="int" value="1"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel5">
@@ -768,6 +768,7 @@
                     </Component>
                     <Component class="javax.swing.JTextField" name="tam_linea_t">
                       <Properties>
+                        <Property name="text" type="java.lang.String" value="4"/>
                         <Property name="toolTipText" type="java.lang.String" value="Tama&#xf1;o de cada bloque."/>
                       </Properties>
                       <Events>
@@ -867,6 +868,7 @@
                             </Component>
                             <Component class="javax.swing.JTextField" name="n_entradas_c1_t">
                               <Properties>
+                                <Property name="text" type="java.lang.String" value="16"/>
                                 <Property name="toolTipText" type="java.lang.String" value="Tama&#xf1;o de la cach&#xe9;."/>
                                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                                   <Color id="Text Cursor"/>
@@ -884,6 +886,7 @@
                             </Component>
                             <Component class="javax.swing.JTextField" name="n_vias_c1_t">
                               <Properties>
+                                <Property name="text" type="java.lang.String" value="1"/>
                                 <Property name="toolTipText" type="java.lang.String" value="N&#xfa;mero de v&#xed;as para cach&#xe9;s asociativas."/>
                               </Properties>
                               <Events>
@@ -1718,6 +1721,7 @@
                             <StringItem index="1" value="Palabras"/>
                           </StringArray>
                         </Property>
+                        <Property name="selectedIndex" type="int" value="1"/>
                         <Property name="toolTipText" type="java.lang.String" value=""/>
                       </Properties>
                     </Component>
