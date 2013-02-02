@@ -2332,39 +2332,32 @@ public class Vista extends JPanel {
     {
     	return politica_reemplazo_c6_cb.getSelectedItem().toString();
     }
-    public void resTraza(String t)
+    
+    public void resTraza(String t, AttributeSet aset)
     {
-        try {
-            Document doc = ejecucion_a.getDocument();
-            doc.insertString(doc.getLength(), t, null);
-         } catch(BadLocationException exc) {
+        try
+        {
+        	Document doc = ejecucion_a.getDocument();
+        	doc.insertString(doc.getLength(), t, aset);
+        }
+        catch(BadLocationException exc)
+        {
             //exc.printStackTrace();
-         }
+        }
     }
-    /*public void resEjec(String t)
+    public void resEjec(String t, AttributeSet aset)
     {
-        try {
-            Document doc = ejecucion_a1.getDocument();
-            doc.insertString(doc.getLength(), t, null);
-         } catch(BadLocationException exc) {
+        try
+        {
+        	Document doc = ejecucion_a1.getDocument();
+        	doc.insertString(doc.getLength(), t, aset);
+        }
+        catch(BadLocationException exc)
+        {
             //exc.printStackTrace();
-         }
-    }*/
-    public void resEjec(String t)
-    {
-        try {
-            Document doc = ejecucion_a1.getDocument();
-            
-            
-            StyleContext sc = StyleContext.getDefaultStyleContext();
-            AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY,StyleConstants.Foreground, Color.RED);
-            
-            doc.insertString(doc.getLength(), t, aset);
-            
-         } catch(BadLocationException exc) {
-            //exc.printStackTrace();
-         }
+        }
     }
+    
     public void enabledConfig(boolean b)
     {
     	ejecucion_p.setEnabledAt(0, b);
@@ -2385,7 +2378,6 @@ public class Vista extends JPanel {
     {
     	return ejecucion_a1.getText();
     }
-
 
 	public String getArchivoCodigo()
 	{
