@@ -1,5 +1,12 @@
 package general;
 
+import java.awt.Color;
+
+import javax.swing.text.AttributeSet;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyleContext;
+
 import interfazgrafica.Vista;
 import general.Config.Conf_Type;
 
@@ -295,9 +302,30 @@ public class Log {
 			if(Config.getVista()!=null)
 			{
 				if (Config.ejecutando_codigo)
-					Config.getVista().resEjec(s+"\n");
+					Config.getVista().resEjec(s+"\n", null);
 				else
-					Config.getVista().resTraza(s+"\n");
+					Config.getVista().resTraza(s+"\n", null);
+			}
+			System.out.println(s);
+		}
+	}
+	
+	public static void println(int n, String s, Color color, boolean negrita)
+	{
+		// Filtramos el nivel de log.
+		if (n <= nivel)
+		{
+			// Llamamos al controlador para que muestre el mensaje en el lugar adecuado.
+			if(Config.getVista()!=null)
+			{
+				SimpleAttributeSet aset = new SimpleAttributeSet(); 
+				StyleConstants.setForeground(aset, color);
+				StyleConstants.setBold(aset, negrita);
+		        
+				if (Config.ejecutando_codigo)
+					Config.getVista().resEjec(s+"\n", aset);
+				else
+					Config.getVista().resTraza(s+"\n", aset);
 			}
 			System.out.println(s);
 		}
@@ -312,9 +340,9 @@ public class Log {
 			if(Config.getVista()!=null)
 			{
 				if (Config.ejecutando_codigo)
-					Config.getVista().resEjec(s);
+					Config.getVista().resEjec(s, null);
 				else
-					Config.getVista().resTraza(s);
+					Config.getVista().resTraza(s, null);
 			}
 			System.out.println(s);
 		}
@@ -327,9 +355,9 @@ public class Log {
 			if(Config.getVista()!=null)
 			{
 				if (Config.ejecutando_codigo)
-					Config.getVista().resEjec("---------------------------------\n");
+					Config.getVista().resEjec("---------------------------------\n", null);
 				else
-					Config.getVista().resTraza("---------------------------------\n");
+					Config.getVista().resTraza("---------------------------------\n", null);
 			}
 			System.out.println("---------------------------------\n");
 	}
