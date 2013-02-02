@@ -46,7 +46,7 @@ public class Controlador implements ActionListener {
 				Config.set(Conf_Type.ENTRADAS_PAGINA,v.getEntradasPagina());
 				Config.set(Conf_Type.NUMERO_ENTRADAS_MEMORIA, v.getEntradasMemP());
 				Config.set(Conf_Type.MAXIMA_ENTRADA_MEMORIA,v.getMaxEntradasVirt());
-				error++;
+				error = 1;
 				
 				if (v.getEntradasMemP() > 16384)
 					JOptionPane.showMessageDialog( v, "Aviso, no se puede mostrar la memoria si tiene más de " + 16384 + " entradas.", "Advertencia", JOptionPane.WARNING_MESSAGE );	
@@ -73,7 +73,7 @@ public class Controlador implements ActionListener {
 					 Config.set(Conf_Type.TLB_INSTRUCCIONES_VIAS, v.getTLBINumVias());
 					 Config.set(Conf_Type_c.TLB_INSTRUCCIONES_POLITICA, v.getPRTLBI());
 				}
-				error++;
+				error = 2;
 
 				Config.set(Conf_Type.NIVELES_CACHE_DATOS,v.getnvCacheD());
 				Config.set(Conf_Type.NIVELES_CACHE_INSTRUCCIONES,v.getnvCacheI());
@@ -81,7 +81,7 @@ public class Controlador implements ActionListener {
 				Config.set(Conf_Type.CACHE1_DATOS_ENTRADAS,v.getCD1NEntradas());
 				Config.set(Conf_Type.CACHE1_DATOS_VIAS,v.getCD1NVias());
 				Config.set(Conf_Type_c.CACHE1_DATOS_POLITICA,v.getPRCD1());
-				error++;
+				error = 3;
 				
 				if(v.getnvCacheD()>=2)
 				{
@@ -89,7 +89,7 @@ public class Controlador implements ActionListener {
 					Config.set(Conf_Type.CACHE2_DATOS_VIAS,v.getCD2NVias());
 					Config.set(Conf_Type_c.CACHE2_DATOS_POLITICA,v.getPRCD2());
 				}
-				error++;
+				error = 4;
 				
 				if(v.getnvCacheD()==3)
 				{
@@ -97,31 +97,31 @@ public class Controlador implements ActionListener {
 					Config.set(Conf_Type.CACHE3_DATOS_VIAS,v.getCD3NVias());
 					Config.set(Conf_Type_c.CACHE3_DATOS_POLITICA,v.getPRCD3());
 				}
-				error++;
-				
-				if(v.cacheSepNivel() > 1)
+				error = 5;
+			
+				if(v.cacheSepNivel() > 1 && v.cacheSepNivel()>1)
 				{
 					Config.set(Conf_Type.CACHE1_INSTRUCCIONES_ENTRADAS, v.getCI1NEntradas());
 					Config.set(Conf_Type.CACHE1_INSTRUCCIONES_VIAS,v.getCI1NVias());
 					Config.set(Conf_Type_c.CACHE1_INSTRUCCIONES_POLITICA,v.getPRCI1());
 				}
-				error++;
+				error = 6;
 				
-				if(v.getnvCacheI()>=2)
+				if(v.cacheSepNivel() > 2 && v.getnvCacheI()>=2)
 				{
 					Config.set(Conf_Type.CACHE2_INSTRUCCIONES_ENTRADAS, v.getCI2NEntradas());
 					Config.set(Conf_Type.CACHE2_INSTRUCCIONES_VIAS,v.getCI2NVias());
 					Config.set(Conf_Type_c.CACHE2_INSTRUCCIONES_POLITICA,v.getPRCI2());
 				}
-				error++;
+				error = 7;
 				
-				if(v.getnvCacheI()==3)
+				if(v.cacheSepNivel() > 3 && v.getnvCacheI()==3)
 				{
 					Config.set(Conf_Type.CACHE3_INSTRUCCIONES_ENTRADAS, v.getCI3NEntradas());
 					Config.set(Conf_Type.CACHE3_INSTRUCCIONES_VIAS,v.getCI3NVias());
 					Config.set(Conf_Type_c.CACHE3_INSTRUCCIONES_POLITICA,v.getPRCI3()); 
 				}
-				error++;
+				error = 8;
 
 				Config.set(Conf_Type_c.ARCHIVO_CODIGO, v.getArchivoCodigo());
 			 
@@ -129,14 +129,37 @@ public class Controlador implements ActionListener {
 			 
 				v.enabledEjecutarC();
 				v.enabledConfig(false);
+				
+				claseP = new ClasePrincipal();
+				claseP.validarCodigo();
 			}
 			catch(NumberFormatException e1)
 			{
-				JOptionPane.showMessageDialog( v, "" + error + "Error de formato al cargar los datos", "Error de formato", JOptionPane.ERROR_MESSAGE );
+				String mensaje = "";
+				switch(error)
+				{
+					case 0:
+						mensaje = "Configuración de memoria no válida.";
+						break;
+					case 1:
+						mensaje = "Configuración de TLB no válida.";
+						break;
+					case 2:
+					case 3:
+					case 4:
+					case 5:
+					case 6:
+					case 7:
+						mensaje = "Configuración de Caché de Datos " + (error-2) + " no válida.";
+						break;
+					case 8:
+						mensaje = "Error de fichero.";
+						break;
+				}
+				
+				JOptionPane.showMessageDialog( v, mensaje, "Error de formato", JOptionPane.ERROR_MESSAGE );
+				e1.printStackTrace();
 			}
-			
-			claseP = new ClasePrincipal();
-			claseP.validarCodigo();
 		}
 		/*else if(comando.equals(Global.VALT))
 		{
