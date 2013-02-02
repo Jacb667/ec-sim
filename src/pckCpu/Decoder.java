@@ -1,11 +1,16 @@
 package pckCpu;
 
+import general.Config;
 import general.Global.Opcode;
+
+import interfazgrafica.Vista;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
+
+import javax.swing.JOptionPane;
 
 public class Decoder
 {
@@ -61,13 +66,21 @@ public class Decoder
 		}
 		catch (IOException e)
 		{
-			System.err.println("Error en la lectura del archivo.");
+			Vista v = Config.getVista();
+			if (v == null)
+				System.err.println("No se ha podido leer el fichero.");
+			else
+				JOptionPane.showMessageDialog( v, "No se ha podido leer el fichero.", "Error en la lectura del fichero", JOptionPane.ERROR_MESSAGE );
 			clean();
 			return false;
 		}
 		catch (CpuException e)
 		{
-			System.err.println(e);
+			Vista v = Config.getVista();
+			if (v == null)
+				System.err.println(e);
+			else
+				JOptionPane.showMessageDialog( v, e.getMessage(), "Error en la lectura del fichero", JOptionPane.ERROR_MESSAGE );
 			clean();
 			return false;
 		}
@@ -85,7 +98,7 @@ public class Decoder
 		}
 		catch (NumberFormatException e)
 		{
-			throw new CpuException("Error en formato de dirección en línea" + lin_fich);
+			throw new CpuException("Error en formato de dirección en línea " + lin_fich);
 		}
 	}
 	

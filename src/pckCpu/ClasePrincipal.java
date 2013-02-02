@@ -149,7 +149,7 @@ public class ClasePrincipal {
 			if (v == null)
 				System.err.println(e);
 			else
-				JOptionPane.showMessageDialog( v, e, "Se ha producido una excepción", JOptionPane.ERROR_MESSAGE );
+				JOptionPane.showMessageDialog( v, e, "Error en la lectura del fichero", JOptionPane.ERROR_MESSAGE );
 			e.printStackTrace();
 		}
 		catch (Exception e)
