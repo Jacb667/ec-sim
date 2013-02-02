@@ -38,7 +38,7 @@ public class TestCpu {
 	private int bytes_palabra;
 	private int palabras_linea;
 	
-	private boolean jerarquiasSeparadas;
+	private int nivelJerarquiasSeparadas;
 	
 	public JFrame frameMemoria;
 	public Tabla tablaMemoria;
@@ -163,8 +163,7 @@ public class TestCpu {
 		bytes_palabra = Config.get(Conf_Type.TAMAÑO_PALABRA);
 		palabras_linea = Config.get(Conf_Type.TAMAÑO_LINEA);
 		
-		jerarquiasSeparadas = Config.get(Conf_Type.JERARQUIAS_SEPARADAS) == 1 ? true : false;
-		//segmentado = Config.get(Conf_Type.SEGMENTADO) == 1 ? true : false;
+		nivelJerarquiasSeparadas = Config.get(Conf_Type.NIVEL_JERARQUIAS_SEPARADAS);
 		
 		entradas_pagina = Config.get(Conf_Type.ENTRADAS_PAGINA);
 		max_ent_mem = Config.get(Conf_Type.NUMERO_ENTRADAS_MEMORIA);
@@ -184,21 +183,21 @@ public class TestCpu {
 
 
 		politicas_caches1 = new TiposReemplazo[niveles_cache1];
-		if (niveles_cache1 > 0)
+		if (niveles_cache1 > 0 && Config.get(Conf_Type_c.CACHE1_DATOS_POLITICA) != null)
 			politicas_caches1[0] = TiposReemplazo.valueOf(Config.get(Conf_Type_c.CACHE1_DATOS_POLITICA));
-		if (niveles_cache1 > 1)
+		if (niveles_cache1 > 1 && Config.get(Conf_Type_c.CACHE2_DATOS_POLITICA) != null)
 			politicas_caches1[1] = TiposReemplazo.valueOf(Config.get(Conf_Type_c.CACHE2_DATOS_POLITICA));
-		if (niveles_cache1 > 2)
+		if (niveles_cache1 > 2 && Config.get(Conf_Type_c.CACHE3_DATOS_POLITICA) != null)
 			politicas_caches1[2] = TiposReemplazo.valueOf(Config.get(Conf_Type_c.CACHE3_DATOS_POLITICA));
 		
-		if (jerarquiasSeparadas)
+		if (nivelJerarquiasSeparadas > 1)
 		{
 			politicas_caches2 = new TiposReemplazo[niveles_cache2];
-			if (niveles_cache2 > 0)
+			if (niveles_cache2 > 0 && Config.get(Conf_Type_c.CACHE1_INSTRUCCIONES_POLITICA) != null)
 				politicas_caches2[0] = TiposReemplazo.valueOf(Config.get(Conf_Type_c.CACHE1_INSTRUCCIONES_POLITICA));
-			if (niveles_cache2 > 1)
+			if (niveles_cache2 > 1 && Config.get(Conf_Type_c.CACHE2_INSTRUCCIONES_POLITICA) != null)
 				politicas_caches2[1] = TiposReemplazo.valueOf(Config.get(Conf_Type_c.CACHE2_INSTRUCCIONES_POLITICA));
-			if (niveles_cache2 > 2)
+			if (niveles_cache2 > 2 && Config.get(Conf_Type_c.CACHE3_INSTRUCCIONES_POLITICA) != null)
 				politicas_caches2[2] = TiposReemplazo.valueOf(Config.get(Conf_Type_c.CACHE3_INSTRUCCIONES_POLITICA));
 		}
 
@@ -258,15 +257,58 @@ public class TestCpu {
 				caches1[i] = new CacheDirecta(entradas_caches1[i], palabras_linea, bytes_palabra);
 		}
 		
-		if (jerarquiasSeparadas)
+		// Si hay alguna separación inicializo las de instrucciones.
+		if (nivelJerarquiasSeparadas != 1)
 		{
 			caches2 = new Cache[niveles_cache2];
-			for (int i = 0; i < niveles_cache2; i++)
+			
+			if (nivelJerarquiasSeparadas < 4)
 			{
-				if (vias_caches2[i] > 1)
-					caches2[i] = new CacheAsociativa(entradas_caches2[i], palabras_linea, vias_caches2[i], politicas_caches2[i], bytes_palabra);
+				if (nivelJerarquiasSeparadas == 2)
+				{
+					// Si a partir de la 2 son compartidas, creo la primera.
+					if (vias_caches2[0] > 1)
+						caches2[0] = new CacheAsociativa(entradas_caches2[0], palabras_linea, vias_caches2[0], politicas_caches2[0], bytes_palabra);
+					else
+						caches2[0] = new CacheDirecta(entradas_caches2[0], palabras_linea, bytes_palabra);
+					
+					// Las otras 2 son las mismas que las de datos:
+					if (niveles_cache2 > 1)
+						caches2[1] = caches1[1];
+					if (niveles_cache2 > 2)
+					caches2[2] = caches2[2];
+				}
 				else
-					caches2[i] = new CacheDirecta(entradas_caches2[i], palabras_linea, bytes_palabra);
+				{
+					// Sólo la 3 es compartida, creo la 1 y la 2
+					if (vias_caches2[0] > 1)
+						caches2[0] = new CacheAsociativa(entradas_caches2[0], palabras_linea, vias_caches2[0], politicas_caches2[0], bytes_palabra);
+					else
+						caches2[0] = new CacheDirecta(entradas_caches2[0], palabras_linea, bytes_palabra);
+					
+					if (niveles_cache2 > 1)
+					{
+						if (vias_caches2[1] > 1)
+							caches2[1] = new CacheAsociativa(entradas_caches2[1], palabras_linea, vias_caches2[1], politicas_caches2[1], bytes_palabra);
+						else
+							caches2[1] = new CacheDirecta(entradas_caches2[1], palabras_linea, bytes_palabra);
+					}
+					
+					// La última es la misma que la de datos.
+					if (niveles_cache2 > 2)
+						caches2[2] = caches2[2];
+				}
+			}
+			else
+			{
+				// Todas separadas.
+				for (int i = 0; i < niveles_cache2; i++)
+				{
+					if (vias_caches2[i] > 1)
+						caches2[i] = new CacheAsociativa(entradas_caches2[i], palabras_linea, vias_caches2[i], politicas_caches2[i], bytes_palabra);
+					else
+						caches2[i] = new CacheDirecta(entradas_caches2[i], palabras_linea, bytes_palabra);
+				}
 			}
 		}
 		
@@ -293,7 +335,7 @@ public class TestCpu {
 		
 		// Inicializar la Jerarquía de Memoria.
 		jmem = new JerarquiaMemoria(tablaPags, caches1, memoria);
-		if (jerarquiasSeparadas)
+		if (nivelJerarquiasSeparadas > 1)
 			jmem2 = new JerarquiaMemoria(tablaPags, caches2, memoria);
 		
 		tablaPags.setJerarquiaMemoria(jmem, jmem2);
@@ -303,9 +345,6 @@ public class TestCpu {
 	private void inicializarInterfaz() throws Exception
 	{
 		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		
-		tablaMemoria = new Tabla(memoria);
-		frameMemoria = new JFrame();
 		
 		tablaMemoria = new Tabla(memoria);
 		frameMemoria = new VentanaLimitada();
@@ -341,7 +380,7 @@ public class TestCpu {
 			caches1[i].setInterfaz(tablasCache1[i]);
 		}
 		
-		if (jerarquiasSeparadas)
+		if (nivelJerarquiasSeparadas > 1)
 		{
 			tablasCache2 = new Tabla[niveles_cache2];
 			framesCache2 = new JFrame[niveles_cache2];
