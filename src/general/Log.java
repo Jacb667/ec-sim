@@ -238,16 +238,6 @@ public class Log {
 			case CONFLICT_PAGE:
 				conflictosPagina++;
 				break;
-			case CACHE_HIT:
-			case CACHE_MISS:
-			case CONFLICT_CACHE:
-			try {
-				throw new MemoryException("ERROR AQUI");
-			} catch (MemoryException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				Global.sleep(10000);
-			}
 		}
 	}
 	
@@ -302,7 +292,6 @@ public class Log {
 		if (n <= nivel)
 		{
 			// Llamamos al controlador para que muestre el mensaje en el lugar adecuado.
-			// TODO: De momento hacemos una llamada a System.out.
 			if(Config.getVista()!=null)
 			{
 				if (Config.ejecutando_codigo)
@@ -320,9 +309,29 @@ public class Log {
 		if (n <= nivel)
 		{
 			// Llamamos al controlador para que muestre el mensaje en el lugar adecuado.
-			// TODO: De momento hacemos una llamada a System.out.
-			System.out.print(s);
+			if(Config.getVista()!=null)
+			{
+				if (Config.ejecutando_codigo)
+					Config.getVista().resEjec(s);
+				else
+					Config.getVista().resTraza(s);
+			}
+			System.out.println(s);
 		}
+	}
+	
+	public static void printSeparador(int n)
+	{
+		if (n <= nivel)
+			// Llamamos al controlador para que muestre el mensaje en el lugar adecuado.
+			if(Config.getVista()!=null)
+			{
+				if (Config.ejecutando_codigo)
+					Config.getVista().resEjec("---------------------------------\n");
+				else
+					Config.getVista().resTraza("---------------------------------\n");
+			}
+			System.out.println("---------------------------------\n");
 	}
 	
 	public static void errorln(int n, String s)

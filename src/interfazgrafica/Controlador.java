@@ -18,8 +18,6 @@ import pckCpu.ClasePrincipal;
 public class Controlador implements ActionListener {
 	
 	private Vista v;
-	private String ArchivoTraza="";
-	private String ArchivoCode="";
 	private BufferedReader br;
 	private FileReader fr;
 	
@@ -32,117 +30,115 @@ public class Controlador implements ActionListener {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e)
+	{
 		String comando = e.getActionCommand();
+		int error = 0;
 		
-                if(comando.equals(Global.VALC))
+        if(comando.equals(Global.VALC))
 		{
 			//COMPLETO(?)---TERMINAR PARA EJECUCION
 			try
 			{
 				Config.ejecutando_codigo = true;
 				Config.set(Conf_Type.TAMAÑO_PALABRA,v.getTamPal());
-				if(v.jsepCheck())
-				{
-					Config.set(Conf_Type.JERARQUIAS_SEPARADAS,1);
-				}
-				else
-				{
-					Config.set(Conf_Type.JERARQUIAS_SEPARADAS,0);
-				}
-				Config.set(Conf_Type.SEGMENTADO, v.getSegmentado());
+				Config.set(Conf_Type.NIVEL_JERARQUIAS_SEPARADAS,v.cacheSepNivel());
 				Config.set(Conf_Type.ENTRADAS_PAGINA,v.getEntradasPagina());
-				Config.set(Conf_Type.NUMERO_ENTRADAS_MEMORIA, v.getNumEntradasMem());
-				Config.set(Conf_Type.MAXIMA_ENTRADA_MEMORIA,v.getMaxNumEntradas());
+				Config.set(Conf_Type.NUMERO_ENTRADAS_MEMORIA, v.getEntradasMemP());
+				Config.set(Conf_Type.MAXIMA_ENTRADA_MEMORIA,v.getMaxEntradasVirt());
+				error++;
 				
-				if (v.getMaxNumEntradas() > 0xFFFF)
-					throw new MemoryException("Aviso, no se puede mostrar la memoria si tiene más de " + 0xFFFF + " entradas.");
-				
+				if (v.getEntradasMemP() > 16384)
+					JOptionPane.showMessageDialog( v, "Aviso, no se puede mostrar la memoria si tiene más de " + 16384 + " entradas.", "Advertencia", JOptionPane.WARNING_MESSAGE );	
 				
 				if(v.tlbDataCheck())
-				{
 					Config.set(Conf_Type.TLB_DATOS, 1);
-				}
 				else
-				{
 					Config.set(Conf_Type.TLB_DATOS, 0);
-				}
+				
 				if(v.tlbInstCheck())
-				{
 					Config.set(Conf_Type.TLB_INSTRUCCIONES, 1);
-				}
 				else
-				{
 					Config.set(Conf_Type.TLB_INSTRUCCIONES, 0);
-				}
-				if(v.tlbDataCheck()&&v.jsepCheck())
+				
+				if(v.tlbDataCheck())
 				{
 					 Config.set(Conf_Type.TLB_DATOS_ENTRADAS, v.getTLBDNumEntradas());
 					 Config.set(Conf_Type.TLB_DATOS_VIAS, v.getTLBDNumVias());
 					 Config.set(Conf_Type_c.TLB_DATOS_POLITICA, v.getPRTLBD());
 				}			 
-				if(v.tlbInstCheck()&&v.jsepCheck())
-				 {
-					 
+				if(v.tlbInstCheck())
+				{
 					 Config.set(Conf_Type.TLB_INSTRUCCIONES_ENTRADAS, v.getTLBINumEntradas());
 					 Config.set(Conf_Type.TLB_INSTRUCCIONES_VIAS, v.getTLBINumVias());
 					 Config.set(Conf_Type_c.TLB_INSTRUCCIONES_POLITICA, v.getPRTLBI());
-				 }
-				 
-				 Config.set(Conf_Type.NIVELES_CACHE_DATOS,v.getnvCache());
-				 Config.set(Conf_Type.NIVELES_CACHE_INSTRUCCIONES,v.getnvCacheI());
-				 Config.set(Conf_Type.TAMAÑO_LINEA, v.getTamLinea());
-				 Config.set(Conf_Type.CACHE1_DATOS_ENTRADAS,v.getCD1NEntradas());
-				 Config.set(Conf_Type.CACHE1_DATOS_VIAS,v.getCD1NVias());
-				 Config.set(Conf_Type_c.CACHE1_DATOS_POLITICA,v.getPRCD1());
-				 if(v.getnvCache()>=2)
-				 {
-					 Config.set(Conf_Type.CACHE2_DATOS_ENTRADAS,v.getCD2NEntradas());
-					 Config.set(Conf_Type.CACHE2_DATOS_VIAS,v.getCD2NVias());
-					 Config.set(Conf_Type_c.CACHE2_DATOS_POLITICA,v.getPRCD2());
-				 }
-				 if(v.getnvCache()==3)
-				 {
-					 Config.set(Conf_Type.CACHE3_DATOS_ENTRADAS,v.getCD3NEntradas());
-					 Config.set(Conf_Type.CACHE3_DATOS_VIAS,v.getCD3NVias());
-					 Config.set(Conf_Type_c.CACHE3_DATOS_POLITICA,v.getPRCD3());
-				 }
-				 if(v.jsepCheck())
-				 {
-					 Config.set(Conf_Type.CACHE1_INSTRUCCIONES_ENTRADAS, v.getCI1NEntradas());
-					 Config.set(Conf_Type.CACHE1_INSTRUCCIONES_VIAS,v.getCI1NVias());
-					 Config.set(Conf_Type_c.CACHE1_INSTRUCCIONES_POLITICA,v.getPRCI1());
-				 if(v.getnvCacheI()>=2)
-				 {
-					 Config.set(Conf_Type.CACHE2_INSTRUCCIONES_ENTRADAS, v.getCI2NEntradas());
-					 Config.set(Conf_Type.CACHE2_INSTRUCCIONES_VIAS,v.getCI2NVias());
-					 Config.set(Conf_Type_c.CACHE2_INSTRUCCIONES_POLITICA,v.getPRCI2());
-				 }
-				 if(v.getnvCacheI()==3)
-				 {
-					 Config.set(Conf_Type.CACHE3_INSTRUCCIONES_ENTRADAS, v.getCI3NEntradas());
-					 Config.set(Conf_Type.CACHE3_INSTRUCCIONES_VIAS,v.getCI3NVias());
-					 Config.set(Conf_Type_c.CACHE3_INSTRUCCIONES_POLITICA,v.getPRCI3()); 
-				 }
-				 	 
-			 }
-			 Config.set(Conf_Type_c.ARCHIVO_CODIGO,ArchivoCode);
-			 v.enabledEjecutarC();
-			 v.enabledConfig(false);
+				}
+				error++;
+
+				Config.set(Conf_Type.NIVELES_CACHE_DATOS,v.getnvCacheD());
+				Config.set(Conf_Type.NIVELES_CACHE_INSTRUCCIONES,v.getnvCacheI());
+				Config.set(Conf_Type.TAMAÑO_LINEA, v.getTamLinea());
+				Config.set(Conf_Type.CACHE1_DATOS_ENTRADAS,v.getCD1NEntradas());
+				Config.set(Conf_Type.CACHE1_DATOS_VIAS,v.getCD1NVias());
+				Config.set(Conf_Type_c.CACHE1_DATOS_POLITICA,v.getPRCD1());
+				error++;
+				
+				if(v.getnvCacheD()>=2)
+				{
+					Config.set(Conf_Type.CACHE2_DATOS_ENTRADAS,v.getCD2NEntradas());
+					Config.set(Conf_Type.CACHE2_DATOS_VIAS,v.getCD2NVias());
+					Config.set(Conf_Type_c.CACHE2_DATOS_POLITICA,v.getPRCD2());
+				}
+				error++;
+				
+				if(v.getnvCacheD()==3)
+				{
+					Config.set(Conf_Type.CACHE3_DATOS_ENTRADAS,v.getCD3NEntradas());
+					Config.set(Conf_Type.CACHE3_DATOS_VIAS,v.getCD3NVias());
+					Config.set(Conf_Type_c.CACHE3_DATOS_POLITICA,v.getPRCD3());
+				}
+				error++;
+				
+				if(v.cacheSepNivel() > 1)
+				{
+					Config.set(Conf_Type.CACHE1_INSTRUCCIONES_ENTRADAS, v.getCI1NEntradas());
+					Config.set(Conf_Type.CACHE1_INSTRUCCIONES_VIAS,v.getCI1NVias());
+					Config.set(Conf_Type_c.CACHE1_INSTRUCCIONES_POLITICA,v.getPRCI1());
+				}
+				error++;
+				
+				if(v.getnvCacheI()>=2)
+				{
+					Config.set(Conf_Type.CACHE2_INSTRUCCIONES_ENTRADAS, v.getCI2NEntradas());
+					Config.set(Conf_Type.CACHE2_INSTRUCCIONES_VIAS,v.getCI2NVias());
+					Config.set(Conf_Type_c.CACHE2_INSTRUCCIONES_POLITICA,v.getPRCI2());
+				}
+				error++;
+				
+				if(v.getnvCacheI()==3)
+				{
+					Config.set(Conf_Type.CACHE3_INSTRUCCIONES_ENTRADAS, v.getCI3NEntradas());
+					Config.set(Conf_Type.CACHE3_INSTRUCCIONES_VIAS,v.getCI3NVias());
+					Config.set(Conf_Type_c.CACHE3_INSTRUCCIONES_POLITICA,v.getPRCI3()); 
+				}
+				error++;
+
+				Config.set(Conf_Type_c.ARCHIVO_CODIGO, v.getArchivoCodigo());
+			 
+				System.out.println("Validar");
+			 
+				v.enabledEjecutarC();
+				v.enabledConfig(false);
 			}
 			catch(NumberFormatException e1)
 			{
-				JOptionPane.showMessageDialog( v, "Error de formato al cargar los datos", "Error de formato", JOptionPane.ERROR_MESSAGE );
-			}
-			catch (MemoryException e2)
-			{
-				JOptionPane.showMessageDialog( v, e2, "Advertencia", JOptionPane.WARNING_MESSAGE );
+				JOptionPane.showMessageDialog( v, "" + error + "Error de formato al cargar los datos", "Error de formato", JOptionPane.ERROR_MESSAGE );
 			}
 			
 			claseP = new ClasePrincipal();
 			claseP.validarCodigo();
 		}
-		else if(comando.equals(Global.VALT))
+		/*else if(comando.equals(Global.VALT))
 		{
 			//COMPLETO(?)-----TERMINAR PARA EJECUCION
 			try
@@ -241,8 +237,8 @@ public class Controlador implements ActionListener {
 			claseP = new ClasePrincipal();
 			//claseP.validarCodigo();
 			 
-		}
-		else if(comando.equals(Global.EJECUTART))
+		}*/
+		/*else if(comando.equals(Global.EJECUTART))
 		{
 			Config.ejecutando_codigo = false;
 			//System.out.println("ENTRA2");
@@ -272,7 +268,7 @@ public class Controlador implements ActionListener {
 			
 			}
 			v.enabledConfig(true);
-		}
+		}*/
 		else if(comando.equals(Global.EJECUTARC))
 		{
 			Config.ejecutando_codigo = true;
@@ -287,7 +283,7 @@ public class Controlador implements ActionListener {
 				claseP.ejecutarCicloCodigo();
 		}
 		// A PARTIR DE AQUI LOS BOTONES DE CACHES Y MEM-----------------------------------------------------------------------------------------------
-		else if(comando.equals(Global.BCACHED1))
+		/*else if(comando.equals(Global.BCACHED1))
 		{
 			if (claseP != null && claseP.framesCache1[0] != null)
 				claseP.framesCache1[0].setVisible(true);
@@ -321,7 +317,7 @@ public class Controlador implements ActionListener {
 		{
 			if (claseP != null && claseP.frameMemoria != null)
 				claseP.frameMemoria.setVisible(true);
-		}
+		}*/
 		
 	}
 	private String bfOn() throws IOException

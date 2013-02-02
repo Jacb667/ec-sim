@@ -48,7 +48,7 @@ public class Aplicacion extends javax.swing.JFrame {
     	/*Config.set(Conf_Type.TAMAÑO_PALABRA, 4);
 		Config.set(Conf_Type.TAMAÑO_LINEA, 4);
 		
-		Config.set(Conf_Type.JERARQUIAS_SEPARADAS, 0);
+		Config.set(Conf_Type.NIVEL_JERARQUIAS_SEPARADAS, 1);
 		//segmentado = Config.get(Conf_Type.SEGMENTADO) == 1 ? true : false;
 		
 		Config.set(Conf_Type.ENTRADAS_PAGINA, 32);
