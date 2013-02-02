@@ -4,10 +4,14 @@ import java.awt.Component;
 
 import java.awt.event.ActionListener;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.StyledDocument;
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -328,7 +332,7 @@ public class Vista extends JPanel {
 
         m_entradas_p_pagina_l.setText("Tamaño de página:");
 
-        m_entradas_p_pagina_t.setText("4");
+        m_entradas_p_pagina_t.setText("512");
         m_entradas_p_pagina_t.setToolTipText("Tamaño de página.");
         m_entradas_p_pagina_t.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -448,6 +452,11 @@ public class Vista extends JPanel {
 
         n_entradas_c2_l7.setText("Número de entradas");
 
+        n_entradas_tlb_inst_t.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                n_entradas_tlb_inst_tActionPerformed(evt);
+            }
+        });
         n_entradas_tlb_inst_t.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 n_entradas_tlb_inst_tFocusLost(evt);
@@ -523,13 +532,12 @@ public class Vista extends JPanel {
         panelesTLBs.addTab("TLB Inst", jPanel2);
 
         cb_tam_pagina.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bytes", "KBytes", "MBytes" }));
-        cb_tam_pagina.setSelectedIndex(1);
 
         cb_tam_memp.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bytes", "KBytes", "MBytes" }));
-        cb_tam_memp.setSelectedIndex(2);
+        cb_tam_memp.setSelectedIndex(1);
 
         cb_tam_virt.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bytes", "KBytes", "MBytes" }));
-        cb_tam_virt.setSelectedIndex(2);
+        cb_tam_virt.setSelectedIndex(1);
 
         jLabel5.setText("Configuración de TLB:");
 
@@ -604,6 +612,7 @@ public class Vista extends JPanel {
             }
         });
 
+        tam_linea_t.setText("4");
         tam_linea_t.setToolTipText("Tamaño de cada bloque.");
         tam_linea_t.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -615,6 +624,7 @@ public class Vista extends JPanel {
 
         n_entradas_c1_l.setText("Tamaño:");
 
+        n_entradas_c1_t.setText("16");
         n_entradas_c1_t.setToolTipText("Tamaño de la caché.");
         n_entradas_c1_t.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         n_entradas_c1_t.setName(""); // NOI18N
@@ -626,6 +636,7 @@ public class Vista extends JPanel {
 
         n_vias_c1_l.setText("Número de vías:");
 
+        n_vias_c1_t.setText("1");
         n_vias_c1_t.setToolTipText("Número de vías para cachés asociativas.");
         n_vias_c1_t.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -1143,6 +1154,7 @@ public class Vista extends JPanel {
         jLabel3.setText("Niveles de Cache Inst:");
 
         cb_tipo_tam_linea.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bytes", "Palabras" }));
+        cb_tipo_tam_linea.setSelectedIndex(1);
         cb_tipo_tam_linea.setToolTipText("");
 
         javax.swing.GroupLayout caches_pLayout = new javax.swing.GroupLayout(caches_p);
@@ -1416,7 +1428,7 @@ public class Vista extends JPanel {
 	int returnVal = chooser.showOpenDialog(this);
 	if(returnVal == JFileChooser.APPROVE_OPTION)
 	{
-		archivoTraza=chooser.getSelectedFile().toString();
+		archivoTraza = chooser.getSelectedFile().toString();
                 enabledValidarT();
 	}
     }//GEN-LAST:event_traza_carga_bActionPerformed
@@ -1428,21 +1440,6 @@ public class Vista extends JPanel {
     private void niv_cache_data_cbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_niv_cache_data_cbActionPerformed
         actualizarInterfazCache();
     }//GEN-LAST:event_niv_cache_data_cbActionPerformed
-
-    private void cargar_codigo_bActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargar_codigo_bActionPerformed
-        JFileChooser chooser= new JFileChooser();
-	FileNameExtensionFilter filtro = new FileNameExtensionFilter("" +
-			"*.txt","txt");
-	FileNameExtensionFilter filtro2 = new FileNameExtensionFilter("*.asm","asm");
-	chooser.setFileFilter(filtro2);
-	chooser.setFileFilter(filtro);
-	int returnVal = chooser.showOpenDialog(this);
-	if(returnVal == JFileChooser.APPROVE_OPTION)
-	{
-		archivoCodigo = chooser.getSelectedFile().toString();
-                enabledValidarC();
-	}
-    }//GEN-LAST:event_cargar_codigo_bActionPerformed
 
     private void cb_tipo_tlb_datosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tipo_tlb_datosActionPerformed
         // Nada
@@ -1479,10 +1476,6 @@ public class Vista extends JPanel {
     private void caches_separadas_cbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_caches_separadas_cbActionPerformed
         actualizarInterfazCache();
     }//GEN-LAST:event_caches_separadas_cbActionPerformed
-
-    private void cache_i3_bActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cache_i3_bActionPerformed
-        // Nada
-    }//GEN-LAST:event_cache_i3_bActionPerformed
 
     private void tlb_inst_chbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tlb_inst_chbActionPerformed
         enabledTLBInst(tlb_inst_chb.isSelected());
@@ -1578,6 +1571,29 @@ public class Vista extends JPanel {
     private void n_vias_c6_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_vias_c6_tFocusLost
         // TODO add your handling code here:
     }//GEN-LAST:event_n_vias_c6_tFocusLost
+
+    private void n_entradas_tlb_inst_tActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_n_entradas_tlb_inst_tActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_n_entradas_tlb_inst_tActionPerformed
+
+    private void cache_i3_bActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cache_i3_bActionPerformed
+        // Nada
+    }//GEN-LAST:event_cache_i3_bActionPerformed
+
+    private void cargar_codigo_bActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargar_codigo_bActionPerformed
+        JFileChooser chooser= new JFileChooser();
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("" +
+            "*.txt","txt");
+        FileNameExtensionFilter filtro2 = new FileNameExtensionFilter("*.asm","asm");
+        chooser.setFileFilter(filtro2);
+        chooser.setFileFilter(filtro);
+        int returnVal = chooser.showOpenDialog(this);
+        if(returnVal == JFileChooser.APPROVE_OPTION)
+        {
+            archivoCodigo = chooser.getSelectedFile().toString();
+            enabledValidarC();
+        }
+    }//GEN-LAST:event_cargar_codigo_bActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Configuracion;
@@ -1727,21 +1743,12 @@ public class Vista extends JPanel {
     
     public void controlador(ActionListener ctr)
     {
-    	/*niv_cache_data_cb.setActionCommand(Global.CBNCACHE);
-    	niv_cache_data_cb.addActionListener(ctr);
-    	tlb_data_chb.setActionCommand(Global.TLBDATA);
-    	tlb_data_chb.addActionListener(ctr);
-    	caches_separadas_cb.setActionCommand(Global.JSEP);
-    	caches_separadas_cb.addActionListener(ctr);
-    	niv_cache_inst_cb.setActionCommand(Global.CBNCACHEI);
-    	niv_cache_inst_cb.addActionListener(ctr);
-    	tlb_inst_chb.setActionCommand(Global.TLBINST);
     	tlb_inst_chb.addActionListener(ctr);
     	validar_c_b.setActionCommand(Global.VALC);
     	validar_c_b.addActionListener(ctr);
     	validar_t_b.setActionCommand(Global.VALT);
     	validar_t_b.addActionListener(ctr);
-    	cache_d1_b.setActionCommand(Global.BCACHED1);
+    	/*cache_d1_b.setActionCommand(Global.BCACHED1);
     	cache_d1_b.addActionListener(ctr);
     	cache_d2_b.setActionCommand(Global.BCACHED2);
     	cache_d2_b.addActionListener(ctr);
@@ -1752,7 +1759,7 @@ public class Vista extends JPanel {
     	cache_i2_b.setActionCommand(Global.BCACHEI2);
     	cache_i2_b.addActionListener(ctr);
     	cache_i3_b.setActionCommand(Global.BCACHEI3);
-    	cache_i3_b.addActionListener(ctr);
+    	cache_i3_b.addActionListener(ctr);*/
     	memoria_b.setActionCommand(Global.BMEM);
     	memoria_b.addActionListener(ctr);
     	ejecutar_b.setActionCommand(Global.EJECUTART);
@@ -1760,7 +1767,7 @@ public class Vista extends JPanel {
     	ejecutar_b1.setActionCommand(Global.EJECUTARC);
     	ejecutar_b1.addActionListener(ctr);
     	ciclo_b1.setActionCommand(Global.CICLO);
-    	ciclo_b1.addActionListener(ctr);*/
+    	ciclo_b1.addActionListener(ctr);
     }
     
     // Inicializar interfaz.
@@ -2342,18 +2349,30 @@ public class Vista extends JPanel {
     }
     public void resetTraza()
     {
-    	ejecucion_a.setText("");
+    	jTextPane1.setText("");
     }
     public void resetEjec()
     {
-    	ejecucion_a1.setText("");
+    	jTextPane1.setText("");
     }
     public String getTraza()
     {
-    	return ejecucion_a.getText();
+    	return jTextPane1.getText();
     }
     public String getEjec()
     {
-    	return ejecucion_a1.getText();
+    	return jTextPane1.getText();
     }
+
+
+	public String getArchivoCodigo()
+	{
+		return archivoCodigo;
+	}
+
+	public String getResultadoCodigo()
+	{
+		return resultadoCodigo;
+	}
+
 }
