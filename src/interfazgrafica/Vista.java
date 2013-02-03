@@ -339,6 +339,11 @@ public class Vista extends JPanel {
 
         m_entradas_p_pagina_t.setText("512");
         m_entradas_p_pagina_t.setToolTipText("Tamaño de página.");
+        m_entradas_p_pagina_t.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                m_entradas_p_pagina_tActionPerformed(evt);
+            }
+        });
         m_entradas_p_pagina_t.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 m_entradas_p_pagina_tFocusLost(evt);
@@ -1660,11 +1665,27 @@ public class Vista extends JPanel {
     }//GEN-LAST:event_pal_p_linea_tFocusLost
 
     private void m_entradas_p_pagina_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_m_entradas_p_pagina_tFocusLost
-        // TODO add your handling code here:
+        try
+        {
+            Integer.decode(m_entradas_p_pagina_t.getText());
+        }
+        catch(NumberFormatException e1)
+	{
+                m_entradas_p_pagina_t.setText("32");
+		JOptionPane.showMessageDialog( this, "Valor incorrecto, sólo se aceptan valores numéricos o hexadecimales comenzando por # o 0x.", "Error de formato", JOptionPane.ERROR_MESSAGE );
+	}
     }//GEN-LAST:event_m_entradas_p_pagina_tFocusLost
 
     private void m_tam_virt_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_m_tam_virt_tFocusLost
-        // TODO add your handling code here:
+        try
+        {
+            Integer.decode(m_tam_virt_t.getText());
+        }
+        catch(NumberFormatException e1)
+	{
+                m_tam_virt_t.setText("32");
+		JOptionPane.showMessageDialog( this, "Valor incorrecto, sólo se aceptan valores numéricos o hexadecimales comenzando por # o 0x.", "Error de formato", JOptionPane.ERROR_MESSAGE );
+	}
     }//GEN-LAST:event_m_tam_virt_tFocusLost
 
     private void n_entradas_tlb_data_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_entradas_tlb_data_tFocusLost
@@ -1868,6 +1889,10 @@ public class Vista extends JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_n_entradas_c4_tActionPerformed
 
+    private void m_entradas_p_pagina_tActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_entradas_p_pagina_tActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_m_entradas_p_pagina_tActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Configuracion;
     private javax.swing.JPanel cache1_i_p;
@@ -2021,7 +2046,7 @@ public class Vista extends JPanel {
     	validar_c_b.addActionListener(ctr);
     	validar_t_b.setActionCommand(Global.VALT);
     	validar_t_b.addActionListener(ctr);
-    	/*cache_d1_b.setActionCommand(Global.BCACHED1);
+    	cache_d1_b.setActionCommand(Global.BCACHED1);
     	cache_d1_b.addActionListener(ctr);
     	cache_d2_b.setActionCommand(Global.BCACHED2);
     	cache_d2_b.addActionListener(ctr);
@@ -2032,7 +2057,7 @@ public class Vista extends JPanel {
     	cache_i2_b.setActionCommand(Global.BCACHEI2);
     	cache_i2_b.addActionListener(ctr);
     	cache_i3_b.setActionCommand(Global.BCACHEI3);
-    	cache_i3_b.addActionListener(ctr);*/
+    	cache_i3_b.addActionListener(ctr);
     	memoria_b.setActionCommand(Global.BMEM);
     	memoria_b.addActionListener(ctr);
     	ejecutar_b.setActionCommand(Global.EJECUTART);
