@@ -633,6 +633,11 @@ public class Vista extends JPanel {
         n_entradas_c1_t.setToolTipText("Tamaño de la caché.");
         n_entradas_c1_t.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         n_entradas_c1_t.setName(""); // NOI18N
+        n_entradas_c1_t.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                n_entradas_c1_tActionPerformed(evt);
+            }
+        });
         n_entradas_c1_t.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 n_entradas_c1_tFocusLost(evt);
@@ -643,6 +648,7 @@ public class Vista extends JPanel {
 
         n_vias_c1_t.setText("1");
         n_vias_c1_t.setToolTipText("Número de vías para cachés asociativas.");
+        n_vias_c1_t.setEnabled(false);
         n_vias_c1_t.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 n_vias_c1_tFocusLost(evt);
@@ -653,6 +659,7 @@ public class Vista extends JPanel {
 
         politica_reemplazo_c1_cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "LRU", "LFU", "FIFO", "AGING", "RANDOM" }));
         politica_reemplazo_c1_cb.setToolTipText("Política de reemplazo para cachés asociativas.");
+        politica_reemplazo_c1_cb.setEnabled(false);
 
         cb_tam_cd1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bytes", "KBytes", "MBytes" }));
 
@@ -723,9 +730,15 @@ public class Vista extends JPanel {
 
         n_entradas_c2_l.setText("Tamaño:");
 
+        n_entradas_c2_t.setText("16");
         n_entradas_c2_t.setToolTipText("Tamaño de la caché.");
         n_entradas_c2_t.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         n_entradas_c2_t.setName(""); // NOI18N
+        n_entradas_c2_t.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                n_entradas_c2_tActionPerformed(evt);
+            }
+        });
         n_entradas_c2_t.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 n_entradas_c2_tFocusLost(evt);
@@ -736,6 +749,7 @@ public class Vista extends JPanel {
 
         n_vias_c2_t.setText("1");
         n_vias_c2_t.setToolTipText("Número de vías para cachés asociativas.");
+        n_vias_c2_t.setEnabled(false);
         n_vias_c2_t.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 n_vias_c2_tFocusLost(evt);
@@ -746,6 +760,7 @@ public class Vista extends JPanel {
 
         politica_reemplazo_c2_cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "LRU", "LFU", "FIFO", "AGING", "RANDOM" }));
         politica_reemplazo_c2_cb.setToolTipText("Política de reemplazo para cachés asociativas.");
+        politica_reemplazo_c2_cb.setEnabled(false);
 
         cb_tam_cd2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bytes", "KBytes", "MBytes" }));
 
@@ -816,9 +831,15 @@ public class Vista extends JPanel {
 
         n_entradas_c3_l.setText("Tamaño:");
 
+        n_entradas_c3_t.setText("16");
         n_entradas_c3_t.setToolTipText("Tamaño de la caché.");
         n_entradas_c3_t.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         n_entradas_c3_t.setName(""); // NOI18N
+        n_entradas_c3_t.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                n_entradas_c3_tActionPerformed(evt);
+            }
+        });
         n_entradas_c3_t.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 n_entradas_c3_tFocusLost(evt);
@@ -829,6 +850,7 @@ public class Vista extends JPanel {
 
         n_vias_c3_t.setText("1");
         n_vias_c3_t.setToolTipText("Número de vías para cachés asociativas.");
+        n_vias_c3_t.setEnabled(false);
         n_vias_c3_t.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 n_vias_c3_tFocusLost(evt);
@@ -839,6 +861,7 @@ public class Vista extends JPanel {
 
         politica_reemplazo_c3_cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "LRU", "LFU", "FIFO", "AGING", "RANDOM" }));
         politica_reemplazo_c3_cb.setToolTipText("Política de reemplazo para cachés asociativas.");
+        politica_reemplazo_c3_cb.setEnabled(false);
 
         cb_tam_cd3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bytes", "KBytes", "MBytes" }));
 
@@ -901,9 +924,15 @@ public class Vista extends JPanel {
 
         n_entradas_c4_l.setText("Tamaño:");
 
+        n_entradas_c4_t.setText("16");
         n_entradas_c4_t.setToolTipText("Tamaño de la caché.");
         n_entradas_c4_t.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         n_entradas_c4_t.setName(""); // NOI18N
+        n_entradas_c4_t.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                n_entradas_c4_tActionPerformed(evt);
+            }
+        });
         n_entradas_c4_t.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 n_entradas_c4_tFocusLost(evt);
@@ -914,6 +943,7 @@ public class Vista extends JPanel {
 
         n_vias_c4_t.setText("1");
         n_vias_c4_t.setToolTipText("Número de vías para cachés asociativas.");
+        n_vias_c4_t.setEnabled(false);
         n_vias_c4_t.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 n_vias_c4_tFocusLost(evt);
@@ -924,6 +954,7 @@ public class Vista extends JPanel {
 
         politica_reemplazo_c4_cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "LRU", "LFU", "FIFO", "AGING", "RANDOM" }));
         politica_reemplazo_c4_cb.setToolTipText("Política de reemplazo para cachés asociativas.");
+        politica_reemplazo_c4_cb.setEnabled(false);
 
         cb_tam_cd4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bytes", "KBytes", "MBytes" }));
 
@@ -986,6 +1017,7 @@ public class Vista extends JPanel {
 
         n_entradas_c5_l.setText("Tamaño:");
 
+        n_entradas_c5_t.setText("16");
         n_entradas_c5_t.setToolTipText("Tamaño de la caché.");
         n_entradas_c5_t.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         n_entradas_c5_t.setName(""); // NOI18N
@@ -999,6 +1031,7 @@ public class Vista extends JPanel {
 
         n_vias_c5_t.setText("1");
         n_vias_c5_t.setToolTipText("Número de vías para cachés asociativas.");
+        n_vias_c5_t.setEnabled(false);
         n_vias_c5_t.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 n_vias_c5_tFocusLost(evt);
@@ -1009,6 +1042,7 @@ public class Vista extends JPanel {
 
         politica_reemplazo_c5_cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "LRU", "LFU", "FIFO", "AGING", "RANDOM" }));
         politica_reemplazo_c5_cb.setToolTipText("Política de reemplazo para cachés asociativas.");
+        politica_reemplazo_c5_cb.setEnabled(false);
 
         cb_tam_cd5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bytes", "KBytes", "MBytes" }));
 
@@ -1071,6 +1105,7 @@ public class Vista extends JPanel {
 
         n_entradas_c6_l.setText("Tamaño:");
 
+        n_entradas_c6_t.setText("16");
         n_entradas_c6_t.setToolTipText("Tamaño de la caché.");
         n_entradas_c6_t.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         n_entradas_c6_t.setName(""); // NOI18N
@@ -1084,6 +1119,7 @@ public class Vista extends JPanel {
 
         n_vias_c6_t.setText("1");
         n_vias_c6_t.setToolTipText("Número de vías para cachés asociativas.");
+        n_vias_c6_t.setEnabled(false);
         n_vias_c6_t.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 n_vias_c6_tFocusLost(evt);
@@ -1094,6 +1130,7 @@ public class Vista extends JPanel {
 
         politica_reemplazo_c6_cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "LRU", "LFU", "FIFO", "AGING", "RANDOM" }));
         politica_reemplazo_c6_cb.setToolTipText("Política de reemplazo para cachés asociativas.");
+        politica_reemplazo_c6_cb.setEnabled(false);
 
         cb_tam_cd6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bytes", "KBytes", "MBytes" }));
 
@@ -1455,15 +1492,24 @@ public class Vista extends JPanel {
           if(cb_tipo_cd1.getSelectedIndex()==0)
           {
               n_vias_c1_t.setText("1");
+              n_vias_c1_t.setEnabled(false);
+              politica_reemplazo_c1_cb.setEnabled(false);
           }
           else if(cb_tipo_cd1.getSelectedIndex()==1)
           {
-              
+              n_vias_c1_t.setEnabled(true);
+              politica_reemplazo_c1_cb.setEnabled(true);
           }
           else
               
           {
-              
+              n_vias_c1_t.setEnabled(false);
+               
+               if(n_entradas_c1_t.getText()!=null)
+              {
+               n_vias_c1_t.setText(String.valueOf(getCD1NEntradas()));
+              }
+              politica_reemplazo_c1_cb.setEnabled(true);
           }
     }//GEN-LAST:event_cb_tipo_cd1ActionPerformed
 
@@ -1472,15 +1518,23 @@ public class Vista extends JPanel {
         if(cb_tipo_cd2.getSelectedIndex()==0)
           {
               n_vias_c2_t.setText("1");
+              n_vias_c2_t.setEnabled(false);
+              politica_reemplazo_c2_cb.setEnabled(false);
           }
           else if(cb_tipo_cd2.getSelectedIndex()==1)
           {
-              
+              n_vias_c2_t.setEnabled(true);
+              politica_reemplazo_c2_cb.setEnabled(true);
           }
           else
               
           {
-              
+              n_vias_c2_t.setEnabled(false);
+              if(n_entradas_c2_t.getText()!=null)
+              {
+               n_vias_c2_t.setText(String.valueOf(getCD2NEntradas()));
+              }
+              politica_reemplazo_c2_cb.setEnabled(true);
           }
     }//GEN-LAST:event_cb_tipo_cd2ActionPerformed
 
@@ -1488,15 +1542,24 @@ public class Vista extends JPanel {
            if(cb_tipo_cd3.getSelectedIndex()==0)
           {
               n_vias_c3_t.setText("1");
+              n_vias_c3_t.setEnabled(false);
+              politica_reemplazo_c3_cb.setEnabled(false);
           }
           else if(cb_tipo_cd3.getSelectedIndex()==1)
           {
-              
+              n_vias_c3_t.setEnabled(true);
+              politica_reemplazo_c3_cb.setEnabled(true);
           }
           else
               
           {
+              n_vias_c3_t.setEnabled(false);
+              if(n_entradas_c3_t.getText()!=null)
+              {
+               n_vias_c3_t.setText(String.valueOf(getCD3NEntradas()));
+              }
               
+              politica_reemplazo_c3_cb.setEnabled(true);
           }        // Nada
     }//GEN-LAST:event_cb_tipo_cd3ActionPerformed
 
@@ -1504,15 +1567,23 @@ public class Vista extends JPanel {
         if(cb_tipo_cd4.getSelectedIndex()==0)
           {
               n_vias_c4_t.setText("1");
+              n_vias_c4_t.setEnabled(false);
+              politica_reemplazo_c4_cb.setEnabled(false);
           }
           else if(cb_tipo_cd4.getSelectedIndex()==1)
           {
-              
+              n_vias_c4_t.setEnabled(true);
+              politica_reemplazo_c4_cb.setEnabled(true);
           }
           else
               
           {
-              
+              n_vias_c4_t.setEnabled(false);
+              if(n_entradas_c4_t.getText()!=null)
+              {
+               n_vias_c4_t.setText(String.valueOf(getCI1NEntradas()));
+              }
+              politica_reemplazo_c4_cb.setEnabled(true);
           }
     }//GEN-LAST:event_cb_tipo_cd4ActionPerformed
 
@@ -1520,15 +1591,23 @@ public class Vista extends JPanel {
         if(cb_tipo_cd5.getSelectedIndex()==0)
           {
               n_vias_c5_t.setText("1");
+              n_vias_c5_t.setEnabled(false);
+              politica_reemplazo_c5_cb.setEnabled(false);
           }
           else if(cb_tipo_cd5.getSelectedIndex()==1)
           {
-              
+              n_vias_c5_t.setEnabled(true);
+              politica_reemplazo_c5_cb.setEnabled(true);
           }
           else
               
           {
-              
+              n_vias_c5_t.setEnabled(false);
+              if(n_entradas_c5_t.getText()!=null)
+              {
+               n_vias_c5_t.setText(String.valueOf(getCI2NEntradas()));
+              }
+              politica_reemplazo_c5_cb.setEnabled(true);
           }
     }//GEN-LAST:event_cb_tipo_cd5ActionPerformed
 
@@ -1536,15 +1615,23 @@ public class Vista extends JPanel {
         if(cb_tipo_cd6.getSelectedIndex()==0)
           {
               n_vias_c6_t.setText("1");
+              n_vias_c6_t.setEnabled(false);
+              politica_reemplazo_c6_cb.setEnabled(false);
           }
           else if(cb_tipo_cd6.getSelectedIndex()==1)
           {
-              
+              n_vias_c6_t.setEnabled(true);
+              politica_reemplazo_c6_cb.setEnabled(true);
           }
           else
               
           {
-              
+              n_vias_c6_t.setEnabled(false);
+              if(n_entradas_c6_t.getText()!=null)
+              {
+               n_vias_c6_t.setText(String.valueOf(getCI3NEntradas()));
+              }
+              politica_reemplazo_c6_cb.setEnabled(true);
           }
     }//GEN-LAST:event_cb_tipo_cd6ActionPerformed
 
@@ -1563,6 +1650,7 @@ public class Vista extends JPanel {
         }
         catch(NumberFormatException e1)
 	{
+                m_tam_memp_t.setText("32");
 		JOptionPane.showMessageDialog( this, "Valor incorrecto, sólo se aceptan valores numéricos o hexadecimales comenzando por # o 0x.", "Error de formato", JOptionPane.ERROR_MESSAGE );
 	}
     }//GEN-LAST:event_m_tam_memp_tFocusLost
@@ -1600,7 +1688,23 @@ public class Vista extends JPanel {
     }//GEN-LAST:event_tam_linea_tFocusLost
 
     private void n_entradas_c1_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_entradas_c1_tFocusLost
-        // TODO add your handling code here:
+        
+        try
+        {
+           if (cb_tipo_cd1.getSelectedIndex() == 2)
+        {
+            // Escribimos en número de vías el mismo número que en este campo.
+            // El campo número de vías se supone que ya está desactivado (no se puede editar).
+            n_vias_c1_t.setText(String.valueOf(getCD1NEntradas()));
+        }
+        }
+        catch(NumberFormatException e1)
+	{
+               n_entradas_c1_t.setText("16");
+               n_vias_c1_t.setText(String.valueOf(getCD1NEntradas()));
+		JOptionPane.showMessageDialog( this, "Valor incorrecto, sólo se aceptan valores numéricos o hexadecimales comenzando por # o 0x.", "Error de formato", JOptionPane.ERROR_MESSAGE );
+	}
+        
     }//GEN-LAST:event_n_entradas_c1_tFocusLost
 
     private void n_vias_c1_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_vias_c1_tFocusLost
@@ -1608,7 +1712,22 @@ public class Vista extends JPanel {
     }//GEN-LAST:event_n_vias_c1_tFocusLost
 
     private void n_entradas_c2_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_entradas_c2_tFocusLost
-        // TODO add your handling code here:
+        
+        try
+        {
+            if (cb_tipo_cd2.getSelectedIndex() == 2)
+        {
+            // Escribimos en número de vías el mismo número que en este campo.
+            // El campo número de vías se supone que ya está desactivado (no se puede editar).
+            n_vias_c2_t.setText(String.valueOf(getCD2NEntradas()));
+        }
+        }
+        catch(NumberFormatException e1)
+	{
+               n_entradas_c2_t.setText("16");
+               n_vias_c2_t.setText(String.valueOf(getCD2NEntradas()));
+		JOptionPane.showMessageDialog( this, "Valor incorrecto, sólo se aceptan valores numéricos o hexadecimales comenzando por # o 0x.", "Error de formato", JOptionPane.ERROR_MESSAGE );
+	}
     }//GEN-LAST:event_n_entradas_c2_tFocusLost
 
     private void n_vias_c2_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_vias_c2_tFocusLost
@@ -1618,12 +1737,22 @@ public class Vista extends JPanel {
     private void n_entradas_c3_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_entradas_c3_tFocusLost
         
         // Si está seleccionada "Completamente asociativa".
-        if (cb_tipo_cd3.getSelectedIndex() == 2)
+        
+        try
+        {
+            if (cb_tipo_cd3.getSelectedIndex() == 2)
         {
             // Escribimos en número de vías el mismo número que en este campo.
             // El campo número de vías se supone que ya está desactivado (no se puede editar).
-            n_vias_c3_t.setText(String.valueOf(getCD3NEntradas()));
+            
         }
+        }
+        catch(NumberFormatException e1)
+	{
+               n_entradas_c3_t.setText("16");
+               n_vias_c3_t.setText(String.valueOf(getCD3NEntradas()));
+		JOptionPane.showMessageDialog( this, "Valor incorrecto, sólo se aceptan valores numéricos o hexadecimales comenzando por # o 0x.", "Error de formato", JOptionPane.ERROR_MESSAGE );
+	}
     }//GEN-LAST:event_n_entradas_c3_tFocusLost
 
     private void n_vias_c3_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_vias_c3_tFocusLost
@@ -1632,6 +1761,22 @@ public class Vista extends JPanel {
 
     private void n_entradas_c4_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_entradas_c4_tFocusLost
         // TODO add your handling code here:
+        
+        try
+        {
+            if (cb_tipo_cd4.getSelectedIndex() == 2)
+        {
+            // Escribimos en número de vías el mismo número que en este campo.
+            // El campo número de vías se supone que ya está desactivado (no se puede editar).
+            n_vias_c4_t.setText(String.valueOf(getCI1NEntradas()));
+        }
+        }
+        catch(NumberFormatException e1)
+	{
+               n_entradas_c4_t.setText("16");
+               n_vias_c4_t.setText(String.valueOf(getCI1NEntradas()));
+		JOptionPane.showMessageDialog( this, "Valor incorrecto, sólo se aceptan valores numéricos o hexadecimales comenzando por # o 0x.", "Error de formato", JOptionPane.ERROR_MESSAGE );
+	}
     }//GEN-LAST:event_n_entradas_c4_tFocusLost
 
     private void n_vias_c4_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_vias_c4_tFocusLost
@@ -1639,7 +1784,22 @@ public class Vista extends JPanel {
     }//GEN-LAST:event_n_vias_c4_tFocusLost
 
     private void n_entradas_c5_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_entradas_c5_tFocusLost
-        // TODO add your handling code here:
+       
+       try
+        {
+           if (cb_tipo_cd5.getSelectedIndex() == 2)
+        {
+            // Escribimos en número de vías el mismo número que en este campo.
+            // El campo número de vías se supone que ya está desactivado (no se puede editar).
+            
+        }
+        }
+        catch(NumberFormatException e1)
+	{
+               n_entradas_c5_t.setText("16");
+               n_vias_c5_t.setText(String.valueOf(getCI2NEntradas()));
+		JOptionPane.showMessageDialog( this, "Valor incorrecto, sólo se aceptan valores numéricos o hexadecimales comenzando por # o 0x.", "Error de formato", JOptionPane.ERROR_MESSAGE );
+	}
     }//GEN-LAST:event_n_entradas_c5_tFocusLost
 
     private void n_vias_c5_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_vias_c5_tFocusLost
@@ -1647,7 +1807,22 @@ public class Vista extends JPanel {
     }//GEN-LAST:event_n_vias_c5_tFocusLost
 
     private void n_entradas_c6_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_entradas_c6_tFocusLost
-        // TODO add your handling code here:
+        
+        try
+        {
+            if (cb_tipo_cd6.getSelectedIndex() == 2)
+        {
+            // Escribimos en número de vías el mismo número que en este campo.
+            // El campo número de vías se supone que ya está desactivado (no se puede editar).
+            n_vias_c6_t.setText(String.valueOf(getCI3NEntradas()));
+        }
+        }
+        catch(NumberFormatException e1)
+	{
+               n_entradas_c6_t.setText("16");
+               n_vias_c6_t.setText(String.valueOf(getCI3NEntradas()));
+		JOptionPane.showMessageDialog( this, "Valor incorrecto, sólo se aceptan valores numéricos o hexadecimales comenzando por # o 0x.", "Error de formato", JOptionPane.ERROR_MESSAGE );
+	}
     }//GEN-LAST:event_n_entradas_c6_tFocusLost
 
     private void n_vias_c6_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_vias_c6_tFocusLost
@@ -1676,6 +1851,22 @@ public class Vista extends JPanel {
             enabledValidarC();
         }
     }//GEN-LAST:event_cargar_codigo_bActionPerformed
+
+    private void n_entradas_c1_tActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_n_entradas_c1_tActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_n_entradas_c1_tActionPerformed
+
+    private void n_entradas_c3_tActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_n_entradas_c3_tActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_n_entradas_c3_tActionPerformed
+
+    private void n_entradas_c2_tActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_n_entradas_c2_tActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_n_entradas_c2_tActionPerformed
+
+    private void n_entradas_c4_tActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_n_entradas_c4_tActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_n_entradas_c4_tActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Configuracion;
