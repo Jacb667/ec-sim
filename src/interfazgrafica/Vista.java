@@ -2476,5 +2476,13 @@ public class Vista extends JPanel {
 	{
 		return resultadoCodigo;
 	}
+	public String getArchivoTraza()
+	{
+		return archivoTraza;
+	}
+	public String getResultadoTraza()
+	{
+		return resultadoTraza;
+	}
 
 }
