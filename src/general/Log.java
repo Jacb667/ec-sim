@@ -355,11 +355,11 @@ public class Log {
 			if(Config.getVista()!=null)
 			{
 				if (Config.ejecutando_codigo)
-					Config.getVista().resEjec("---------------------------------\n", null);
+					Config.getVista().resEjec("----------------------------------------\n", null);
 				else
-					Config.getVista().resTraza("---------------------------------\n", null);
+					Config.getVista().resTraza("----------------------------------------\n", null);
 			}
-			System.out.println("---------------------------------\n");
+			System.out.println("----------------------------------------\n");
 	}
 	
 	public static void errorln(int n, String s)

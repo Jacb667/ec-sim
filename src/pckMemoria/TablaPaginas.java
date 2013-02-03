@@ -33,6 +33,9 @@ public class TablaPaginas {
 	
 	public PoliticaReemplazo politica;
 	
+	private int registroTablaPaginas;
+	private boolean tablaPagsEnMemoria = true;
+	
 	// Esta clase contiene todas las páginas.
 	// Cada página contendrá su porción de memoria y si está en ella o no.
 	// Cada página se direcciona según dirección VIRTUAL.
@@ -88,6 +91,43 @@ public class TablaPaginas {
 		
 		// La política sólo tendrá 1 entrada, con el número de marcos que hay.
 		politica = new PoliticaReemplazo(_Tpolitica, 1, marcos.length);
+	}
+	
+	public void generarPaginasTablas(int direccion) throws MemoryException
+	{
+		int numPags = (int) Math.ceil(num_paginas / entradas_pagina);
+		Pagina[] res = new Pagina[numPags];
+		System.out.println("PV = " + numPags);
+		for (int i = 0; i < numPags; i++)
+		{
+			Pagina nueva = crearPagina(direccion);
+			res[i] = nueva;
+		}
+		
+		insertarPaginasTabla(res);
+		
+		int primer_marco = num_marcos - numPags;
+		registroTablaPaginas = primer_marco * entradas_pagina * 4;
+		
+		for (int i = 0; i < numPags; i++)
+			asignarPaginaMarco(res[i], primer_marco+i);
+	}
+	
+	private void insertarPaginasTabla(Pagina[] pags)
+	{
+		for (int i = 0; i < num_paginas; i++)
+		{
+			int pagina = (int) Math.ceil(i / entradas_pagina);
+			int dato = 0;
+			if (paginas.get(i) != null)
+			{
+				dato = paginas.get(i).getMarco();
+				dato = dato | 0x80000000;
+				if (paginas.get(i).esDirty())
+					dato = dato | 0x40000000;
+			}
+			pags[pagina].guardarLinea((i % entradas_pagina) * bytes_palabra, new int[]{dato});
+		}
 	}
 	
 	// Crea una página nueva.
@@ -195,6 +235,14 @@ public class TablaPaginas {
 					Log.println(2,"TLB MISS");
 				}
 			}
+			
+			// Comprobamos la tabla de páginas.
+			if (tablaPagsEnMemoria)
+			{
+				int dirPag = registroTablaPaginas + pag.getId()*4;
+				System.out.println(">>> Se accede a leer la posición " + dirPag + " para traducir.");
+			}
+			
 			// Es PAGE FAULT
 			Log.report(Flags.PAGE_FAULT, secundaria);
 			Log.println(2,"PAGE FAULT");

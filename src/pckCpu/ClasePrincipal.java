@@ -58,6 +58,7 @@ public class ClasePrincipal {
 	
 	private CpuMonociclo cpu;
 	private int direccion_inst = 0;
+	private int direccion_tablPags = 0;
 	
 	private int niveles_cache1;
 	private int niveles_cache2;
@@ -119,6 +120,7 @@ public class ClasePrincipal {
 			inicializarMemoria();
 			inicializarInterfaz();
 			inicializarCpu();
+			tablaPags.generarPaginasTablas(direccion_tablPags);
 			
 			// Guardo las instrucciones en memoria.
 			for (Instruccion inst : Decoder.getInstrucciones())
@@ -233,7 +235,6 @@ public class ClasePrincipal {
 			e.printStackTrace();
 		}
 		
-		
 		traza=new Traza(jmem,jmem2);
 	}
 	
@@ -302,7 +303,9 @@ public class ClasePrincipal {
 	{
 		// Calculo la dirección de memoria para instrucciones.
 		int num_instrucciones = Decoder.getInstrucciones().size();
-		int paginas_instrucciones = (int) Math.ceil(num_instrucciones / entradas_pagina);
+		int paginas_instrucciones = (int) Math.ceil(((float)num_instrucciones / (float)entradas_pagina));
+		int num_paginas = max_entrada / entradas_pagina;
+		int paginas_tablaPags = (int) Math.ceil(((float)num_paginas / (float)entradas_pagina));
 		
 		if (tablaPags.getNumeroPaginas() == 1)
 		{
@@ -314,7 +317,13 @@ public class ClasePrincipal {
 		}
 		else
 		{
-			int primera_pag_inst = tablaPags.getNumeroPaginas()-1 - paginas_instrucciones;
+			//if (tablaEnMemoria)
+			//{
+			int primera_pag_tabla = tablaPags.getNumeroPaginas()-1 - paginas_tablaPags;
+			direccion_tablPags = primera_pag_tabla * tablaPags.getEntradasPagina() * 4;
+			//}
+			
+			int primera_pag_inst = primera_pag_tabla - paginas_instrucciones;
 			direccion_inst = primera_pag_inst * tablaPags.getEntradasPagina() * 4;
 		}
 		
@@ -428,7 +437,7 @@ public class ClasePrincipal {
 		System.out.println("Validando 11");
 		//UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		
-		/*tablaMemoria = new Tabla(memoria);
+		tablaMemoria = new Tabla(memoria);
 		frameMemoria = new VentanaLimitada();
 		System.out.println("Validando 12");
 		JScrollPane jscroll1 = new JScrollPane(tablaMemoria, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -443,7 +452,7 @@ public class ClasePrincipal {
 		System.out.println("Validando 14");
 		frameMemoria.setVisible(false);
 		memoria.setInterfaz(tablaMemoria);
-		System.out.println("Validando 12");*/
+		System.out.println("Validando 12");
 		
 		
 		tablasCache1 = new Tabla[niveles_cache1];
