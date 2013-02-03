@@ -767,7 +767,6 @@
                         <Property name="toolTipText" type="java.lang.String" value="Tama&#xf1;o de cada bloque."/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tam_linea_tActionPerformed"/>
                         <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tam_linea_tFocusLost"/>
                       </Events>
                     </Component>
@@ -867,7 +866,7 @@
                                 <Property name="text" type="java.lang.String" value="16"/>
                                 <Property name="toolTipText" type="java.lang.String" value="Tama&#xf1;o de la cach&#xe9;."/>
                                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                                  <Color id="Cursor Por defecto"/>
+                                  <Color id="Default Cursor"/>
                                 </Property>
                                 <Property name="name" type="java.lang.String" value="" noResource="true"/>
                               </Properties>
@@ -1027,7 +1026,7 @@
                               <Properties>
                                 <Property name="toolTipText" type="java.lang.String" value="Tama&#xf1;o de la cach&#xe9;."/>
                                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                                  <Color id="Cursor Por defecto"/>
+                                  <Color id="Default Cursor"/>
                                 </Property>
                                 <Property name="name" type="java.lang.String" value="" noResource="true"/>
                               </Properties>
@@ -1175,7 +1174,7 @@
                               <Properties>
                                 <Property name="toolTipText" type="java.lang.String" value="Tama&#xf1;o de la cach&#xe9;."/>
                                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                                  <Color id="Cursor Por defecto"/>
+                                  <Color id="Default Cursor"/>
                                 </Property>
                                 <Property name="name" type="java.lang.String" value="" noResource="true"/>
                               </Properties>
@@ -1323,7 +1322,7 @@
                               <Properties>
                                 <Property name="toolTipText" type="java.lang.String" value="Tama&#xf1;o de la cach&#xe9;."/>
                                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                                  <Color id="Cursor Por defecto"/>
+                                  <Color id="Default Cursor"/>
                                 </Property>
                                 <Property name="name" type="java.lang.String" value="" noResource="true"/>
                               </Properties>
@@ -1471,7 +1470,7 @@
                               <Properties>
                                 <Property name="toolTipText" type="java.lang.String" value="Tama&#xf1;o de la cach&#xe9;."/>
                                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                                  <Color id="Cursor Por defecto"/>
+                                  <Color id="Default Cursor"/>
                                 </Property>
                                 <Property name="name" type="java.lang.String" value="" noResource="true"/>
                               </Properties>
@@ -1619,7 +1618,7 @@
                               <Properties>
                                 <Property name="toolTipText" type="java.lang.String" value="Tama&#xf1;o de la cach&#xe9;."/>
                                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                                  <Color id="Cursor Por defecto"/>
+                                  <Color id="Default Cursor"/>
                                 </Property>
                                 <Property name="name" type="java.lang.String" value="" noResource="true"/>
                               </Properties>
@@ -1638,7 +1637,6 @@
                                 <Property name="toolTipText" type="java.lang.String" value="N&#xfa;mero de v&#xed;as para cach&#xe9;s asociativas."/>
                               </Properties>
                               <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="n_vias_c6_tActionPerformed"/>
                                 <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="n_vias_c6_tFocusLost"/>
                               </Events>
                             </Component>
