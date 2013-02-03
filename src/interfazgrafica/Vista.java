@@ -619,6 +619,11 @@ public class Vista extends JPanel {
 
         tam_linea_t.setText("4");
         tam_linea_t.setToolTipText("Tamaño de cada bloque.");
+        tam_linea_t.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tam_linea_tActionPerformed(evt);
+            }
+        });
         tam_linea_t.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 tam_linea_tFocusLost(evt);
@@ -631,7 +636,7 @@ public class Vista extends JPanel {
 
         n_entradas_c1_t.setText("16");
         n_entradas_c1_t.setToolTipText("Tamaño de la caché.");
-        n_entradas_c1_t.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        n_entradas_c1_t.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         n_entradas_c1_t.setName(""); // NOI18N
         n_entradas_c1_t.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -724,7 +729,7 @@ public class Vista extends JPanel {
         n_entradas_c2_l.setText("Tamaño:");
 
         n_entradas_c2_t.setToolTipText("Tamaño de la caché.");
-        n_entradas_c2_t.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        n_entradas_c2_t.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         n_entradas_c2_t.setName(""); // NOI18N
         n_entradas_c2_t.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -734,6 +739,7 @@ public class Vista extends JPanel {
 
         n_vias_c2_l.setText("Número de vías:");
 
+        n_vias_c2_t.setText("1");
         n_vias_c2_t.setToolTipText("Número de vías para cachés asociativas.");
         n_vias_c2_t.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -816,7 +822,7 @@ public class Vista extends JPanel {
         n_entradas_c3_l.setText("Tamaño:");
 
         n_entradas_c3_t.setToolTipText("Tamaño de la caché.");
-        n_entradas_c3_t.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        n_entradas_c3_t.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         n_entradas_c3_t.setName(""); // NOI18N
         n_entradas_c3_t.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -826,6 +832,7 @@ public class Vista extends JPanel {
 
         n_vias_c3_l.setText("Número de vías:");
 
+        n_vias_c3_t.setText("1");
         n_vias_c3_t.setToolTipText("Número de vías para cachés asociativas.");
         n_vias_c3_t.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -900,7 +907,7 @@ public class Vista extends JPanel {
         n_entradas_c4_l.setText("Tamaño:");
 
         n_entradas_c4_t.setToolTipText("Tamaño de la caché.");
-        n_entradas_c4_t.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        n_entradas_c4_t.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         n_entradas_c4_t.setName(""); // NOI18N
         n_entradas_c4_t.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -910,6 +917,7 @@ public class Vista extends JPanel {
 
         n_vias_c4_l.setText("Número de vías:");
 
+        n_vias_c4_t.setText("1");
         n_vias_c4_t.setToolTipText("Número de vías para cachés asociativas.");
         n_vias_c4_t.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -984,7 +992,7 @@ public class Vista extends JPanel {
         n_entradas_c5_l.setText("Tamaño:");
 
         n_entradas_c5_t.setToolTipText("Tamaño de la caché.");
-        n_entradas_c5_t.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        n_entradas_c5_t.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         n_entradas_c5_t.setName(""); // NOI18N
         n_entradas_c5_t.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -994,6 +1002,7 @@ public class Vista extends JPanel {
 
         n_vias_c5_l.setText("Número de vías:");
 
+        n_vias_c5_t.setText("1");
         n_vias_c5_t.setToolTipText("Número de vías para cachés asociativas.");
         n_vias_c5_t.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -1068,7 +1077,7 @@ public class Vista extends JPanel {
         n_entradas_c6_l.setText("Tamaño:");
 
         n_entradas_c6_t.setToolTipText("Tamaño de la caché.");
-        n_entradas_c6_t.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        n_entradas_c6_t.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         n_entradas_c6_t.setName(""); // NOI18N
         n_entradas_c6_t.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -1078,7 +1087,13 @@ public class Vista extends JPanel {
 
         n_vias_c6_l.setText("Número de vías:");
 
+        n_vias_c6_t.setText("1");
         n_vias_c6_t.setToolTipText("Número de vías para cachés asociativas.");
+        n_vias_c6_t.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                n_vias_c6_tActionPerformed(evt);
+            }
+        });
         n_vias_c6_t.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 n_vias_c6_tFocusLost(evt);
@@ -1447,27 +1462,100 @@ public class Vista extends JPanel {
     }//GEN-LAST:event_cb_tipo_tlb_instActionPerformed
 
     private void cb_tipo_cd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tipo_cd1ActionPerformed
-        // Nada
+          if(cb_tipo_cd1.getSelectedIndex()==0)
+          {
+              n_vias_c1_t.setText("1");
+          }
+          else if(cb_tipo_cd1.getSelectedIndex()==1)
+          {
+              
+          }
+          else
+              
+          {
+              
+          }
     }//GEN-LAST:event_cb_tipo_cd1ActionPerformed
 
     private void cb_tipo_cd2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tipo_cd2ActionPerformed
-        // Nada
+        
+        if(cb_tipo_cd2.getSelectedIndex()==0)
+          {
+              n_vias_c2_t.setText("1");
+          }
+          else if(cb_tipo_cd2.getSelectedIndex()==1)
+          {
+              
+          }
+          else
+              
+          {
+              
+          }
     }//GEN-LAST:event_cb_tipo_cd2ActionPerformed
 
     private void cb_tipo_cd3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tipo_cd3ActionPerformed
-        // Nada
+           if(cb_tipo_cd3.getSelectedIndex()==0)
+          {
+              n_vias_c3_t.setText("1");
+          }
+          else if(cb_tipo_cd3.getSelectedIndex()==1)
+          {
+              
+          }
+          else
+              
+          {
+              
+          }        // Nada
     }//GEN-LAST:event_cb_tipo_cd3ActionPerformed
 
     private void cb_tipo_cd4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tipo_cd4ActionPerformed
-        // Nada
+        if(cb_tipo_cd4.getSelectedIndex()==0)
+          {
+              n_vias_c4_t.setText("1");
+          }
+          else if(cb_tipo_cd4.getSelectedIndex()==1)
+          {
+              
+          }
+          else
+              
+          {
+              
+          }
     }//GEN-LAST:event_cb_tipo_cd4ActionPerformed
 
     private void cb_tipo_cd5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tipo_cd5ActionPerformed
-        // Nada
+        if(cb_tipo_cd5.getSelectedIndex()==0)
+          {
+              n_vias_c5_t.setText("1");
+          }
+          else if(cb_tipo_cd5.getSelectedIndex()==1)
+          {
+              
+          }
+          else
+              
+          {
+              
+          }
     }//GEN-LAST:event_cb_tipo_cd5ActionPerformed
 
     private void cb_tipo_cd6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tipo_cd6ActionPerformed
-        // Nada
+        if(cb_tipo_cd6.getSelectedIndex()==0)
+          {
+              n_vias_c6_t.setText("1");
+          }
+          else if(cb_tipo_cd6.getSelectedIndex()==1)
+          {
+              
+          }
+          else
+              
+          {
+              
+          }
     }//GEN-LAST:event_cb_tipo_cd6ActionPerformed
 
     private void caches_separadas_cbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_caches_separadas_cbActionPerformed
