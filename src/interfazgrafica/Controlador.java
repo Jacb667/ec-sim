@@ -429,7 +429,7 @@ public class Controlador implements ActionListener {
 				claseP.ejecutarCicloCodigo();
 		}
 		// A PARTIR DE AQUI LOS BOTONES DE CACHES Y MEM-----------------------------------------------------------------------------------------------
-		/*else if(comando.equals(Global.BCACHED1))
+		else if(comando.equals(Global.BCACHED1))
 		{
 			if (claseP != null && claseP.framesCache1[0] != null)
 				claseP.framesCache1[0].setVisible(true);
@@ -463,7 +463,7 @@ public class Controlador implements ActionListener {
 		{
 			if (claseP != null && claseP.frameMemoria != null)
 				claseP.frameMemoria.setVisible(true);
-		}*/
+		}
 		
 	}
 	private String bfOn() throws IOException

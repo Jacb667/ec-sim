@@ -330,6 +330,7 @@
                         <Property name="toolTipText" type="java.lang.String" value="Tama&#xf1;o de p&#xe1;gina."/>
                       </Properties>
                       <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="m_entradas_p_pagina_tActionPerformed"/>
                         <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="m_entradas_p_pagina_tFocusLost"/>
                       </Events>
                     </Component>
