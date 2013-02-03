@@ -161,9 +161,9 @@ public class Controlador implements ActionListener {
 				e1.printStackTrace();
 			}
 		}
-		/*else if(comando.equals(Global.VALT))
+		else if(comando.equals(Global.VALT))
 		{
-			//COMPLETO(?)-----TERMINAR PARA EJECUCION
+			/*/COMPLETO(?)-----TERMINAR PARA EJECUCION
 			try
 			{
 				Config.ejecutando_codigo = false;
@@ -261,7 +261,130 @@ public class Controlador implements ActionListener {
 			//claseP.validarCodigo();
 			 
 		}*/
-		/*else if(comando.equals(Global.EJECUTART))
+			try
+			{
+				Config.ejecutando_codigo = true;
+				Config.set(Conf_Type.TAMAÑO_PALABRA,v.getTamPal());
+				Config.set(Conf_Type.NIVEL_JERARQUIAS_SEPARADAS,v.cacheSepNivel());
+				Config.set(Conf_Type.ENTRADAS_PAGINA,v.getEntradasPagina());
+				Config.set(Conf_Type.NUMERO_ENTRADAS_MEMORIA, v.getEntradasMemP());
+				Config.set(Conf_Type.MAXIMA_ENTRADA_MEMORIA,v.getMaxEntradasVirt());
+				error = 1;
+				
+				if (v.getEntradasMemP() > 16384)
+					JOptionPane.showMessageDialog( v, "Aviso, no se puede mostrar la memoria si tiene más de " + 16384 + " entradas.", "Advertencia", JOptionPane.WARNING_MESSAGE );	
+				
+				if(v.tlbDataCheck())
+					Config.set(Conf_Type.TLB_DATOS, 1);
+				else
+					Config.set(Conf_Type.TLB_DATOS, 0);
+				
+				if(v.tlbInstCheck())
+					Config.set(Conf_Type.TLB_INSTRUCCIONES, 1);
+				else
+					Config.set(Conf_Type.TLB_INSTRUCCIONES, 0);
+				
+				if(v.tlbDataCheck())
+				{
+					 Config.set(Conf_Type.TLB_DATOS_ENTRADAS, v.getTLBDNumEntradas());
+					 Config.set(Conf_Type.TLB_DATOS_VIAS, v.getTLBDNumVias());
+					 Config.set(Conf_Type_c.TLB_DATOS_POLITICA, v.getPRTLBD());
+				}			 
+				if(v.tlbInstCheck())
+				{
+					 Config.set(Conf_Type.TLB_INSTRUCCIONES_ENTRADAS, v.getTLBINumEntradas());
+					 Config.set(Conf_Type.TLB_INSTRUCCIONES_VIAS, v.getTLBINumVias());
+					 Config.set(Conf_Type_c.TLB_INSTRUCCIONES_POLITICA, v.getPRTLBI());
+				}
+				error = 2;
+
+				Config.set(Conf_Type.NIVELES_CACHE_DATOS,v.getnvCacheD());
+				Config.set(Conf_Type.NIVELES_CACHE_INSTRUCCIONES,v.getnvCacheI());
+				Config.set(Conf_Type.TAMAÑO_LINEA, v.getTamLinea());
+				Config.set(Conf_Type.CACHE1_DATOS_ENTRADAS,v.getCD1NEntradas());
+				Config.set(Conf_Type.CACHE1_DATOS_VIAS,v.getCD1NVias());
+				Config.set(Conf_Type_c.CACHE1_DATOS_POLITICA,v.getPRCD1());
+				error = 3;
+				
+				if(v.getnvCacheD()>=2)
+				{
+					Config.set(Conf_Type.CACHE2_DATOS_ENTRADAS,v.getCD2NEntradas());
+					Config.set(Conf_Type.CACHE2_DATOS_VIAS,v.getCD2NVias());
+					Config.set(Conf_Type_c.CACHE2_DATOS_POLITICA,v.getPRCD2());
+				}
+				error = 4;
+				
+				if(v.getnvCacheD()==3)
+				{
+					Config.set(Conf_Type.CACHE3_DATOS_ENTRADAS,v.getCD3NEntradas());
+					Config.set(Conf_Type.CACHE3_DATOS_VIAS,v.getCD3NVias());
+					Config.set(Conf_Type_c.CACHE3_DATOS_POLITICA,v.getPRCD3());
+				}
+				error = 5;
+			
+				if(v.cacheSepNivel() > 1 && v.cacheSepNivel()>1)
+				{
+					Config.set(Conf_Type.CACHE1_INSTRUCCIONES_ENTRADAS, v.getCI1NEntradas());
+					Config.set(Conf_Type.CACHE1_INSTRUCCIONES_VIAS,v.getCI1NVias());
+					Config.set(Conf_Type_c.CACHE1_INSTRUCCIONES_POLITICA,v.getPRCI1());
+				}
+				error = 6;
+				
+				if(v.cacheSepNivel() > 2 && v.getnvCacheI()>=2)
+				{
+					Config.set(Conf_Type.CACHE2_INSTRUCCIONES_ENTRADAS, v.getCI2NEntradas());
+					Config.set(Conf_Type.CACHE2_INSTRUCCIONES_VIAS,v.getCI2NVias());
+					Config.set(Conf_Type_c.CACHE2_INSTRUCCIONES_POLITICA,v.getPRCI2());
+				}
+				error = 7;
+				
+				if(v.cacheSepNivel() > 3 && v.getnvCacheI()==3)
+				{
+					Config.set(Conf_Type.CACHE3_INSTRUCCIONES_ENTRADAS, v.getCI3NEntradas());
+					Config.set(Conf_Type.CACHE3_INSTRUCCIONES_VIAS,v.getCI3NVias());
+					Config.set(Conf_Type_c.CACHE3_INSTRUCCIONES_POLITICA,v.getPRCI3()); 
+				}
+				error = 8;
+
+				Config.set(Conf_Type_c.ARCHIVO_CODIGO, v.getArchivoTraza());
+			 
+				System.out.println("Validar Traza");
+			 
+				v.enabledEjecutarT();
+				v.enabledConfig(false);
+				
+				claseP = new ClasePrincipal();
+				//claseP.validarCodigo();
+			}
+			catch(NumberFormatException e1)
+			{
+				String mensaje = "";
+				switch(error)
+				{
+					case 0:
+						mensaje = "Configuración de memoria no válida.";
+						break;
+					case 1:
+						mensaje = "Configuración de TLB no válida.";
+						break;
+					case 2:
+					case 3:
+					case 4:
+					case 5:
+					case 6:
+					case 7:
+						mensaje = "Configuración de Caché de Datos " + (error-2) + " no válida.";
+						break;
+					case 8:
+						mensaje = "Error de fichero.";
+						break;
+				}
+				
+				JOptionPane.showMessageDialog( v, mensaje, "Error de formato", JOptionPane.ERROR_MESSAGE );
+				e1.printStackTrace();
+			}
+		}
+		else if(comando.equals(Global.EJECUTART))
 		{
 			Config.ejecutando_codigo = false;
 			//System.out.println("ENTRA2");
@@ -283,7 +406,7 @@ public class Controlador implements ActionListener {
 				claseP.setTraza(s);
 				try {
 					claseP.ejecutarTraza();
-					v.resTraza(claseP.resTraza());
+					//v.resTraza(claseP.resTraza());
 				} catch (MemoryException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -291,7 +414,7 @@ public class Controlador implements ActionListener {
 			
 			}
 			v.enabledConfig(true);
-		}*/
+		}
 		else if(comando.equals(Global.EJECUTARC))
 		{
 			Config.ejecutando_codigo = true;
@@ -346,7 +469,7 @@ public class Controlador implements ActionListener {
 	private String bfOn() throws IOException
 	{
 		StringBuilder sb = new StringBuilder("");
-		fr=new FileReader(ArchivoTraza);
+		fr=new FileReader(v.getArchivoTraza());
 		br=new BufferedReader(fr);
 		String aux=br.readLine();
 		while(aux!=null)
