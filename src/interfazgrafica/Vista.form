@@ -866,11 +866,12 @@
                                 <Property name="text" type="java.lang.String" value="16"/>
                                 <Property name="toolTipText" type="java.lang.String" value="Tama&#xf1;o de la cach&#xe9;."/>
                                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                                  <Color id="Default Cursor"/>
+                                  <Color id="Cursor Por defecto"/>
                                 </Property>
                                 <Property name="name" type="java.lang.String" value="" noResource="true"/>
                               </Properties>
                               <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="n_entradas_c1_tActionPerformed"/>
                                 <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="n_entradas_c1_tFocusLost"/>
                               </Events>
                             </Component>
@@ -883,6 +884,7 @@
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="1"/>
                                 <Property name="toolTipText" type="java.lang.String" value="N&#xfa;mero de v&#xed;as para cach&#xe9;s asociativas."/>
+                                <Property name="enabled" type="boolean" value="false"/>
                               </Properties>
                               <Events>
                                 <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="n_vias_c1_tFocusLost"/>
@@ -905,6 +907,7 @@
                                   </StringArray>
                                 </Property>
                                 <Property name="toolTipText" type="java.lang.String" value="Pol&#xed;tica de reemplazo para cach&#xe9;s asociativas."/>
+                                <Property name="enabled" type="boolean" value="false"/>
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JComboBox" name="cb_tam_cd1">
@@ -1024,13 +1027,15 @@
                             </Component>
                             <Component class="javax.swing.JTextField" name="n_entradas_c2_t">
                               <Properties>
+                                <Property name="text" type="java.lang.String" value="16"/>
                                 <Property name="toolTipText" type="java.lang.String" value="Tama&#xf1;o de la cach&#xe9;."/>
                                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                                  <Color id="Default Cursor"/>
+                                  <Color id="Cursor Por defecto"/>
                                 </Property>
                                 <Property name="name" type="java.lang.String" value="" noResource="true"/>
                               </Properties>
                               <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="n_entradas_c2_tActionPerformed"/>
                                 <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="n_entradas_c2_tFocusLost"/>
                               </Events>
                             </Component>
@@ -1043,6 +1048,7 @@
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="1"/>
                                 <Property name="toolTipText" type="java.lang.String" value="N&#xfa;mero de v&#xed;as para cach&#xe9;s asociativas."/>
+                                <Property name="enabled" type="boolean" value="false"/>
                               </Properties>
                               <Events>
                                 <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="n_vias_c2_tFocusLost"/>
@@ -1065,6 +1071,7 @@
                                   </StringArray>
                                 </Property>
                                 <Property name="toolTipText" type="java.lang.String" value="Pol&#xed;tica de reemplazo para cach&#xe9;s asociativas."/>
+                                <Property name="enabled" type="boolean" value="false"/>
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JComboBox" name="cb_tam_cd2">
@@ -1172,13 +1179,15 @@
                             </Component>
                             <Component class="javax.swing.JTextField" name="n_entradas_c3_t">
                               <Properties>
+                                <Property name="text" type="java.lang.String" value="16"/>
                                 <Property name="toolTipText" type="java.lang.String" value="Tama&#xf1;o de la cach&#xe9;."/>
                                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                                  <Color id="Default Cursor"/>
+                                  <Color id="Cursor Por defecto"/>
                                 </Property>
                                 <Property name="name" type="java.lang.String" value="" noResource="true"/>
                               </Properties>
                               <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="n_entradas_c3_tActionPerformed"/>
                                 <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="n_entradas_c3_tFocusLost"/>
                               </Events>
                             </Component>
@@ -1191,6 +1200,7 @@
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="1"/>
                                 <Property name="toolTipText" type="java.lang.String" value="N&#xfa;mero de v&#xed;as para cach&#xe9;s asociativas."/>
+                                <Property name="enabled" type="boolean" value="false"/>
                               </Properties>
                               <Events>
                                 <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="n_vias_c3_tFocusLost"/>
@@ -1213,6 +1223,7 @@
                                   </StringArray>
                                 </Property>
                                 <Property name="toolTipText" type="java.lang.String" value="Pol&#xed;tica de reemplazo para cach&#xe9;s asociativas."/>
+                                <Property name="enabled" type="boolean" value="false"/>
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JComboBox" name="cb_tam_cd3">
@@ -1320,13 +1331,15 @@
                             </Component>
                             <Component class="javax.swing.JTextField" name="n_entradas_c4_t">
                               <Properties>
+                                <Property name="text" type="java.lang.String" value="16"/>
                                 <Property name="toolTipText" type="java.lang.String" value="Tama&#xf1;o de la cach&#xe9;."/>
                                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                                  <Color id="Default Cursor"/>
+                                  <Color id="Cursor Por defecto"/>
                                 </Property>
                                 <Property name="name" type="java.lang.String" value="" noResource="true"/>
                               </Properties>
                               <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="n_entradas_c4_tActionPerformed"/>
                                 <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="n_entradas_c4_tFocusLost"/>
                               </Events>
                             </Component>
@@ -1339,6 +1352,7 @@
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="1"/>
                                 <Property name="toolTipText" type="java.lang.String" value="N&#xfa;mero de v&#xed;as para cach&#xe9;s asociativas."/>
+                                <Property name="enabled" type="boolean" value="false"/>
                               </Properties>
                               <Events>
                                 <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="n_vias_c4_tFocusLost"/>
@@ -1361,6 +1375,7 @@
                                   </StringArray>
                                 </Property>
                                 <Property name="toolTipText" type="java.lang.String" value="Pol&#xed;tica de reemplazo para cach&#xe9;s asociativas."/>
+                                <Property name="enabled" type="boolean" value="false"/>
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JComboBox" name="cb_tam_cd4">
@@ -1468,9 +1483,10 @@
                             </Component>
                             <Component class="javax.swing.JTextField" name="n_entradas_c5_t">
                               <Properties>
+                                <Property name="text" type="java.lang.String" value="16"/>
                                 <Property name="toolTipText" type="java.lang.String" value="Tama&#xf1;o de la cach&#xe9;."/>
                                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                                  <Color id="Default Cursor"/>
+                                  <Color id="Cursor Por defecto"/>
                                 </Property>
                                 <Property name="name" type="java.lang.String" value="" noResource="true"/>
                               </Properties>
@@ -1487,6 +1503,7 @@
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="1"/>
                                 <Property name="toolTipText" type="java.lang.String" value="N&#xfa;mero de v&#xed;as para cach&#xe9;s asociativas."/>
+                                <Property name="enabled" type="boolean" value="false"/>
                               </Properties>
                               <Events>
                                 <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="n_vias_c5_tFocusLost"/>
@@ -1509,6 +1526,7 @@
                                   </StringArray>
                                 </Property>
                                 <Property name="toolTipText" type="java.lang.String" value="Pol&#xed;tica de reemplazo para cach&#xe9;s asociativas."/>
+                                <Property name="enabled" type="boolean" value="false"/>
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JComboBox" name="cb_tam_cd5">
@@ -1616,9 +1634,10 @@
                             </Component>
                             <Component class="javax.swing.JTextField" name="n_entradas_c6_t">
                               <Properties>
+                                <Property name="text" type="java.lang.String" value="16"/>
                                 <Property name="toolTipText" type="java.lang.String" value="Tama&#xf1;o de la cach&#xe9;."/>
                                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                                  <Color id="Default Cursor"/>
+                                  <Color id="Cursor Por defecto"/>
                                 </Property>
                                 <Property name="name" type="java.lang.String" value="" noResource="true"/>
                               </Properties>
@@ -1635,6 +1654,7 @@
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="1"/>
                                 <Property name="toolTipText" type="java.lang.String" value="N&#xfa;mero de v&#xed;as para cach&#xe9;s asociativas."/>
+                                <Property name="enabled" type="boolean" value="false"/>
                               </Properties>
                               <Events>
                                 <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="n_vias_c6_tFocusLost"/>
@@ -1657,6 +1677,7 @@
                                   </StringArray>
                                 </Property>
                                 <Property name="toolTipText" type="java.lang.String" value="Pol&#xed;tica de reemplazo para cach&#xe9;s asociativas."/>
+                                <Property name="enabled" type="boolean" value="false"/>
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JComboBox" name="cb_tam_cd6">
