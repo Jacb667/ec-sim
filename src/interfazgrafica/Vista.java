@@ -619,11 +619,6 @@ public class Vista extends JPanel {
 
         tam_linea_t.setText("4");
         tam_linea_t.setToolTipText("Tamaño de cada bloque.");
-        tam_linea_t.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tam_linea_tActionPerformed(evt);
-            }
-        });
         tam_linea_t.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 tam_linea_tFocusLost(evt);
@@ -1089,11 +1084,6 @@ public class Vista extends JPanel {
 
         n_vias_c6_t.setText("1");
         n_vias_c6_t.setToolTipText("Número de vías para cachés asociativas.");
-        n_vias_c6_t.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                n_vias_c6_tActionPerformed(evt);
-            }
-        });
         n_vias_c6_t.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 n_vias_c6_tFocusLost(evt);
@@ -1626,7 +1616,14 @@ public class Vista extends JPanel {
     }//GEN-LAST:event_n_vias_c2_tFocusLost
 
     private void n_entradas_c3_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_entradas_c3_tFocusLost
-        // TODO add your handling code here:
+        
+        // Si está seleccionada "Completamente asociativa".
+        if (cb_tipo_cd3.getSelectedIndex() == 2)
+        {
+            // Escribimos en número de vías el mismo número que en este campo.
+            // El campo número de vías se supone que ya está desactivado (no se puede editar).
+            n_vias_c3_t.setText(String.valueOf(getCD3NEntradas()));
+        }
     }//GEN-LAST:event_n_entradas_c3_tFocusLost
 
     private void n_vias_c3_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_vias_c3_tFocusLost
