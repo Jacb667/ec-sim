@@ -2,12 +2,8 @@ package general;
 
 import java.awt.Color;
 
-import javax.swing.text.AttributeSet;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
-import javax.swing.text.StyleContext;
-
-import interfazgrafica.Vista;
 import general.Config.Conf_Type;
 
 public class Log {
@@ -33,6 +29,9 @@ public class Log {
 	public static int fallosTlb = 0;
 	public static int aciertosTlb = 0;
 	public static int conflictosTlb = 0;
+	public static int accesosTablaPaginas = 0;
+	
+	
 	public static int accesosBloques1 = 0;
 	public static int lecturasBloques1 = 0;
 	public static int escriturasBloques1 = 0;
@@ -47,24 +46,31 @@ public class Log {
 	public static int fallosTlb1 = 0;
 	public static int aciertosTlb1 = 0;
 	public static int conflictosTlb1 = 0;
+	public static int accesosTablaPaginas1 = 0;
 	
 	// Flags por defecto para logs
 	public enum Flags
 	{
 		CACHE_HIT,
 		CACHE_MISS,
+
 		MEMORY_WRITE,
 		MEMORY_READ,
+
 		BLOCK_READ,
 		BLOCK_WRITE,
+
 		PAGE_FAULT,
 		PAGE_HIT,
+
 		TLB_HIT,
 		TLB_MISS,
 		
 		CONFLICT_CACHE,
 		CONFLICT_TLB,
 		CONFLICT_PAGE,
+		
+		ACCESS_PT;
 	}
 	
 	// 0 = no mostrar nada.
@@ -245,6 +251,8 @@ public class Log {
 			case CONFLICT_PAGE:
 				conflictosPagina++;
 				break;
+			case ACCESS_PT:
+				accesosTablaPaginas++;
 		}
 	}
 	
@@ -290,6 +298,8 @@ public class Log {
 			case CONFLICT_PAGE:
 				conflictosPagina1++;
 				break;
+			case ACCESS_PT:
+				accesosTablaPaginas1++;
 		}
 	}
 	

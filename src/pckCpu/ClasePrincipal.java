@@ -319,7 +319,7 @@ public class ClasePrincipal {
 		{
 			//if (tablaEnMemoria)
 			//{
-			int primera_pag_tabla = tablaPags.getNumeroPaginas()-1 - paginas_tablaPags;
+			int primera_pag_tabla = tablaPags.getNumeroPaginas() - paginas_tablaPags;
 			direccion_tablPags = primera_pag_tabla * tablaPags.getEntradasPagina() * 4;
 			//}
 			
