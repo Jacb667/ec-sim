@@ -98,10 +98,14 @@ public class TablaPaginas {
 		int numPags = (int) Math.ceil(num_paginas / entradas_pagina);
 		Pagina[] res = new Pagina[numPags];
 		System.out.println("PV = " + numPags);
+		
+		int direccion_inicio = direccion;
+		
 		for (int i = 0; i < numPags; i++)
 		{
-			Pagina nueva = crearPagina(direccion);
+			Pagina nueva = seleccionarPagina(direccion_inicio);
 			res[i] = nueva;
+			direccion_inicio += entradas_pagina * bytes_palabra;
 		}
 		
 		insertarPaginasTabla(res);
