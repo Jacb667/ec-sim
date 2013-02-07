@@ -103,6 +103,8 @@ public class Vista extends JPanel {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        tp_alojada_chb = new javax.swing.JCheckBox();
+        tabla_paginas_l = new javax.swing.JLabel();
         memoria_p = new javax.swing.JPanel();
         m_entradas_p_pagina_l = new javax.swing.JLabel();
         m_entradas_p_pagina_t = new javax.swing.JTextField();
@@ -276,6 +278,10 @@ public class Vista extends JPanel {
 
         jLabel9.setText("Universidad de Málaga");
 
+        tp_alojada_chb.setText("Alojada en memoria");
+
+        tabla_paginas_l.setText("Tabla de Páginas:");
+
         javax.swing.GroupLayout cpu_pLayout = new javax.swing.GroupLayout(cpu_p);
         cpu_p.setLayout(cpu_pLayout);
         cpu_pLayout.setHorizontalGroup(
@@ -283,29 +289,35 @@ public class Vista extends JPanel {
             .addGroup(cpu_pLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(cpu_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(cpu_pLayout.createSequentialGroup()
+                        .addGroup(cpu_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(cpu_pLayout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel9))
+                            .addGroup(cpu_pLayout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel8)))
+                        .addContainerGap())
                     .addGroup(cpu_pLayout.createSequentialGroup()
                         .addGroup(cpu_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jerarquias_separadas_l)
-                            .addComponent(pal_p_linea_l))
+                            .addComponent(pal_p_linea_l)
+                            .addComponent(tabla_paginas_l))
                         .addGap(18, 18, 18)
-                        .addGroup(cpu_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(pal_p_linea_t, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
-                            .addComponent(caches_separadas_cb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(63, 63, 63)
-                        .addComponent(jLabel4)
-                        .addGap(18, 18, 18)
-                        .addComponent(log_cb, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(146, 146, 146))
-                    .addGroup(cpu_pLayout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel9))
-                    .addGroup(cpu_pLayout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel8)))
-                .addContainerGap())
+                        .addGroup(cpu_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tp_alojada_chb)
+                            .addGroup(cpu_pLayout.createSequentialGroup()
+                                .addGroup(cpu_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(pal_p_linea_t, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+                                    .addComponent(caches_separadas_cb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(63, 63, 63)
+                                .addComponent(jLabel4)
+                                .addGap(18, 18, 18)
+                                .addComponent(log_cb, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(156, 156, 156))))
         );
         cpu_pLayout.setVerticalGroup(
             cpu_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -320,7 +332,11 @@ public class Vista extends JPanel {
                 .addGroup(cpu_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jerarquias_separadas_l)
                     .addComponent(caches_separadas_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 195, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(cpu_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tp_alojada_chb)
+                    .addComponent(tabla_paginas_l))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 154, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(2, 2, 2)
                 .addGroup(cpu_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -339,11 +355,6 @@ public class Vista extends JPanel {
 
         m_entradas_p_pagina_t.setText("512");
         m_entradas_p_pagina_t.setToolTipText("Tamaño de página.");
-        m_entradas_p_pagina_t.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                m_entradas_p_pagina_tActionPerformed(evt);
-            }
-        });
         m_entradas_p_pagina_t.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 m_entradas_p_pagina_tFocusLost(evt);
@@ -462,11 +473,6 @@ public class Vista extends JPanel {
 
         n_entradas_c2_l7.setText("Número de entradas");
 
-        n_entradas_tlb_inst_t.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                n_entradas_tlb_inst_tActionPerformed(evt);
-            }
-        });
         n_entradas_tlb_inst_t.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 n_entradas_tlb_inst_tFocusLost(evt);
@@ -638,11 +644,6 @@ public class Vista extends JPanel {
         n_entradas_c1_t.setToolTipText("Tamaño de la caché.");
         n_entradas_c1_t.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         n_entradas_c1_t.setName(""); // NOI18N
-        n_entradas_c1_t.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                n_entradas_c1_tActionPerformed(evt);
-            }
-        });
         n_entradas_c1_t.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 n_entradas_c1_tFocusLost(evt);
@@ -739,11 +740,6 @@ public class Vista extends JPanel {
         n_entradas_c2_t.setToolTipText("Tamaño de la caché.");
         n_entradas_c2_t.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         n_entradas_c2_t.setName(""); // NOI18N
-        n_entradas_c2_t.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                n_entradas_c2_tActionPerformed(evt);
-            }
-        });
         n_entradas_c2_t.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 n_entradas_c2_tFocusLost(evt);
@@ -840,11 +836,6 @@ public class Vista extends JPanel {
         n_entradas_c3_t.setToolTipText("Tamaño de la caché.");
         n_entradas_c3_t.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         n_entradas_c3_t.setName(""); // NOI18N
-        n_entradas_c3_t.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                n_entradas_c3_tActionPerformed(evt);
-            }
-        });
         n_entradas_c3_t.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 n_entradas_c3_tFocusLost(evt);
@@ -933,11 +924,6 @@ public class Vista extends JPanel {
         n_entradas_c4_t.setToolTipText("Tamaño de la caché.");
         n_entradas_c4_t.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         n_entradas_c4_t.setName(""); // NOI18N
-        n_entradas_c4_t.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                n_entradas_c4_tActionPerformed(evt);
-            }
-        });
         n_entradas_c4_t.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 n_entradas_c4_tFocusLost(evt);
@@ -1850,10 +1836,6 @@ public class Vista extends JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_n_vias_c6_tFocusLost
 
-    private void n_entradas_tlb_inst_tActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_n_entradas_tlb_inst_tActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_n_entradas_tlb_inst_tActionPerformed
-
     private void cache_i3_bActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cache_i3_bActionPerformed
         // Nada
     }//GEN-LAST:event_cache_i3_bActionPerformed
@@ -1872,26 +1854,6 @@ public class Vista extends JPanel {
             enabledValidarC();
         }
     }//GEN-LAST:event_cargar_codigo_bActionPerformed
-
-    private void n_entradas_c1_tActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_n_entradas_c1_tActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_n_entradas_c1_tActionPerformed
-
-    private void n_entradas_c3_tActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_n_entradas_c3_tActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_n_entradas_c3_tActionPerformed
-
-    private void n_entradas_c2_tActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_n_entradas_c2_tActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_n_entradas_c2_tActionPerformed
-
-    private void n_entradas_c4_tActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_n_entradas_c4_tActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_n_entradas_c4_tActionPerformed
-
-    private void m_entradas_p_pagina_tActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_entradas_p_pagina_tActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_m_entradas_p_pagina_tActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Configuracion;
@@ -2030,10 +1992,12 @@ public class Vista extends JPanel {
     private javax.swing.JComboBox politica_reemplazo_tlb_inst_cb;
     private javax.swing.JTextField salvar_e;
     private javax.swing.JTextField salvar_t;
+    private javax.swing.JLabel tabla_paginas_l;
     private javax.swing.JLabel tam_linea_l;
     private javax.swing.JTextField tam_linea_t;
     private javax.swing.JCheckBox tlb_data_chb;
     private javax.swing.JCheckBox tlb_inst_chb;
+    private javax.swing.JCheckBox tp_alojada_chb;
     private javax.swing.JButton traza_carga_b;
     private javax.swing.JButton validar_c_b;
     private javax.swing.JButton validar_t_b;
