@@ -167,7 +167,7 @@ public class Instruccion {
 						modifica = true;
 						break;
 					case "R":  // JR
-						destino = v[0];
+						origen1 = v[0];
 						break;
 					case "E":  // J
 						etiqueta = etiq;
