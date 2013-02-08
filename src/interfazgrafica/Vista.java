@@ -2063,21 +2063,31 @@ public class Vista extends JPanel {
     {
     	return Integer.parseInt(niv_cache_data_cb.getSelectedItem().toString());
     }
+    
     // Niveles de caché de instrucciones.
     public int getnvCacheI()
     {
     	return Integer.parseInt(niv_cache_inst_cb.getSelectedItem().toString());
     }
+    
     // TLB de datos.
     public boolean tlbDataCheck()
     {
     	return tlb_data_chb.isSelected();
     }
+    
     // TLB de instrucciones.
     public boolean tlbInstCheck()
     {
-   	return tlb_inst_chb.isSelected();
+    	return tlb_inst_chb.isSelected();
     }
+    
+    // Tabla de páginas alojada en memoria.
+    public int tablaPaginasAlojada()
+    {
+    	return tp_alojada_chb.isSelected() ? 1 : 0;
+    }
+    
     // Nivel desde el que la caché es compartida.
     public int cacheSepNivel()
     {

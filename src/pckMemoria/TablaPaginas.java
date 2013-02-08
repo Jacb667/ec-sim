@@ -34,7 +34,7 @@ public class TablaPaginas {
 	public PoliticaReemplazo politica;
 	
 	private int registroTablaPaginas;
-	private boolean tablaPagsEnMemoria = true;
+	private boolean tablaPagsEnMemoria;
 	
 	// Esta clase contiene todas las páginas.
 	// Cada página contendrá su porción de memoria y si está en ella o no.
@@ -57,12 +57,12 @@ public class TablaPaginas {
 	 */
 	
 	// Este constructor utiliza NUMERO DE ENTRADAS de cada tipo.
-	public TablaPaginas(int ent_pag, int pal_linea, int max_ent_mem, int ent_mem_princ, TiposReemplazo _Tpolitica, Tlb tlb1, Tlb tlb2)
+	public TablaPaginas(int ent_pag, int pal_linea, int max_ent_mem, int ent_mem_princ, TiposReemplazo _Tpolitica, Tlb tlb1, Tlb tlb2, boolean tp_alojada)
 	{
-		this (ent_pag, pal_linea, max_ent_mem, ent_mem_princ, 4, _Tpolitica, tlb1, tlb2);
+		this (ent_pag, pal_linea, max_ent_mem, ent_mem_princ, 4, _Tpolitica, tlb1, tlb2, tp_alojada);
 	}
 	
-	public TablaPaginas(int ent_pag, int pal_linea, int max_ent_mem, int ent_mem_princ, int _bytes_palabra, TiposReemplazo _Tpolitica, Tlb tlb1, Tlb tlb2)
+	public TablaPaginas(int ent_pag, int pal_linea, int max_ent_mem, int ent_mem_princ, int _bytes_palabra, TiposReemplazo _Tpolitica, Tlb tlb1, Tlb tlb2, boolean tp_alojada)
 	{
 		// Max_memoria por defecto: 0xFFFFFFFF -> Max ent: 0xFFFFFFFF / 4
 		// Memoria principal por defecto: 2048 (64KB).
@@ -76,6 +76,7 @@ public class TablaPaginas {
 		palabras_linea = pal_linea;
 		tam_pagina = entradas_pagina * _bytes_palabra;
 		bytes_palabra = _bytes_palabra;
+		tablaPagsEnMemoria = tp_alojada;
 		
 		tlb_datos = tlb1;
 		tlb_inst = tlb2;
@@ -245,6 +246,10 @@ public class TablaPaginas {
 			{
 				int dirPag = registroTablaPaginas + pag.getId()*4;
 				System.out.println(">>> Se accede a leer la posición " + dirPag + " para traducir.");
+			}
+			else
+			{
+				System.out.println(">>> Se accede a la tabla de páginas para traducir.");
 			}
 			
 			// Es PAGE FAULT

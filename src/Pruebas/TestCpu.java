@@ -68,6 +68,8 @@ public class TestCpu {
 	private TiposReemplazo politicas_caches1[];
 	private TiposReemplazo politicas_caches2[];
 	
+	private boolean tp_alojada;
+	
 	private boolean tlb_datos;
 	private boolean tlb_inst;
 	
@@ -169,6 +171,8 @@ public class TestCpu {
 		
 		archivo_cpu = Config.get(Conf_Type_c.ARCHIVO_CODIGO);
 		archivo_traza = Config.get(Conf_Type_c.ARCHIVO_TRAZA);
+		
+		tp_alojada = Config.get(Conf_Type.TABLA_PAGINAS_ALOJADA) == 1 ? true : false;
 		
 		// Niveles de caché
 		niveles_cache1 = Config.get(Conf_Type.NIVELES_CACHE_DATOS);
@@ -323,7 +327,7 @@ public class TestCpu {
 		}
 
 		// Tabla de Páginas
-		tablaPags = new TablaPaginas(entradas_pagina, palabras_linea, max_entrada, max_ent_mem, TiposReemplazo.LRU, tlb1, tlb2);
+		tablaPags = new TablaPaginas(entradas_pagina, palabras_linea, max_entrada, max_ent_mem, TiposReemplazo.LRU, tlb1, tlb2, tp_alojada);
 		
 		// Memoria principal.
 		memoria = new MemoriaPrincipal(tablaPags);

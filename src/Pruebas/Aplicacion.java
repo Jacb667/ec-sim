@@ -58,6 +58,8 @@ public class Aplicacion extends javax.swing.JFrame {
 		Config.set(Conf_Type_c.ARCHIVO_CODIGO, "Prueba.txt");
 		Config.set(Conf_Type_c.ARCHIVO_TRAZA, "");
 		
+		Config.set(Conf_Type.TABLA_PAGINAS_ALOJADA, 0);
+		
 		// Niveles de caché
 		Config.set(Conf_Type.NIVELES_CACHE_DATOS, 2);
 		Config.set(Conf_Type.NIVELES_CACHE_INSTRUCCIONES, 1);
