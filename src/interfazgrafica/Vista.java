@@ -2630,6 +2630,24 @@ public class Vista extends JPanel {
         }
     }
     
+    public int getNivelLog()
+    {
+    	int result = 1;
+        switch (log_cb.getSelectedItem().toString().toUpperCase())
+        {
+            case "NADA":
+                result = 0;
+                break;
+            case "NORMAL":
+                result = 2;
+                break;
+            case "DEBUG":
+                result = 3;
+                break;
+        }
+        return result;
+    }
+    
     public void enabledConfig(boolean b)
     {
     	ejecucion_p.setEnabledAt(0, b);
