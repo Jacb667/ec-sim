@@ -89,7 +89,8 @@ public class Config {
 		CACHE3_INSTRUCCIONES_ENTRADAS(24),
 		CACHE3_INSTRUCCIONES_VIAS(25),
 		TABLA_PAGINAS_ALOJADA(26),
-		END_CONFIG (27);
+		NIVEL_LOG(27),
+		END_CONFIG (28);
 		
 		private int index;   
 

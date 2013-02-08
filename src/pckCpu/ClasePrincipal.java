@@ -242,6 +242,8 @@ public class ClasePrincipal {
 	// Leer configuración.
 	private void leerConfig()
 	{
+		Log.setNivel(Config.get(Conf_Type.NIVEL_LOG));
+		
 		bytes_palabra = Config.get(Conf_Type.TAMAÑO_PALABRA);
 		palabras_linea = Config.get(Conf_Type.TAMAÑO_LINEA);
 		

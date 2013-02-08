@@ -45,6 +45,7 @@ public class Controlador implements ActionListener {
 				Config.set(Conf_Type.NUMERO_ENTRADAS_MEMORIA, v.getEntradasMemP());
 				Config.set(Conf_Type.MAXIMA_ENTRADA_MEMORIA,v.getMaxEntradasVirt());
 				Config.set(Conf_Type.TABLA_PAGINAS_ALOJADA,v.tablaPaginasAlojada());
+				Config.set(Conf_Type.NIVEL_LOG, v.getNivelLog());
 				error = 1;
 				
 				if (v.getEntradasMemP() > 16384)
@@ -169,6 +170,7 @@ public class Controlador implements ActionListener {
 				Config.set(Conf_Type.NUMERO_ENTRADAS_MEMORIA, v.getEntradasMemP());
 				Config.set(Conf_Type.MAXIMA_ENTRADA_MEMORIA,v.getMaxEntradasVirt());
 				Config.set(Conf_Type.TABLA_PAGINAS_ALOJADA,v.tablaPaginasAlojada());
+				Config.set(Conf_Type.NIVEL_LOG, v.getNivelLog());
 				error = 1;
 				
 				if(v.tlbDataCheck())
