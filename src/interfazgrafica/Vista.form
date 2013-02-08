@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.8" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+<Form version="1.8" maxVersion="1.8" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <NonVisualComponents>
     <Container class="javax.swing.JPanel" name="jPanel4">
 
@@ -252,7 +252,9 @@
                     </Component>
                     <Component class="javax.swing.JCheckBox" name="tp_alojada_chb">
                       <Properties>
+                        <Property name="selected" type="boolean" value="true"/>
                         <Property name="text" type="java.lang.String" value="Alojada en memoria"/>
+                        <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Especifica si la Tabla de P&#xe1;ginas se alojar&#xe1; en memoria principal.&lt;br&gt;&#xa;Si no se aloja en memoria, la Tabla de P&#xe1;ginas funcionar&#xe1; de la misma forma, pero no se visualizar&#xe1; dentro de un marco.&lt;br&gt;&#xa;Desactivar esta opci&#xf3;n es aconsejable cuando se desea utilizar toda la memoria para el proceso, sin preocuparse por la memoria ocupada por la Tabla de P&#xe1;ginas.&lt;/html&gt;"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="tabla_paginas_l">
@@ -481,6 +483,9 @@
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JTextField" name="n_entradas_tlb_data_t">
+                              <Properties>
+                                <Property name="toolTipText" type="java.lang.String" value="N&#xfa;mero de entradas de la TLB de Datos."/>
+                              </Properties>
                               <Events>
                                 <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="n_entradas_tlb_data_tFocusLost"/>
                               </Events>
@@ -491,6 +496,9 @@
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JTextField" name="n_vias_tlb_data_t">
+                              <Properties>
+                                <Property name="toolTipText" type="java.lang.String" value="N&#xfa;mero de v&#xed;as de la TLB cuando es asociativa."/>
+                              </Properties>
                               <Events>
                                 <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="n_vias_tlb_data_tFocusLost"/>
                               </Events>
@@ -511,6 +519,7 @@
                                     <StringItem index="4" value="RANDOM"/>
                                   </StringArray>
                                 </Property>
+                                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Pol&#xed;tica de reemplazo utilizada para cach&#xe9;s asociativas:&lt;br&gt;&lt;br&gt;&#xa;&#xa;- &lt;b&gt;LRU:&lt;/b&gt; Elimina la p&#xe1;gina menos utilizada recientemente.&lt;br&gt;&#xa;- &lt;b&gt;NRU:&lt;/b&gt; Elimina la p&#xe1;gina con menor n&#xfa;mero de utilizaciones.&lt;br&gt;&#xa;- &lt;b&gt;FIFO:&lt;/b&gt; Elimina la primera p&#xe1;gina que se asign&#xf3;.&lt;br&gt;&#xa;- &lt;b&gt;AGING:&lt;/b&gt; Se basa en el hist&#xf3;rico de accesos para determinar la p&#xe1;gina que se eliminar&#xe1;.&lt;br&gt;&#xa;- &lt;b&gt;RANDOM:&lt;/b&gt; Se selecciona una p&#xe1;gina aleatoriamente y se elimina.&lt;br&gt;&lt;/html&gt;"/>
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JComboBox" name="cb_tipo_tlb_datos">
@@ -522,6 +531,7 @@
                                     <StringItem index="2" value="Completamente Asoc."/>
                                   </StringArray>
                                 </Property>
+                                <Property name="toolTipText" type="java.lang.String" value="Tipo de asociatividad de la TLB."/>
                               </Properties>
                               <Events>
                                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_tipo_tlb_datosActionPerformed"/>
@@ -606,6 +616,9 @@
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JTextField" name="n_entradas_tlb_inst_t">
+                              <Properties>
+                                <Property name="toolTipText" type="java.lang.String" value="N&#xfa;mero de entradas de la TLB de Instrucciones."/>
+                              </Properties>
                               <Events>
                                 <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="n_entradas_tlb_inst_tFocusLost"/>
                               </Events>
@@ -616,6 +629,9 @@
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JTextField" name="n_vias_tlb_inst_t">
+                              <Properties>
+                                <Property name="toolTipText" type="java.lang.String" value="N&#xfa;mero de v&#xed;as de la TLB cuando es asociativa."/>
+                              </Properties>
                               <Events>
                                 <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="n_vias_tlb_inst_tFocusLost"/>
                               </Events>
@@ -636,6 +652,7 @@
                                     <StringItem index="4" value="RANDOM"/>
                                   </StringArray>
                                 </Property>
+                                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Pol&#xed;tica de reemplazo utilizada para cach&#xe9;s asociativas:&lt;br&gt;&lt;br&gt;  - &lt;b&gt;LRU:&lt;/b&gt; Elimina la p&#xe1;gina menos utilizada recientemente.&lt;br&gt; - &lt;b&gt;NRU:&lt;/b&gt; Elimina la p&#xe1;gina con menor n&#xfa;mero de utilizaciones.&lt;br&gt; - &lt;b&gt;FIFO:&lt;/b&gt; Elimina la primera p&#xe1;gina que se asign&#xf3;.&lt;br&gt; - &lt;b&gt;AGING:&lt;/b&gt; Se basa en el hist&#xf3;rico de accesos para determinar la p&#xe1;gina que se eliminar&#xe1;.&lt;br&gt; - &lt;b&gt;RANDOM:&lt;/b&gt; Se selecciona una p&#xe1;gina aleatoriamente y se elimina.&lt;br&gt;&lt;/html&gt;"/>
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JComboBox" name="cb_tipo_tlb_inst">
@@ -929,7 +946,7 @@
                                     <StringItem index="4" value="RANDOM"/>
                                   </StringArray>
                                 </Property>
-                                <Property name="toolTipText" type="java.lang.String" value="Pol&#xed;tica de reemplazo para cach&#xe9;s asociativas."/>
+                                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Pol&#xed;tica de reemplazo utilizada para cach&#xe9;s asociativas:&lt;br&gt;&lt;br&gt;&#xa;&#xa;- &lt;b&gt;LRU:&lt;/b&gt; Elimina el conjunto menos utilizado recientemente.&lt;br&gt;&#xa;- &lt;b&gt;NRU:&lt;/b&gt; Elimina el conjunto con menor n&#xfa;mero de utilizaciones.&lt;br&gt;&#xa;- &lt;b&gt;FIFO:&lt;/b&gt; Elimina el primer conjunto que entr&#xf3;.&lt;br&gt;&#xa;- &lt;b&gt;AGING:&lt;/b&gt; Se basa en el hist&#xf3;rico de accesos para determinar el conjunto que se eliminar&#xe1;.&lt;br&gt;&#xa;- &lt;b&gt;RANDOM:&lt;/b&gt; Se selecciona un conjunto aleatoriamente y se elimina.&lt;br&gt;&lt;/html&gt;"/>
                                 <Property name="enabled" type="boolean" value="false"/>
                               </Properties>
                             </Component>
@@ -1092,7 +1109,7 @@
                                     <StringItem index="4" value="RANDOM"/>
                                   </StringArray>
                                 </Property>
-                                <Property name="toolTipText" type="java.lang.String" value="Pol&#xed;tica de reemplazo para cach&#xe9;s asociativas."/>
+                                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Pol&#xed;tica de reemplazo utilizada para cach&#xe9;s asociativas:&lt;br&gt;&lt;br&gt;  - &lt;b&gt;LRU:&lt;/b&gt; Elimina el conjunto menos utilizado recientemente.&lt;br&gt; - &lt;b&gt;NRU:&lt;/b&gt; Elimina el conjunto con menor n&#xfa;mero de utilizaciones.&lt;br&gt; - &lt;b&gt;FIFO:&lt;/b&gt; Elimina el primer conjunto que entr&#xf3;.&lt;br&gt; - &lt;b&gt;AGING:&lt;/b&gt; Se basa en el hist&#xf3;rico de accesos para determinar el conjunto que se eliminar&#xe1;.&lt;br&gt; - &lt;b&gt;RANDOM:&lt;/b&gt; Se selecciona un conjunto aleatoriamente y se elimina.&lt;br&gt;&lt;/html&gt;"/>
                                 <Property name="enabled" type="boolean" value="false"/>
                               </Properties>
                             </Component>
@@ -1243,7 +1260,7 @@
                                     <StringItem index="4" value="RANDOM"/>
                                   </StringArray>
                                 </Property>
-                                <Property name="toolTipText" type="java.lang.String" value="Pol&#xed;tica de reemplazo para cach&#xe9;s asociativas."/>
+                                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Pol&#xed;tica de reemplazo utilizada para cach&#xe9;s asociativas:&lt;br&gt;&lt;br&gt;  - &lt;b&gt;LRU:&lt;/b&gt; Elimina el conjunto menos utilizado recientemente.&lt;br&gt; - &lt;b&gt;NRU:&lt;/b&gt; Elimina el conjunto con menor n&#xfa;mero de utilizaciones.&lt;br&gt; - &lt;b&gt;FIFO:&lt;/b&gt; Elimina el primer conjunto que entr&#xf3;.&lt;br&gt; - &lt;b&gt;AGING:&lt;/b&gt; Se basa en el hist&#xf3;rico de accesos para determinar el conjunto que se eliminar&#xe1;.&lt;br&gt; - &lt;b&gt;RANDOM:&lt;/b&gt; Se selecciona un conjunto aleatoriamente y se elimina.&lt;br&gt;&lt;/html&gt;"/>
                                 <Property name="enabled" type="boolean" value="false"/>
                               </Properties>
                             </Component>
@@ -1394,7 +1411,7 @@
                                     <StringItem index="4" value="RANDOM"/>
                                   </StringArray>
                                 </Property>
-                                <Property name="toolTipText" type="java.lang.String" value="Pol&#xed;tica de reemplazo para cach&#xe9;s asociativas."/>
+                                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Pol&#xed;tica de reemplazo utilizada para cach&#xe9;s asociativas:&lt;br&gt;&lt;br&gt;  - &lt;b&gt;LRU:&lt;/b&gt; Elimina el conjunto menos utilizado recientemente.&lt;br&gt; - &lt;b&gt;NRU:&lt;/b&gt; Elimina el conjunto con menor n&#xfa;mero de utilizaciones.&lt;br&gt; - &lt;b&gt;FIFO:&lt;/b&gt; Elimina el primer conjunto que entr&#xf3;.&lt;br&gt; - &lt;b&gt;AGING:&lt;/b&gt; Se basa en el hist&#xf3;rico de accesos para determinar el conjunto que se eliminar&#xe1;.&lt;br&gt; - &lt;b&gt;RANDOM:&lt;/b&gt; Se selecciona un conjunto aleatoriamente y se elimina.&lt;br&gt;&lt;/html&gt;"/>
                                 <Property name="enabled" type="boolean" value="false"/>
                               </Properties>
                             </Component>
@@ -1545,7 +1562,7 @@
                                     <StringItem index="4" value="RANDOM"/>
                                   </StringArray>
                                 </Property>
-                                <Property name="toolTipText" type="java.lang.String" value="Pol&#xed;tica de reemplazo para cach&#xe9;s asociativas."/>
+                                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Pol&#xed;tica de reemplazo utilizada para cach&#xe9;s asociativas:&lt;br&gt;&lt;br&gt;  - &lt;b&gt;LRU:&lt;/b&gt; Elimina el conjunto menos utilizado recientemente.&lt;br&gt; - &lt;b&gt;NRU:&lt;/b&gt; Elimina el conjunto con menor n&#xfa;mero de utilizaciones.&lt;br&gt; - &lt;b&gt;FIFO:&lt;/b&gt; Elimina el primer conjunto que entr&#xf3;.&lt;br&gt; - &lt;b&gt;AGING:&lt;/b&gt; Se basa en el hist&#xf3;rico de accesos para determinar el conjunto que se eliminar&#xe1;.&lt;br&gt; - &lt;b&gt;RANDOM:&lt;/b&gt; Se selecciona un conjunto aleatoriamente y se elimina.&lt;br&gt;&lt;/html&gt;"/>
                                 <Property name="enabled" type="boolean" value="false"/>
                               </Properties>
                             </Component>
@@ -1696,7 +1713,7 @@
                                     <StringItem index="4" value="RANDOM"/>
                                   </StringArray>
                                 </Property>
-                                <Property name="toolTipText" type="java.lang.String" value="Pol&#xed;tica de reemplazo para cach&#xe9;s asociativas."/>
+                                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Pol&#xed;tica de reemplazo utilizada para cach&#xe9;s asociativas:&lt;br&gt;&lt;br&gt;  - &lt;b&gt;LRU:&lt;/b&gt; Elimina el conjunto menos utilizado recientemente.&lt;br&gt; - &lt;b&gt;NRU:&lt;/b&gt; Elimina el conjunto con menor n&#xfa;mero de utilizaciones.&lt;br&gt; - &lt;b&gt;FIFO:&lt;/b&gt; Elimina el primer conjunto que entr&#xf3;.&lt;br&gt; - &lt;b&gt;AGING:&lt;/b&gt; Se basa en el hist&#xf3;rico de accesos para determinar el conjunto que se eliminar&#xe1;.&lt;br&gt; - &lt;b&gt;RANDOM:&lt;/b&gt; Se selecciona un conjunto aleatoriamente y se elimina.&lt;br&gt;&lt;/html&gt;"/>
                                 <Property name="enabled" type="boolean" value="false"/>
                               </Properties>
                             </Component>
