@@ -1,8 +1,6 @@
 package pckCpu;
 
-import general.Global;
 import general.Global.Opcode;
-import general.Log;
 import general.MemoryException;
 
 import java.util.List;
@@ -11,7 +9,7 @@ import java.util.TreeMap;
 
 import pckMemoria.JerarquiaMemoria;
 
-public class CpuMonociclo implements Cpu {
+public class CpuMonociclo {
 	
 	private int pc;
 	private Alu alu;
