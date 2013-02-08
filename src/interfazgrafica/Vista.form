@@ -484,6 +484,7 @@
                             </Component>
                             <Component class="javax.swing.JTextField" name="n_entradas_tlb_data_t">
                               <Properties>
+                                <Property name="text" type="java.lang.String" value="16"/>
                                 <Property name="toolTipText" type="java.lang.String" value="N&#xfa;mero de entradas de la TLB de Datos."/>
                               </Properties>
                               <Events>
@@ -497,7 +498,9 @@
                             </Component>
                             <Component class="javax.swing.JTextField" name="n_vias_tlb_data_t">
                               <Properties>
+                                <Property name="text" type="java.lang.String" value="1"/>
                                 <Property name="toolTipText" type="java.lang.String" value="N&#xfa;mero de v&#xed;as de la TLB cuando es asociativa."/>
+                                <Property name="enabled" type="boolean" value="false"/>
                               </Properties>
                               <Events>
                                 <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="n_vias_tlb_data_tFocusLost"/>
@@ -520,6 +523,7 @@
                                   </StringArray>
                                 </Property>
                                 <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Pol&#xed;tica de reemplazo utilizada para cach&#xe9;s asociativas:&lt;br&gt;&lt;br&gt;&#xa;&#xa;- &lt;b&gt;LRU:&lt;/b&gt; Elimina la p&#xe1;gina menos utilizada recientemente.&lt;br&gt;&#xa;- &lt;b&gt;NRU:&lt;/b&gt; Elimina la p&#xe1;gina con menor n&#xfa;mero de utilizaciones.&lt;br&gt;&#xa;- &lt;b&gt;FIFO:&lt;/b&gt; Elimina la primera p&#xe1;gina que se asign&#xf3;.&lt;br&gt;&#xa;- &lt;b&gt;AGING:&lt;/b&gt; Se basa en el hist&#xf3;rico de accesos para determinar la p&#xe1;gina que se eliminar&#xe1;.&lt;br&gt;&#xa;- &lt;b&gt;RANDOM:&lt;/b&gt; Se selecciona una p&#xe1;gina aleatoriamente y se elimina.&lt;br&gt;&lt;/html&gt;"/>
+                                <Property name="enabled" type="boolean" value="false"/>
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JComboBox" name="cb_tipo_tlb_datos">
@@ -617,6 +621,7 @@
                             </Component>
                             <Component class="javax.swing.JTextField" name="n_entradas_tlb_inst_t">
                               <Properties>
+                                <Property name="text" type="java.lang.String" value="16"/>
                                 <Property name="toolTipText" type="java.lang.String" value="N&#xfa;mero de entradas de la TLB de Instrucciones."/>
                               </Properties>
                               <Events>
@@ -630,7 +635,9 @@
                             </Component>
                             <Component class="javax.swing.JTextField" name="n_vias_tlb_inst_t">
                               <Properties>
+                                <Property name="text" type="java.lang.String" value="1"/>
                                 <Property name="toolTipText" type="java.lang.String" value="N&#xfa;mero de v&#xed;as de la TLB cuando es asociativa."/>
+                                <Property name="enabled" type="boolean" value="false"/>
                               </Properties>
                               <Events>
                                 <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="n_vias_tlb_inst_tFocusLost"/>
@@ -653,6 +660,7 @@
                                   </StringArray>
                                 </Property>
                                 <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Pol&#xed;tica de reemplazo utilizada para cach&#xe9;s asociativas:&lt;br&gt;&lt;br&gt;  - &lt;b&gt;LRU:&lt;/b&gt; Elimina la p&#xe1;gina menos utilizada recientemente.&lt;br&gt; - &lt;b&gt;NRU:&lt;/b&gt; Elimina la p&#xe1;gina con menor n&#xfa;mero de utilizaciones.&lt;br&gt; - &lt;b&gt;FIFO:&lt;/b&gt; Elimina la primera p&#xe1;gina que se asign&#xf3;.&lt;br&gt; - &lt;b&gt;AGING:&lt;/b&gt; Se basa en el hist&#xf3;rico de accesos para determinar la p&#xe1;gina que se eliminar&#xe1;.&lt;br&gt; - &lt;b&gt;RANDOM:&lt;/b&gt; Se selecciona una p&#xe1;gina aleatoriamente y se elimina.&lt;br&gt;&lt;/html&gt;"/>
+                                <Property name="enabled" type="boolean" value="false"/>
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JComboBox" name="cb_tipo_tlb_inst">
@@ -907,7 +915,7 @@
                                 <Property name="text" type="java.lang.String" value="16"/>
                                 <Property name="toolTipText" type="java.lang.String" value="Tama&#xf1;o de la cach&#xe9;."/>
                                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                                  <Color id="Default Cursor"/>
+                                  <Color id="Cursor Por defecto"/>
                                 </Property>
                                 <Property name="name" type="java.lang.String" value="" noResource="true"/>
                               </Properties>
@@ -1070,7 +1078,7 @@
                                 <Property name="text" type="java.lang.String" value="16"/>
                                 <Property name="toolTipText" type="java.lang.String" value="Tama&#xf1;o de la cach&#xe9;."/>
                                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                                  <Color id="Default Cursor"/>
+                                  <Color id="Cursor Por defecto"/>
                                 </Property>
                                 <Property name="name" type="java.lang.String" value="" noResource="true"/>
                               </Properties>
@@ -1221,7 +1229,7 @@
                                 <Property name="text" type="java.lang.String" value="16"/>
                                 <Property name="toolTipText" type="java.lang.String" value="Tama&#xf1;o de la cach&#xe9;."/>
                                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                                  <Color id="Default Cursor"/>
+                                  <Color id="Cursor Por defecto"/>
                                 </Property>
                                 <Property name="name" type="java.lang.String" value="" noResource="true"/>
                               </Properties>
@@ -1372,7 +1380,7 @@
                                 <Property name="text" type="java.lang.String" value="16"/>
                                 <Property name="toolTipText" type="java.lang.String" value="Tama&#xf1;o de la cach&#xe9;."/>
                                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                                  <Color id="Default Cursor"/>
+                                  <Color id="Cursor Por defecto"/>
                                 </Property>
                                 <Property name="name" type="java.lang.String" value="" noResource="true"/>
                               </Properties>
@@ -1523,7 +1531,7 @@
                                 <Property name="text" type="java.lang.String" value="16"/>
                                 <Property name="toolTipText" type="java.lang.String" value="Tama&#xf1;o de la cach&#xe9;."/>
                                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                                  <Color id="Default Cursor"/>
+                                  <Color id="Cursor Por defecto"/>
                                 </Property>
                                 <Property name="name" type="java.lang.String" value="" noResource="true"/>
                               </Properties>
@@ -1674,7 +1682,7 @@
                                 <Property name="text" type="java.lang.String" value="16"/>
                                 <Property name="toolTipText" type="java.lang.String" value="Tama&#xf1;o de la cach&#xe9;."/>
                                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                                  <Color id="Default Cursor"/>
+                                  <Color id="Cursor Por defecto"/>
                                 </Property>
                                 <Property name="name" type="java.lang.String" value="" noResource="true"/>
                               </Properties>

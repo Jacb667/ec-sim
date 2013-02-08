@@ -385,6 +385,7 @@ public class Vista extends JPanel {
 
         n_entradas_c2_l4.setText("Número de entradas");
 
+        n_entradas_tlb_data_t.setText("16");
         n_entradas_tlb_data_t.setToolTipText("Número de entradas de la TLB de Datos.");
         n_entradas_tlb_data_t.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -394,7 +395,9 @@ public class Vista extends JPanel {
 
         n_vias_c2_l4.setText("Número de vías");
 
+        n_vias_tlb_data_t.setText("1");
         n_vias_tlb_data_t.setToolTipText("Número de vías de la TLB cuando es asociativa.");
+        n_vias_tlb_data_t.setEnabled(false);
         n_vias_tlb_data_t.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 n_vias_tlb_data_tFocusLost(evt);
@@ -405,6 +408,7 @@ public class Vista extends JPanel {
 
         politica_reemplazo_tlb_data_cb1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "LRU", "LFU", "FIFO", "AGING", "RANDOM" }));
         politica_reemplazo_tlb_data_cb1.setToolTipText("<html>Política de reemplazo utilizada para cachés asociativas:<br><br>\n\n- <b>LRU:</b> Elimina la página menos utilizada recientemente.<br>\n- <b>NRU:</b> Elimina la página con menor número de utilizaciones.<br>\n- <b>FIFO:</b> Elimina la primera página que se asignó.<br>\n- <b>AGING:</b> Se basa en el histórico de accesos para determinar la página que se eliminará.<br>\n- <b>RANDOM:</b> Se selecciona una página aleatoriamente y se elimina.<br></html>");
+        politica_reemplazo_tlb_data_cb1.setEnabled(false);
 
         cb_tipo_tlb_datos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Directa", "Asociativa", "Completamente Asoc." }));
         cb_tipo_tlb_datos.setToolTipText("Tipo de asociatividad de la TLB.");
@@ -465,6 +469,7 @@ public class Vista extends JPanel {
 
         n_entradas_c2_l7.setText("Número de entradas");
 
+        n_entradas_tlb_inst_t.setText("16");
         n_entradas_tlb_inst_t.setToolTipText("Número de entradas de la TLB de Instrucciones.");
         n_entradas_tlb_inst_t.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -474,7 +479,9 @@ public class Vista extends JPanel {
 
         n_vias_c2_l6.setText("Número de vías");
 
+        n_vias_tlb_inst_t.setText("1");
         n_vias_tlb_inst_t.setToolTipText("Número de vías de la TLB cuando es asociativa.");
+        n_vias_tlb_inst_t.setEnabled(false);
         n_vias_tlb_inst_t.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 n_vias_tlb_inst_tFocusLost(evt);
@@ -485,6 +492,7 @@ public class Vista extends JPanel {
 
         politica_reemplazo_tlb_inst_cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "LRU", "LFU", "FIFO", "AGING", "RANDOM" }));
         politica_reemplazo_tlb_inst_cb.setToolTipText("<html>Política de reemplazo utilizada para cachés asociativas:<br><br>  - <b>LRU:</b> Elimina la página menos utilizada recientemente.<br> - <b>NRU:</b> Elimina la página con menor número de utilizaciones.<br> - <b>FIFO:</b> Elimina la primera página que se asignó.<br> - <b>AGING:</b> Se basa en el histórico de accesos para determinar la página que se eliminará.<br> - <b>RANDOM:</b> Se selecciona una página aleatoriamente y se elimina.<br></html>");
+        politica_reemplazo_tlb_inst_cb.setEnabled(false);
 
         cb_tipo_tlb_inst.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Directa", "Asociativa", "Completamente Asoc." }));
         cb_tipo_tlb_inst.addActionListener(new java.awt.event.ActionListener() {
@@ -1469,11 +1477,53 @@ public class Vista extends JPanel {
     }//GEN-LAST:event_niv_cache_data_cbActionPerformed
 
     private void cb_tipo_tlb_datosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tipo_tlb_datosActionPerformed
-        // Nada
+        if(cb_tipo_tlb_datos.getSelectedIndex()==0)
+          {
+              n_vias_tlb_data_t.setText("1");
+              n_vias_tlb_data_t.setEnabled(false);
+             politica_reemplazo_tlb_data_cb1.setEnabled(false);
+          }
+          else if(cb_tipo_tlb_datos.getSelectedIndex()==1)
+          {
+              n_vias_tlb_data_t.setEnabled(true);
+              politica_reemplazo_tlb_data_cb1.setEnabled(true);
+          }
+          else
+              
+          {
+              n_vias_tlb_data_t.setEnabled(false);
+               
+               if(n_entradas_tlb_data_t.getText()!=null)
+              {
+               n_vias_tlb_data_t.setText(String.valueOf(getCD1NEntradas()));
+              }
+              politica_reemplazo_tlb_data_cb1.setEnabled(true);
+          }        // Nada
     }//GEN-LAST:event_cb_tipo_tlb_datosActionPerformed
 
     private void cb_tipo_tlb_instActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tipo_tlb_instActionPerformed
-        // Nada
+      if(cb_tipo_tlb_inst.getSelectedIndex()==0)
+          {
+              n_vias_tlb_inst_t.setText("1");
+              n_vias_tlb_inst_t.setEnabled(false);
+             politica_reemplazo_tlb_inst_cb.setEnabled(false);
+          }
+          else if(cb_tipo_tlb_inst.getSelectedIndex()==1)
+          {
+              n_vias_tlb_inst_t.setEnabled(true);
+              politica_reemplazo_tlb_inst_cb.setEnabled(true);
+          }
+          else
+              
+          {
+              n_vias_tlb_inst_t.setEnabled(false);
+               
+               if(n_entradas_tlb_inst_t.getText()!=null)
+              {
+               n_vias_tlb_inst_t.setText(String.valueOf(getCD1NEntradas()));
+              }
+              politica_reemplazo_tlb_inst_cb.setEnabled(true);
+          }   
     }//GEN-LAST:event_cb_tipo_tlb_instActionPerformed
 
     private void cb_tipo_cd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tipo_cd1ActionPerformed
@@ -1677,6 +1727,21 @@ public class Vista extends JPanel {
 
     private void n_entradas_tlb_data_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_entradas_tlb_data_tFocusLost
         // TODO add your handling code here:
+        try
+        {
+           if (cb_tipo_tlb_datos.getSelectedIndex() == 2)
+            {
+            // Escribimos en número de vías el mismo número que en este campo.
+            // El campo número de vías se supone que ya está desactivado (no se puede editar).
+                n_vias_tlb_data_t.setText(String.valueOf(getCD1NEntradas()));
+            }
+        }
+        catch(NumberFormatException e1)
+	{
+               n_entradas_tlb_data_t.setText("16");
+               n_vias_tlb_data_t.setText(String.valueOf(getCD1NEntradas()));
+		JOptionPane.showMessageDialog( this, "Valor incorrecto, sólo se aceptan valores numéricos o hexadecimales comenzando por # o 0x.", "Error de formato", JOptionPane.ERROR_MESSAGE );
+	}
     }//GEN-LAST:event_n_entradas_tlb_data_tFocusLost
 
     private void n_vias_tlb_data_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_vias_tlb_data_tFocusLost
@@ -1684,7 +1749,23 @@ public class Vista extends JPanel {
     }//GEN-LAST:event_n_vias_tlb_data_tFocusLost
 
     private void n_entradas_tlb_inst_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_entradas_tlb_inst_tFocusLost
+        // TODO add your handling code here:                                            
         // TODO add your handling code here:
+         try
+        {
+           if (cb_tipo_tlb_inst.getSelectedIndex() == 2)
+            {
+            // Escribimos en número de vías el mismo número que en este campo.
+            // El campo número de vías se supone que ya está desactivado (no se puede editar).
+                n_vias_tlb_inst_t.setText(String.valueOf(getCD1NEntradas()));
+            }
+        }
+        catch(NumberFormatException e1)
+	{
+               n_entradas_tlb_inst_t.setText("16");
+               n_vias_tlb_inst_t.setText(String.valueOf(getCD1NEntradas()));
+		JOptionPane.showMessageDialog( this, "Valor incorrecto, sólo se aceptan valores numéricos o hexadecimales comenzando por # o 0x.", "Error de formato", JOptionPane.ERROR_MESSAGE );
+	}
     }//GEN-LAST:event_n_entradas_tlb_inst_tFocusLost
 
     private void n_vias_tlb_inst_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_vias_tlb_inst_tFocusLost
@@ -2421,16 +2502,31 @@ public class Vista extends JPanel {
     public void enabledTLBInst(boolean b)
     {
     	panelesTLBs.setEnabledAt(1, b);
+        panelesTLBs.setSelectedIndex(1);
     	if(!b)
-    		panelesTLBs.setSelectedIndex(0);
+        {
+            panelesTLBs.setSelectedIndex(0);
+            n_vias_tlb_inst_t.setText("1");
+            cb_tipo_tlb_inst.setSelectedIndex(0);
+        }
     	
     }
     public void enabledTLBData(boolean b)
     {
+        if(!b)
+        {
     	n_entradas_tlb_data_t.setEnabled(b);
     	n_vias_tlb_data_t.setEnabled(b);
     	politica_reemplazo_tlb_data_cb1.setEnabled(b);
         cb_tipo_tlb_datos.setEnabled(b);
+        }
+        else
+        {
+            n_entradas_tlb_data_t.setEnabled(b);
+            n_vias_tlb_data_t.setText("1");
+            cb_tipo_tlb_datos.setEnabled(b);
+            cb_tipo_tlb_datos.setSelectedIndex(0);
+        }
     }
     public void enabledValidarT()
     {
