@@ -248,5 +248,15 @@ public class Global {
 			e.printStackTrace();
 		}
 	}
+	public static boolean esPotencia(int dato)
+	{
+		boolean es=false;
+		if(dato%2==0)
+		{
+			es=true;
+		}
+		
+		return es;
+	}
 }
 
