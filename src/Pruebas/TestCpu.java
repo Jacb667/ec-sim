@@ -19,10 +19,8 @@ import general.Global.TiposReemplazo;
 import general.Config;
 import general.Log;
 import general.MemoryException;
-import pckCpu.Cpu;
 import pckCpu.CpuMonociclo;
 import pckCpu.CpuException;
-import pckCpu.CpuSegmentado;
 import pckCpu.Decoder;
 import pckCpu.Instruccion;
 import pckMemoria.Cache;
@@ -239,10 +237,7 @@ public class TestCpu {
 			direccion_inst = primera_pag_inst * tablaPags.getEntradasPagina() * 4;
 		}
 		
-		//if (segmentado == true)
-		//	cpu = new CpuSegmentado(jmem, null, direccion_inst);
-		//else
-			cpu = new CpuMonociclo(jmem, null, direccion_inst);
+		cpu = new CpuMonociclo(jmem, null, direccion_inst);
 	}
 	
 	// Inicializa la Jerarquía de Memoria.
