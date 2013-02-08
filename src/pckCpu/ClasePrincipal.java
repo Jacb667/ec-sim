@@ -71,6 +71,8 @@ public class ClasePrincipal {
 	private boolean tlb_datos;
 	private boolean tlb_inst;
 	
+	private boolean tp_alojada;
+	
 	// CPU
 	private String archivo_cpu;
 	private String archivo_traza;
@@ -252,6 +254,8 @@ public class ClasePrincipal {
 		archivo_cpu = Config.get(Conf_Type_c.ARCHIVO_CODIGO);
 		archivo_traza = Config.get(Conf_Type_c.ARCHIVO_TRAZA);
 		
+		tp_alojada = Config.get(Conf_Type.TABLA_PAGINAS_ALOJADA) == 1 ? true : false;
+		
 		// Niveles de caché
 		niveles_cache1 = Config.get(Conf_Type.NIVELES_CACHE_DATOS);
 		niveles_cache2 =  Config.get(Conf_Type.NIVELES_CACHE_INSTRUCCIONES);
@@ -316,11 +320,13 @@ public class ClasePrincipal {
 		}
 		else
 		{
-			//if (tablaEnMemoria)
-			//{
-			int primera_pag_tabla = tablaPags.getNumeroPaginas() - paginas_tablaPags;
-			direccion_tablPags = primera_pag_tabla * tablaPags.getEntradasPagina() * 4;
-			//}
+			int primera_pag_tabla = tablaPags.getNumeroPaginas();
+			
+			if (tp_alojada)
+			{
+				primera_pag_tabla = tablaPags.getNumeroPaginas() - paginas_tablaPags;
+				direccion_tablPags = primera_pag_tabla * tablaPags.getEntradasPagina() * 4;
+			}
 			
 			int primera_pag_inst = primera_pag_tabla - paginas_instrucciones;
 			direccion_inst = primera_pag_inst * tablaPags.getEntradasPagina() * 4;
@@ -329,10 +335,7 @@ public class ClasePrincipal {
 			System.out.println("direccion_inst: " + direccion_inst);
 		}
 		
-		//if (segmentado == true)
-		//	cpu = new CpuSegmentado(jmem, null, direccion_inst);
-		//else
-			cpu = new CpuMonociclo(jmem, null, direccion_inst);
+		cpu = new CpuMonociclo(jmem, null, direccion_inst);
 	}
 	
 	// Inicializa la Jerarquía de Memoria.
@@ -420,7 +423,7 @@ public class ClasePrincipal {
 		}
 
 		// Tabla de Páginas
-		tablaPags = new TablaPaginas(entradas_pagina, palabras_linea, max_entrada, max_ent_mem, TiposReemplazo.LRU, tlb1, tlb2);
+		tablaPags = new TablaPaginas(entradas_pagina, palabras_linea, max_entrada, max_ent_mem, TiposReemplazo.LRU, tlb1, tlb2, tp_alojada);
 		
 		// Memoria principal.
 		memoria = new MemoriaPrincipal(tablaPags);
