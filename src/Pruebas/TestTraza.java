@@ -18,6 +18,7 @@ import componentes.VentanaOculta;
 import pckCpu.CpuMonociclo;
 import pckCpu.CpuException;
 import pckCpu.Decoder;
+import pckCpu.Traza;
 import pckMemoria.Cache;
 import pckMemoria.CacheAsociativa;
 import pckMemoria.CacheDirecta;
@@ -25,7 +26,6 @@ import pckMemoria.JerarquiaMemoria;
 import pckMemoria.MemoriaPrincipal;
 import pckMemoria.TablaPaginas;
 import pckMemoria.Tlb;
-import pckMemoria.Traza;
 
 public class TestTraza {
 
