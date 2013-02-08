@@ -2401,6 +2401,7 @@ public class Vista extends JPanel {
             tlb_inst_chb.setEnabled(true);
         }
     }
+    
     public void enabledTLBInst(boolean b)
     {
     	panelesTLBs.setEnabledAt(1, b);
@@ -2490,11 +2491,12 @@ public class Vista extends JPanel {
     }
     public int getTamLinea()
     {
-        int valor = Integer.decode(tam_linea_t.getText());
-        int multiplicador = getMultiplicadorComboBox(cb_tipo_tam_linea);
-        // Hay que dividir siempre entre 4 (bytes por línea).
-        int result = (valor * multiplicador) / 4;
-        return result;
+    	int valor = Integer.decode(tam_linea_t.getText());
+
+		if (cb_tipo_tam_linea.getSelectedItem().toString().toUpperCase() == "BYTES")
+			return valor / getTamPal();
+		else
+			return valor;
     }
     public int getCD1NEntradas()
     {
