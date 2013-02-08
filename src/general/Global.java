@@ -209,6 +209,12 @@ public class Global {
 		return (int) Math.ceil((Math.log(i) / Math.log(2)));
 	}
 	
+	// Comprueba si un número es potencia de 2.
+	public static boolean esPotencia(int n)
+	{
+		return (Math.log(n) / Math.log(2)) % 1 == 0;
+	}
+	
 	// Devuelve true/false si la cadena es numérica o no.
 	public static boolean esNumero(String s)
 	{
@@ -247,16 +253,6 @@ public class Global {
 		{
 			e.printStackTrace();
 		}
-	}
-	public static boolean esPotencia(int dato)
-	{
-		boolean es=false;
-		if(dato%2==0)
-		{
-			es=true;
-		}
-		
-		return es;
 	}
 }
 
