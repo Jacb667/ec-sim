@@ -134,12 +134,17 @@ public class CpuMonociclo implements Cpu {
 		{
 			// Si es un JAL, guarda PC+4 en $31
 			case JAL:
-				System.out.println("Guardo PC+4 y modifico PC.");
-				registros.guardarDato(31, getPC()+4);
+				registros.guardarDato(31, getPC());
 				if (inst.esDireccionVirtual())
+				{
+					System.out.println("Guardo PC+4 y modifico PC = " + inst.getDireccionSalto());
 					setPC(inst.getDireccionSalto());
+				}
 				else
+				{
+					System.out.println("Guardo PC+4 y modifico PC = " + calcularSalto(inst.getDireccionSalto()));
 					setPC(calcularSalto(inst.getDireccionSalto()));
+				}
 				break;
 			// Si es un J, modifico PC
 			case J:
@@ -151,7 +156,7 @@ public class CpuMonociclo implements Cpu {
 				break;
 			// Si es un JR, modifico PC
 			case JR:
-				System.out.println("Modifico PC.");
+				System.out.println("Modifico PC = " + dato1);
 				setPC(dato1);
 				break;
 			// Si es un BEQ, compruebo el flag zero de Alu antes de saltar.

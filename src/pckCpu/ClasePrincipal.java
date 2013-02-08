@@ -325,6 +325,9 @@ public class ClasePrincipal {
 			
 			int primera_pag_inst = primera_pag_tabla - paginas_instrucciones;
 			direccion_inst = primera_pag_inst * tablaPags.getEntradasPagina() * 4;
+			
+			System.out.println("direccion_tablPags: " + direccion_tablPags);
+			System.out.println("direccion_inst: " + direccion_inst);
 		}
 		
 		//if (segmentado == true)
