@@ -484,6 +484,9 @@
                             </Component>
                             <Component class="javax.swing.JTextField" name="n_entradas_tlb_data_t">
                               <Properties>
+                                <Property name="text" type="java.lang.String" value="16"/>
+                              </Properties>
+                              <Properties>
                                 <Property name="toolTipText" type="java.lang.String" value="N&#xfa;mero de entradas de la TLB de Datos."/>
                               </Properties>
                               <Events>
@@ -496,6 +499,10 @@
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JTextField" name="n_vias_tlb_data_t">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="1"/>
+                                <Property name="enabled" type="boolean" value="false"/>
+                              </Properties>
                               <Properties>
                                 <Property name="toolTipText" type="java.lang.String" value="N&#xfa;mero de v&#xed;as de la TLB cuando es asociativa."/>
                               </Properties>
@@ -519,6 +526,7 @@
                                     <StringItem index="4" value="RANDOM"/>
                                   </StringArray>
                                 </Property>
+                                <Property name="enabled" type="boolean" value="false"/>
                                 <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Pol&#xed;tica de reemplazo utilizada para cach&#xe9;s asociativas:&lt;br&gt;&lt;br&gt;&#xa;&#xa;- &lt;b&gt;LRU:&lt;/b&gt; Elimina la p&#xe1;gina menos utilizada recientemente.&lt;br&gt;&#xa;- &lt;b&gt;NRU:&lt;/b&gt; Elimina la p&#xe1;gina con menor n&#xfa;mero de utilizaciones.&lt;br&gt;&#xa;- &lt;b&gt;FIFO:&lt;/b&gt; Elimina la primera p&#xe1;gina que se asign&#xf3;.&lt;br&gt;&#xa;- &lt;b&gt;AGING:&lt;/b&gt; Se basa en el hist&#xf3;rico de accesos para determinar la p&#xe1;gina que se eliminar&#xe1;.&lt;br&gt;&#xa;- &lt;b&gt;RANDOM:&lt;/b&gt; Se selecciona una p&#xe1;gina aleatoriamente y se elimina.&lt;br&gt;&lt;/html&gt;"/>
                               </Properties>
                             </Component>
@@ -617,6 +625,9 @@
                             </Component>
                             <Component class="javax.swing.JTextField" name="n_entradas_tlb_inst_t">
                               <Properties>
+                                <Property name="text" type="java.lang.String" value="16"/>
+                              </Properties>
+                              <Properties>
                                 <Property name="toolTipText" type="java.lang.String" value="N&#xfa;mero de entradas de la TLB de Instrucciones."/>
                               </Properties>
                               <Events>
@@ -629,6 +640,10 @@
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JTextField" name="n_vias_tlb_inst_t">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="1"/>
+                                <Property name="enabled" type="boolean" value="false"/>
+                              </Properties>
                               <Properties>
                                 <Property name="toolTipText" type="java.lang.String" value="N&#xfa;mero de v&#xed;as de la TLB cuando es asociativa."/>
                               </Properties>
@@ -652,6 +667,7 @@
                                     <StringItem index="4" value="RANDOM"/>
                                   </StringArray>
                                 </Property>
+                                <Property name="enabled" type="boolean" value="false"/>
                                 <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Pol&#xed;tica de reemplazo utilizada para cach&#xe9;s asociativas:&lt;br&gt;&lt;br&gt;  - &lt;b&gt;LRU:&lt;/b&gt; Elimina la p&#xe1;gina menos utilizada recientemente.&lt;br&gt; - &lt;b&gt;NRU:&lt;/b&gt; Elimina la p&#xe1;gina con menor n&#xfa;mero de utilizaciones.&lt;br&gt; - &lt;b&gt;FIFO:&lt;/b&gt; Elimina la primera p&#xe1;gina que se asign&#xf3;.&lt;br&gt; - &lt;b&gt;AGING:&lt;/b&gt; Se basa en el hist&#xf3;rico de accesos para determinar la p&#xe1;gina que se eliminar&#xe1;.&lt;br&gt; - &lt;b&gt;RANDOM:&lt;/b&gt; Se selecciona una p&#xe1;gina aleatoriamente y se elimina.&lt;br&gt;&lt;/html&gt;"/>
                               </Properties>
                             </Component>
