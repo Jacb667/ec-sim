@@ -264,7 +264,9 @@ public class Vista extends JPanel {
 
         jLabel9.setText("Universidad de Málaga");
 
+        tp_alojada_chb.setSelected(true);
         tp_alojada_chb.setText("Alojada en memoria");
+        tp_alojada_chb.setToolTipText("<html>Especifica si la Tabla de Páginas se alojará en memoria principal.<br>\nSi no se aloja en memoria, la Tabla de Páginas funcionará de la misma forma, pero no se visualizará dentro de un marco.<br>\nDesactivar esta opción es aconsejable cuando se desea utilizar toda la memoria para el proceso, sin preocuparse por la memoria ocupada por la Tabla de Páginas.</html>");
 
         tabla_paginas_l.setText("Tabla de Páginas:");
 
@@ -383,6 +385,7 @@ public class Vista extends JPanel {
 
         n_entradas_c2_l4.setText("Número de entradas");
 
+        n_entradas_tlb_data_t.setToolTipText("Número de entradas de la TLB de Datos.");
         n_entradas_tlb_data_t.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 n_entradas_tlb_data_tFocusLost(evt);
@@ -391,6 +394,7 @@ public class Vista extends JPanel {
 
         n_vias_c2_l4.setText("Número de vías");
 
+        n_vias_tlb_data_t.setToolTipText("Número de vías de la TLB cuando es asociativa.");
         n_vias_tlb_data_t.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 n_vias_tlb_data_tFocusLost(evt);
@@ -400,8 +404,10 @@ public class Vista extends JPanel {
         politica_reemplazo_c1_l1.setText("Política de reemplazo");
 
         politica_reemplazo_tlb_data_cb1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "LRU", "LFU", "FIFO", "AGING", "RANDOM" }));
+        politica_reemplazo_tlb_data_cb1.setToolTipText("<html>Política de reemplazo utilizada para cachés asociativas:<br><br>\n\n- <b>LRU:</b> Elimina la página menos utilizada recientemente.<br>\n- <b>NRU:</b> Elimina la página con menor número de utilizaciones.<br>\n- <b>FIFO:</b> Elimina la primera página que se asignó.<br>\n- <b>AGING:</b> Se basa en el histórico de accesos para determinar la página que se eliminará.<br>\n- <b>RANDOM:</b> Se selecciona una página aleatoriamente y se elimina.<br></html>");
 
         cb_tipo_tlb_datos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Directa", "Asociativa", "Completamente Asoc." }));
+        cb_tipo_tlb_datos.setToolTipText("Tipo de asociatividad de la TLB.");
         cb_tipo_tlb_datos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_tipo_tlb_datosActionPerformed(evt);
@@ -459,6 +465,7 @@ public class Vista extends JPanel {
 
         n_entradas_c2_l7.setText("Número de entradas");
 
+        n_entradas_tlb_inst_t.setToolTipText("Número de entradas de la TLB de Instrucciones.");
         n_entradas_tlb_inst_t.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 n_entradas_tlb_inst_tFocusLost(evt);
@@ -467,6 +474,7 @@ public class Vista extends JPanel {
 
         n_vias_c2_l6.setText("Número de vías");
 
+        n_vias_tlb_inst_t.setToolTipText("Número de vías de la TLB cuando es asociativa.");
         n_vias_tlb_inst_t.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 n_vias_tlb_inst_tFocusLost(evt);
@@ -476,6 +484,7 @@ public class Vista extends JPanel {
         politica_reemplazo_c1_l3.setText("Política de reemplazo");
 
         politica_reemplazo_tlb_inst_cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "LRU", "LFU", "FIFO", "AGING", "RANDOM" }));
+        politica_reemplazo_tlb_inst_cb.setToolTipText("<html>Política de reemplazo utilizada para cachés asociativas:<br><br>  - <b>LRU:</b> Elimina la página menos utilizada recientemente.<br> - <b>NRU:</b> Elimina la página con menor número de utilizaciones.<br> - <b>FIFO:</b> Elimina la primera página que se asignó.<br> - <b>AGING:</b> Se basa en el histórico de accesos para determinar la página que se eliminará.<br> - <b>RANDOM:</b> Se selecciona una página aleatoriamente y se elimina.<br></html>");
 
         cb_tipo_tlb_inst.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Directa", "Asociativa", "Completamente Asoc." }));
         cb_tipo_tlb_inst.addActionListener(new java.awt.event.ActionListener() {
@@ -650,7 +659,7 @@ public class Vista extends JPanel {
         politica_reemplazo_c1_l.setText("Política de reemplazo:");
 
         politica_reemplazo_c1_cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "LRU", "LFU", "FIFO", "AGING", "RANDOM" }));
-        politica_reemplazo_c1_cb.setToolTipText("Política de reemplazo para cachés asociativas.");
+        politica_reemplazo_c1_cb.setToolTipText("<html>Política de reemplazo utilizada para cachés asociativas:<br><br>\n\n- <b>LRU:</b> Elimina el conjunto menos utilizado recientemente.<br>\n- <b>NRU:</b> Elimina el conjunto con menor número de utilizaciones.<br>\n- <b>FIFO:</b> Elimina el primer conjunto que entró.<br>\n- <b>AGING:</b> Se basa en el histórico de accesos para determinar el conjunto que se eliminará.<br>\n- <b>RANDOM:</b> Se selecciona un conjunto aleatoriamente y se elimina.<br></html>");
         politica_reemplazo_c1_cb.setEnabled(false);
 
         cb_tam_cd1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bytes", "KBytes", "MBytes" }));
@@ -746,7 +755,7 @@ public class Vista extends JPanel {
         politica_reemplazo_c2_l.setText("Política de reemplazo:");
 
         politica_reemplazo_c2_cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "LRU", "LFU", "FIFO", "AGING", "RANDOM" }));
-        politica_reemplazo_c2_cb.setToolTipText("Política de reemplazo para cachés asociativas.");
+        politica_reemplazo_c2_cb.setToolTipText("<html>Política de reemplazo utilizada para cachés asociativas:<br><br>  - <b>LRU:</b> Elimina el conjunto menos utilizado recientemente.<br> - <b>NRU:</b> Elimina el conjunto con menor número de utilizaciones.<br> - <b>FIFO:</b> Elimina el primer conjunto que entró.<br> - <b>AGING:</b> Se basa en el histórico de accesos para determinar el conjunto que se eliminará.<br> - <b>RANDOM:</b> Se selecciona un conjunto aleatoriamente y se elimina.<br></html>");
         politica_reemplazo_c2_cb.setEnabled(false);
 
         cb_tam_cd2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bytes", "KBytes", "MBytes" }));
@@ -842,7 +851,7 @@ public class Vista extends JPanel {
         politica_reemplazo_c3_l.setText("Política de reemplazo:");
 
         politica_reemplazo_c3_cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "LRU", "LFU", "FIFO", "AGING", "RANDOM" }));
-        politica_reemplazo_c3_cb.setToolTipText("Política de reemplazo para cachés asociativas.");
+        politica_reemplazo_c3_cb.setToolTipText("<html>Política de reemplazo utilizada para cachés asociativas:<br><br>  - <b>LRU:</b> Elimina el conjunto menos utilizado recientemente.<br> - <b>NRU:</b> Elimina el conjunto con menor número de utilizaciones.<br> - <b>FIFO:</b> Elimina el primer conjunto que entró.<br> - <b>AGING:</b> Se basa en el histórico de accesos para determinar el conjunto que se eliminará.<br> - <b>RANDOM:</b> Se selecciona un conjunto aleatoriamente y se elimina.<br></html>");
         politica_reemplazo_c3_cb.setEnabled(false);
 
         cb_tam_cd3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bytes", "KBytes", "MBytes" }));
@@ -930,7 +939,7 @@ public class Vista extends JPanel {
         politica_reemplazo_c4_l.setText("Política de reemplazo:");
 
         politica_reemplazo_c4_cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "LRU", "LFU", "FIFO", "AGING", "RANDOM" }));
-        politica_reemplazo_c4_cb.setToolTipText("Política de reemplazo para cachés asociativas.");
+        politica_reemplazo_c4_cb.setToolTipText("<html>Política de reemplazo utilizada para cachés asociativas:<br><br>  - <b>LRU:</b> Elimina el conjunto menos utilizado recientemente.<br> - <b>NRU:</b> Elimina el conjunto con menor número de utilizaciones.<br> - <b>FIFO:</b> Elimina el primer conjunto que entró.<br> - <b>AGING:</b> Se basa en el histórico de accesos para determinar el conjunto que se eliminará.<br> - <b>RANDOM:</b> Se selecciona un conjunto aleatoriamente y se elimina.<br></html>");
         politica_reemplazo_c4_cb.setEnabled(false);
 
         cb_tam_cd4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bytes", "KBytes", "MBytes" }));
@@ -1018,7 +1027,7 @@ public class Vista extends JPanel {
         politica_reemplazo_c5_l.setText("Política de reemplazo:");
 
         politica_reemplazo_c5_cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "LRU", "LFU", "FIFO", "AGING", "RANDOM" }));
-        politica_reemplazo_c5_cb.setToolTipText("Política de reemplazo para cachés asociativas.");
+        politica_reemplazo_c5_cb.setToolTipText("<html>Política de reemplazo utilizada para cachés asociativas:<br><br>  - <b>LRU:</b> Elimina el conjunto menos utilizado recientemente.<br> - <b>NRU:</b> Elimina el conjunto con menor número de utilizaciones.<br> - <b>FIFO:</b> Elimina el primer conjunto que entró.<br> - <b>AGING:</b> Se basa en el histórico de accesos para determinar el conjunto que se eliminará.<br> - <b>RANDOM:</b> Se selecciona un conjunto aleatoriamente y se elimina.<br></html>");
         politica_reemplazo_c5_cb.setEnabled(false);
 
         cb_tam_cd5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bytes", "KBytes", "MBytes" }));
@@ -1106,7 +1115,7 @@ public class Vista extends JPanel {
         politica_reemplazo_c6_l.setText("Política de reemplazo:");
 
         politica_reemplazo_c6_cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "LRU", "LFU", "FIFO", "AGING", "RANDOM" }));
-        politica_reemplazo_c6_cb.setToolTipText("Política de reemplazo para cachés asociativas.");
+        politica_reemplazo_c6_cb.setToolTipText("<html>Política de reemplazo utilizada para cachés asociativas:<br><br>  - <b>LRU:</b> Elimina el conjunto menos utilizado recientemente.<br> - <b>NRU:</b> Elimina el conjunto con menor número de utilizaciones.<br> - <b>FIFO:</b> Elimina el primer conjunto que entró.<br> - <b>AGING:</b> Se basa en el histórico de accesos para determinar el conjunto que se eliminará.<br> - <b>RANDOM:</b> Se selecciona un conjunto aleatoriamente y se elimina.<br></html>");
         politica_reemplazo_c6_cb.setEnabled(false);
 
         cb_tam_cd6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bytes", "KBytes", "MBytes" }));
