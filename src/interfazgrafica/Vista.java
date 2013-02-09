@@ -2786,5 +2786,10 @@ public class Vista extends JPanel {
 	{
 		return resultadoTraza;
 	}
+	
+	public void mostrarBotonMemoria(boolean b)
+	{
+		memoria_b.setEnabled(b);
+	}
 
 }

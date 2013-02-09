@@ -49,7 +49,7 @@ public class Controlador implements ActionListener {
 				error = 1;
 				
 				if (v.getEntradasMemP() > 16384)
-					JOptionPane.showMessageDialog( v, "Aviso, no se puede mostrar la memoria si tiene más de " + 16384 + " entradas.", "Advertencia", JOptionPane.WARNING_MESSAGE );	
+					JOptionPane.showMessageDialog( v, "Aviso, no se puede mostrar la memoria si tiene más de " + 16384 + " entradas (128KB).", "Advertencia", JOptionPane.WARNING_MESSAGE );	
 				
 				if(v.tlbDataCheck())
 					Config.set(Conf_Type.TLB_DATOS, 1);

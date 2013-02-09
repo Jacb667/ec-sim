@@ -429,25 +429,26 @@ public class ClasePrincipal implements Runnable {
 	// Inicializa la interfaz gráfica.
 	private void inicializarInterfaz() throws Exception
 	{
-		System.out.println("Validando 11");
 		//UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		
-		tablaMemoria = new Tabla(memoria);
-		frameMemoria = new VentanaLimitada();
-		System.out.println("Validando 12");
-		JScrollPane jscroll1 = new JScrollPane(tablaMemoria, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		frameMemoria.setTitle("Memoria");
-		frameMemoria.setPreferredSize( new Dimension(245, 400) );
-		frameMemoria.setMinimumSize(new Dimension(250, 400));
-		frameMemoria.setMaximumSize(new Dimension(400, 2000));
-		System.out.println("Validando 13");
-		frameMemoria.add( jscroll1 );
-		frameMemoria.pack();
-		frameMemoria.addWindowListener(new VentanaOculta(frameMemoria));
-		System.out.println("Validando 14");
-		frameMemoria.setVisible(false);
-		memoria.setInterfaz(tablaMemoria);
-		System.out.println("Validando 12");
+		if (max_ent_mem > 16384)
+			Config.getVista().mostrarBotonMemoria(false);
+		else
+		{
+			Config.getVista().mostrarBotonMemoria(true);
+			tablaMemoria = new Tabla(memoria);
+			frameMemoria = new VentanaLimitada();
+			JScrollPane jscroll1 = new JScrollPane(tablaMemoria, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+			frameMemoria.setTitle("Memoria");
+			frameMemoria.setPreferredSize( new Dimension(245, 400) );
+			frameMemoria.setMinimumSize(new Dimension(250, 400));
+			frameMemoria.setMaximumSize(new Dimension(400, 2000));
+			frameMemoria.add( jscroll1 );
+			frameMemoria.pack();
+			frameMemoria.addWindowListener(new VentanaOculta(frameMemoria));
+			frameMemoria.setVisible(false);
+			memoria.setInterfaz(tablaMemoria);
+		}
 		
 		
 		tablasCache1 = new Tabla[niveles_cache1];
@@ -470,7 +471,6 @@ public class ClasePrincipal implements Runnable {
 			framesCache1[i].setVisible(false);
 			caches1[i].setInterfaz(tablasCache1[i]);
 		}
-		System.out.println("Validando 14");
 		if (nivelJerarquiasSeparadas > 1)
 		{
 			tablasCache2 = new Tabla[niveles_cache2];
@@ -515,7 +515,7 @@ public class ClasePrincipal implements Runnable {
 					JOptionPane.showMessageDialog( v, e, "Se ha producido una excepción", JOptionPane.ERROR_MESSAGE );
 			}
 			
-			Log.generarEstadistica();
+			//Log.generarEstadistica();
 		}
 	}
 }
