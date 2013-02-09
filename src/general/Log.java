@@ -320,7 +320,27 @@ public class Log {
 		}
 	}
 	
-	public static void println(int n, String s, Color color, boolean negrita)
+	public static void println(int n, String s, Color color)
+	{
+		// Filtramos el nivel de log.
+		if (n <= nivel)
+		{
+			// Llamamos al controlador para que muestre el mensaje en el lugar adecuado.
+			if(Config.getVista()!=null)
+			{
+				SimpleAttributeSet aset = new SimpleAttributeSet(); 
+				StyleConstants.setForeground(aset, color);
+		        
+				if (Config.ejecutando_codigo)
+					Config.getVista().resEjec(s+"\n", aset);
+				else
+					Config.getVista().resTraza(s+"\n", aset);
+			}
+			System.out.println(s);
+		}
+	}
+	
+	public static void println(int n, String s, Color color, boolean negrita, boolean cursiva)
 	{
 		// Filtramos el nivel de log.
 		if (n <= nivel)
@@ -331,6 +351,7 @@ public class Log {
 				SimpleAttributeSet aset = new SimpleAttributeSet(); 
 				StyleConstants.setForeground(aset, color);
 				StyleConstants.setBold(aset, negrita);
+				StyleConstants.setItalic(aset, cursiva);
 		        
 				if (Config.ejecutando_codigo)
 					Config.getVista().resEjec(s+"\n", aset);
