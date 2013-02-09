@@ -251,6 +251,7 @@ public class Controlador implements ActionListener {
 				v.enabledConfig(false);
 				
 				claseP = new ClasePrincipal();
+				claseP.iniciarTraza();
 				//claseP.validarCodigo();
 			}
 			catch(NumberFormatException e1)
@@ -287,7 +288,6 @@ public class Controlador implements ActionListener {
 			//System.out.println("ENTRA2");
 			if (claseP != null)
 			{	
-				claseP.iniciarTraza();
 				String s=null;
 				//System.out.println("ENTRA");
 				try {
