@@ -67,6 +67,7 @@ public class CpuMonociclo {
 		if (inst.getOpcode() == Opcode.TRAP)
 			return false;
 		
+		// Fetch memoria.
 		if (jinstr != null)
 			jinstr.leerDato(getPC());
 		else

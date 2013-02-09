@@ -6,6 +6,7 @@ import general.Log;
 import general.Log.Flags;
 import general.MemoryException;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -81,14 +82,16 @@ public class TablaPaginas {
 		tlb_datos = tlb1;
 		tlb_inst = tlb2;
 		
-		System.out.println("entrada_maxima: " + entrada_maxima);
-		System.out.println("tam_pagina: " + ent_pag);
-		System.out.println("num_paginas: " + num_paginas);
-		System.out.println("num_marcos: " + num_marcos);
+		Log.printDebug("Máxima entrada: " + entrada_maxima);
+		Log.printDebug("Tamaño página: " + ent_pag);
+		Log.printDebug("Número páginas: " + num_paginas);
+		Log.printDebug("Número marcos: " + num_marcos);
 		
-		System.out.println("Máxima dirección virtual: " + ((entrada_maxima << 2)-1));
-		System.out.println("Máxima dirección física: " + (((num_paginas) << Global.bitsDireccionar(tam_pagina))-1));
-		System.out.println("Máxima dirección memoria: " + (((num_marcos) << Global.bitsDireccionar(tam_pagina))-1));
+		Log.printDebug("Máxima dirección virtual: " + ((entrada_maxima << 2)-1));
+		Log.printDebug("Máxima dirección física: " + (((num_paginas) << Global.bitsDireccionar(tam_pagina))-1));
+		Log.printDebug("Máxima dirección memoria: " + (((num_marcos) << Global.bitsDireccionar(tam_pagina))-1));
+		
+		Log.printSeparador(3);
 		
 		// La política sólo tendrá 1 entrada, con el número de marcos que hay.
 		politica = new PoliticaReemplazo(_Tpolitica, 1, marcos.length);
@@ -98,7 +101,6 @@ public class TablaPaginas {
 	{
 		int numPags = (int) Math.ceil(num_paginas / entradas_pagina);
 		Pagina[] res = new Pagina[numPags];
-		System.out.println("PV = " + numPags);
 		
 		int direccion_inicio = direccion;
 		
@@ -139,7 +141,7 @@ public class TablaPaginas {
 	private Pagina crearPagina(int direccion) throws MemoryException
 	{
 		int id = calcularId(direccion);
-		Log.println(3, "Creando página " + id);
+		Log.printDebug("Creando página " + id);
 		Pagina nueva = new Pagina(entradas_pagina, palabras_linea, id);
 		paginas.put(id, nueva);
 		return nueva;
@@ -155,6 +157,8 @@ public class TablaPaginas {
 	// Si no le corresponde una dirección física deberá poner la página en un marco.
 	public Direccion traducirDireccion(int direccion, boolean secundaria) throws MemoryException
 	{
+		Log.printDebug("Se traduce la dirección " + direccion);
+		
 		if ((direccion >> Global.bitsDireccionar(bytes_palabra)) >= entrada_maxima)
 			throw new MemoryException("La dirección 0x" + Integer.toHexString(direccion) + " sobrepasa el límite de direccionamiento.");
 		
@@ -164,24 +168,27 @@ public class TablaPaginas {
 		// Ya tenemos la página correspondiente, comprobamos si está en un marco.
 		if (pag.getMarco() != -1)
 		{
-			// Comprobamos si está en la TLB (en realidad no se utiliza para nada, sólo para ver si es HIT o MISS)
+			boolean tlb_hit = false;
+			
+			// Comprobamos si está en la TLB.
 			if (secundaria == false)
 			{
 				if (tlb_datos != null)
 				{
 					if (tlb_datos.existePagina(pag.getId()))
 					{
-						Log.report(Flags.TLB_HIT, secundaria);
-						Log.println(2,"TLB HIT");
+						Log.report(Flags.TLB_HIT);
+						Log.println(1,"TLB HIT", Color.GREEN, false);
+						tlb_hit = true;
 					}
 					else
 					{
 						// MISS, la guardamos en TLB
 						if (!tlb_datos.hayHueco(pag.getId()))
-							Log.report(Flags.CONFLICT_TLB, secundaria);
+							Log.report(Flags.CONFLICT_TLB);
 						tlb_datos.insertar(pag.getId(), pag.getMarco());
-						Log.report(Flags.TLB_MISS, secundaria);
-						Log.println(2,"TLB MISS");
+						Log.report(Flags.TLB_MISS);
+						Log.println(1,"TLB MISS", Color.RED, false);
 					}
 				}
 			}
@@ -191,28 +198,43 @@ public class TablaPaginas {
 				{
 					if (tlb_inst.existePagina(pag.getId()))
 					{
-						Log.report(Flags.TLB_HIT, secundaria);
-						Log.println(2,"TLB HIT");
+						Log.report(Flags.TLB_HIT_F);
+						Log.println(1,"ITLB HIT", Color.GREEN, false);
+						tlb_hit = true;
 					}
 					else
 					{
 						// MISS, la guardamos en TLB
 						if (!tlb_inst.hayHueco(pag.getId()))
-							Log.report(Flags.CONFLICT_TLB, secundaria);
+							Log.report(Flags.CONFLICT_TLB_F);
 						tlb_inst.insertar(pag.getId(), pag.getMarco());
-						Log.report(Flags.TLB_MISS, secundaria);
-						Log.println(2,"TLB MISS");
+						Log.report(Flags.TLB_MISS_F);
+						Log.println(1,"ITLB MISS", Color.RED, false);
 					}
+				}
+			}
+			
+			// Comprobamos la tabla de páginas.
+			if (!tlb_hit)
+			{
+				if (tablaPagsEnMemoria)
+				{
+					int dirPag = registroTablaPaginas + pag.getId()*4;
+					Log.println(2, "Se accede a leer la posición " + dirPag + " para traducir.", Color.BLUE);
+				}
+				else
+				{
+					Log.println(2, "Se accede a la tabla de páginas para traducir.", Color.BLUE);
 				}
 			}
 			
 			// Si estamos aquí es porque se ha encontrado la página asociada a un marco.
 			// OJO! Puede ser PAGE HIT y TLB MISS.
-			Log.report(Flags.PAGE_HIT, secundaria);
-			Log.println(2,"PAGE HIT");
+			Log.report(Flags.PAGE_HIT);
+			Log.println(2,"PAGE HIT", Color.GREEN);
 			
 			// La página está en un marco, podemos traducir la dirección.
-			//Log.println(3, "La página ya está en el marco " + pag.getMarco());
+			Log.printDebug("La página ya está en el marco " + pag.getMarco());
 			return calcularDireccion(direccion, pag.getMarco());
 		}
 		else
@@ -223,10 +245,10 @@ public class TablaPaginas {
 				if (tlb_datos != null)
 				{
 					if (!tlb_datos.hayHueco(pag.getId()))
-						Log.report(Flags.CONFLICT_TLB, secundaria);
+						Log.report(Flags.CONFLICT_TLB);
 					tlb_datos.insertar(pag.getId(), pag.getMarco());
-					Log.report(Flags.TLB_MISS, secundaria);
-					Log.println(2,"TLB MISS");
+					Log.report(Flags.TLB_MISS);
+					Log.println(1,"TLB MISS", Color.RED, false);
 				}
 			}
 			else
@@ -234,10 +256,10 @@ public class TablaPaginas {
 				if (tlb_inst != null)
 				{
 					if (!tlb_inst.hayHueco(pag.getId()))
-						Log.report(Flags.CONFLICT_TLB, secundaria);
+						Log.report(Flags.CONFLICT_TLB_F);
 					tlb_inst.insertar(pag.getId(), pag.getMarco());
-					Log.report(Flags.TLB_MISS, secundaria);
-					Log.println(2,"TLB MISS");
+					Log.report(Flags.TLB_MISS_F);
+					Log.println(1,"TLB MISS", Color.RED, false);
 				}
 			}
 			
@@ -245,29 +267,29 @@ public class TablaPaginas {
 			if (tablaPagsEnMemoria)
 			{
 				int dirPag = registroTablaPaginas + pag.getId()*4;
-				System.out.println(">>> Se accede a leer la posición " + dirPag + " para traducir.");
+				Log.println(2, "Se accede a leer la posición " + dirPag + " para traducir.", Color.BLUE);
 			}
 			else
 			{
-				System.out.println(">>> Se accede a la tabla de páginas para traducir.");
+				Log.println(2, "Se accede a la tabla de páginas para traducir.", Color.BLUE);
 			}
 			
 			// Es PAGE FAULT
-			Log.report(Flags.PAGE_FAULT, secundaria);
+			Log.report(Flags.PAGE_FAULT);
 			Log.println(2,"PAGE FAULT");
 			// Tenemos que guardar la página en un marco.
 			int marco = buscarMarcoLibre();
 			if (marco != -1)
 			{
 				asignarPaginaMarco(pag, marco);
-				Log.println(3, "Página asignada al marco " + marco);
+				Log.println(2, "SO: Página asignada al marco " + marco);
 				return calcularDireccion(direccion, marco);
 			}
 			else
 			{
 				marco = liberarMarco();
 				asignarPaginaMarco(pag, marco);
-				Log.println(3, "Se ha reemplazado la página del marco " + marco);
+				Log.println(2, "SO: Se ha reemplazado la página del marco " + marco);
 				return calcularDireccion(direccion, marco);
 			}
 		}
@@ -350,11 +372,11 @@ public class TablaPaginas {
 		
 		int id = marcos[marco_libre].getId();
 		
-		Log.report(Flags.CONFLICT_PAGE, false);
+		Log.report(Flags.CONFLICT_PAGE);
 		if (marcos[marco_libre].esDirty())
 		{
 			marcos[marco_libre].escribirDisco();
-			Log.println(3, "Se escribe la página " + id + " en disco.");
+			Log.println(2, "Se escribe la página " + id + " en disco.");
 		}
 		
 		// Eliminamos todas las referencias a la página anterior en caché.
