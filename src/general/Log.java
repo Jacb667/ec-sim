@@ -340,7 +340,8 @@ public class Log {
 		}
 	}
 	
-	public static void println(int n, String s, Color color, boolean negrita, boolean cursiva)
+	// Tipo: true = negrita, false = cursiva
+	public static void println(int n, String s, Color color, boolean tipo)
 	{
 		// Filtramos el nivel de log.
 		if (n <= nivel)
@@ -350,8 +351,8 @@ public class Log {
 			{
 				SimpleAttributeSet aset = new SimpleAttributeSet(); 
 				StyleConstants.setForeground(aset, color);
-				StyleConstants.setBold(aset, negrita);
-				StyleConstants.setItalic(aset, cursiva);
+				StyleConstants.setBold(aset, tipo);
+				StyleConstants.setItalic(aset, !tipo);
 		        
 				if (Config.ejecutando_codigo)
 					Config.getVista().resEjec(s+"\n", aset);
@@ -362,20 +363,23 @@ public class Log {
 		}
 	}
 	
-	public static void print(int n, String s)
+	public static void printDebug(String s)
 	{
 		// Filtramos el nivel de log.
-		if (n <= nivel)
+		if (nivel >= 3)
 		{
 			// Llamamos al controlador para que muestre el mensaje en el lugar adecuado.
 			if(Config.getVista()!=null)
 			{
+				SimpleAttributeSet aset = new SimpleAttributeSet(); 
+				StyleConstants.setItalic(aset, true);
+		        
 				if (Config.ejecutando_codigo)
-					Config.getVista().resEjec(s, null);
+					Config.getVista().resEjec("DEBUG: " + s + "\n", aset);
 				else
-					Config.getVista().resTraza(s, null);
+					Config.getVista().resTraza("DEBUG: " + s + "\n", aset);
 			}
-			System.out.println(s);
+			System.out.println("DEBUG: " + s);
 		}
 	}
 	
@@ -391,49 +395,5 @@ public class Log {
 					Config.getVista().resTraza("----------------------------------------\n", null);
 			}
 			System.out.println("----------------------------------------\n");
-	}
-	
-	public static void errorln(int n, String s)
-	{
-		// Filtramos el nivel de log.
-		if (n <= nivel)
-		{
-			// Llamamos al controlador para que muestre el mensaje en el lugar adecuado.
-			// TODO: De momento hacemos una llamada a System.out.
-			System.out.println(s);
-		}
-	}
-	
-	public static void error(int n, String s)
-	{
-		// Filtramos el nivel de log.
-		if (n <= nivel)
-		{
-			// Llamamos al controlador para que muestre el mensaje en el lugar adecuado.
-			// TODO: De momento hacemos una llamada a System.out.
-			System.out.print(s);
-		}
-	}
-	
-	public static void correctln(int n, String s)
-	{
-		// Filtramos el nivel de log.
-		if (n <= nivel)
-		{
-			// Llamamos al controlador para que muestre el mensaje en el lugar adecuado.
-			// TODO: De momento hacemos una llamada a System.out.
-			System.out.println(s);
-		}
-	}
-	
-	public static void correct(int n, String s)
-	{
-		// Filtramos el nivel de log.
-		if (n <= nivel)
-		{
-			// Llamamos al controlador para que muestre el mensaje en el lugar adecuado.
-			// TODO: De momento hacemos una llamada a System.out.
-			System.out.print(s);
-		}
 	}
 }
