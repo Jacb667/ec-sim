@@ -386,6 +386,7 @@ public class Log {
 	public static void printSeparador(int n)
 	{
 		if (n <= nivel)
+		{
 			// Llamamos al controlador para que muestre el mensaje en el lugar adecuado.
 			if(Config.getVista()!=null)
 			{
@@ -395,5 +396,41 @@ public class Log {
 					Config.getVista().resTraza("----------------------------------------\n", null);
 			}
 			System.out.println("----------------------------------------\n");
+		}
+	}
+	
+	public static void limpiar()
+	{
+		cache_hits = new int[3];
+		cache_misses = new int[3];
+		cache_conflicts = new int[3];
+		
+		cache_hits_f = new int[3];			// Para Fetch
+		cache_misses_f = new int[3];		// Para Fetch
+		cache_conflicts_f = new int[3];		// Para Fetch
+		
+		accesosBloques = 0;
+		lecturasBloques = 0;
+		escriturasBloques = 0;
+		
+		accesosMemoria = 0;
+		lecturasMemoria = 0;
+		escriturasMemoria = 0;
+		
+		accesosPagina = 0;
+		fallosPagina = 0;
+		aciertosPagina = 0;
+		conflictosPagina = 0;
+		
+		accesosTlb = 0;
+		fallosTlb = 0;
+		aciertosTlb = 0;
+		conflictosTlb = 0;
+		accesosTlb_f = 0;		// Para Fetch
+		fallosTlb_f = 0;		// Para Fetch
+		aciertosTlb_f = 0;		// Para Fetch
+		conflictosTlb_f = 0;	// Para Fetch
+		
+		accesosTablaPaginas = 0;
 	}
 }
