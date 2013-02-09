@@ -316,7 +316,11 @@ public class Controlador implements ActionListener {
 		{
 			Config.ejecutando_codigo = true;
 			if (claseP != null)
+			{
 				claseP.ejecutarCodigo();
+				Thread thread = new Thread(claseP);
+				thread.start();
+			}
 			v.enabledConfig(true);
 		}
 		else if (comando.equals(Global.CICLO))

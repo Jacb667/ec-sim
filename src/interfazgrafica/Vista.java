@@ -17,10 +17,6 @@ import javax.swing.text.Document;
  */
 public class Vista extends JPanel {
     
-    private boolean cachesUnificadas;
-
-    private JPanel[] paneles_cache;
-    
     // Traza
     private String archivoTraza;
     private String resultadoTraza;
