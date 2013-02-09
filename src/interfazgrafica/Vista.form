@@ -915,7 +915,7 @@
                                 <Property name="text" type="java.lang.String" value="16"/>
                                 <Property name="toolTipText" type="java.lang.String" value="Tama&#xf1;o de la cach&#xe9;."/>
                                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                                  <Color id="Cursor Por defecto"/>
+                                  <Color id="Default Cursor"/>
                                 </Property>
                                 <Property name="name" type="java.lang.String" value="" noResource="true"/>
                               </Properties>
@@ -1078,7 +1078,7 @@
                                 <Property name="text" type="java.lang.String" value="16"/>
                                 <Property name="toolTipText" type="java.lang.String" value="Tama&#xf1;o de la cach&#xe9;."/>
                                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                                  <Color id="Cursor Por defecto"/>
+                                  <Color id="Default Cursor"/>
                                 </Property>
                                 <Property name="name" type="java.lang.String" value="" noResource="true"/>
                               </Properties>
@@ -1229,7 +1229,7 @@
                                 <Property name="text" type="java.lang.String" value="16"/>
                                 <Property name="toolTipText" type="java.lang.String" value="Tama&#xf1;o de la cach&#xe9;."/>
                                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                                  <Color id="Cursor Por defecto"/>
+                                  <Color id="Default Cursor"/>
                                 </Property>
                                 <Property name="name" type="java.lang.String" value="" noResource="true"/>
                               </Properties>
@@ -1380,7 +1380,7 @@
                                 <Property name="text" type="java.lang.String" value="16"/>
                                 <Property name="toolTipText" type="java.lang.String" value="Tama&#xf1;o de la cach&#xe9;."/>
                                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                                  <Color id="Cursor Por defecto"/>
+                                  <Color id="Default Cursor"/>
                                 </Property>
                                 <Property name="name" type="java.lang.String" value="" noResource="true"/>
                               </Properties>
@@ -1531,7 +1531,7 @@
                                 <Property name="text" type="java.lang.String" value="16"/>
                                 <Property name="toolTipText" type="java.lang.String" value="Tama&#xf1;o de la cach&#xe9;."/>
                                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                                  <Color id="Cursor Por defecto"/>
+                                  <Color id="Default Cursor"/>
                                 </Property>
                                 <Property name="name" type="java.lang.String" value="" noResource="true"/>
                               </Properties>
@@ -1682,7 +1682,7 @@
                                 <Property name="text" type="java.lang.String" value="16"/>
                                 <Property name="toolTipText" type="java.lang.String" value="Tama&#xf1;o de la cach&#xe9;."/>
                                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                                  <Color id="Cursor Por defecto"/>
+                                  <Color id="Default Cursor"/>
                                 </Property>
                                 <Property name="name" type="java.lang.String" value="" noResource="true"/>
                               </Properties>
@@ -1812,7 +1812,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane3" max="32767" attributes="0"/>
+                          <Component id="scroll_ejecucion_a" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="salvar_t" max="32767" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -1843,7 +1843,7 @@
                           <Component id="limpiar_t_b" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jScrollPane3" pref="252" max="32767" attributes="0"/>
+                      <Component id="scroll_ejecucion_a" pref="252" max="32767" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="salvar_t" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -1891,7 +1891,7 @@
                 <Property name="text" type="java.lang.String" value="Limpiar"/>
               </Properties>
             </Component>
-            <Container class="javax.swing.JScrollPane" name="jScrollPane3">
+            <Container class="javax.swing.JScrollPane" name="scroll_ejecucion_a">
               <AuxValues>
                 <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
               </AuxValues>
@@ -1922,7 +1922,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane2" max="32767" attributes="0"/>
+                          <Component id="scroll_ejecucion_a1" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="cargar_codigo_b" min="-2" pref="110" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -1975,7 +1975,7 @@
                           <Component id="limpiar_ej_b" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jScrollPane2" pref="218" max="32767" attributes="0"/>
+                      <Component id="scroll_ejecucion_a1" pref="218" max="32767" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="cache_d1_b" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -2073,7 +2073,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cache_i3_bActionPerformed"/>
               </Events>
             </Component>
-            <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+            <Container class="javax.swing.JScrollPane" name="scroll_ejecucion_a1">
               <AuxValues>
                 <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
               </AuxValues>
