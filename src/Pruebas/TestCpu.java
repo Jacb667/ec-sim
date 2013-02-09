@@ -333,9 +333,9 @@ public class TestCpu {
 		memoria = new MemoriaPrincipal(tablaPags);
 		
 		// Inicializar la Jerarquía de Memoria.
-		jmem = new JerarquiaMemoria(tablaPags, caches1, memoria);
+		jmem = new JerarquiaMemoria(tablaPags, caches1, memoria, false);
 		if (nivelJerarquiasSeparadas > 1)
-			jmem2 = new JerarquiaMemoria(tablaPags, caches2, memoria);
+			jmem2 = new JerarquiaMemoria(tablaPags, caches2, memoria, true);
 		
 		tablaPags.setJerarquiaMemoria(jmem, jmem2);
 	}
