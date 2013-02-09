@@ -30,7 +30,7 @@ import pckMemoria.MemoriaPrincipal;
 import pckMemoria.TablaPaginas;
 import pckMemoria.Tlb;
 
-public class ClasePrincipal {
+public class ClasePrincipal implements Runnable {
 	
 	private int bytes_palabra;
 	private int palabras_linea;
@@ -72,6 +72,8 @@ public class ClasePrincipal {
 	private boolean tlb_inst;
 	
 	private boolean tp_alojada;
+	
+	private boolean codigo1_traza0;
 	
 	// CPU
 	private String archivo_cpu;
@@ -166,21 +168,7 @@ public class ClasePrincipal {
 	
 	public void ejecutarCodigo()
 	{
-		// Una vez tenemos el código guardado en memoria, comenzamos la ejecución.
-		try
-		{
-			cpu.ejecutarCodigo();
-		}
-		catch (MemoryException | CpuException e)
-		{
-			Vista v = Config.getVista();
-			if (v == null)
-				System.err.println(e);
-			else
-				JOptionPane.showMessageDialog( v, e, "Se ha producido una excepción", JOptionPane.ERROR_MESSAGE );
-		}
-		
-		Log.generarEstadistica();
+		codigo1_traza0 = true;
 	}
 	
 	public void ejecutarCicloCodigo()
@@ -505,6 +493,29 @@ public class ClasePrincipal {
 				framesCache2[i].setVisible(false);
 				caches1[i].setInterfaz(tablasCache2[i]);
 			}
+		}
+	}
+
+	@Override
+	public void run()
+	{
+		if (codigo1_traza0)
+		{
+			// Una vez tenemos el código guardado en memoria, comenzamos la ejecución.
+			try
+			{
+				cpu.ejecutarCodigo();
+			}
+			catch (MemoryException | CpuException e)
+			{
+				Vista v = Config.getVista();
+				if (v == null)
+					System.err.println(e);
+				else
+					JOptionPane.showMessageDialog( v, e, "Se ha producido una excepción", JOptionPane.ERROR_MESSAGE );
+			}
+			
+			Log.generarEstadistica();
 		}
 	}
 }
