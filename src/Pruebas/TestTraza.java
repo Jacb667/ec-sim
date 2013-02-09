@@ -149,8 +149,8 @@ public class TestTraza {
 		memoria = new MemoriaPrincipal(tablaPags);
 		
 		// Inicializar la Jerarquía de Memoria.
-		jmem = new JerarquiaMemoria(tablaPags, caches, memoria);
-		jmem2= new JerarquiaMemoria(tablaPags,cache2,memoria);
+		jmem = new JerarquiaMemoria(tablaPags, caches, memoria, false);
+		jmem2= new JerarquiaMemoria(tablaPags,cache2,memoria, true);
 
 		tablaPags.setJerarquiaMemoria(jmem, jmem2);
 	}

@@ -63,7 +63,7 @@ public class TestMemoria {
 			MemoriaPrincipal memoria = new MemoriaPrincipal(tablaPags);
 			
 			// Inicializar la Jerarquía de Memoria.
-			JerarquiaMemoria jmem = new JerarquiaMemoria(tablaPags, caches, memoria);
+			JerarquiaMemoria jmem = new JerarquiaMemoria(tablaPags, caches, memoria, false);
 			tablaPags.setJerarquiaMemoria(jmem, null);
 			
 			// Inicializar interfaz de memoria.
