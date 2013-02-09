@@ -1,0 +1,25 @@
+:0x30000
+suma: add $3, $3, $4
+add $2, $2, $3
+jr $31
+
+:0x3A980
+leer: lw $2, 1000($1)
+lw $3, 2000($1)
+lw $4, 2000($1)
+jr $31
+
+:0x3B920
+guardar: sw $2, 0($1)
+jr $31
+
+;Lee el contenido de 3 matrices y las suma
+:0x30D40
+inicio: addi $1, $1, 0
+bucle: jal leer
+jal suma
+jal guardar
+addi $1, $1, 4
+slti $5, $1, 1000
+bne $0, $5, bucle
+trap
