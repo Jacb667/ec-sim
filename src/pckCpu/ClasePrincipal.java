@@ -3,6 +3,7 @@ package pckCpu;
 
 import interfazgrafica.Vista;
 
+import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
@@ -131,18 +132,16 @@ public class ClasePrincipal implements Runnable {
 			{
 				if (inst.esDireccionVirtual())
 				{
-					System.out.println("++ Instruccion " + inst);
-					System.out.println("++ Dirección V " + (inst.getDireccion()));
+					Log.println(3, inst.getDireccion() + " : " + inst, Color.BLACK, false);
 					tablaPags.inicializarDatoMemoriaVirtual(inst.getDireccion(), inst.codificarBinario());
 				}
 				else
 				{
-					System.out.println("++ Instruccion " + inst);
-					System.out.println("++ Dirección V " + (direccion_inst + inst.getDireccion()));
+					Log.println(3, (direccion_inst + inst.getDireccion()) + " : " + inst, Color.BLACK, false);
 					tablaPags.inicializarDatoMemoriaVirtual(direccion_inst + inst.getDireccion(), inst.codificarBinario());
 				}
 			}
-
+			
 			// Asignamos PC a la primera instrucción.
 			if (Decoder.getPrimeraInstruccion().esDireccionVirtual())
 				cpu.setPC(Decoder.getPrimeraInstruccion().getDireccion());
@@ -336,8 +335,8 @@ public class ClasePrincipal implements Runnable {
 			int primera_pag_inst = primera_pag_tabla - paginas_instrucciones;
 			direccion_inst = primera_pag_inst * tablaPags.getEntradasPagina() * 4;
 			
-			System.out.println("direccion_tablPags: " + direccion_tablPags);
-			System.out.println("direccion_inst: " + direccion_inst);
+			Log.printDebug("Puntero Tabla Páginas: " + direccion_tablPags);
+			Log.printDebug("Dirección Primera Instrucción: " + direccion_inst);
 		}
 		
 		cpu = new CpuMonociclo(jmem, null, direccion_inst);
@@ -434,9 +433,9 @@ public class ClasePrincipal implements Runnable {
 		memoria = new MemoriaPrincipal(tablaPags);
 		
 		// Inicializar la Jerarquía de Memoria.
-		jmem = new JerarquiaMemoria(tablaPags, caches1, memoria);
+		jmem = new JerarquiaMemoria(tablaPags, caches1, memoria, false);
 		if (nivelJerarquiasSeparadas > 1)
-			jmem2 = new JerarquiaMemoria(tablaPags, caches2, memoria);
+			jmem2 = new JerarquiaMemoria(tablaPags, caches2, memoria, true);
 		
 		tablaPags.setJerarquiaMemoria(jmem, jmem2);
 	}
