@@ -2,6 +2,7 @@ package interfazgrafica;
 import general.*;
 import general.Config.Conf_Type;
 import general.Config.Conf_Type_c;
+import general.Global.Funcion;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -131,7 +132,9 @@ public class Controlador implements ActionListener {
 				v.enabledConfig(false);
 				
 				claseP = new ClasePrincipal();
-				claseP.validarCodigo();
+				claseP.setFuncion(Funcion.VALIDAR_CODIGO);
+				Thread thread = new Thread(claseP);
+				thread.start();
 			}
 			catch(NumberFormatException e1)
 			{
@@ -319,7 +322,7 @@ public class Controlador implements ActionListener {
 			Config.ejecutando_codigo = true;
 			if (claseP != null)
 			{
-				claseP.ejecutarCodigo();
+				claseP.setFuncion(Funcion.EJECUTAR_CODIGO);
 				Thread thread = new Thread(claseP);
 				thread.start();
 			}

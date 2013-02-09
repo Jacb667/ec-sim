@@ -101,7 +101,7 @@ public class ClasePrincipal implements Runnable {
 		leerConfig();
 	}
 	
-	public void validarCodigo()
+	private void validarCodigo()
 	{
 		// Leo el código.
 		if (!Decoder.decodificarArchivo(archivo_cpu))
@@ -517,7 +517,7 @@ public class ClasePrincipal implements Runnable {
 		switch(funcion)
 		{
 			case VALIDAR_CODIGO:
-				
+				validarCodigo();
 				break;
 			case EJECUTAR_CODIGO:
 				ejecutarCodigo();
