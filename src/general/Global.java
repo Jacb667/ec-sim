@@ -28,7 +28,13 @@ public class Global {
 	final static public String EJECUTARC="EJECUTAC";
 	final static public String CICLO="CICLO";
 	
-	
+	public enum Funcion
+	{
+		VALIDAR_CODIGO,
+		EJECUTAR_CODIGO,
+		VALIDAR_TRAZA,
+		EJECUTAR_TRAZA,
+	}
 
 	public enum Opcode
 	{

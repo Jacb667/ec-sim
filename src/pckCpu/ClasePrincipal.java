@@ -14,6 +14,7 @@ import componentes.VentanaOculta;
 
 import general.Config.Conf_Type;
 import general.Config.Conf_Type_c;
+import general.Global.Funcion;
 import general.Global.TiposReemplazo;
 import general.Config;
 import general.Log;
@@ -73,7 +74,7 @@ public class ClasePrincipal implements Runnable {
 	
 	private boolean tp_alojada;
 	
-	private boolean codigo1_traza0;
+	private Funcion funcion;
 	
 	// CPU
 	private String archivo_cpu;
@@ -141,7 +142,7 @@ public class ClasePrincipal implements Runnable {
 					tablaPags.inicializarDatoMemoriaVirtual(direccion_inst + inst.getDireccion(), inst.codificarBinario());
 				}
 			}
-			System.out.println("Validando 3");
+
 			// Asignamos PC a la primera instrucción.
 			if (Decoder.getPrimeraInstruccion().esDireccionVirtual())
 				cpu.setPC(Decoder.getPrimeraInstruccion().getDireccion());
@@ -166,9 +167,23 @@ public class ClasePrincipal implements Runnable {
 		}
 	}
 	
-	public void ejecutarCodigo()
+	private void ejecutarCodigo()
 	{
-		codigo1_traza0 = true;
+		// Una vez tenemos el código guardado en memoria, comenzamos la ejecución.
+		try
+		{
+			cpu.ejecutarCodigo();
+		}
+		catch (MemoryException | CpuException e)
+		{
+			Vista v = Config.getVista();
+			if (v == null)
+				System.err.println(e);
+			else
+				JOptionPane.showMessageDialog( v, e, "Se ha producido una excepción", JOptionPane.ERROR_MESSAGE );
+		}
+		
+		Log.generarEstadistica();
 	}
 	
 	public void ejecutarCicloCodigo()
@@ -461,8 +476,8 @@ public class ClasePrincipal implements Runnable {
 				tablasCache1[i].setRenderTablaEnCelda();
 			framesCache1[i] = new VentanaLimitada();
 			JScrollPane jscroll = new JScrollPane(tablasCache1[i], JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-			framesCache1[i].setTitle("Cache Datos L"+(i));
-			framesCache1[i].setPreferredSize( new Dimension(600, 200) );
+			framesCache1[i].setTitle("Cache L"+(i+1));
+			framesCache1[i].setPreferredSize(new Dimension(600, 200));
 			framesCache1[i].setMinimumSize(new Dimension(500, 200));
 			framesCache1[i].setMaximumSize(new Dimension(2000, 2000));
 			framesCache1[i].add( jscroll );
@@ -483,8 +498,8 @@ public class ClasePrincipal implements Runnable {
 					tablasCache2[i].setRenderTablaEnCelda();
 				framesCache2[i] = new VentanaLimitada();
 				JScrollPane jscroll = new JScrollPane(tablasCache2[i], JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-				framesCache2[i].setTitle("Cache Instrucciones L"+(i));
-				framesCache2[i].setPreferredSize( new Dimension(600, 200) );
+				framesCache2[i].setTitle("Cache Instrucciones L"+(i+1));
+				framesCache2[i].setPreferredSize(new Dimension(600, 200));
 				framesCache2[i].setMinimumSize(new Dimension(500, 200));
 				framesCache2[i].setMaximumSize(new Dimension(2000, 2000));
 				framesCache2[i].add( jscroll );
@@ -499,23 +514,30 @@ public class ClasePrincipal implements Runnable {
 	@Override
 	public void run()
 	{
-		if (codigo1_traza0)
+		switch(funcion)
 		{
-			// Una vez tenemos el código guardado en memoria, comenzamos la ejecución.
-			try
-			{
-				cpu.ejecutarCodigo();
-			}
-			catch (MemoryException | CpuException e)
-			{
-				Vista v = Config.getVista();
-				if (v == null)
-					System.err.println(e);
-				else
-					JOptionPane.showMessageDialog( v, e, "Se ha producido una excepción", JOptionPane.ERROR_MESSAGE );
-			}
-			
-			//Log.generarEstadistica();
+			case VALIDAR_CODIGO:
+				
+				break;
+			case EJECUTAR_CODIGO:
+				ejecutarCodigo();
+				break;
+			case VALIDAR_TRAZA:
+				
+				break;
+			case EJECUTAR_TRAZA:
+				
+				break;
 		}
+	}
+
+	public Funcion getFuncion()
+	{
+		return funcion;
+	}
+
+	public void setFuncion(Funcion funcion)
+	{
+		this.funcion = funcion;
 	}
 }
