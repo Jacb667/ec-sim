@@ -489,10 +489,23 @@ public class ClasePrincipal implements Runnable {
 		}
 		if (nivelJerarquiasSeparadas > 1)
 		{
-			tablasCache2 = new Tabla[niveles_cache2];
-			framesCache2 = new JFrame[niveles_cache2];
+			int limite2 = niveles_cache2;
 			
-			for (int i = 0; i < niveles_cache2; i++)
+			// Si hay jerarquías compartidas, la caché de instrucciones tendrá menos niveles de los que nos envía la Config.
+			if (nivelJerarquiasSeparadas < 4)
+			{
+				if (nivelJerarquiasSeparadas == 1)
+					limite2 = 0;
+				else if (nivelJerarquiasSeparadas == 2)
+					limite2 = 1;
+				else if (nivelJerarquiasSeparadas == 3)
+					limite2 = Math.max(niveles_cache1, 2);
+			}
+			
+			tablasCache2 = new Tabla[limite2];
+			framesCache2 = new JFrame[limite2];
+			
+			for (int i = 0; i < limite2; i++)
 			{
 				tablasCache2[i] = new Tabla(caches2[i]);
 				if (vias_caches2[i] > 1)
