@@ -27,6 +27,7 @@ public class Global {
 	final static public String EJECUTART="EJECUTAR";
 	final static public String EJECUTARC="EJECUTAC";
 	final static public String CICLO="CICLO";
+	final static public String DETENER="DETENER";
 	
 	public enum Funcion
 	{
