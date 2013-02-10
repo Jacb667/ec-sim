@@ -125,7 +125,7 @@ public class CacheDirecta implements Cache
 			{
 				if (dirty[pos])
 				{
-					LineaReemplazo LinR = new LineaReemplazo(getDireccionGuardadaEntrada(pos), paginas[pos], datos[pos]);
+					LineaReemplazo LinR = new LineaReemplazo(getDireccionGuardadaEntrada(pos), paginas[pos], datos[pos], true);
 					eliminadas.add(LinR);
 				}
 				
@@ -234,9 +234,8 @@ public class CacheDirecta implements Cache
 	{
 		LineaReemplazo res = null;
 		
-		// La devolvemos solamente si está "sucia".
-		if (lineaDirty(direccion))
-			res = new LineaReemplazo(getDireccionGuardada(direccion), paginas[buscarPosicion(direccion)], leerLinea(direccion));
+		// Devolvemos la línea reemplazada.
+		res = new LineaReemplazo(getDireccionGuardada(direccion), paginas[buscarPosicion(direccion)], leerLinea(direccion), lineaDirty(direccion));
 		
 		escribirLinea(direccion, pagina, linea);
 		
