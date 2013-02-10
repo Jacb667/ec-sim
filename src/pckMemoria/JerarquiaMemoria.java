@@ -167,7 +167,7 @@ public class JerarquiaMemoria {
 					Log.report(FlagsD.CONFLICT_CACHE, nivel_act);
 				
 				// Si era dirty, tenemos que enviarla al siguiente nivel.
-				if (linR != null)
+				if (linR.isDirty())
 				{
 					Log.println(2, "El bloque reemplazado era \"dirty\", se escribe en los siguientes niveles.");
 					actualizarLinea(linR, nivel_act);
@@ -176,7 +176,7 @@ public class JerarquiaMemoria {
 		}
 		else
 		{
-			Log.println(2, "Se accede a L" + nivel_sig + " para traer el bloque a L" + (nivel_act+1));
+			Log.println(2, "Se accede a L" + (nivel_sig+1) + " para traer el bloque a L" + (nivel_act+1));
 			Cache sig = caches[nivel_sig];  // De donde leo el dato.
 			Cache act = caches[nivel_act];  // A donde traigo el dato.
 			
@@ -222,7 +222,7 @@ public class JerarquiaMemoria {
 				Log.println(2, "No hay hueco libre para traer el bloque, reemplazo 0x" + Integer.toHexString(linR.getDireccion()));
 				
 				// Si era dirty, tenemos que enviarla al siguiente nivel.
-				if (linR != null)
+				if (linR.isDirty())
 				{
 					Log.println(2, "El bloque reemplazado era \"dirty\", se escribe en los siguientes niveles.");
 					actualizarLinea(linR, nivel_act);
