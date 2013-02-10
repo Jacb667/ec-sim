@@ -64,7 +64,7 @@ public class JerarquiaMemoria {
 				Log.report(FlagsD.CACHE_MISS, 0);
 			// Traemos la línea desde el siguiente nivel de caché.
 			traerLinea(0, direccion);
-			Log.println(2,"El bloque ya está disponible en L1 y se envía al procesador.");
+			Log.println(2,"CPU: El bloque se guarda en cache L1 y se envía al procesador.");
 
 			// El dato ya debería existir.
 			if (!c.existeDato(direccion.getReal()))
@@ -101,7 +101,6 @@ public class JerarquiaMemoria {
 			
 			Log.printDebug("Dato: " + dato + " modificado en: " + direccion.getRealHex());
 			c.modificarDato(direccion.getReal(), direccion.getPagina(), dato);
-			// TODO: Write-Through.
 			return;
 		}
 		else  // No existe el dato (MISS)
@@ -113,6 +112,7 @@ public class JerarquiaMemoria {
 				Log.report(FlagsD.CACHE_MISS, 0);
 			// Traemos la línea desde el siguiente nivel de caché.
 			traerLinea(0, direccion);
+			Log.println(2,"CPU: Se guarda el dato en cache L1 y se marca como \"dirty\".");
 				
 			// El dato ya debería existir.
 			if (!c.existeDato(direccion.getReal()))
@@ -121,7 +121,6 @@ public class JerarquiaMemoria {
 			// El dato ya está aquí. Lo modifico.
 			Log.printDebug("Dato: " + dato + " modificado en: " + direccion.getRealHex());
 			c.modificarDato(direccion.getReal(), direccion.getPagina(), dato);
-			// TODO: Write-Through.
 			return;
 		}
 	}
@@ -139,7 +138,7 @@ public class JerarquiaMemoria {
 		// Siguiente nivel es memoria.
 		if (nivel_sig == caches.length)
 		{
-			Log.println(2, "Se accede a memoria para traer el bloque a L" + (nivel_act+1));
+			Log.println(2, "CPU: Se accede a memoria para traer el bloque a L" + (nivel_act+1));
 			MemoriaPrincipal sig = memoria;
 			Cache act = caches[nivel_act];
 			
@@ -153,13 +152,13 @@ public class JerarquiaMemoria {
 			// Si hay hueco en la caché donde almacenar (nivel actual).
 			if (act.lineaLibre(direccion.getReal()))
 			{
-				Log.println(2, "Hay un conjunto libre en L" + (nivel_act+1) + " para traer el bloque");
+				Log.println(2, "CPU: Hay un conjunto libre en L" + (nivel_act+1) + " para traer el bloque");
 				act.escribirLinea(direccion.getReal(), direccion.getPagina(), linea);
 			}
 			else  // Si no hay hueco.
 			{
 				LineaReemplazo linR = act.reemplazarLinea(direccion.getReal(), direccion.getPagina(), linea);
-				Log.println(2, "No hay conjunto libre para traer el bloque, reemplazo 0x" + Integer.toHexString(linR.getDireccion()));
+				Log.println(2, "CPU: No hay conjunto libre para traer el bloque, reemplazo 0x" + Integer.toHexString(linR.getDireccion()));
 				
 				if (secundaria)
 					Log.report(FlagsD.CONFLICT_CACHE_F, nivel_act);
@@ -169,14 +168,14 @@ public class JerarquiaMemoria {
 				// Si era dirty, tenemos que enviarla al siguiente nivel.
 				if (linR.isDirty())
 				{
-					Log.println(2, "El bloque reemplazado era \"dirty\", se escribe en los siguientes niveles.");
+					Log.println(2, "CPU: El bloque reemplazado era \"dirty\", se escribe en los siguientes niveles.");
 					actualizarLinea(linR, nivel_act);
 				}
 			}
 		}
 		else
 		{
-			Log.println(2, "Se accede a L" + (nivel_sig+1) + " para traer el bloque a L" + (nivel_act+1));
+			Log.println(2, "CPU: Se accede a L" + (nivel_sig+1) + " para traer el bloque a L" + (nivel_act+1));
 			Cache sig = caches[nivel_sig];  // De donde leo el dato.
 			Cache act = caches[nivel_act];  // A donde traigo el dato.
 			
@@ -208,7 +207,7 @@ public class JerarquiaMemoria {
 			// Si hay hueco en la caché donde almacenar (nivel actual).
 			if (act.lineaLibre(direccion.getReal()))
 			{
-				Log.println(2, "Hay hueco libre en L" + (nivel_act+1) + " para traer el bloque");
+				Log.println(2, "CPU: Hay un conjunto libre en L" + (nivel_act+1) + " para traer el bloque");
 				act.escribirLinea(direccion.getReal(), direccion.getPagina(), linea);
 			}
 			else  // Si no hay hueco.
@@ -219,12 +218,12 @@ public class JerarquiaMemoria {
 					Log.report(FlagsD.CONFLICT_CACHE, nivel_act);
 				
 				LineaReemplazo linR = act.reemplazarLinea(direccion.getReal(), direccion.getPagina(), linea);
-				Log.println(2, "No hay hueco libre para traer el bloque, reemplazo 0x" + Integer.toHexString(linR.getDireccion()));
+				Log.println(2, "CPU: No hay conjunto libre para traer el bloque, reemplazo 0x" + Integer.toHexString(linR.getDireccion()));
 				
 				// Si era dirty, tenemos que enviarla al siguiente nivel.
 				if (linR.isDirty())
 				{
-					Log.println(2, "El bloque reemplazado era \"dirty\", se escribe en los siguientes niveles.");
+					Log.println(2, "CPU: El bloque reemplazado era \"dirty\", se escribe en los siguientes niveles.");
 					actualizarLinea(linR, nivel_act);
 				}
 			}
