@@ -1,8 +1,10 @@
 package pckCpu;
 
 import general.Global.Opcode;
+import general.Log;
 import general.MemoryException;
 
+import java.awt.Color;
 import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
@@ -17,6 +19,8 @@ public class CpuMonociclo {
 	private JerarquiaMemoria jinstr;
 	private BancoRegistros registros;
 	private int direccion_base;
+	
+	private boolean forzar_detencion;
 	
 	private SortedMap<Integer, Instruccion> instrucciones;
 	
@@ -46,18 +50,20 @@ public class CpuMonociclo {
 	{
 		boolean ejecutando = true;
 		
-		while (ejecutando)
+		while (!forzar_detencion && ejecutando)
 		{
 			ejecutando = ejecutarInstruccion();
 		}
 		
-		System.out.println("Fin de programa.");
+		if (forzar_detencion)
+			Log.println(1,"Programa detenido.\n\n", Color.RED, true);
+		else
+			Log.println(1,"Fin de programa.\n\n", Color.BLACK, true);
 	}
 	
 	// Ejecutar siguiente instrucción (monociclo).
 	public boolean ejecutarInstruccion() throws MemoryException, CpuException
 	{
-		System.out.println("Fetch " + getPC());
 		/*
 		 *  Etapa Fetch
 		 */
@@ -69,9 +75,15 @@ public class CpuMonociclo {
 		
 		// Fetch memoria.
 		if (jinstr != null)
+		{
+			Log.println(2, "Fetch 0x" + Integer.toHexString(getPC()), Color.BLACK, true);
 			jinstr.leerDato(getPC());
+		}
 		else
+		{
+			Log.println(2, "Fetch 0x" + Integer.toHexString(getPC()), Color.BLACK, true);
 			jmem.leerDato(getPC());
+		}
 		
 		// PC+4
 		incPC();
@@ -79,23 +91,18 @@ public class CpuMonociclo {
 		/*
 		 *  Etapa Decode
 		 */
-		System.out.println("Decode " + inst);
+		Log.printDebug("Ejecutando instrucción " + inst.getOpcode());
 		
 		// Leo los 2 registros de origen.
 		int dato1 = registros.leerDato(inst.getOrigen1());
 		int dato2 = registros.leerDato(inst.getOrigen2());
-		
-		System.out.println("Dato1 " + dato1);
-		System.out.println("Dato2 " + dato2);
-		
+	
 		/*
 		 *  Etapa Execution
 		 */
 		
 		int resultado = alu.ejecutar(inst, dato1, dato2);
 		boolean[] flags = alu.getFlags();
-		
-		System.out.println("resultado alu " + resultado);
 		
 		/*
 		 *  Etapa Memory
@@ -104,16 +111,15 @@ public class CpuMonociclo {
 		// Lee desde memoria.
 		if (inst.getOpcode() == Opcode.LW)
 		{
+			Log.println(2, "Leer dirección virtual: 0x" + Integer.toHexString(resultado));
 			resultado = jmem.leerDato(resultado);
-			System.out.println("resultado memoria " + resultado);
 		}
 		// Guarda en memoria.
 		else if (inst.getOpcode() == Opcode.SW)
 		{
-			System.out.println("guardo en memoria");
+			Log.println(2, "Guardar dato [" + dato1 + "] dirección virtual: 0x" + Integer.toHexString(resultado));
 			jmem.guardarDato(resultado, dato1);
 		}
-		
 		
 		/*
 		 *  Etapa Writeback
@@ -136,55 +142,68 @@ public class CpuMonociclo {
 				registros.guardarDato(31, getPC());
 				if (inst.esDireccionVirtual())
 				{
-					System.out.println("Guardo PC+4 y modifico PC = " + inst.getDireccionSalto());
+					Log.printDebug("Guardo PC+4 en $31 y modifico PC = " + inst.getDireccionSalto());
 					setPC(inst.getDireccionSalto());
 				}
 				else
 				{
-					System.out.println("Guardo PC+4 y modifico PC = " + calcularSalto(inst.getDireccionSalto()));
+					Log.printDebug("Guardo PC+4 en $31 y modifico PC = " + calcularSalto(inst.getDireccionSalto()));
 					setPC(calcularSalto(inst.getDireccionSalto()));
 				}
 				break;
 			// Si es un J, modifico PC
 			case J:
-				System.out.println("Modifico PC.");
 				if (inst.esDireccionVirtual())
+				{
+					Log.printDebug("Modifico PC = " + inst.getDireccionSalto());
 					setPC(inst.getDireccionSalto());
+				}
 				else
+				{
+					Log.printDebug("Modifico PC = " + calcularSalto(inst.getDireccionSalto()));
 					setPC(calcularSalto(inst.getDireccionSalto()));
+				}
 				break;
 			// Si es un JR, modifico PC
 			case JR:
-				System.out.println("Modifico PC = " + dato1);
+				Log.printDebug("Modifico PC = " + dato1);
 				setPC(dato1);
 				break;
 			// Si es un BEQ, compruebo el flag zero de Alu antes de saltar.
 			case BEQ:
-				System.out.println("Compruebo si zero.");
 				if (flags[0] == true)
 				{
-					System.out.println("Modifico PC.");
 					if (inst.esDireccionVirtual())
+					{
+						Log.printDebug("Modifico PC = " + inst.getDireccionSalto());
 						setPC(inst.getDireccionSalto());
+					}
 					else
+					{
+						Log.printDebug("Modifico PC = " + calcularSalto(inst.getDireccionSalto()));
 						setPC(calcularSalto(inst.getDireccionSalto()));
+					}
 				}
 				break;
 			// Si es un BNE, compruebo el flag zero de Alu antes de saltar.
 			case BNE:
-				System.out.println("Compruebo si zero.");
 				if (flags[0] == false)
 				{
-					System.out.println("Modifico PC.");
 					if (inst.esDireccionVirtual())
+					{
+						Log.printDebug("Modifico PC = " + inst.getDireccionSalto());
 						setPC(inst.getDireccionSalto());
+					}
 					else
+					{
+						Log.printDebug("Modifico PC = " + calcularSalto(inst.getDireccionSalto()));
 						setPC(calcularSalto(inst.getDireccionSalto()));
+					}
 				}
 				break;
 		}
 		
-		System.out.println(registros);
+		//System.out.println(registros);
 		return true;
 	}
 	
@@ -202,5 +221,10 @@ public class CpuMonociclo {
 	private Instruccion getInstruccion(int dir)
 	{
 		return instrucciones.get(dir);
+	}
+	
+	public void detener()
+	{
+		forzar_detencion = true;
 	}
 }

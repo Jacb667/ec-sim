@@ -370,6 +370,11 @@ public class Controlador implements ActionListener {
 			if (claseP != null && claseP.frameMemoria != null)
 				claseP.frameMemoria.setVisible(true);
 		}
+		else if(comando.equals(Global.DETENER))
+		{
+			if (claseP != null)
+				claseP.detener();
+		}
 		
 	}
 	private String bfOn() throws IOException

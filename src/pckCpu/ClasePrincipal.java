@@ -76,6 +76,7 @@ public class ClasePrincipal implements Runnable {
 	private boolean tp_alojada;
 	
 	private Funcion funcion;
+	private boolean detenido;
 	
 	// CPU
 	private String archivo_cpu;
@@ -179,10 +180,13 @@ public class ClasePrincipal implements Runnable {
 			if (v == null)
 				System.err.println(e);
 			else
-				JOptionPane.showMessageDialog( v, e, "Se ha producido una excepción", JOptionPane.ERROR_MESSAGE );
+				JOptionPane.showMessageDialog( v, e, "Se ha producido un error", JOptionPane.ERROR_MESSAGE );
 		}
 		
-		Log.generarEstadistica();
+		if (!detenido)
+			Log.generarEstadistica();
+		
+		detenido = false;
 	}
 	
 	public void ejecutarCicloCodigo()
@@ -538,5 +542,11 @@ public class ClasePrincipal implements Runnable {
 	public void setFuncion(Funcion funcion)
 	{
 		this.funcion = funcion;
+	}
+	
+	public void detener()
+	{
+		detenido = true;
+		cpu.detener();
 	}
 }
