@@ -341,7 +341,7 @@ public class ClasePrincipal implements Runnable {
 			Log.printDebug("Dirección Primera Instrucción: " + direccion_inst);
 		}
 		
-		cpu = new CpuMonociclo(jmem, null, direccion_inst);
+		cpu = new CpuMonociclo(jmem, jmem2, direccion_inst);
 	}
 	
 	// Inicializa la Jerarquía de Memoria.
@@ -494,7 +494,7 @@ public class ClasePrincipal implements Runnable {
 			
 			for (int i = 0; i < niveles_cache2; i++)
 			{
-				tablasCache2[i] = new Tabla(caches1[i]);
+				tablasCache2[i] = new Tabla(caches2[i]);
 				if (vias_caches2[i] > 1)
 					tablasCache2[i].setRenderTablaEnCelda();
 				framesCache2[i] = new VentanaLimitada();
@@ -507,7 +507,7 @@ public class ClasePrincipal implements Runnable {
 				framesCache2[i].pack();
 				framesCache2[i].addWindowListener(new VentanaOculta(framesCache2[i]));
 				framesCache2[i].setVisible(false);
-				caches1[i].setInterfaz(tablasCache2[i]);
+				caches2[i].setInterfaz(tablasCache2[i]);
 			}
 		}
 	}
