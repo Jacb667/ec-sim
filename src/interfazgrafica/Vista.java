@@ -2709,7 +2709,6 @@ public class Vista extends JPanel {
         {
         	Document doc = ejecucion_a.getDocument();
         	doc.insertString(doc.getLength(), t, aset);
-        	ejecucion_a.setCaretPosition(ejecucion_a.getDocument().getLength());
         }
         catch(BadLocationException exc)
         {
@@ -2722,12 +2721,20 @@ public class Vista extends JPanel {
         {
         	Document doc = ejecucion_a1.getDocument();
         	doc.insertString(doc.getLength(), t, aset);
-        	ejecucion_a1.setCaretPosition(ejecucion_a1.getDocument().getLength());
         }
         catch(BadLocationException exc)
         {
             //exc.printStackTrace();
         }
+    }
+    
+    public void setFinEjec()
+    {
+    	ejecucion_a1.setCaretPosition(ejecucion_a1.getDocument().getLength());
+    }
+    public void setFinTraza()
+    {
+    	ejecucion_a.setCaretPosition(ejecucion_a1.getDocument().getLength());
     }
     
     public int getNivelLog()
