@@ -18,6 +18,7 @@ public class TablaPaginas {
 	// Esta clase funciona únicamente con direcciones REALES.
 	private SortedMap<Integer, Pagina> paginas;
 	private Pagina[] marcos;
+	private Pagina[] paginasTP;
 	
 	private int entradas_pagina;
 	private int tam_pagina;
@@ -97,33 +98,33 @@ public class TablaPaginas {
 		Log.printSeparador(3);
 		
 		// La política sólo tendrá 1 entrada, con el número de marcos que hay.
-		politica = new PoliticaReemplazo(_Tpolitica, 1, marcos.length);
+		politica = new PoliticaReemplazo(_Tpolitica, 1, ultimoMarco());
 	}
 	
 	public void generarPaginasTablas(int direccion) throws MemoryException
 	{
 		int numPags = (int) Math.ceil(num_paginas / entradas_pagina);
-		Pagina[] res = new Pagina[numPags];
+		paginasTP = new Pagina[numPags];
 		
 		int direccion_inicio = direccion;
 		
 		for (int i = 0; i < numPags; i++)
 		{
 			Pagina nueva = seleccionarPagina(direccion_inicio);
-			res[i] = nueva;
+			paginasTP[i] = nueva;
 			direccion_inicio += entradas_pagina * bytes_palabra;
 		}
-		
-		insertarPaginasTabla(res);
 		
 		int primer_marco = num_marcos - numPags;
 		registroTablaPaginas = primer_marco * entradas_pagina * 4;
 		
 		for (int i = 0; i < numPags; i++)
-			asignarPaginaMarco(res[i], primer_marco+i);
+			asignarPaginaMarco(paginasTP[i], primer_marco+i);
+		
+		actualizarPaginasTabla();
 	}
 	
-	private void insertarPaginasTabla(Pagina[] pags)
+	private void actualizarPaginasTabla()
 	{
 		for (int i = 0; i < num_paginas; i++)
 		{
@@ -132,12 +133,24 @@ public class TablaPaginas {
 			if (paginas.get(i) != null)
 			{
 				dato = paginas.get(i).getMarco();
-				dato = dato | 0x80000000;
+				dato = dato | 0x40000000;
 				if (paginas.get(i).esDirty())
-					dato = dato | 0x40000000;
+					dato = dato | 0x20000000;
 			}
-			pags[pagina].guardarLinea((i % entradas_pagina) * bytes_palabra, new int[]{dato});
+			paginasTP[pagina].guardarLinea((i % entradas_pagina) * bytes_palabra, new int[]{dato});
 		}
+		
+		for (int i = 0; i < paginasTP.length; i++)
+			jerarquia1.actualizarMarcoInterfazMemoria(paginasTP[i].getMarco());
+	}
+	
+	// Devuelve el último marco usable por datos (elimina los marcos usados por la Tabla de Páginas.
+	private int ultimoMarco()
+	{
+		if (paginasTP != null)
+			return marcos.length - paginasTP.length;
+		else
+			return marcos.length;
 	}
 	
 	// Crea una página nueva.
@@ -344,7 +357,7 @@ public class TablaPaginas {
 	{
 		// Creamos una lista con todos los marcos libres.
 		List<Integer> lista = new ArrayList<Integer>();
-		for (int i = 0; i < marcos.length; i++)
+		for (int i = 0; i < ultimoMarco(); i++)
 		{
 			if (marcos[i] == null)
 				lista.add(i);
