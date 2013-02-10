@@ -113,11 +113,11 @@ public class Log {
 		float ratio_l2 = (float)(Log.cache_hits[2]*100) / (float)(Log.accesosMemoria-Log.cache_hits[0]-Log.cache_hits[1]);
 		
 		// Estadísticas de memoria (siempre globales).
-		println(1, "Accesos a memoria: " + Log.accesosMemoria + " (" + 
+		println(0, "Accesos a memoria: " + Log.accesosMemoria + " (" + 
 				Log.lecturasMemoria + " lecturas + " + Log.escriturasMemoria + " escrituras)");
-		println(1, "Accesos a bloques: " + Log.accesosBloques + " (" + 
+		println(0, "Accesos a bloques: " + Log.accesosBloques + " (" + 
 				Log.lecturasBloques + " leidos + " + Log.escriturasBloques + " escritos)");
-		println(1, "Accesos a tabla de páginas: " + Log.accesosTablaPaginas);
+		println(0, "Accesos a tabla de páginas: " + Log.accesosTablaPaginas);
 		
 		int nivel_datos = Config.get(Conf_Type.NIVELES_CACHE_DATOS);
 		
@@ -125,15 +125,15 @@ public class Log {
 		if (Config.get(Conf_Type.TLB_DATOS) == 1)
 		{
 			if (nivel_datos > 1)
-				println(1, "DTLB -> " + Log.aciertosTlb + " Hits - " + Log.fallosTlb + " Miss (" + Log.conflictosTlb + ")");
+				println(0, "DTLB -> " + Log.aciertosTlb + " Hits - " + Log.fallosTlb + " Miss (" + Log.conflictosTlb + ")");
 			else
-				println(1, "TLB -> " + Log.aciertosTlb + " Hits - " + Log.fallosTlb + " Miss (" + Log.conflictosTlb + ")");
+				println(0, "TLB -> " + Log.aciertosTlb + " Hits - " + Log.fallosTlb + " Miss (" + Log.conflictosTlb + ")");
 		}
 		
 		// TLB de Instrucciones.
 		if (Config.get(Conf_Type.TLB_INSTRUCCIONES) == 1)
 		{
-			println(1, "ITLB -> " + Log.aciertosTlb_f + " Hits - " + Log.fallosTlb_f + " Miss (" + Log.conflictosTlb_f + ")");
+			println(0, "ITLB -> " + Log.aciertosTlb_f + " Hits - " + Log.fallosTlb_f + " Miss (" + Log.conflictosTlb_f + ")");
 		}
 		
 		// Niveles de caché de Datos (o compartida).
@@ -141,43 +141,43 @@ public class Log {
 		{
 			if (nivel_compartido <= 1)
 			{
-				println(1, "Cache Compartida L1 -> " + Log.cache_hits[0] + " Hits - " + (Log.cache_misses[0]) + " Miss (" + Log.cache_conflicts[0] + ")");
-				println(1, String.format("%.2f%%", ratio_l0));
+				println(0, "Cache Compartida L1 -> " + Log.cache_hits[0] + " Hits - " + (Log.cache_misses[0]) + " Miss (" + Log.cache_conflicts[0] + ")");
+				println(0, String.format("%.2f%%", ratio_l0));
 			}
 			else
 			{
-				println(1, "Cache Datos L1 -> " + Log.cache_hits[0] + " Hits - " + (Log.cache_misses[0]) + " Miss (" + Log.cache_conflicts[0] + ")");
-				println(1, String.format("%.2f%%", ratio_l0));
+				println(0, "Cache Datos L1 -> " + Log.cache_hits[0] + " Hits - " + (Log.cache_misses[0]) + " Miss (" + Log.cache_conflicts[0] + ")");
+				println(0, String.format("%.2f%%", ratio_l0));
 			}
 		}
 		if (nivel_datos > 1)
 		{
 			if (nivel_compartido <= 2)
 			{
-				println(1, "Cache Compartida L2 -> " + Log.cache_hits[1] + " Hits - " + Log.cache_misses[1] + " Miss (" + Log.cache_conflicts[1] + ")");
-				println(1, String.format("%.2f%%", ratio_l1));
+				println(0, "Cache Compartida L2 -> " + Log.cache_hits[1] + " Hits - " + Log.cache_misses[1] + " Miss (" + Log.cache_conflicts[1] + ")");
+				println(0, String.format("%.2f%%", ratio_l1));
 			}
 			else
 			{
-				println(1, "Cache Datos L2 -> " + Log.cache_hits[1] + " Hits - " + Log.cache_misses[1] + " Miss (" + Log.cache_conflicts[1] + ")");
-				println(1, String.format("%.2f%%", ratio_l1));
+				println(0, "Cache Datos L2 -> " + Log.cache_hits[1] + " Hits - " + Log.cache_misses[1] + " Miss (" + Log.cache_conflicts[1] + ")");
+				println(0, String.format("%.2f%%", ratio_l1));
 			}
 		}
 		if (nivel_datos > 2)
 		{
 			if (nivel_compartido <= 3)
 			{
-				println(1, "Cache Compartida L3 -> " + Log.cache_hits[2] + " Hits - " + Log.cache_misses[2] + " Miss (" + Log.cache_conflicts[2] + ")");
-				println(1, String.format("%.2f%%", ratio_l2));
+				println(0, "Cache Compartida L3 -> " + Log.cache_hits[2] + " Hits - " + Log.cache_misses[2] + " Miss (" + Log.cache_conflicts[2] + ")");
+				println(0, String.format("%.2f%%", ratio_l2));
 			}
 			else
 			{
-				println(1, "Cache Datos L3 -> " + Log.cache_hits[2] + " Hits - " + Log.cache_misses[2] + " Miss (" + Log.cache_conflicts[2] + ")");
-				println(1, String.format("%.2f%%", ratio_l2));
+				println(0, "Cache Datos L3 -> " + Log.cache_hits[2] + " Hits - " + Log.cache_misses[2] + " Miss (" + Log.cache_conflicts[2] + ")");
+				println(0, String.format("%.2f%%", ratio_l2));
 			}
 		}
 		
-		println(1, "Páginas -> " + Log.accesosPagina + " Accesos - " + Log.aciertosPagina + " Hits - " + Log.fallosPagina + " Faults (" + Log.conflictosPagina + ")");
+		println(0, "Páginas -> " + Log.accesosPagina + " Accesos - " + Log.aciertosPagina + " Hits - " + Log.fallosPagina + " Faults (" + Log.conflictosPagina + ")");
 		
 		/*if (Config.get(Conf_Type.NIVEL_JERARQUIAS_SEPARADAS) > 1)
 		{
