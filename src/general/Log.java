@@ -218,6 +218,11 @@ public class Log {
 			if (Config.get(Conf_Type.TLB_INSTRUCCIONES) == 1)
 				println(1, "ITLB -> " + Log.aciertosTlb1 + " Hits - " + Log.fallosTlb1 + " Miss (" + Log.conflictosTlb1 + ")");
 		}*/
+		
+		if (Config.ejecutando_codigo)
+			Config.getVista().setFinEjec();
+		else
+			Config.getVista().setFinTraza();
 	}
 	
 	public static void report(FlagsD flag, int data)
@@ -316,7 +321,7 @@ public class Log {
 				else
 					Config.getVista().resTraza(s+"\n", null);
 			}
-			System.out.println(s);
+			//System.out.println(s);
 		}
 	}
 	
@@ -336,7 +341,7 @@ public class Log {
 				else
 					Config.getVista().resTraza(s+"\n", aset);
 			}
-			System.out.println(s);
+			//System.out.println(s);
 		}
 	}
 	
@@ -359,7 +364,7 @@ public class Log {
 				else
 					Config.getVista().resTraza(s+"\n", aset);
 			}
-			System.out.println(s);
+			//System.out.println(s);
 		}
 	}
 	
@@ -379,7 +384,7 @@ public class Log {
 				else
 					Config.getVista().resTraza("DEBUG: " + s + "\n", aset);
 			}
-			System.out.println("DEBUG: " + s);
+			//System.out.println("DEBUG: " + s);
 		}
 	}
 	
@@ -395,7 +400,7 @@ public class Log {
 				else
 					Config.getVista().resTraza("----------------------------------------\n", null);
 			}
-			System.out.println("----------------------------------------\n");
+			//System.out.println("----------------------------------------\n");
 		}
 	}
 	

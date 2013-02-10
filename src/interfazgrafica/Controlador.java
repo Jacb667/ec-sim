@@ -333,6 +333,7 @@ public class Controlador implements ActionListener {
 			Config.ejecutando_codigo = true;
 			if (claseP != null)
 				claseP.ejecutarCicloCodigo();
+			Config.getVista().setFinEjec();
 		}
 		// A PARTIR DE AQUI LOS BOTONES DE CACHES Y MEM-----------------------------------------------------------------------------------------------
 		else if(comando.equals(Global.BCACHED1))
