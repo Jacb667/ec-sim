@@ -1,5 +1,6 @@
 package pckMemoria;
 
+import java.awt.Color;
 import java.util.List;
 
 import general.Log;
@@ -37,7 +38,6 @@ public class JerarquiaMemoria {
 		Direccion direccion = tablaPags.traducirDireccion(direccion_virtual, secundaria);
 		
 		Log.report(Flags.MEMORY_READ);
-		Log.println(3, "Lectura en memoria 0x" + direccion.getRealHex());
 		
 		// Busco en caché L1. Si no está, debemos traer la línea completa.
 		Cache c = caches[0];
@@ -45,29 +45,35 @@ public class JerarquiaMemoria {
 		if (c.existeDato(direccion.getReal()))
 		{
 			// Caché HIT L1
-			Log.println(2, "CACHE HIT L1");
+			Log.println(1, "CACHE HIT L1", Color.GREEN);
 			if (secundaria)
 				Log.report(FlagsD.CACHE_HIT_F, 0);
 			else
 				Log.report(FlagsD.CACHE_HIT, 0);
-			return c.consultarDato(direccion.getReal());
+			
+			int dato = c.consultarDato(direccion.getReal());
+			Log.printDebug("Dato leído: " + dato);
+			return dato;
 		}
 		else  // No existe el dato (MISS)
 		{
-			Log.println(2, "CACHE MISS L1");
+			Log.println(1, "CACHE MISS L1", Color.RED);
 			if (secundaria)
 				Log.report(FlagsD.CACHE_MISS_F, 0);
 			else
 				Log.report(FlagsD.CACHE_MISS, 0);
 			// Traemos la línea desde el siguiente nivel de caché.
 			traerLinea(0, direccion);
+			Log.println(2,"El bloque ya está disponible en L1 y se envía al procesador.");
 
 			// El dato ya debería existir.
 			if (!c.existeDato(direccion.getReal()))
 				throw new MemoryException("No se ha podido localizar la dirección 0x" + direccion.getRealHex());
 				
 			// El dato ya está aquí. Lo devuelvo.
-			return c.consultarDato(direccion.getReal());
+			int dato = c.consultarDato(direccion.getReal());
+			Log.printDebug("Dato leído: " + dato);
+			return dato;
 		}
 	}
 	
@@ -80,7 +86,6 @@ public class JerarquiaMemoria {
 		Direccion direccion = tablaPags.traducirDireccion(direccion_virtual, secundaria);
 		
 		Log.report(Flags.MEMORY_WRITE);
-		Log.println(3, "Guardado en memoria 0x" + direccion.getRealHex());
 		
 		// Siempre escribimos en la cache L1.
 		Cache c = caches[0];
@@ -88,19 +93,20 @@ public class JerarquiaMemoria {
 		// Compruebo si existe el dato (HIT)
 		if (c.existeDato(direccion.getReal()))
 		{
-			Log.println(2, "CACHE HIT L1");
-			Log.println(3, "Dato modificado en cache L1");
+			Log.println(1, "CACHE HIT L1", Color.GREEN);
 			if (secundaria)
 				Log.report(FlagsD.CACHE_HIT_F, 0);
 			else
 				Log.report(FlagsD.CACHE_HIT, 0);
+			
+			Log.printDebug("Dato: " + dato + " modificado en: " + direccion.getRealHex());
 			c.modificarDato(direccion.getReal(), direccion.getPagina(), dato);
 			// TODO: Write-Through.
 			return;
 		}
 		else  // No existe el dato (MISS)
 		{
-			Log.println(2, "CACHE MISS L1");
+			Log.println(1, "CACHE MISS L1", Color.GREEN);
 			if (secundaria)
 				Log.report(FlagsD.CACHE_MISS_F, 0);
 			else
@@ -113,7 +119,7 @@ public class JerarquiaMemoria {
 				throw new MemoryException("No se ha podido localizar la dirección 0x" + direccion.getRealHex());
 				
 			// El dato ya está aquí. Lo modifico.
-			Log.println(3, "Dato modificado en cache L1");
+			Log.printDebug("Dato: " + dato + " modificado en: " + direccion.getRealHex());
 			c.modificarDato(direccion.getReal(), direccion.getPagina(), dato);
 			// TODO: Write-Through.
 			return;
@@ -133,7 +139,7 @@ public class JerarquiaMemoria {
 		// Siguiente nivel es memoria.
 		if (nivel_sig == caches.length)
 		{
-			Log.println(3, "Trayendo bloque desde memoria a L" + (nivel_act+1));
+			Log.println(2, "Se accede a memoria para traer el bloque a L" + (nivel_act+1));
 			MemoriaPrincipal sig = memoria;
 			Cache act = caches[nivel_act];
 			
@@ -147,12 +153,14 @@ public class JerarquiaMemoria {
 			// Si hay hueco en la caché donde almacenar (nivel actual).
 			if (act.lineaLibre(direccion.getReal()))
 			{
-				Log.println(3, "Hay hueco libre en L" + (nivel_act+1) + " para traer el bloque");
+				Log.println(2, "Hay un conjunto libre en L" + (nivel_act+1) + " para traer el bloque");
 				act.escribirLinea(direccion.getReal(), direccion.getPagina(), linea);
 			}
 			else  // Si no hay hueco.
 			{
 				LineaReemplazo linR = act.reemplazarLinea(direccion.getReal(), direccion.getPagina(), linea);
+				Log.println(2, "No hay conjunto libre para traer el bloque, reemplazo 0x" + Integer.toHexString(linR.getDireccion()));
+				
 				if (secundaria)
 					Log.report(FlagsD.CONFLICT_CACHE_F, nivel_act);
 				else
@@ -161,14 +169,14 @@ public class JerarquiaMemoria {
 				// Si era dirty, tenemos que enviarla al siguiente nivel.
 				if (linR != null)
 				{
-					Log.println(3, "El bloque reemplazado era \"dirty\", se actualiza en los demás niveles");
+					Log.println(2, "El bloque reemplazado era \"dirty\", se escribe en los siguientes niveles.");
 					actualizarLinea(linR, nivel_act);
 				}
 			}
 		}
 		else
 		{
-			Log.println(3, "Trayendo bloque desde L" + nivel_sig + " a L" + (nivel_act+1));
+			Log.println(2, "Se accede a L" + nivel_sig + " para traer el bloque a L" + (nivel_act+1));
 			Cache sig = caches[nivel_sig];  // De donde leo el dato.
 			Cache act = caches[nivel_act];  // A donde traigo el dato.
 			
@@ -200,7 +208,7 @@ public class JerarquiaMemoria {
 			// Si hay hueco en la caché donde almacenar (nivel actual).
 			if (act.lineaLibre(direccion.getReal()))
 			{
-				Log.println(3, "Hay hueco libre en L" + (nivel_act+1) + " para traer el bloque");
+				Log.println(2, "Hay hueco libre en L" + (nivel_act+1) + " para traer el bloque");
 				act.escribirLinea(direccion.getReal(), direccion.getPagina(), linea);
 			}
 			else  // Si no hay hueco.
@@ -209,12 +217,14 @@ public class JerarquiaMemoria {
 					Log.report(FlagsD.CONFLICT_CACHE_F, nivel_act);
 				else
 					Log.report(FlagsD.CONFLICT_CACHE, nivel_act);
+				
 				LineaReemplazo linR = act.reemplazarLinea(direccion.getReal(), direccion.getPagina(), linea);
+				Log.println(2, "No hay hueco libre para traer el bloque, reemplazo 0x" + Integer.toHexString(linR.getDireccion()));
 				
 				// Si era dirty, tenemos que enviarla al siguiente nivel.
 				if (linR != null)
 				{
-					Log.println(3, "El bloque reemplazado era \"dirty\", se actualiza en los demás niveles");
+					Log.println(2, "El bloque reemplazado era \"dirty\", se escribe en los siguientes niveles.");
 					actualizarLinea(linR, nivel_act);
 				}
 			}
@@ -237,11 +247,11 @@ public class JerarquiaMemoria {
 		
 		for (int i = nivel_sig; i < caches.length; i++)
 		{
-			Log.println(3, "Actualizo en cache L" + (i+1) + " la dirección 0x" + Integer.toHexString(direccion));
+			Log.printDebug("Actualizo en cache L" + (i+1) + " la dirección 0x" + Integer.toHexString(direccion));
 			caches[i].actualizarLinea(direccion, pagina, linea);
 		}
 		
-		Log.println(3, "Actualizo en memoria la dirección 0x" + Integer.toHexString(direccion));
+		Log.printDebug("Actualizo en memoria la dirección 0x" + Integer.toHexString(direccion));
 		Log.report(Flags.BLOCK_WRITE);
 		memoria.guardarLinea(direccion, linea);
 	}
@@ -250,6 +260,7 @@ public class JerarquiaMemoria {
 	// Las líneas invalidadas y "dirty" se actualizan a los demás niveles.
 	public void invalidarPagina(int pagina) throws MemoryException
 	{
+		Log.printDebug("Invalidando en cache la página " + pagina);
 		for (int i = 0; i < caches.length; i++)
 		{
 			List<LineaReemplazo> lineasR1 = caches[i].invalidarPagina(pagina);
@@ -281,24 +292,24 @@ public class JerarquiaMemoria {
 		Direccion direccion = tablaPags.traducirDireccion(direccion_virtual, secundaria);
 		
 		Log.report(Flags.MEMORY_READ);
-		Log.println(3, "Lectura en memoria 0x" + direccion.getRealHex());
 		
-		// Busco en caché L0. Si no está, debemos traer la línea completa.
+		// Busco en caché L1. Si no está, debemos traer la línea completa.
 		Cache c = caches[0];
 		
 		if (c.existeDato(direccion.getReal()))
 		{
-			// Caché HIT L0
-			Log.println(2, "CACHE HIT L1");
+			// Caché HIT L1
+			Log.println(1, "CACHE HIT L1", Color.GREEN);
 			if (secundaria)
 				Log.report(FlagsD.CACHE_HIT_F, 0);
 			else
 				Log.report(FlagsD.CACHE_HIT, 0);
+			
 			c.consultarDato(direccion.getReal());
 		}
 		else  // No existe el dato (MISS)
 		{
-			Log.println(2, "CACHE MISS L1");
+			Log.println(1, "CACHE MISS L1", Color.RED);
 			if (secundaria)
 				Log.report(FlagsD.CACHE_MISS_F, 0);
 			else
@@ -327,26 +338,24 @@ public class JerarquiaMemoria {
 		Direccion direccion = tablaPags.traducirDireccion(direccion_virtual, secundaria);
 		
 		Log.report(Flags.MEMORY_WRITE);
-		Log.println(3, "Guardado en memoria 0x" + direccion.getRealHex());
 		
-		// Siempre escribimos en la cache L0.
+		// Siempre escribimos en la cache L1.
 		Cache c = caches[0];
 		
 		// Compruebo si existe el dato (HIT)
 		if (c.existeDato(direccion.getReal()))
 		{
-			Log.println(2, "CACHE HIT L1");
-			Log.println(3, "Dato modificado en cache L1");
+			Log.println(1, "CACHE HIT L1", Color.GREEN);
 			if (secundaria)
 				Log.report(FlagsD.CACHE_HIT_F, 0);
 			else
 				Log.report(FlagsD.CACHE_HIT, 0);
+			
 			c.modificarDato(direccion.getReal(), direccion.getPagina(), dato);
-			// TODO: Write-Through.
 		}
 		else  // No existe el dato (MISS)
 		{
-			Log.println(2, "CACHE MISS L1");
+			Log.println(1, "CACHE MISS L1", Color.GREEN);
 			if (secundaria)
 				Log.report(FlagsD.CACHE_MISS_F, 0);
 			else
@@ -359,9 +368,7 @@ public class JerarquiaMemoria {
 				throw new MemoryException("No se ha podido localizar la dirección 0x" + direccion.getRealHex());
 				
 			// El dato ya está aquí. Lo modifico.
-			Log.println(3, "Dato modificado en cache L1");
 			c.modificarDato(direccion.getReal(), direccion.getPagina(), dato);
-			// TODO: Write-Through.
 		}
 		
 		// Devuelvo la dirección para la traza.

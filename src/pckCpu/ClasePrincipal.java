@@ -121,8 +121,6 @@ public class ClasePrincipal implements Runnable {
 
 		try
 		{
-			Log.println(1, "Inicialización");
-			Log.printSeparador(1);
 			inicializarMemoria();
 			inicializarInterfaz();
 			inicializarCpu();
@@ -339,7 +337,7 @@ public class ClasePrincipal implements Runnable {
 			int primera_pag_inst = primera_pag_tabla - paginas_instrucciones;
 			direccion_inst = primera_pag_inst * tablaPags.getEntradasPagina() * 4;
 			
-			Log.printDebug("Puntero Tabla Páginas: " + direccion_tablPags);
+			Log.printDebug("Dirección Tabla Páginas: " + direccion_tablPags);
 			Log.printDebug("Dirección Primera Instrucción: " + direccion_inst);
 		}
 		

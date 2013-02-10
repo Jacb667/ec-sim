@@ -76,12 +76,12 @@ public class CpuMonociclo {
 		// Fetch memoria.
 		if (jinstr != null)
 		{
-			Log.println(2, "Fetch 0x" + Integer.toHexString(getPC()), Color.BLACK, true);
+			Log.println(1, "Fetch 0x" + Integer.toHexString(getPC()), Color.BLACK, true);
 			jinstr.leerDato(getPC());
 		}
 		else
 		{
-			Log.println(2, "Fetch 0x" + Integer.toHexString(getPC()), Color.BLACK, true);
+			Log.println(1, "Fetch 0x" + Integer.toHexString(getPC()), Color.BLACK, true);
 			jmem.leerDato(getPC());
 		}
 		
@@ -91,7 +91,6 @@ public class CpuMonociclo {
 		/*
 		 *  Etapa Decode
 		 */
-		Log.printDebug("Ejecutando instrucción " + inst.getOpcode());
 		
 		// Leo los 2 registros de origen.
 		int dato1 = registros.leerDato(inst.getOrigen1());
@@ -111,13 +110,13 @@ public class CpuMonociclo {
 		// Lee desde memoria.
 		if (inst.getOpcode() == Opcode.LW)
 		{
-			Log.println(2, "Leer dirección virtual: 0x" + Integer.toHexString(resultado));
+			Log.println(1, "Lectura de dirección virtual: 0x" + Integer.toHexString(resultado), Color.BLACK, true);
 			resultado = jmem.leerDato(resultado);
 		}
 		// Guarda en memoria.
 		else if (inst.getOpcode() == Opcode.SW)
 		{
-			Log.println(2, "Guardar dato [" + dato1 + "] dirección virtual: 0x" + Integer.toHexString(resultado));
+			Log.println(1, "Guardado de dato [" + dato1 + "] en dirección virtual: 0x" + Integer.toHexString(resultado), Color.BLACK, true);
 			jmem.guardarDato(resultado, dato1);
 		}
 		
