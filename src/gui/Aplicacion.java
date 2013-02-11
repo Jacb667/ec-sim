@@ -6,11 +6,6 @@ package gui;
 
 import java.awt.Dimension;
 
-import general.Config;
-import general.Config.Conf_Type;
-import general.Config.Conf_Type_c;
-import general.Global.TiposReemplazo;
-
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
