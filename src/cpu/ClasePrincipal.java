@@ -232,6 +232,8 @@ public class ClasePrincipal implements Runnable {
 	{
 		try
 		{
+			tp_alojada = false;
+			
 			inicializarMemoria();
 			inicializarInterfaz();
 			inicializarCpu();
@@ -536,6 +538,9 @@ public class ClasePrincipal implements Runnable {
 				break;
 			case EJECUTAR_CODIGO:
 				ejecutarCodigo();
+				
+				Config.getVista().enabledConfig(true);
+				Config.getVista().enabledEjecutarC(false);
 				break;
 			case VALIDAR_TRAZA:
 				

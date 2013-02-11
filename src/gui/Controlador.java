@@ -129,7 +129,7 @@ public class Controlador implements ActionListener {
 
 				Config.set(Conf_Type_c.ARCHIVO_CODIGO, v.getArchivoCodigo());
 			 
-				v.enabledEjecutarC();
+				v.enabledEjecutarC(true);
 				v.enabledConfig(false);
 				
 				claseP = new ClasePrincipal();
@@ -253,7 +253,7 @@ public class Controlador implements ActionListener {
 
 				Config.set(Conf_Type_c.ARCHIVO_CODIGO, v.getArchivoTraza());
 			 
-				v.enabledEjecutarT();
+				v.enabledEjecutarT(true);
 				v.enabledConfig(false);
 				
 				claseP = new ClasePrincipal();
@@ -317,6 +317,7 @@ public class Controlador implements ActionListener {
 			
 			}
 			v.enabledConfig(true);
+			v.enabledEjecutarT(false);
 		}
 		else if(comando.equals(Global.EJECUTARC))
 		{
@@ -327,7 +328,6 @@ public class Controlador implements ActionListener {
 				Thread thread = new Thread(claseP);
 				thread.start();
 			}
-			v.enabledConfig(true);
 		}
 		else if (comando.equals(Global.CICLO))
 		{
