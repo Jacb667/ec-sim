@@ -639,7 +639,7 @@ public class Vista extends JPanel {
 
         n_entradas_c1_l.setText("Tamaño:");
 
-        n_entradas_c1_t.setText("16");
+        n_entradas_c1_t.setText("64");
         n_entradas_c1_t.setToolTipText("Tamaño de la caché.");
         n_entradas_c1_t.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         n_entradas_c1_t.setName(""); // NOI18N
@@ -735,7 +735,7 @@ public class Vista extends JPanel {
 
         n_entradas_c2_l.setText("Tamaño:");
 
-        n_entradas_c2_t.setText("16");
+        n_entradas_c2_t.setText("64");
         n_entradas_c2_t.setToolTipText("Tamaño de la caché.");
         n_entradas_c2_t.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         n_entradas_c2_t.setName(""); // NOI18N
@@ -831,7 +831,7 @@ public class Vista extends JPanel {
 
         n_entradas_c3_l.setText("Tamaño:");
 
-        n_entradas_c3_t.setText("16");
+        n_entradas_c3_t.setText("64");
         n_entradas_c3_t.setToolTipText("Tamaño de la caché.");
         n_entradas_c3_t.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         n_entradas_c3_t.setName(""); // NOI18N
@@ -919,7 +919,7 @@ public class Vista extends JPanel {
 
         n_entradas_c4_l.setText("Tamaño:");
 
-        n_entradas_c4_t.setText("16");
+        n_entradas_c4_t.setText("64");
         n_entradas_c4_t.setToolTipText("Tamaño de la caché.");
         n_entradas_c4_t.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         n_entradas_c4_t.setName(""); // NOI18N
@@ -1007,7 +1007,7 @@ public class Vista extends JPanel {
 
         n_entradas_c5_l.setText("Tamaño:");
 
-        n_entradas_c5_t.setText("16");
+        n_entradas_c5_t.setText("64");
         n_entradas_c5_t.setToolTipText("Tamaño de la caché.");
         n_entradas_c5_t.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         n_entradas_c5_t.setName(""); // NOI18N
@@ -1095,7 +1095,7 @@ public class Vista extends JPanel {
 
         n_entradas_c6_l.setText("Tamaño:");
 
-        n_entradas_c6_t.setText("16");
+        n_entradas_c6_t.setText("64");
         n_entradas_c6_t.setToolTipText("Tamaño de la caché.");
         n_entradas_c6_t.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         n_entradas_c6_t.setName(""); // NOI18N
@@ -1273,6 +1273,11 @@ public class Vista extends JPanel {
         validar_t_b.setText("Validar");
 
         limpiar_t_b.setText("Limpiar");
+        limpiar_t_b.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                limpiar_t_bActionPerformed(evt);
+            }
+        });
 
         ejecucion_a.setEditable(false);
         scroll_ejecucion_a.setViewportView(ejecucion_a);
@@ -1349,6 +1354,11 @@ public class Vista extends JPanel {
         memoria_b.setText("Memoria");
 
         limpiar_ej_b.setText("Limpiar");
+        limpiar_ej_b.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                limpiar_ej_bActionPerformed(evt);
+            }
+        });
 
         cache_i3_b.setText("Cache I3");
         cache_i3_b.addActionListener(new java.awt.event.ActionListener() {
@@ -1715,29 +1725,29 @@ public class Vista extends JPanel {
             Integer.decode(m_tam_virt_t.getText());
         }
         catch(NumberFormatException e1)
-	{
-                m_tam_virt_t.setText("32");
-		JOptionPane.showMessageDialog( this, "Valor incorrecto, sólo se aceptan valores numéricos o hexadecimales comenzando por # o 0x.", "Error de formato", JOptionPane.ERROR_MESSAGE );
-	}
+        {
+        	m_tam_virt_t.setText("32");
+        	JOptionPane.showMessageDialog( this, "Valor incorrecto, sólo se aceptan valores numéricos o hexadecimales comenzando por # o 0x.", "Error de formato", JOptionPane.ERROR_MESSAGE );
+        }
     }//GEN-LAST:event_m_tam_virt_tFocusLost
 
     private void n_entradas_tlb_data_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_entradas_tlb_data_tFocusLost
-        // TODO add your handling code here:
+    	// TODO add your handling code here:
         try
         {
-           if (cb_tipo_tlb_datos.getSelectedIndex() == 2)
-            {
-            // Escribimos en número de vías el mismo número que en este campo.
-            // El campo número de vías se supone que ya está desactivado (no se puede editar).
-                n_vias_tlb_data_t.setText(String.valueOf(getCD1NEntradas()));
-            }
+        	if (cb_tipo_tlb_datos.getSelectedIndex() == 2)
+        	{
+        		// Escribimos en número de vías el mismo número que en este campo.
+        		// El campo número de vías se supone que ya está desactivado (no se puede editar).
+        		n_vias_tlb_data_t.setText(String.valueOf(getCD1NEntradas()));
+        	}
         }
         catch(NumberFormatException e1)
-	{
-               n_entradas_tlb_data_t.setText("16");
-               n_vias_tlb_data_t.setText(String.valueOf(getCD1NEntradas()));
-		JOptionPane.showMessageDialog( this, "Valor incorrecto, sólo se aceptan valores numéricos o hexadecimales comenzando por # o 0x.", "Error de formato", JOptionPane.ERROR_MESSAGE );
-	}
+        {
+        	n_entradas_tlb_data_t.setText("16");
+        	n_vias_tlb_data_t.setText(String.valueOf(getCD1NEntradas()));
+        	JOptionPane.showMessageDialog( this, "Valor incorrecto, sólo se aceptan valores numéricos o hexadecimales comenzando por # o 0x.", "Error de formato", JOptionPane.ERROR_MESSAGE );
+        }
     }//GEN-LAST:event_n_entradas_tlb_data_tFocusLost
 
     private void n_vias_tlb_data_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_vias_tlb_data_tFocusLost
@@ -1745,23 +1755,22 @@ public class Vista extends JPanel {
     }//GEN-LAST:event_n_vias_tlb_data_tFocusLost
 
     private void n_entradas_tlb_inst_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_entradas_tlb_inst_tFocusLost
-        // TODO add your handling code here:                                            
-        // TODO add your handling code here:
-         try
+    	// TODO add your handling code here:                                            
+        try
         {
-           if (cb_tipo_tlb_inst.getSelectedIndex() == 2)
+        	if (cb_tipo_tlb_inst.getSelectedIndex() == 2)
             {
-            // Escribimos en número de vías el mismo número que en este campo.
-            // El campo número de vías se supone que ya está desactivado (no se puede editar).
+        		// Escribimos en número de vías el mismo número que en este campo.
+        		// El campo número de vías se supone que ya está desactivado (no se puede editar).
                 n_vias_tlb_inst_t.setText(String.valueOf(getCD1NEntradas()));
             }
         }
         catch(NumberFormatException e1)
-	{
-               n_entradas_tlb_inst_t.setText("16");
-               n_vias_tlb_inst_t.setText(String.valueOf(getCD1NEntradas()));
-		JOptionPane.showMessageDialog( this, "Valor incorrecto, sólo se aceptan valores numéricos o hexadecimales comenzando por # o 0x.", "Error de formato", JOptionPane.ERROR_MESSAGE );
-	}
+        {
+        	n_entradas_tlb_inst_t.setText("16");
+        	n_vias_tlb_inst_t.setText(String.valueOf(getCD1NEntradas()));
+        	JOptionPane.showMessageDialog( this, "Valor incorrecto, sólo se aceptan valores numéricos o hexadecimales comenzando por # o 0x.", "Error de formato", JOptionPane.ERROR_MESSAGE );
+        }
     }//GEN-LAST:event_n_entradas_tlb_inst_tFocusLost
 
     private void n_vias_tlb_inst_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_vias_tlb_inst_tFocusLost
@@ -1774,21 +1783,21 @@ public class Vista extends JPanel {
 
     private void n_entradas_c1_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_entradas_c1_tFocusLost
         
-        try
+    	try
         {
-           if (cb_tipo_cd1.getSelectedIndex() == 2)
-        {
-            // Escribimos en número de vías el mismo número que en este campo.
-            // El campo número de vías se supone que ya está desactivado (no se puede editar).
-            n_vias_c1_t.setText(String.valueOf(getCD1NEntradas()));
-        }
+    		if (cb_tipo_cd1.getSelectedIndex() == 2)
+    		{
+    			// Escribimos en número de vías el mismo número que en este campo.
+    			// El campo número de vías se supone que ya está desactivado (no se puede editar).
+    			n_vias_c1_t.setText(String.valueOf(getCD1NEntradas()));
+	        }
         }
         catch(NumberFormatException e1)
-	{
-               n_entradas_c1_t.setText("16");
-               n_vias_c1_t.setText(String.valueOf(getCD1NEntradas()));
-		JOptionPane.showMessageDialog( this, "Valor incorrecto, sólo se aceptan valores numéricos o hexadecimales comenzando por # o 0x.", "Error de formato", JOptionPane.ERROR_MESSAGE );
-	}
+		{
+        	n_entradas_c1_t.setText("64");
+        	n_vias_c1_t.setText(String.valueOf(getCD1NEntradas()));
+        	JOptionPane.showMessageDialog( this, "Valor incorrecto, sólo se aceptan valores numéricos o hexadecimales comenzando por # o 0x.", "Error de formato", JOptionPane.ERROR_MESSAGE );
+		}
         
     }//GEN-LAST:event_n_entradas_c1_tFocusLost
 
@@ -1800,19 +1809,19 @@ public class Vista extends JPanel {
         
         try
         {
-            if (cb_tipo_cd2.getSelectedIndex() == 2)
-        {
-            // Escribimos en número de vías el mismo número que en este campo.
-            // El campo número de vías se supone que ya está desactivado (no se puede editar).
-            n_vias_c2_t.setText(String.valueOf(getCD2NEntradas()));
-        }
+	        if (cb_tipo_cd2.getSelectedIndex() == 2)
+	        {
+	        	// Escribimos en número de vías el mismo número que en este campo.
+	        	// El campo número de vías se supone que ya está desactivado (no se puede editar).
+	        	n_vias_c2_t.setText(String.valueOf(getCD2NEntradas()));
+	        }
         }
         catch(NumberFormatException e1)
-	{
-               n_entradas_c2_t.setText("16");
-               n_vias_c2_t.setText(String.valueOf(getCD2NEntradas()));
-		JOptionPane.showMessageDialog( this, "Valor incorrecto, sólo se aceptan valores numéricos o hexadecimales comenzando por # o 0x.", "Error de formato", JOptionPane.ERROR_MESSAGE );
-	}
+        {
+        	n_entradas_c2_t.setText("64");
+        	n_vias_c2_t.setText(String.valueOf(getCD2NEntradas()));
+        	JOptionPane.showMessageDialog( this, "Valor incorrecto, sólo se aceptan valores numéricos o hexadecimales comenzando por # o 0x.", "Error de formato", JOptionPane.ERROR_MESSAGE );
+        }
     }//GEN-LAST:event_n_entradas_c2_tFocusLost
 
     private void n_vias_c2_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_vias_c2_tFocusLost
@@ -1822,22 +1831,21 @@ public class Vista extends JPanel {
     private void n_entradas_c3_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_entradas_c3_tFocusLost
         
         // Si está seleccionada "Completamente asociativa".
-        
         try
         {
             if (cb_tipo_cd3.getSelectedIndex() == 2)
-        {
-            // Escribimos en número de vías el mismo número que en este campo.
-            // El campo número de vías se supone que ya está desactivado (no se puede editar).
-            
-        }
+            {
+            	// Escribimos en número de vías el mismo número que en este campo.
+            	// El campo número de vías se supone que ya está desactivado (no se puede editar).
+            	n_vias_c3_t.setText(String.valueOf(getCD3NEntradas()));
+            }
         }
         catch(NumberFormatException e1)
-	{
-               n_entradas_c3_t.setText("16");
-               n_vias_c3_t.setText(String.valueOf(getCD3NEntradas()));
-		JOptionPane.showMessageDialog( this, "Valor incorrecto, sólo se aceptan valores numéricos o hexadecimales comenzando por # o 0x.", "Error de formato", JOptionPane.ERROR_MESSAGE );
-	}
+        {
+        	n_entradas_c3_t.setText("64");
+        	n_vias_c3_t.setText(String.valueOf(getCD3NEntradas()));
+        	JOptionPane.showMessageDialog( this, "Valor incorrecto, sólo se aceptan valores numéricos o hexadecimales comenzando por # o 0x.", "Error de formato", JOptionPane.ERROR_MESSAGE );
+        }
     }//GEN-LAST:event_n_entradas_c3_tFocusLost
 
     private void n_vias_c3_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_vias_c3_tFocusLost
@@ -1850,18 +1858,18 @@ public class Vista extends JPanel {
         try
         {
             if (cb_tipo_cd4.getSelectedIndex() == 2)
-        {
-            // Escribimos en número de vías el mismo número que en este campo.
-            // El campo número de vías se supone que ya está desactivado (no se puede editar).
-            n_vias_c4_t.setText(String.valueOf(getCI1NEntradas()));
-        }
+            {
+            	// Escribimos en número de vías el mismo número que en este campo.
+            	// El campo número de vías se supone que ya está desactivado (no se puede editar).
+            	n_vias_c4_t.setText(String.valueOf(getCI1NEntradas()));
+            }
         }
         catch(NumberFormatException e1)
-	{
-               n_entradas_c4_t.setText("16");
-               n_vias_c4_t.setText(String.valueOf(getCI1NEntradas()));
-		JOptionPane.showMessageDialog( this, "Valor incorrecto, sólo se aceptan valores numéricos o hexadecimales comenzando por # o 0x.", "Error de formato", JOptionPane.ERROR_MESSAGE );
-	}
+        {
+        	n_entradas_c4_t.setText("64");
+        	n_vias_c4_t.setText(String.valueOf(getCI1NEntradas()));
+        	JOptionPane.showMessageDialog( this, "Valor incorrecto, sólo se aceptan valores numéricos o hexadecimales comenzando por # o 0x.", "Error de formato", JOptionPane.ERROR_MESSAGE );
+        }
     }//GEN-LAST:event_n_entradas_c4_tFocusLost
 
     private void n_vias_c4_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_vias_c4_tFocusLost
@@ -1873,18 +1881,18 @@ public class Vista extends JPanel {
        try
         {
            if (cb_tipo_cd5.getSelectedIndex() == 2)
-        {
-            // Escribimos en número de vías el mismo número que en este campo.
-            // El campo número de vías se supone que ya está desactivado (no se puede editar).
-            
-        }
+           {
+        	   // Escribimos en número de vías el mismo número que en este campo.
+        	   // El campo número de vías se supone que ya está desactivado (no se puede editar).
+        	   n_vias_c5_t.setText(String.valueOf(getCI2NEntradas()));
+           }
         }
         catch(NumberFormatException e1)
-	{
-               n_entradas_c5_t.setText("16");
-               n_vias_c5_t.setText(String.valueOf(getCI2NEntradas()));
-		JOptionPane.showMessageDialog( this, "Valor incorrecto, sólo se aceptan valores numéricos o hexadecimales comenzando por # o 0x.", "Error de formato", JOptionPane.ERROR_MESSAGE );
-	}
+        {
+        	n_entradas_c5_t.setText("64");
+        	n_vias_c5_t.setText(String.valueOf(getCI2NEntradas()));
+        	JOptionPane.showMessageDialog( this, "Valor incorrecto, sólo se aceptan valores numéricos o hexadecimales comenzando por # o 0x.", "Error de formato", JOptionPane.ERROR_MESSAGE );
+        }
     }//GEN-LAST:event_n_entradas_c5_tFocusLost
 
     private void n_vias_c5_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_vias_c5_tFocusLost
@@ -1896,18 +1904,18 @@ public class Vista extends JPanel {
         try
         {
             if (cb_tipo_cd6.getSelectedIndex() == 2)
-        {
-            // Escribimos en número de vías el mismo número que en este campo.
-            // El campo número de vías se supone que ya está desactivado (no se puede editar).
-            n_vias_c6_t.setText(String.valueOf(getCI3NEntradas()));
-        }
+            {
+            	// Escribimos en número de vías el mismo número que en este campo.
+            	// El campo número de vías se supone que ya está desactivado (no se puede editar).
+            	n_vias_c6_t.setText(String.valueOf(getCI3NEntradas()));
+            }
         }
         catch(NumberFormatException e1)
-	{
-               n_entradas_c6_t.setText("16");
-               n_vias_c6_t.setText(String.valueOf(getCI3NEntradas()));
-		JOptionPane.showMessageDialog( this, "Valor incorrecto, sólo se aceptan valores numéricos o hexadecimales comenzando por # o 0x.", "Error de formato", JOptionPane.ERROR_MESSAGE );
-	}
+        {
+        	n_entradas_c6_t.setText("64");
+        	n_vias_c6_t.setText(String.valueOf(getCI3NEntradas()));
+        	JOptionPane.showMessageDialog( this, "Valor incorrecto, sólo se aceptan valores numéricos o hexadecimales comenzando por # o 0x.", "Error de formato", JOptionPane.ERROR_MESSAGE );
+        }
     }//GEN-LAST:event_n_entradas_c6_tFocusLost
 
     private void n_vias_c6_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_vias_c6_tFocusLost
@@ -1932,6 +1940,16 @@ public class Vista extends JPanel {
             enabledValidarC();
         }
     }//GEN-LAST:event_cargar_codigo_bActionPerformed
+
+    private void limpiar_ej_bActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiar_ej_bActionPerformed
+        Log.limpiar();
+		resetEjec();
+    }//GEN-LAST:event_limpiar_ej_bActionPerformed
+
+    private void limpiar_t_bActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiar_t_bActionPerformed
+        Log.limpiar();
+		resetTraza();
+    }//GEN-LAST:event_limpiar_t_bActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Configuracion;
@@ -2528,18 +2546,18 @@ public class Vista extends JPanel {
     {
     	validar_t_b.setEnabled(true);
     }
-    public void enabledEjecutarT()
+    public void enabledEjecutarT(boolean b)
     {
-    	ejecutar_b.setEnabled(true);
+    	ejecutar_b.setEnabled(b);
     }
     public void enabledValidarC()
     {
     	validar_c_b.setEnabled(true);
     }
-    public void enabledEjecutarC()
+    public void enabledEjecutarC(boolean b)
     {
-    	ejecutar_b1.setEnabled(true);
-    	ciclo_b1.setEnabled(true);
+    	ejecutar_b1.setEnabled(b);
+    	ciclo_b1.setEnabled(b);
     }
     
     // Tamaño de palabra (siempre en bytes)
@@ -2611,7 +2629,7 @@ public class Vista extends JPanel {
         int valor = Integer.decode(n_entradas_c1_t.getText());
         int multiplicador = getMultiplicadorComboBox(cb_tam_cd1);
         // Hay que dividir siempre entre 4 (bytes por línea).
-        int result = (valor * multiplicador) / 4;
+        int result = (valor * multiplicador) / (getTamPal() * getTamLinea());
         return result;
     }
     public int getCD2NEntradas()
@@ -2619,7 +2637,7 @@ public class Vista extends JPanel {
     	int valor = Integer.decode(n_entradas_c2_t.getText());
         int multiplicador = getMultiplicadorComboBox(cb_tam_cd2);
         // Hay que dividir siempre entre 4 (bytes por línea).
-        int result = (valor * multiplicador) / 4;
+        int result = (valor * multiplicador) / (getTamPal() * getTamLinea());
         return result;
     }
     public int getCD3NEntradas()
@@ -2627,7 +2645,7 @@ public class Vista extends JPanel {
     	int valor = Integer.decode(n_entradas_c3_t.getText());
         int multiplicador = getMultiplicadorComboBox(cb_tam_cd3);
         // Hay que dividir siempre entre 4 (bytes por línea).
-        int result = (valor * multiplicador) / 4;
+        int result = (valor * multiplicador) / (getTamPal() * getTamLinea());
         return result;
     }
     public int getCI1NEntradas()
@@ -2635,7 +2653,7 @@ public class Vista extends JPanel {
     	int valor = Integer.decode(n_entradas_c4_t.getText());
         int multiplicador = getMultiplicadorComboBox(cb_tam_cd4);
         // Hay que dividir siempre entre 4 (bytes por línea).
-        int result = (valor * multiplicador) / 4;
+        int result = (valor * multiplicador) / (getTamPal() * getTamLinea());
         return result;
     }
     public int getCI2NEntradas()
@@ -2643,7 +2661,7 @@ public class Vista extends JPanel {
     	int valor = Integer.decode(n_entradas_c5_t.getText());
         int multiplicador = getMultiplicadorComboBox(cb_tam_cd5);
         // Hay que dividir siempre entre 4 (bytes por línea).
-        int result = (valor * multiplicador) / 4;
+        int result = (valor * multiplicador) / (getTamPal() * getTamLinea());
         return result;
     }
     public int getCI3NEntradas()
@@ -2651,7 +2669,7 @@ public class Vista extends JPanel {
     	int valor = Integer.decode(n_entradas_c6_t.getText());
         int multiplicador = getMultiplicadorComboBox(cb_tam_cd6);
         // Hay que dividir siempre entre 4 (bytes por línea).
-        int result = (valor * multiplicador) / 4;
+        int result = (valor * multiplicador) / (getTamPal() * getTamLinea());
         return result;
     }
     public int getCD1NVias()

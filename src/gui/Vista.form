@@ -1890,6 +1890,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Limpiar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="limpiar_t_bActionPerformed"/>
+              </Events>
             </Component>
             <Container class="javax.swing.JScrollPane" name="scroll_ejecucion_a">
               <AuxValues>
@@ -2064,6 +2067,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Limpiar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="limpiar_ej_bActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="cache_i3_b">
               <Properties>

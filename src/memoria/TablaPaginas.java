@@ -146,6 +146,9 @@ public class TablaPaginas {
 	
 	private void actualizarPaginasTabla(Pagina pag)
 	{
+		if (!tablaPagsEnMemoria)
+			return;
+		
 		int pagId = pag.getId();
 		int pagina = (int) Math.ceil(pagId / entradas_pagina);
 		int dato = 0;
