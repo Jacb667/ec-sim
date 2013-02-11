@@ -37,7 +37,10 @@ public class JerarquiaMemoria {
 		// Traducir la dirección.
 		Direccion direccion = tablaPags.traducirDireccion(direccion_virtual, secundaria);
 		
-		Log.report(Flags.MEMORY_READ);
+		if (secundaria)
+			Log.report(Flags.MEMORY_READ_F);
+		else
+			Log.report(Flags.MEMORY_READ);
 		
 		// Busco en caché L1. Si no está, debemos traer la línea completa.
 		Cache c = caches[0];
@@ -85,7 +88,10 @@ public class JerarquiaMemoria {
 		// Traducir la dirección.
 		Direccion direccion = tablaPags.traducirDireccion(direccion_virtual, secundaria);
 		
-		Log.report(Flags.MEMORY_WRITE);
+		if (secundaria)
+			Log.report(Flags.MEMORY_WRITE_F);
+		else
+			Log.report(Flags.MEMORY_WRITE);
 		
 		// Siempre escribimos en la cache L1.
 		Cache c = caches[0];
@@ -290,7 +296,10 @@ public class JerarquiaMemoria {
 		// Traducir la dirección.
 		Direccion direccion = tablaPags.traducirDireccion(direccion_virtual, secundaria);
 		
-		Log.report(Flags.MEMORY_READ);
+		if (secundaria)
+			Log.report(Flags.MEMORY_READ_F);
+		else
+			Log.report(Flags.MEMORY_READ);
 		
 		// Busco en caché L1. Si no está, debemos traer la línea completa.
 		Cache c = caches[0];
@@ -336,7 +345,10 @@ public class JerarquiaMemoria {
 		// Traducir la dirección.
 		Direccion direccion = tablaPags.traducirDireccion(direccion_virtual, secundaria);
 		
-		Log.report(Flags.MEMORY_WRITE);
+		if (secundaria)
+			Log.report(Flags.MEMORY_WRITE_F);
+		else
+			Log.report(Flags.MEMORY_WRITE);
 		
 		// Siempre escribimos en la cache L1.
 		Cache c = caches[0];
