@@ -7,7 +7,7 @@ public class LineaReemplazo {
 	private int[] lin;
 	private int dir;
 	private int pag;
-	private boolean dirty;
+	private boolean dirt;
 	
 	// Clase auxiliar para devolver líneas con la dirección.
 	public LineaReemplazo(int direccion, int pagina, int[] linea, boolean dirty)
@@ -15,6 +15,7 @@ public class LineaReemplazo {
 		lin = linea;
 		dir = direccion;
 		pag = pagina;
+		dirt = dirty;
 	}
 
 	public int[] getLinea()
@@ -54,6 +55,6 @@ public class LineaReemplazo {
 
 	public boolean isDirty()
 	{
-		return dirty;
+		return dirt;
 	}
 }
