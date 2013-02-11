@@ -105,7 +105,7 @@ public class JerarquiaMemoria {
 		}
 		else  // No existe el dato (MISS)
 		{
-			Log.println(1, "CACHE MISS L1", Color.GREEN);
+			Log.println(1, "CACHE MISS L1", Color.RED);
 			if (secundaria)
 				Log.report(FlagsD.CACHE_MISS_F, 0);
 			else
@@ -182,7 +182,7 @@ public class JerarquiaMemoria {
 			// Llamada recursiva para traer a los demás niveles.
 			if (!sig.existeDato(direccion.getReal()))
 			{
-				Log.println(2, "CACHE MISS L" + (nivel_sig+1));
+				Log.println(2, "CACHE MISS L" + (nivel_sig+1), Color.RED);
 				if (secundaria)
 					Log.report(FlagsD.CACHE_MISS_F, nivel_sig);
 				else
@@ -191,7 +191,7 @@ public class JerarquiaMemoria {
 			}
 			else
 			{
-				Log.println(2, "CACHE HIT L" + (nivel_sig+1));
+				Log.println(2, "CACHE HIT L" + (nivel_sig+1), Color.GREEN);
 				if (secundaria)
 					Log.report(FlagsD.CACHE_HIT_F, nivel_sig);
 				else
@@ -354,7 +354,7 @@ public class JerarquiaMemoria {
 		}
 		else  // No existe el dato (MISS)
 		{
-			Log.println(1, "CACHE MISS L1", Color.GREEN);
+			Log.println(1, "CACHE MISS L1", Color.RED);
 			if (secundaria)
 				Log.report(FlagsD.CACHE_MISS_F, 0);
 			else
