@@ -130,7 +130,7 @@ public class TablaPaginas {
 		{
 			int pagina = (int) Math.ceil(i / entradas_pagina);
 			int dato = 0;
-			if (paginas.get(i) != null)
+			if (paginas.get(i) != null && paginas.get(i).getMarco() != -1)
 			{
 				dato = paginas.get(i).getMarco();
 				dato = dato | 0x40000000;
@@ -139,6 +139,29 @@ public class TablaPaginas {
 			}
 			paginasTP[pagina].guardarLinea((i % entradas_pagina) * bytes_palabra, new int[]{dato});
 		}
+		
+		for (int i = 0; i < paginasTP.length; i++)
+			jerarquia1.actualizarMarcoInterfazMemoria(paginasTP[i].getMarco());
+	}
+	
+	private void actualizarPaginasTabla(Pagina pag)
+	{
+		int pagId = pag.getId();
+		int pagina = (int) Math.ceil(pagId / entradas_pagina);
+		int dato = 0;
+		if (pag != null && pag.getMarco() != -1)
+		{
+			dato = pag.getMarco();
+			dato = dato | 0x40000000;
+			if (pag.esDirty())
+				dato = dato | 0x20000000;
+		}
+		
+		int direcR = registroTablaPaginas + (pagId * bytes_palabra);
+		int direc = (pagId % entradas_pagina) * bytes_palabra;
+		Log.printDebug(String.format("Se actualiza la Tabla de Páginas -> Página: %d (0x%s) Marco: %d (%d).",pagId,Integer.toHexString(direcR),pag.getMarco(),dato));
+		
+		paginasTP[pagina].guardarLinea(direc, new int[]{dato});
 		
 		for (int i = 0; i < paginasTP.length; i++)
 			jerarquia1.actualizarMarcoInterfazMemoria(paginasTP[i].getMarco());
@@ -180,6 +203,10 @@ public class TablaPaginas {
 		
 		// Primero buscamos en qué página debe estar la dirección.
 		Pagina pag = seleccionarPagina(direccion);
+		if (pag.getMarco() == -1)
+			Log.printDebug("La página " + pag.getId() + " no tiene marco asignado.");
+		else
+			Log.printDebug("La página " + pag.getId() + " tiene asignada el marco " + pag.getMarco());
 		
 		// Ya tenemos la página correspondiente, comprobamos si está en un marco.
 		if (pag.getMarco() != -1)
@@ -194,11 +221,11 @@ public class TablaPaginas {
 					int dirPag = registroTablaPaginas + pag.getId()*4;
 					Log.printDebug("Puntero Tabla Páginas: " + registroTablaPaginas);
 					Log.printDebug("Desplazamiento: " + pag.getId()*4);
-					Log.println(2, "TP: Se accede a la dirección 0x" + Integer.toHexString(dirPag) + " para buscar el marco de la página.", Color.BLUE);
+					Log.println(2,"TP: Se accede a la dirección 0x" + Integer.toHexString(dirPag) + " para buscar el marco de la página.", Color.BLUE);
 				}
 				else
 				{
-					Log.println(2, "TP: Se accede a la tabla de páginas para buscar el marco de la página.", Color.BLUE);
+					Log.println(2,"TP: Se accede a la tabla de páginas para buscar el marco de la página.", Color.BLUE);
 				}
 			}
 			
@@ -304,6 +331,7 @@ public class TablaPaginas {
 			if (marco != -1)
 			{
 				asignarPaginaMarco(pag, marco);
+				actualizarPaginasTabla(pag);
 				Log.println(2,"SO: Se carga la página desde memoria secundaria al marco " + marco);
 				Direccion dirR = calcularDireccion(direccion, marco);
 				Log.println(2,"TP: Se traduce la dirección como 0x" + dirR.getRealHex());
@@ -313,6 +341,7 @@ public class TablaPaginas {
 			{
 				marco = liberarMarco();
 				asignarPaginaMarco(pag, marco);
+				actualizarPaginasTabla(pag);
 				Log.println(2,"SO: Se carga la página desde memoria secundaria al marco " + marco + ", reemplazando la página anterior.");
 				Direccion dirR = calcularDireccion(direccion, marco);
 				Log.println(2,"TP: Se traduce la dirección como 0x" + dirR.getRealHex());
