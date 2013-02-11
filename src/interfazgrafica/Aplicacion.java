@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Pruebas;
+package interfazgrafica;
 
 import java.awt.Dimension;
 
@@ -10,8 +10,6 @@ import general.Config;
 import general.Config.Conf_Type;
 import general.Config.Conf_Type_c;
 import general.Global.TiposReemplazo;
-import interfazgrafica.Controlador;
-import interfazgrafica.Vista;
 
 import javax.swing.JFrame;
 import javax.swing.UIManager;

@@ -184,41 +184,44 @@ public class Log {
 			}
 		}
 		
-		println(0, "Páginas -> " + Log.accesosPagina + " Accesos - " + Log.aciertosPagina + " Hits - " + Log.fallosPagina + " Faults (" + Log.conflictosPagina + ")");
-		
-		/*if (Config.get(Conf_Type.NIVEL_JERARQUIAS_SEPARADAS) > 1)
+		int nivelJerarquiasSeparadas = Config.get(Conf_Type.NIVEL_JERARQUIAS_SEPARADAS);
+		if (nivelJerarquiasSeparadas > 1)
 		{
-			println(1, "");
-			println(1, "--------------------------");
-			println(1, "Jerarquía de instrucciones");
-			
-			ratio_l0 = (float)(Log.cache_hits_f[0]*100) / (float)(Log.accesosMemoria);
-			ratio_l1 = (float)(Log.cache_hits_f[1]*100) / (float)(Log.accesosMemoria-Log.cache_hits[0]);
-			ratio_l2 = (float)(Log.cache_hits_f[2]*100) / (float)(Log.accesosMemoria-Log.cache_hits[0]-Log.cache_hits[1]);
+			ratio_l0 = (float)(Log.cache_hits_f[0]*100) / (float)(Log.accesosMemoria_f);
+			ratio_l1 = (float)(Log.cache_hits_f[1]*100) / (float)(Log.accesosMemoria_f-Log.cache_hits_f[0]);
+			ratio_l2 = (float)(Log.cache_hits_f[2]*100) / (float)(Log.accesosMemoria_f-Log.cache_hits_f[0]-Log.cache_hits_f[1]);
 			
 			int nivel_instr = Config.get(Conf_Type.NIVELES_CACHE_INSTRUCCIONES);
 			
+			// Si hay jerarquías compartidas, la caché de instrucciones tendrá menos niveles de los que nos envía la Config.
+			if (nivelJerarquiasSeparadas < 4)
+			{
+				if (nivelJerarquiasSeparadas == 1)
+					nivel_instr = 0;
+				else if (nivelJerarquiasSeparadas == 2)
+					nivel_instr = 1;
+				else if (nivelJerarquiasSeparadas == 3)
+					nivel_instr = Math.max(nivel_datos, 2);
+			}
+			
 			if (nivel_instr > 0)
 			{
-				println(1, "Cache L0 -> " + Log.cache_hits1[0] + " Hits - " + (Log.cache_misses1[0]) + " Miss (" + Log.cache_conflicts1[0] + ")");
+				println(1, "Cache L0 -> " + Log.cache_hits_f[0] + " Hits - " + (Log.cache_misses_f[0]) + " Miss (" + Log.cache_conflicts_f[0] + ")");
 				println(1, String.format("%.2f%%", ratio_l0));
 			}
 			if (nivel_instr > 1)
 			{
-				println(1, "Cache L1 -> " + Log.cache_hits1[1] + " Hits - " + Log.cache_misses1[1] + " Miss (" + Log.cache_conflicts1[1] + ")");
+				println(1, "Cache L1 -> " + Log.cache_hits_f[1] + " Hits - " + Log.cache_misses_f[1] + " Miss (" + Log.cache_conflicts_f[1] + ")");
 				println(1, String.format("%.2f%%", ratio_l1));
 			}
 			if (nivel_instr > 2)
 			{
-				println(1, "Cache L2 -> " + Log.cache_hits1[2] + " Hits - " + Log.cache_misses1[2] + " Miss (" + Log.cache_conflicts1[2] + ")");
+				println(1, "Cache L2 -> " + Log.cache_hits_f[2] + " Hits - " + Log.cache_misses_f[2] + " Miss (" + Log.cache_conflicts_f[2] + ")");
 				println(1, String.format("%.2f%%", ratio_l2));
 			}
-			
-			println(1, "Páginas -> " + Log.accesosPagina1 + " Accesos - " + Log.aciertosPagina1 + " Hits - " + Log.fallosPagina1 + " Faults (" + Log.conflictosPagina1 + ")");
-			
-			if (Config.get(Conf_Type.TLB_INSTRUCCIONES) == 1)
-				println(1, "ITLB -> " + Log.aciertosTlb1 + " Hits - " + Log.fallosTlb1 + " Miss (" + Log.conflictosTlb1 + ")");
-		}*/
+		}
+		
+		println(0, "Páginas -> " + Log.accesosPagina + " Accesos - " + Log.aciertosPagina + " Hits - " + Log.fallosPagina + " Faults (" + Log.conflictosPagina + ")");
 		
 		if (Config.ejecutando_codigo)
 			Config.getVista().setFinEjec();
