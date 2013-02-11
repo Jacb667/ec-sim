@@ -66,7 +66,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="config_p1" max="32767" attributes="0"/>
+                      <Component id="config_p1" pref="345" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -91,48 +91,53 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jSeparator1" alignment="1" max="32767" attributes="0"/>
-                                          <Group type="102" attributes="0">
-                                              <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="32767" attributes="0"/>
-                                              <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="32767" attributes="0"/>
-                                              <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="jSeparator1" max="32767" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jerarquias_separadas_l" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="pal_p_linea_l" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="tabla_paginas_l" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="politica_reemplazo_tp_l" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="tp_alojada_chb" min="-2" max="-2" attributes="0"/>
+                                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="pal_p_linea_t" pref="125" max="32767" attributes="0"/>
+                                              <Component id="caches_separadas_cb" max="32767" attributes="0"/>
+                                          </Group>
+                                          <Component id="politica_reemplazo_tp" alignment="0" min="-2" pref="125" max="-2" attributes="0"/>
+                                          <Component id="tp_alojada_chb" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" attributes="0">
-                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="pal_p_linea_t" pref="125" max="32767" attributes="0"/>
-                                                  <Component id="caches_separadas_cb" max="32767" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
                                               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                                               <Component id="log_cb" min="-2" pref="101" max="-2" attributes="0"/>
                                           </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="politica_reemplazo_tp_l1" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Component id="boton_carga_memoria" min="-2" max="-2" attributes="0"/>
+                                          </Group>
                                       </Group>
-                                      <EmptySpace min="-2" pref="156" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="102" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -152,11 +157,27 @@
                                   <Component id="caches_separadas_cb" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="tp_alojada_chb" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="tabla_paginas_l" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="tp_alojada_chb" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="tabla_paginas_l" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="politica_reemplazo_tp_l" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="politica_reemplazo_tp" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace pref="123" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="boton_carga_memoria" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="politica_reemplazo_tp_l1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace pref="161" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <EmptySpace pref="154" max="32767" attributes="0"/>
                               <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
@@ -262,6 +283,38 @@
                         <Property name="text" type="java.lang.String" value="Tabla de P&#xe1;ginas:"/>
                       </Properties>
                     </Component>
+                    <Component class="javax.swing.JLabel" name="politica_reemplazo_tp_l">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Pol&#xed;tica de Reemplazo:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JComboBox" name="politica_reemplazo_tp">
+                      <Properties>
+                        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                          <StringArray count="5">
+                            <StringItem index="0" value="LRU"/>
+                            <StringItem index="1" value="LFU"/>
+                            <StringItem index="2" value="FIFO"/>
+                            <StringItem index="3" value="AGING"/>
+                            <StringItem index="4" value="RANDOM"/>
+                          </StringArray>
+                        </Property>
+                        <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Pol&#xed;tica de reemplazo utilizada para cach&#xe9;s asociativas:&lt;br&gt;&lt;br&gt;&#xa;&#xa;- &lt;b&gt;LRU:&lt;/b&gt; Elimina la p&#xe1;gina menos utilizada recientemente.&lt;br&gt;&#xa;- &lt;b&gt;NRU:&lt;/b&gt; Elimina la p&#xe1;gina con menor n&#xfa;mero de utilizaciones.&lt;br&gt;&#xa;- &lt;b&gt;FIFO:&lt;/b&gt; Elimina la primera p&#xe1;gina que se asign&#xf3;.&lt;br&gt;&#xa;- &lt;b&gt;AGING:&lt;/b&gt; Se basa en el hist&#xf3;rico de accesos para determinar la p&#xe1;gina que se eliminar&#xe1;.&lt;br&gt;&#xa;- &lt;b&gt;RANDOM:&lt;/b&gt; Se selecciona una p&#xe1;gina aleatoriamente y se elimina.&lt;br&gt;&lt;/html&gt;"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="politica_reemplazo_tp_l1">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Fichero de memoria:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="boton_carga_memoria">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Cargar"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="boton_carga_memoriaActionPerformed"/>
+                      </Events>
+                    </Component>
                   </SubComponents>
                 </Container>
                 <Container class="javax.swing.JPanel" name="memoria_p">
@@ -307,7 +360,7 @@
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
-                          <Component id="panelesTLBs" alignment="0" max="32767" attributes="0"/>
+                          <Component id="panelesTLBs" alignment="0" pref="630" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
@@ -471,7 +524,7 @@
                                           <Component id="politica_reemplazo_tlb_data_cb1" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="politica_reemplazo_c1_l1" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace pref="54" max="32767" attributes="0"/>
+                                      <EmptySpace pref="55" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -479,7 +532,7 @@
                           <SubComponents>
                             <Component class="javax.swing.JLabel" name="n_entradas_c2_l4">
                               <Properties>
-                                <Property name="text" type="java.lang.String" value="N&#xfa;mero de entradas"/>
+                                <Property name="text" type="java.lang.String" value="N&#xfa;mero de entradas:"/>
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JTextField" name="n_entradas_tlb_data_t">
@@ -493,7 +546,7 @@
                             </Component>
                             <Component class="javax.swing.JLabel" name="n_vias_c2_l4">
                               <Properties>
-                                <Property name="text" type="java.lang.String" value="N&#xfa;mero de v&#xed;as"/>
+                                <Property name="text" type="java.lang.String" value="N&#xfa;mero de v&#xed;as:"/>
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JTextField" name="n_vias_tlb_data_t">
@@ -508,7 +561,7 @@
                             </Component>
                             <Component class="javax.swing.JLabel" name="politica_reemplazo_c1_l1">
                               <Properties>
-                                <Property name="text" type="java.lang.String" value="Pol&#xed;tica de reemplazo"/>
+                                <Property name="text" type="java.lang.String" value="Pol&#xed;tica de reemplazo:"/>
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JComboBox" name="politica_reemplazo_tlb_data_cb1">
@@ -543,7 +596,7 @@
                             </Component>
                             <Component class="javax.swing.JLabel" name="n_entradas_c2_l6">
                               <Properties>
-                                <Property name="text" type="java.lang.String" value="Tipo"/>
+                                <Property name="text" type="java.lang.String" value="Tipo:"/>
                               </Properties>
                             </Component>
                           </SubComponents>
@@ -608,7 +661,7 @@
                                           <Component id="politica_reemplazo_tlb_inst_cb" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="politica_reemplazo_c1_l3" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace pref="54" max="32767" attributes="0"/>
+                                      <EmptySpace pref="55" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -616,7 +669,7 @@
                           <SubComponents>
                             <Component class="javax.swing.JLabel" name="n_entradas_c2_l7">
                               <Properties>
-                                <Property name="text" type="java.lang.String" value="N&#xfa;mero de entradas"/>
+                                <Property name="text" type="java.lang.String" value="N&#xfa;mero de entradas:"/>
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JTextField" name="n_entradas_tlb_inst_t">
@@ -630,7 +683,7 @@
                             </Component>
                             <Component class="javax.swing.JLabel" name="n_vias_c2_l6">
                               <Properties>
-                                <Property name="text" type="java.lang.String" value="N&#xfa;mero de v&#xed;as"/>
+                                <Property name="text" type="java.lang.String" value="N&#xfa;mero de v&#xed;as:"/>
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JTextField" name="n_vias_tlb_inst_t">
@@ -645,7 +698,7 @@
                             </Component>
                             <Component class="javax.swing.JLabel" name="politica_reemplazo_c1_l3">
                               <Properties>
-                                <Property name="text" type="java.lang.String" value="Pol&#xed;tica de reemplazo"/>
+                                <Property name="text" type="java.lang.String" value="Pol&#xed;tica de reemplazo:"/>
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JComboBox" name="politica_reemplazo_tlb_inst_cb">
@@ -679,7 +732,7 @@
                             </Component>
                             <Component class="javax.swing.JLabel" name="n_entradas_c2_l8">
                               <Properties>
-                                <Property name="text" type="java.lang.String" value="Tipo"/>
+                                <Property name="text" type="java.lang.String" value="Tipo:"/>
                               </Properties>
                             </Component>
                           </SubComponents>
@@ -1219,7 +1272,7 @@
                                           <Component id="politica_reemplazo_c3_l" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="politica_reemplazo_c3_cb" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace pref="104" max="32767" attributes="0"/>
+                                      <EmptySpace pref="105" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -1373,7 +1426,7 @@
                                           <Component id="politica_reemplazo_c4_l" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="politica_reemplazo_c4_cb" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace pref="104" max="32767" attributes="0"/>
+                                      <EmptySpace pref="105" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -1527,7 +1580,7 @@
                                           <Component id="politica_reemplazo_c5_l" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="politica_reemplazo_c5_cb" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace pref="104" max="32767" attributes="0"/>
+                                      <EmptySpace pref="105" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -1681,7 +1734,7 @@
                                           <Component id="politica_reemplazo_c6_l" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="politica_reemplazo_c6_cb" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace pref="104" max="32767" attributes="0"/>
+                                      <EmptySpace pref="105" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -1861,7 +1914,7 @@
                           <Component id="limpiar_t_b" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="scroll_ejecucion_a" pref="252" max="32767" attributes="0"/>
+                      <Component id="scroll_ejecucion_a" pref="253" max="32767" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="salvar_t" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -1996,7 +2049,7 @@
                           <Component id="limpiar_ej_b" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="scroll_ejecucion_a1" pref="218" max="32767" attributes="0"/>
+                      <Component id="scroll_ejecucion_a1" pref="219" max="32767" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="cache_d1_b" alignment="3" min="-2" max="-2" attributes="0"/>
