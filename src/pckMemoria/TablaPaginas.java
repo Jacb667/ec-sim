@@ -198,7 +198,7 @@ public class TablaPaginas {
 				}
 				else
 				{
-					Log.println(2, "Se accede a la tabla de páginas para buscar el marco de la página.", Color.BLUE);
+					Log.println(2, "TP: Se accede a la tabla de páginas para buscar el marco de la página.", Color.BLUE);
 				}
 			}
 			
@@ -249,12 +249,12 @@ public class TablaPaginas {
 			// Si estamos aquí es porque se ha encontrado la página asociada a un marco.
 			// OJO! Puede ser PAGE HIT y TLB MISS.
 			Log.report(Flags.PAGE_HIT);
-			Log.println(2,"PAGE HIT", Color.GREEN);
+			Log.println(1,"PAGE HIT", Color.GREEN);
 			
 			// La página está en un marco, podemos traducir la dirección.
-			Log.println(2,"Se ha encontrado la página en el marco " + pag.getMarco());
+			Log.println(2,"TP: Se ha encontrado la página en el marco " + pag.getMarco());
 			Direccion dirR = calcularDireccion(direccion, pag.getMarco());
-			Log.println(2,"Se traduce la dirección como 0x" + dirR.getRealHex());
+			Log.println(2,"TP: Se traduce la dirección como 0x" + dirR.getRealHex());
 			return dirR;
 		}
 		else
@@ -289,11 +289,11 @@ public class TablaPaginas {
 				int dirPag = registroTablaPaginas + pag.getId()*4;
 				Log.printDebug("Puntero Tabla Páginas: " + registroTablaPaginas);
 				Log.printDebug("Desplazamiento: " + pag.getId()*4);
-				Log.println(2, "TP: Se accede a la dirección 0x" + Integer.toHexString(dirPag) + " para buscar el marco de la página.", Color.BLUE);
+				Log.println(2,"TP: Se accede a la dirección 0x" + Integer.toHexString(dirPag) + " para buscar el marco de la página.", Color.BLUE);
 			}
 			else
 			{
-				Log.println(2, "Se accede a la tabla de páginas para buscar el marco de la página.", Color.BLUE);
+				Log.println(2,"TP: Se accede a la tabla de páginas para buscar el marco de la página.", Color.BLUE);
 			}
 			
 			// Es PAGE FAULT
@@ -304,18 +304,18 @@ public class TablaPaginas {
 			if (marco != -1)
 			{
 				asignarPaginaMarco(pag, marco);
-				Log.println(2, "SO: Se carga la página desde memoria secundaria al marco " + marco);
+				Log.println(2,"SO: Se carga la página desde memoria secundaria al marco " + marco);
 				Direccion dirR = calcularDireccion(direccion, marco);
-				Log.println(2,"Se traduce la dirección como 0x" + dirR.getRealHex());
+				Log.println(2,"TP: Se traduce la dirección como 0x" + dirR.getRealHex());
 				return dirR;
 			}
 			else
 			{
 				marco = liberarMarco();
 				asignarPaginaMarco(pag, marco);
-				Log.println(2, "SO: Se carga la página desde memoria secundaria al marco " + marco + ", reemplazando la página anterior.");
+				Log.println(2,"SO: Se carga la página desde memoria secundaria al marco " + marco + ", reemplazando la página anterior.");
 				Direccion dirR = calcularDireccion(direccion, marco);
-				Log.println(2,"Se traduce la dirección como 0x" + dirR.getRealHex());
+				Log.println(2,"TP: Se traduce la dirección como 0x" + dirR.getRealHex());
 				return dirR;
 			}
 		}
@@ -387,8 +387,6 @@ public class TablaPaginas {
 		
 		// Actualizar la interfaz de memoria para este marco.
 		jerarquia1.actualizarMarcoInterfazMemoria(marco);
-		if (jerarquia2 != null)
-			jerarquia2.actualizarMarcoInterfazMemoria(marco);
 	}
 	
 	// Libera un marco (según política de reemplazo).
