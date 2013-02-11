@@ -667,6 +667,11 @@ public class Vista extends JPanel {
         politica_reemplazo_c1_cb.setEnabled(false);
 
         cb_tam_cd1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bytes", "KBytes", "MBytes" }));
+        cb_tam_cd1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_tam_cd1ActionPerformed(evt);
+            }
+        });
 
         n_tipo_c1_l.setText("Tipo:");
 
@@ -735,7 +740,7 @@ public class Vista extends JPanel {
 
         n_entradas_c2_l.setText("Tamaño:");
 
-        n_entradas_c2_t.setText("64");
+        n_entradas_c2_t.setText("128");
         n_entradas_c2_t.setToolTipText("Tamaño de la caché.");
         n_entradas_c2_t.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         n_entradas_c2_t.setName(""); // NOI18N
@@ -763,6 +768,11 @@ public class Vista extends JPanel {
         politica_reemplazo_c2_cb.setEnabled(false);
 
         cb_tam_cd2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bytes", "KBytes", "MBytes" }));
+        cb_tam_cd2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_tam_cd2ActionPerformed(evt);
+            }
+        });
 
         n_tipo_c2_l.setText("Tipo:");
 
@@ -831,7 +841,7 @@ public class Vista extends JPanel {
 
         n_entradas_c3_l.setText("Tamaño:");
 
-        n_entradas_c3_t.setText("64");
+        n_entradas_c3_t.setText("128");
         n_entradas_c3_t.setToolTipText("Tamaño de la caché.");
         n_entradas_c3_t.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         n_entradas_c3_t.setName(""); // NOI18N
@@ -859,6 +869,11 @@ public class Vista extends JPanel {
         politica_reemplazo_c3_cb.setEnabled(false);
 
         cb_tam_cd3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bytes", "KBytes", "MBytes" }));
+        cb_tam_cd3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_tam_cd3ActionPerformed(evt);
+            }
+        });
 
         n_tipo_c3_l.setText("Tipo:");
 
@@ -947,6 +962,11 @@ public class Vista extends JPanel {
         politica_reemplazo_c4_cb.setEnabled(false);
 
         cb_tam_cd4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bytes", "KBytes", "MBytes" }));
+        cb_tam_cd4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_tam_cd4ActionPerformed(evt);
+            }
+        });
 
         n_tipo_c4_l.setText("Tipo:");
 
@@ -1007,7 +1027,7 @@ public class Vista extends JPanel {
 
         n_entradas_c5_l.setText("Tamaño:");
 
-        n_entradas_c5_t.setText("64");
+        n_entradas_c5_t.setText("128");
         n_entradas_c5_t.setToolTipText("Tamaño de la caché.");
         n_entradas_c5_t.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         n_entradas_c5_t.setName(""); // NOI18N
@@ -1035,6 +1055,11 @@ public class Vista extends JPanel {
         politica_reemplazo_c5_cb.setEnabled(false);
 
         cb_tam_cd5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bytes", "KBytes", "MBytes" }));
+        cb_tam_cd5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_tam_cd5ActionPerformed(evt);
+            }
+        });
 
         n_tipo_c5_l.setText("Tipo:");
 
@@ -1095,7 +1120,7 @@ public class Vista extends JPanel {
 
         n_entradas_c6_l.setText("Tamaño:");
 
-        n_entradas_c6_t.setText("64");
+        n_entradas_c6_t.setText("128");
         n_entradas_c6_t.setToolTipText("Tamaño de la caché.");
         n_entradas_c6_t.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         n_entradas_c6_t.setName(""); // NOI18N
@@ -1123,6 +1148,11 @@ public class Vista extends JPanel {
         politica_reemplazo_c6_cb.setEnabled(false);
 
         cb_tam_cd6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bytes", "KBytes", "MBytes" }));
+        cb_tam_cd6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_tam_cd6ActionPerformed(evt);
+            }
+        });
 
         n_tipo_c6_l.setText("Tipo:");
 
@@ -1361,11 +1391,6 @@ public class Vista extends JPanel {
         });
 
         cache_i3_b.setText("Cache I3");
-        cache_i3_b.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cache_i3_bActionPerformed(evt);
-            }
-        });
 
         ejecucion_a1.setEditable(false);
         scroll_ejecucion_a1.setViewportView(ejecucion_a1);
@@ -1722,7 +1747,10 @@ public class Vista extends JPanel {
     private void m_tam_virt_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_m_tam_virt_tFocusLost
         try
         {
-            Integer.decode(m_tam_virt_t.getText());
+            int dato = Integer.decode(m_tam_virt_t.getText());
+            
+            if (!Global.esPotencia(dato))
+            	JOptionPane.showMessageDialog( this, "El tamaño debe ser potencia de 2.", "Valor incorrecto", JOptionPane.ERROR_MESSAGE );
         }
         catch(NumberFormatException e1)
         {
@@ -1732,7 +1760,6 @@ public class Vista extends JPanel {
     }//GEN-LAST:event_m_tam_virt_tFocusLost
 
     private void n_entradas_tlb_data_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_entradas_tlb_data_tFocusLost
-    	// TODO add your handling code here:
         try
         {
         	if (cb_tipo_tlb_datos.getSelectedIndex() == 2)
@@ -1751,11 +1778,23 @@ public class Vista extends JPanel {
     }//GEN-LAST:event_n_entradas_tlb_data_tFocusLost
 
     private void n_vias_tlb_data_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_vias_tlb_data_tFocusLost
-        // TODO add your handling code here:
+        
+    	try
+        {
+            int dato = Integer.decode(n_vias_tlb_data_t.getText());
+            
+            if (!Global.esPotencia(dato))
+            	JOptionPane.showMessageDialog( this, "El tamaño debe ser potencia de 2.", "Valor incorrecto", JOptionPane.ERROR_MESSAGE );
+        }
+        catch(NumberFormatException e1)
+        {
+        	n_vias_tlb_data_t.setText("1");
+        	JOptionPane.showMessageDialog( this, "Valor incorrecto, sólo se aceptan valores numéricos o hexadecimales comenzando por # o 0x.", "Error de formato", JOptionPane.ERROR_MESSAGE );
+        }
+    	
     }//GEN-LAST:event_n_vias_tlb_data_tFocusLost
 
     private void n_entradas_tlb_inst_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_entradas_tlb_inst_tFocusLost
-    	// TODO add your handling code here:                                            
         try
         {
         	if (cb_tipo_tlb_inst.getSelectedIndex() == 2)
@@ -1774,17 +1813,44 @@ public class Vista extends JPanel {
     }//GEN-LAST:event_n_entradas_tlb_inst_tFocusLost
 
     private void n_vias_tlb_inst_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_vias_tlb_inst_tFocusLost
-        // TODO add your handling code here:
+    	try
+        {
+            int dato = Integer.decode(n_vias_tlb_inst_t.getText());
+            
+            if (!Global.esPotencia(dato))
+            	JOptionPane.showMessageDialog( this, "El tamaño debe ser potencia de 2.", "Valor incorrecto", JOptionPane.ERROR_MESSAGE );
+        }
+        catch(NumberFormatException e1)
+        {
+        	n_vias_tlb_inst_t.setText("1");
+        	JOptionPane.showMessageDialog( this, "Valor incorrecto, sólo se aceptan valores numéricos o hexadecimales comenzando por # o 0x.", "Error de formato", JOptionPane.ERROR_MESSAGE );
+        }
     }//GEN-LAST:event_n_vias_tlb_inst_tFocusLost
 
     private void tam_linea_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tam_linea_tFocusLost
-        // TODO add your handling code here:
+    	try
+        {
+            int dato = Integer.decode(tam_linea_t.getText());
+            
+            if (!Global.esPotencia(dato))
+            	JOptionPane.showMessageDialog( this, "El tamaño debe ser potencia de 2.", "Valor incorrecto", JOptionPane.ERROR_MESSAGE );
+        }
+        catch(NumberFormatException e1)
+        {
+        	tam_linea_t.setText("4");
+        	JOptionPane.showMessageDialog( this, "Valor incorrecto, sólo se aceptan valores numéricos o hexadecimales comenzando por # o 0x.", "Error de formato", JOptionPane.ERROR_MESSAGE );
+        }
     }//GEN-LAST:event_tam_linea_tFocusLost
 
     private void n_entradas_c1_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_entradas_c1_tFocusLost
         
     	try
         {
+    		int dato = Integer.decode(n_entradas_c1_t.getText());
+            
+            if (!Global.esPotencia(dato))
+            	JOptionPane.showMessageDialog( this, "El tamaño debe ser potencia de 2.", "Valor incorrecto", JOptionPane.ERROR_MESSAGE );
+    		
     		if (cb_tipo_cd1.getSelectedIndex() == 2)
     		{
     			// Escribimos en número de vías el mismo número que en este campo.
@@ -1802,13 +1868,29 @@ public class Vista extends JPanel {
     }//GEN-LAST:event_n_entradas_c1_tFocusLost
 
     private void n_vias_c1_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_vias_c1_tFocusLost
-        // TODO add your handling code here:
+    	try
+        {
+            int dato = Integer.decode(n_vias_c1_t.getText());
+            
+            if (!Global.esPotencia(dato))
+            	JOptionPane.showMessageDialog( this, "El tamaño debe ser potencia de 2.", "Valor incorrecto", JOptionPane.ERROR_MESSAGE );
+        }
+        catch(NumberFormatException e1)
+        {
+        	n_vias_c1_t.setText("1");
+        	JOptionPane.showMessageDialog( this, "Valor incorrecto, sólo se aceptan valores numéricos o hexadecimales comenzando por # o 0x.", "Error de formato", JOptionPane.ERROR_MESSAGE );
+        }
     }//GEN-LAST:event_n_vias_c1_tFocusLost
 
     private void n_entradas_c2_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_entradas_c2_tFocusLost
         
         try
         {
+        	int dato = Integer.decode(n_entradas_c2_t.getText());
+            
+            if (!Global.esPotencia(dato))
+            	JOptionPane.showMessageDialog( this, "El tamaño debe ser potencia de 2.", "Valor incorrecto", JOptionPane.ERROR_MESSAGE );
+        	
 	        if (cb_tipo_cd2.getSelectedIndex() == 2)
 	        {
 	        	// Escribimos en número de vías el mismo número que en este campo.
@@ -1825,7 +1907,18 @@ public class Vista extends JPanel {
     }//GEN-LAST:event_n_entradas_c2_tFocusLost
 
     private void n_vias_c2_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_vias_c2_tFocusLost
-        // TODO add your handling code here:
+    	try
+        {
+            int dato = Integer.decode(n_vias_c2_t.getText());
+            
+            if (!Global.esPotencia(dato))
+            	JOptionPane.showMessageDialog( this, "El tamaño debe ser potencia de 2.", "Valor incorrecto", JOptionPane.ERROR_MESSAGE );
+        }
+        catch(NumberFormatException e1)
+        {
+        	n_vias_c2_t.setText("1");
+        	JOptionPane.showMessageDialog( this, "Valor incorrecto, sólo se aceptan valores numéricos o hexadecimales comenzando por # o 0x.", "Error de formato", JOptionPane.ERROR_MESSAGE );
+        }
     }//GEN-LAST:event_n_vias_c2_tFocusLost
 
     private void n_entradas_c3_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_entradas_c3_tFocusLost
@@ -1833,6 +1926,11 @@ public class Vista extends JPanel {
         // Si está seleccionada "Completamente asociativa".
         try
         {
+        	int dato = Integer.decode(n_entradas_c3_t.getText());
+            
+            if (!Global.esPotencia(dato))
+            	JOptionPane.showMessageDialog( this, "El tamaño debe ser potencia de 2.", "Valor incorrecto", JOptionPane.ERROR_MESSAGE );
+        	
             if (cb_tipo_cd3.getSelectedIndex() == 2)
             {
             	// Escribimos en número de vías el mismo número que en este campo.
@@ -1849,14 +1947,28 @@ public class Vista extends JPanel {
     }//GEN-LAST:event_n_entradas_c3_tFocusLost
 
     private void n_vias_c3_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_vias_c3_tFocusLost
-        // TODO add your handling code here:
+    	try
+        {
+            int dato = Integer.decode(n_vias_c3_t.getText());
+            
+            if (!Global.esPotencia(dato))
+            	JOptionPane.showMessageDialog( this, "El tamaño debe ser potencia de 2.", "Valor incorrecto", JOptionPane.ERROR_MESSAGE );
+        }
+        catch(NumberFormatException e1)
+        {
+        	n_vias_c3_t.setText("1");
+        	JOptionPane.showMessageDialog( this, "Valor incorrecto, sólo se aceptan valores numéricos o hexadecimales comenzando por # o 0x.", "Error de formato", JOptionPane.ERROR_MESSAGE );
+        }
     }//GEN-LAST:event_n_vias_c3_tFocusLost
 
     private void n_entradas_c4_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_entradas_c4_tFocusLost
-        // TODO add your handling code here:
-        
         try
         {
+        	int dato = Integer.decode(n_entradas_c4_t.getText());
+            
+            if (!Global.esPotencia(dato))
+            	JOptionPane.showMessageDialog( this, "El tamaño debe ser potencia de 2.", "Valor incorrecto", JOptionPane.ERROR_MESSAGE );
+        	
             if (cb_tipo_cd4.getSelectedIndex() == 2)
             {
             	// Escribimos en número de vías el mismo número que en este campo.
@@ -1873,13 +1985,29 @@ public class Vista extends JPanel {
     }//GEN-LAST:event_n_entradas_c4_tFocusLost
 
     private void n_vias_c4_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_vias_c4_tFocusLost
-        // TODO add your handling code here:
+    	try
+        {
+            int dato = Integer.decode(n_vias_c4_t.getText());
+            
+            if (!Global.esPotencia(dato))
+            	JOptionPane.showMessageDialog( this, "El tamaño debe ser potencia de 2.", "Valor incorrecto", JOptionPane.ERROR_MESSAGE );
+        }
+        catch(NumberFormatException e1)
+        {
+        	n_vias_c4_t.setText("1");
+        	JOptionPane.showMessageDialog( this, "Valor incorrecto, sólo se aceptan valores numéricos o hexadecimales comenzando por # o 0x.", "Error de formato", JOptionPane.ERROR_MESSAGE );
+        }
     }//GEN-LAST:event_n_vias_c4_tFocusLost
 
     private void n_entradas_c5_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_entradas_c5_tFocusLost
        
        try
         {
+    	   int dato = Integer.decode(n_entradas_c5_t.getText());
+           
+           if (!Global.esPotencia(dato))
+           	JOptionPane.showMessageDialog( this, "El tamaño debe ser potencia de 2.", "Valor incorrecto", JOptionPane.ERROR_MESSAGE );
+    	   
            if (cb_tipo_cd5.getSelectedIndex() == 2)
            {
         	   // Escribimos en número de vías el mismo número que en este campo.
@@ -1896,13 +2024,29 @@ public class Vista extends JPanel {
     }//GEN-LAST:event_n_entradas_c5_tFocusLost
 
     private void n_vias_c5_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_vias_c5_tFocusLost
-        // TODO add your handling code here:
+    	try
+        {
+            int dato = Integer.decode(n_vias_c5_t.getText());
+            
+            if (!Global.esPotencia(dato))
+            	JOptionPane.showMessageDialog( this, "El tamaño debe ser potencia de 2.", "Valor incorrecto", JOptionPane.ERROR_MESSAGE );
+        }
+        catch(NumberFormatException e1)
+        {
+        	n_vias_c5_t.setText("1");
+        	JOptionPane.showMessageDialog( this, "Valor incorrecto, sólo se aceptan valores numéricos o hexadecimales comenzando por # o 0x.", "Error de formato", JOptionPane.ERROR_MESSAGE );
+        }
     }//GEN-LAST:event_n_vias_c5_tFocusLost
 
     private void n_entradas_c6_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_entradas_c6_tFocusLost
         
         try
         {
+        	int dato = Integer.decode(n_entradas_c6_t.getText());
+            
+            if (!Global.esPotencia(dato))
+            	JOptionPane.showMessageDialog( this, "El tamaño debe ser potencia de 2.", "Valor incorrecto", JOptionPane.ERROR_MESSAGE );
+        	
             if (cb_tipo_cd6.getSelectedIndex() == 2)
             {
             	// Escribimos en número de vías el mismo número que en este campo.
@@ -1919,12 +2063,19 @@ public class Vista extends JPanel {
     }//GEN-LAST:event_n_entradas_c6_tFocusLost
 
     private void n_vias_c6_tFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_n_vias_c6_tFocusLost
-        // TODO add your handling code here:
+    	try
+        {
+            int dato = Integer.decode(n_vias_c6_t.getText());
+            
+            if (!Global.esPotencia(dato))
+            	JOptionPane.showMessageDialog( this, "El tamaño debe ser potencia de 2.", "Valor incorrecto", JOptionPane.ERROR_MESSAGE );
+        }
+        catch(NumberFormatException e1)
+        {
+        	n_vias_c6_t.setText("1");
+        	JOptionPane.showMessageDialog( this, "Valor incorrecto, sólo se aceptan valores numéricos o hexadecimales comenzando por # o 0x.", "Error de formato", JOptionPane.ERROR_MESSAGE );
+        }
     }//GEN-LAST:event_n_vias_c6_tFocusLost
-
-    private void cache_i3_bActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cache_i3_bActionPerformed
-        // Nada
-    }//GEN-LAST:event_cache_i3_bActionPerformed
 
     private void cargar_codigo_bActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargar_codigo_bActionPerformed
         JFileChooser chooser= new JFileChooser();
@@ -1950,6 +2101,30 @@ public class Vista extends JPanel {
         Log.limpiar();
 		resetTraza();
     }//GEN-LAST:event_limpiar_t_bActionPerformed
+
+    private void cb_tam_cd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tam_cd1ActionPerformed
+    	n_entradas_c1_tFocusLost(null);
+    }//GEN-LAST:event_cb_tam_cd1ActionPerformed
+
+    private void cb_tam_cd2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tam_cd2ActionPerformed
+    	n_entradas_c2_tFocusLost(null);
+    }//GEN-LAST:event_cb_tam_cd2ActionPerformed
+
+    private void cb_tam_cd3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tam_cd3ActionPerformed
+    	n_entradas_c3_tFocusLost(null);
+    }//GEN-LAST:event_cb_tam_cd3ActionPerformed
+
+    private void cb_tam_cd4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tam_cd4ActionPerformed
+    	n_entradas_c4_tFocusLost(null);
+    }//GEN-LAST:event_cb_tam_cd4ActionPerformed
+
+    private void cb_tam_cd5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tam_cd5ActionPerformed
+    	n_entradas_c5_tFocusLost(null);
+    }//GEN-LAST:event_cb_tam_cd5ActionPerformed
+
+    private void cb_tam_cd6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tam_cd6ActionPerformed
+    	n_entradas_c6_tFocusLost(null);
+    }//GEN-LAST:event_cb_tam_cd6ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Configuracion;
