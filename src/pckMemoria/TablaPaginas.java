@@ -216,6 +216,8 @@ public class TablaPaginas {
 			// Comprobamos la tabla de páginas.
 			if (!tlb_hit)
 			{
+				Log.report(Flags.ACCESS_PT);
+				
 				if (tablaPagsEnMemoria)
 				{
 					int dirPag = registroTablaPaginas + pag.getId()*4;
@@ -230,7 +232,7 @@ public class TablaPaginas {
 			}
 			
 			// Comprobamos si está en la TLB.
-			if (secundaria == false)
+			if (!secundaria)
 			{
 				if (tlb_datos != null)
 				{
@@ -287,7 +289,7 @@ public class TablaPaginas {
 		else
 		{
 			// MISS, la guardamos en TLB
-			if (secundaria == false)
+			if (!secundaria)
 			{
 				if (tlb_datos != null)
 				{
@@ -309,6 +311,8 @@ public class TablaPaginas {
 					Log.println(1,"TLB MISS", Color.RED, false);
 				}
 			}
+			
+			Log.report(Flags.ACCESS_PT);
 			
 			// Comprobamos la tabla de páginas.
 			if (tablaPagsEnMemoria)

@@ -25,6 +25,10 @@ public class Log {
 	public static int lecturasMemoria = 0;
 	public static int escriturasMemoria = 0;
 	
+	public static int accesosMemoria_f = 0;			// Para Fetch
+	public static int lecturasMemoria_f = 0;		// Para Fetch
+	public static int escriturasMemoria_f = 0;		// Para Fetch
+	
 	public static int accesosPagina = 0;
 	public static int fallosPagina = 0;
 	public static int aciertosPagina = 0;
@@ -46,6 +50,9 @@ public class Log {
 	{
 		MEMORY_WRITE,
 		MEMORY_READ,
+		
+		MEMORY_WRITE_F,
+		MEMORY_READ_F,
 
 		BLOCK_READ,
 		BLOCK_WRITE,
@@ -185,29 +192,23 @@ public class Log {
 			println(1, "--------------------------");
 			println(1, "Jerarquía de instrucciones");
 			
+			ratio_l0 = (float)(Log.cache_hits_f[0]*100) / (float)(Log.accesosMemoria);
+			ratio_l1 = (float)(Log.cache_hits_f[1]*100) / (float)(Log.accesosMemoria-Log.cache_hits[0]);
+			ratio_l2 = (float)(Log.cache_hits_f[2]*100) / (float)(Log.accesosMemoria-Log.cache_hits[0]-Log.cache_hits[1]);
 			
-			ratio_l0 = (float)(Log.cache_hits1[0]*100) / (float)(Log.accesosMemoria1);
-			ratio_l1 = (float)(Log.cache_hits1[1]*100) / (float)(Log.accesosMemoria1-Log.cache_hits1[0]);
-			ratio_l2 = (float)(Log.cache_hits1[2]*100) / (float)(Log.accesosMemoria1-Log.cache_hits1[0]-Log.cache_hits1[1]);
+			int nivel_instr = Config.get(Conf_Type.NIVELES_CACHE_INSTRUCCIONES);
 			
-			println(1,"Accesos a memoria: " + Log.accesosMemoria1 + " (" + 
-					Log.lecturasMemoria1 + " lecturas + " + Log.escriturasMemoria1 + " escrituras)");
-			println(1,"Accesos a bloques: " + Log.accesosBloques1 + " (" + 
-					Log.lecturasBloques1 + " leidos + " + Log.escriturasBloques1 + " escritos)");
-			
-			nivel_datos = Config.get(Conf_Type.NIVELES_CACHE_INSTRUCCIONES);
-			
-			if (nivel_datos > 0)
+			if (nivel_instr > 0)
 			{
 				println(1, "Cache L0 -> " + Log.cache_hits1[0] + " Hits - " + (Log.cache_misses1[0]) + " Miss (" + Log.cache_conflicts1[0] + ")");
 				println(1, String.format("%.2f%%", ratio_l0));
 			}
-			if (nivel_datos > 1)
+			if (nivel_instr > 1)
 			{
 				println(1, "Cache L1 -> " + Log.cache_hits1[1] + " Hits - " + Log.cache_misses1[1] + " Miss (" + Log.cache_conflicts1[1] + ")");
 				println(1, String.format("%.2f%%", ratio_l1));
 			}
-			if (nivel_datos > 2)
+			if (nivel_instr > 2)
 			{
 				println(1, "Cache L2 -> " + Log.cache_hits1[2] + " Hits - " + Log.cache_misses1[2] + " Miss (" + Log.cache_conflicts1[2] + ")");
 				println(1, String.format("%.2f%%", ratio_l2));
@@ -261,6 +262,14 @@ public class Log {
 			case MEMORY_WRITE:
 				escriturasMemoria++;
 				accesosMemoria++;
+				break;
+			case MEMORY_READ_F:
+				lecturasMemoria_f++;
+				accesosMemoria_f++;
+				break;
+			case MEMORY_WRITE_F:
+				escriturasMemoria_f++;
+				accesosMemoria_f++;
 				break;
 			case BLOCK_READ:
 				lecturasBloques++;
