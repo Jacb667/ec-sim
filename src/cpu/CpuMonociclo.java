@@ -1,4 +1,4 @@
-package pckCpu;
+package cpu;
 
 import general.Global.Opcode;
 import general.Log;
@@ -9,7 +9,8 @@ import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-import pckMemoria.JerarquiaMemoria;
+import memoria.JerarquiaMemoria;
+
 
 public class CpuMonociclo {
 	

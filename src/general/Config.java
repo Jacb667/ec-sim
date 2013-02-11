@@ -1,7 +1,7 @@
 package general;
 
-import interfazgrafica.Controlador;
-import interfazgrafica.Vista;
+import gui.Controlador;
+import gui.Vista;
 
 // Archivo global para configuraciones del programa.
 

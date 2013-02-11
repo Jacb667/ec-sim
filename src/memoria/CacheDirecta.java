@@ -1,14 +1,14 @@
-package pckMemoria;
+package memoria;
 
 import general.Global;
 import general.MemoryException;
+import gui.Tabla;
 
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import componentes.Tabla;
 
 /* Tamaño:
  * 

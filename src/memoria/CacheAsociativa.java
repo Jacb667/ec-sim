@@ -1,14 +1,14 @@
-package pckMemoria;
+package memoria;
 
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
 
-import componentes.Tabla;
 
 import general.Global;
 import general.Global.TiposReemplazo;
 import general.MemoryException;
+import gui.Tabla;
 
 /*
  * 1024 entradas, 8 vías, 4 palabras por línea:

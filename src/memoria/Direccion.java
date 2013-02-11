@@ -1,4 +1,4 @@
-package pckMemoria;
+package memoria;
 
 public class Direccion {
 	

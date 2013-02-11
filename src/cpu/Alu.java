@@ -1,4 +1,4 @@
-package pckCpu;
+package cpu;
 
 public class Alu
 {

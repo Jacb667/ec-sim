@@ -1,4 +1,4 @@
-package pckCpu;
+package cpu;
 
 import java.util.StringTokenizer;
 

@@ -1,7 +1,6 @@
 
-package pckCpu;
+package cpu;
 
-import interfazgrafica.Vista;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -9,9 +8,18 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
-import componentes.Tabla;
-import componentes.VentanaLimitada;
-import componentes.VentanaOculta;
+
+import memoria.Cache;
+import memoria.CacheAsociativa;
+import memoria.CacheDirecta;
+import memoria.JerarquiaMemoria;
+import memoria.MemoriaPrincipal;
+import memoria.TablaPaginas;
+import memoria.Tlb;
+import cpu.CpuException;
+import cpu.CpuMonociclo;
+import cpu.Decoder;
+import cpu.Instruccion;
 
 import general.Config.Conf_Type;
 import general.Config.Conf_Type_c;
@@ -20,17 +28,10 @@ import general.Global.TiposReemplazo;
 import general.Config;
 import general.Log;
 import general.MemoryException;
-import pckCpu.CpuMonociclo;
-import pckCpu.CpuException;
-import pckCpu.Decoder;
-import pckCpu.Instruccion;
-import pckMemoria.Cache;
-import pckMemoria.CacheAsociativa;
-import pckMemoria.CacheDirecta;
-import pckMemoria.JerarquiaMemoria;
-import pckMemoria.MemoriaPrincipal;
-import pckMemoria.TablaPaginas;
-import pckMemoria.Tlb;
+import gui.Tabla;
+import gui.VentanaLimitada;
+import gui.VentanaOculta;
+import gui.Vista;
 
 public class ClasePrincipal implements Runnable {
 	

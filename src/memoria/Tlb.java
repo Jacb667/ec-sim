@@ -1,4 +1,4 @@
-package pckMemoria;
+package memoria;
 
 import general.Global.TiposReemplazo;
 import general.MemoryException;

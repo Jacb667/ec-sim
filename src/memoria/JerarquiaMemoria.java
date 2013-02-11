@@ -1,4 +1,4 @@
-package pckMemoria;
+package memoria;
 
 import java.awt.Color;
 import java.util.List;

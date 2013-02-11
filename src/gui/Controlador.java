@@ -1,4 +1,4 @@
-package interfazgrafica;
+package gui;
 import general.*;
 import general.Config.Conf_Type;
 import general.Config.Conf_Type_c;
@@ -12,7 +12,8 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import javax.swing.JOptionPane;
-import pckCpu.ClasePrincipal;
+
+import cpu.ClasePrincipal;
 
 public class Controlador implements ActionListener {
 	

@@ -1,12 +1,12 @@
 
-package pckMemoria;
+package memoria;
 
 import java.awt.Dimension;
 
-import componentes.Tabla;
 
 import general.Global;
 import general.MemoryException;
+import gui.Tabla;
 
 /* 
  * La memoria RAM se considera que no tiene vías ni es asociativa.
