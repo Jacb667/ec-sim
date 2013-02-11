@@ -1,6 +1,7 @@
 package cpu;
 
 import general.Global.Opcode;
+import general.Global;
 import general.Log;
 import general.MemoryException;
 
@@ -54,6 +55,7 @@ public class CpuMonociclo {
 		while (!forzar_detencion && ejecutando)
 		{
 			ejecutando = ejecutarInstruccion();
+			Global.sleep(5);  // Con esto evitamos que la interfaz se bloquee demasiado.
 		}
 		
 		if (forzar_detencion)
