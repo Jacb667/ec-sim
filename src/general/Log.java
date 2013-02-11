@@ -105,6 +105,10 @@ public class Log {
 	{
 		int nivel_compartido = Config.get(Conf_Type.NIVEL_JERARQUIAS_SEPARADAS);
 		
+		Log.printSeparador(0);
+		Log.println(0,"Estadísticas", Color.BLACK, true);
+		Log.printSeparador(0);
+		
 		// Calculo las estadísticas de la caché de datos (o compartida).
 		float ratio_l0 = (float)(Log.cache_hits[0]*100) / (float)(Log.accesosMemoria);
 		float ratio_l1 = (float)(Log.cache_hits[1]*100) / (float)(Log.accesosMemoria-Log.cache_hits[0]);
