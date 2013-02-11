@@ -1,6 +1,7 @@
 package memoria;
 
 import general.Config;
+import general.MemoryException;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -13,49 +14,45 @@ import javax.swing.JOptionPane;
 
 public class DecoderRam {
 	
-	private int dato;//dato a guardar
-	private int direccion;//dirección de memoria a guardar
-	private BufferedReader br;//buffer reader
-	private FileReader fr;//File reader
-	private MemoriaPrincipal memoria;
-	public DecoderRam(MemoriaPrincipal mem)//hay que pasarle la memoria donde se quieren guardar los datos.
+	private TablaPaginas tablaPags;
+	public DecoderRam(TablaPaginas tp)//hay que pasarle la memoria donde se quieren guardar los datos.
 	{
-		memoria=mem;
-		direccion=0;
-		dato=0;
+		tablaPags = tp;
 	}
 	
-	public void decodeFile(File file) throws IOException
+	public void decodeFile(String file) throws IOException, MemoryException
 	{
-		fr=new FileReader(file);
-		br=new BufferedReader(fr);
+		FileReader fr = new FileReader(file);
+		BufferedReader br = new BufferedReader(fr);
 		String linea=br.readLine();
-		while(linea!=null)
+		int l = 1;
+		while(linea != null)
 		{
-			decodeLine(linea);
-			linea=br.readLine();
+			decodeLine(linea,l);
+			linea = br.readLine();
+			l++;
 		}
 	}
-	public void decodeLine(String l)
+	public void decodeLine(String l, int lineaN) throws MemoryException
 	{
-		
-		StringTokenizer st= new StringTokenizer(l," ,.; '\n'");
+		StringTokenizer st = new StringTokenizer(l," ,.; '\n'");
 		String s;
-		while(st.hasMoreTokens())
+		int direccion = 0;
+		while (st.hasMoreTokens())
 		{
-			s=st.nextToken();
-			char x=s.charAt(0);
-			if(":".equals(x))
+			s = st.nextToken();
+			char x = s.charAt(0);
+			if(x == ':')
 			{
 				//Coge la dirección
-				StringTokenizer st2=new StringTokenizer(s,":");
+				StringTokenizer st2 = new StringTokenizer(s,":");
 				try
 				{
-					direccion=Integer.parseInt(st2.nextToken());//:Direccion
+					direccion = Integer.parseInt(st2.nextToken());//:Direccion
 				}
 				catch(NumberFormatException ex)
 				{
-					JOptionPane.showMessageDialog( Config.getVista(), "Dirección invalida", "Parametro Invalido", JOptionPane.ERROR_MESSAGE );
+					JOptionPane.showMessageDialog( Config.getVista(), "Dirección inválida en línea " + lineaN, "Carga de archivo de memoria", JOptionPane.ERROR_MESSAGE );
 				}
 			}
 			else
@@ -63,14 +60,14 @@ public class DecoderRam {
 				//introducir el dato en la RAM;
 				try
 				{
-					dato=Integer.parseInt(s);//S es un dato
-					memoria.guardarDato(direccion, dato);
+					int dato = Integer.parseInt(s);//S es un dato
+					tablaPags.inicializarDatoMemoriaVirtual(direccion, dato);
 				}
 				catch(NumberFormatException ex)
 				{
-					JOptionPane.showMessageDialog( Config.getVista(), "Dato invalido", "Parametro Invalido", JOptionPane.ERROR_MESSAGE );
+					JOptionPane.showMessageDialog( Config.getVista(), "Dato inválido en línea " + lineaN, "Carga de archivo de memoria", JOptionPane.ERROR_MESSAGE );
 				}
-				direccion=direccion+4;//Pasa a la siguiente dirección;
+				direccion = direccion+4;//Pasa a la siguiente dirección;
 			}
 		}
 		
