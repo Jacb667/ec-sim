@@ -1,9 +1,9 @@
-package pckCpu;
+package cpu;
 
 import general.Config;
 import general.Global.Opcode;
+import gui.Vista;
 
-import interfazgrafica.Vista;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

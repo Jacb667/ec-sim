@@ -1,4 +1,4 @@
-package pckCpu;
+package cpu;
 
 import general.Config;
 import general.Log;
@@ -8,8 +8,9 @@ import java.util.*;
 
 import javax.swing.JOptionPane;
 
-import pckMemoria.Direccion;
-import pckMemoria.JerarquiaMemoria;
+import memoria.Direccion;
+import memoria.JerarquiaMemoria;
+
 
 public class Traza {
 	int TAM=3;

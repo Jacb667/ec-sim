@@ -1,4 +1,4 @@
-package componentes;
+package gui;
 
 import java.awt.Dimension;
 
@@ -8,8 +8,9 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
-import pckMemoria.Cache;
-import pckMemoria.MemoriaPrincipal;
+import memoria.Cache;
+import memoria.MemoriaPrincipal;
+
 
 @SuppressWarnings("serial")
 public class Tabla extends JTable {

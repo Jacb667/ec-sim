@@ -1,11 +1,11 @@
 
-package pckMemoria;
+package memoria;
 
 import java.awt.Dimension;
 
-import componentes.Tabla;
 
 import general.Global;
+import gui.Tabla;
 
 /* 
  * La memoria principal se compone de Páginas, con una capacidad de las páginas que caben en los marcos de la Tabla de Paginación.

@@ -1,4 +1,4 @@
-package interfazgrafica;
+package gui;
 import general.*;
 
 import java.awt.event.ActionListener;

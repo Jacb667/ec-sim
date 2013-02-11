@@ -1,11 +1,11 @@
-package pckMemoria;
+package memoria;
 
 import java.awt.Dimension;
 import java.util.List;
 
-import componentes.Tabla;
 
 import general.MemoryException;
+import gui.Tabla;
 
 public interface Cache {
 	
