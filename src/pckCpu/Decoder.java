@@ -82,6 +82,7 @@ public class Decoder
 			else
 				JOptionPane.showMessageDialog( v, e.getMessage(), "Error en la lectura del fichero", JOptionPane.ERROR_MESSAGE );
 			clean();
+			e.printStackTrace();
 			return false;
 		}
 	}
@@ -193,12 +194,22 @@ public class Decoder
 			}
 		}
 		
+		// Busco direcciones repetidas (varias instrucciones con misma dirección).
+		for (int i = 0; i < instrucciones.size(); i++)
+		{
+			Instruccion inst = instrucciones.get(i);
+			int dir = inst.getDireccion();
+			
+			if (existeInstruccionDireccion(dir, i+1))
+				throw new CpuException("Existen múltiples instrucciones para la dirección 0x" + Integer.toHexString(dir));
+		}
+		
 		// Comprobamos todas las instrucciones buscando etiquetas de salto.
 		// Para cada etiqueta, comprobamos si existe o no.
 		// Además, asignamos a la instrucción la dirección real de salto.
 		for (Instruccion inst : instrucciones)
 		{
-			if (inst.esSalto())
+			if (inst.esSalto() && inst.getOpcode() != Opcode.JR)
 			{
 				String etiq = inst.getEtiqueta();
 				if (etiq != null)
@@ -215,7 +226,7 @@ public class Decoder
 					// Le sumo la primera instrucción (ya que es relativa a la primera).
 					int direccion = inst.getDireccionSalto() + primera_instruccion;
 					
-					if (direccion < primera_instruccion || direccion > ultima_instruccion)
+					if (!existeInstruccionDireccion(direccion, 0))
 						throw new CpuException("Dirección de salto no válida " + direccion + " en línea " + inst.getLinea());
 					
 					// Asignamos la nueva dirección de salto.
@@ -242,12 +253,6 @@ public class Decoder
 		return instrucciones;
 	}
 	
-	// Devuelve la posición de la última instrucción.
-	public static int getUltimaInstruccion()
-	{
-		return ultima_instruccion;
-	}
-	
 	// Devuelve información sobre las instrucciones encontradas (para debug).
 	public static String getStringInfo()
 	{
@@ -257,6 +262,17 @@ public class Decoder
 			strB.append(inst);
 		
 		return strB.toString();
+	}
+	
+	private static boolean existeInstruccionDireccion(int dir, int comienzo)
+	{
+		for (int i = comienzo; i < instrucciones.size(); i++)
+		{
+			if (instrucciones.get(i).getDireccion() == dir)
+				return true;
+		}
+		
+		return false;
 	}
 	
 	// Clean - Hace limpieza de esta clase. Se utiliza para borrar todo después de un error.
