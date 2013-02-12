@@ -228,23 +228,15 @@ public class ClasePrincipal implements Runnable {
 		//ejecutar(archivo_traza);
 		traza.readLines(t);
 		
+		Log.println(1, "Fin de programa\n\n", Color.BLACK, true);
+		Log.generarEstadistica();
 	}
+	
 	public void setTraza(String s)
 	{
 		t=s;
 	}
-	public String resTraza() throws MemoryException
-	{
-		if(traza!=null)
-		{
-			return traza.getResult();
-		}
-		else
-		{
-			throw new MemoryException("Traza no creada");
-		}
-		
-	}
+
 	public void iniciarTraza()
 	{
 		try
@@ -370,7 +362,6 @@ public class ClasePrincipal implements Runnable {
 	private void inicializarMemoria() throws MemoryException, CpuException
 	{
 		// Inicializo la jerarquía de datos.
-		System.out.println("niveles_cache1" + niveles_cache1);
 		caches1 = new Cache[niveles_cache1];
 		for (int i = 0; i < niveles_cache1; i++)
 		{
