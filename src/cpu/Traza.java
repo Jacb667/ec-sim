@@ -141,12 +141,12 @@ public class Traza {
 	{
 		if(s.equals("W"))
 		{
-			Log.println(1, "Lectura de dirección virtual: 0x" + Integer.toHexString(dirMem), Color.BLACK, true);
+			Log.println(1, "Guardado de dato en dirección virtual: 0x" + Integer.toHexString(dirMem), Color.BLACK, true);
 			Direccion d=jmem.simularGuardarDato(dirMem, dirMem);
 		}
 		else if(s.equals("R"))
 		{
-			Log.println(1, "Guardado de dato en dirección virtual: 0x" + Integer.toHexString(dirMem), Color.BLACK, true);
+			Log.println(1, "Lectura de dirección virtual: 0x" + Integer.toHexString(dirMem), Color.BLACK, true);
 			Direccion d=jmem.simularLeerDato(dirMem);
 		}
 		else
