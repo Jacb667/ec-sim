@@ -521,7 +521,7 @@ public class ClasePrincipal implements Runnable {
 				else if (nivelJerarquiasSeparadas == 2)
 					limite2 = 1;
 				else if (nivelJerarquiasSeparadas == 3)
-					limite2 = Math.max(niveles_cache1, 2);
+					limite2 = Math.min(niveles_cache1, 2);
 			}
 			
 			tablasCache2 = new Tabla[limite2];
