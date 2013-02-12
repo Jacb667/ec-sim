@@ -1,6 +1,7 @@
 package cpu;
 
 import general.Config;
+import general.CpuException;
 import general.Global.Opcode;
 import gui.Vista;
 

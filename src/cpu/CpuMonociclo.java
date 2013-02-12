@@ -1,6 +1,7 @@
 package cpu;
 
 import general.Global.Opcode;
+import general.CpuException;
 import general.Global;
 import general.Log;
 import general.MemoryException;

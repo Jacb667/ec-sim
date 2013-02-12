@@ -1,4 +1,4 @@
-package cpu;
+package general;
 
 public class CpuException extends Exception {
 	
