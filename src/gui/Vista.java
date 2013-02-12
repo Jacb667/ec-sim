@@ -3057,4 +3057,8 @@ public class Vista extends JPanel {
 	{
 		return archivoMemoria;
 	}
+	public void mostrarTraza(String t)
+	{
+		ejecucion_a.setText(t);
+	}
 }

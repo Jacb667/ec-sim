@@ -20,6 +20,7 @@ public class Controlador implements ActionListener {
 	private Vista v;
 	private BufferedReader br;
 	private FileReader fr;
+	private String traza=null;
 	
 	public ClasePrincipal claseP;
 	
@@ -261,6 +262,18 @@ public class Controlador implements ActionListener {
 				v.enabledEjecutarT(true);
 				v.enabledConfig(false);
 				
+				//System.out.println("ENTRA");
+				try {
+					traza=bfOn();
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				v.mostrarTraza(traza);
 				claseP = new ClasePrincipal();
 				claseP.iniciarTraza();
 				//claseP.validarCodigo();
@@ -299,19 +312,8 @@ public class Controlador implements ActionListener {
 			//System.out.println("ENTRA2");
 			if (claseP != null)
 			{	
-				String s=null;
-				//System.out.println("ENTRA");
-				try {
-					s=bfOn();
-				} catch (FileNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				claseP.setTraza(s);
+				v.resetTraza();
+				claseP.setTraza(traza);
 				try {
 					claseP.ejecutarTraza();
 					//v.resTraza(claseP.resTraza());
