@@ -215,25 +215,7 @@ public class TablaPaginas {
 		if (pag.getMarco() != -1)
 		{
 			boolean tlb_hit = false;
-			
-			// Comprobamos la tabla de páginas.
-			if (!tlb_hit)
-			{
-				Log.report(Flags.ACCESS_PT);
-				
-				if (tablaPagsEnMemoria)
-				{
-					int dirPag = registroTablaPaginas + pag.getId()*4;
-					Log.printDebug("Puntero Tabla Páginas: " + registroTablaPaginas);
-					Log.printDebug("Desplazamiento: " + pag.getId()*4);
-					Log.println(2,"TP: Se accede a la dirección 0x" + Integer.toHexString(dirPag) + " para buscar el marco de la página.", Color.BLUE);
-				}
-				else
-				{
-					Log.println(2,"TP: Se accede a la tabla de páginas para buscar el marco de la página.", Color.BLUE);
-				}
-			}
-			
+
 			// Comprobamos si está en la TLB.
 			if (!secundaria)
 			{
@@ -278,6 +260,24 @@ public class TablaPaginas {
 				}
 			}
 			
+			// Comprobamos la tabla de páginas.
+			if (!tlb_hit)
+			{
+				Log.report(Flags.ACCESS_PT);
+				
+				if (tablaPagsEnMemoria)
+				{
+					int dirPag = registroTablaPaginas + pag.getId()*4;
+					Log.printDebug("Puntero Tabla Páginas: " + registroTablaPaginas);
+					Log.printDebug("Desplazamiento: " + pag.getId()*4);
+					Log.println(2,"TP: Se accede a la dirección 0x" + Integer.toHexString(dirPag) + " para buscar el marco de la página.", Color.BLUE);
+				}
+				else
+				{
+					Log.println(2,"TP: Se accede a la tabla de páginas para buscar el marco de la página.", Color.BLUE);
+				}
+			}
+			
 			// Si estamos aquí es porque se ha encontrado la página asociada a un marco.
 			// OJO! Puede ser PAGE HIT y TLB MISS.
 			Log.report(Flags.PAGE_HIT);
@@ -311,7 +311,7 @@ public class TablaPaginas {
 						Log.report(Flags.CONFLICT_TLB_F);
 					tlb_inst.insertar(pag.getId(), pag.getMarco());
 					Log.report(Flags.TLB_MISS_F);
-					Log.println(1,"TLB MISS", Color.RED, false);
+					Log.println(1,"ITLB MISS", Color.RED, false);
 				}
 			}
 			
