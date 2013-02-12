@@ -50,6 +50,9 @@ public class Controlador implements ActionListener {
 				Config.set(Conf_Type.MAXIMA_ENTRADA_MEMORIA,v.getMaxEntradasVirt());
 				Config.set(Conf_Type.TABLA_PAGINAS_ALOJADA,v.tablaPaginasAlojada());
 				Config.set(Conf_Type.NIVEL_LOG, v.getNivelLog());
+				Config.set(Conf_Type_c.TP_POLITICA, v.getPoliticaTP());
+				Config.set(Conf_Type_c.ARCHIVO_MEMORIA, v.getArchivoMemoria());
+				
 				error = 1;
 				
 				if (v.getEntradasMemP() > limMemoriaMostrar)
@@ -177,6 +180,8 @@ public class Controlador implements ActionListener {
 				Config.set(Conf_Type.MAXIMA_ENTRADA_MEMORIA,v.getMaxEntradasVirt());
 				Config.set(Conf_Type.TABLA_PAGINAS_ALOJADA,v.tablaPaginasAlojada());
 				Config.set(Conf_Type.NIVEL_LOG, v.getNivelLog());
+				Config.set(Conf_Type_c.TP_POLITICA, v.getPoliticaTP());
+				
 				error = 1;
 				
 				if(v.tlbDataCheck())
