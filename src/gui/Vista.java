@@ -270,18 +270,19 @@ public class Vista extends JPanel {
 
         tp_alojada_chb.setSelected(true);
         tp_alojada_chb.setText("Alojada en memoria");
-        tp_alojada_chb.setToolTipText("<html>Especifica si la Tabla de Páginas se alojará en memoria principal.<br>\nSi no se aloja en memoria, la Tabla de Páginas funcionará de la misma forma, pero no se visualizará dentro de un marco.<br>\nDesactivar esta opción es aconsejable cuando se desea utilizar toda la memoria para el proceso, sin preocuparse por la memoria ocupada por la Tabla de Páginas.</html>");
+        tp_alojada_chb.setToolTipText("<html>Especifica si la Tabla de Páginas se alojará en memoria principal.<br>\nSi no se aloja en memoria, la Tabla de Páginas funcionará de la misma forma,<br>pero no se visualizará dentro de un marco.<br>\nDesactivar esta opción es aconsejable cuando se desea utilizar toda la memoria para el proceso, <br>sin preocuparse por la memoria ocupada por la Tabla de Páginas.</html>");
 
         tabla_paginas_l.setText("Tabla de Páginas:");
 
         politica_reemplazo_tp_l.setText("Política de Reemplazo:");
 
         politica_reemplazo_tp.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "LRU", "LFU", "FIFO", "AGING", "RANDOM" }));
-        politica_reemplazo_tp.setToolTipText("<html>Política de reemplazo utilizada para cachés asociativas:<br><br>\n\n- <b>LRU:</b> Elimina la página menos utilizada recientemente.<br>\n- <b>NRU:</b> Elimina la página con menor número de utilizaciones.<br>\n- <b>FIFO:</b> Elimina la primera página que se asignó.<br>\n- <b>AGING:</b> Se basa en el histórico de accesos para determinar la página que se eliminará.<br>\n- <b>RANDOM:</b> Se selecciona una página aleatoriamente y se elimina.<br></html>");
+        politica_reemplazo_tp.setToolTipText("<html>Política de reemplazo utilizada para reemplazar páginas:<br><br>\n\n- <b>LRU:</b> Elimina la página menos utilizada recientemente.<br>\n- <b>NRU:</b> Elimina la página con menor número de utilizaciones.<br>\n- <b>FIFO:</b> Elimina la primera página que se asignó.<br>\n- <b>AGING:</b> Se basa en el histórico de accesos para determinar la página que se eliminará.<br>\n- <b>RANDOM:</b> Se selecciona una página aleatoriamente y se elimina.<br></html>");
 
         politica_reemplazo_tp_l1.setText("Fichero de memoria:");
 
         boton_carga_memoria.setText("Cargar");
+        boton_carga_memoria.setToolTipText("Selecciona un archivo para cargar el contenido<br> de la memoria RAM.");
         boton_carga_memoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boton_carga_memoriaActionPerformed(evt);
@@ -352,13 +353,11 @@ public class Vista extends JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(cpu_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(politica_reemplazo_tp_l)
-                            .addComponent(politica_reemplazo_tp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cpu_pLayout.createSequentialGroup()
-                        .addGroup(cpu_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(boton_carga_memoria)
-                            .addComponent(politica_reemplazo_tp_l1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, Short.MAX_VALUE)))
+                            .addComponent(politica_reemplazo_tp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(cpu_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(boton_carga_memoria)
+                        .addComponent(politica_reemplazo_tp_l1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(2, 2, 2)
                 .addGroup(cpu_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1317,7 +1316,7 @@ public class Vista extends JPanel {
             ConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ConfiguracionLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(config_p1, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE))
+                .addComponent(config_p1))
         );
 
         config_p1.getAccessibleContext().setAccessibleName("General");
@@ -1563,7 +1562,7 @@ public class Vista extends JPanel {
                
               if(n_entradas_tlb_data_t.getText()!=null)
               {
-            	  n_vias_tlb_data_t.setText(String.valueOf(getCD1NEntradas()));
+            	  n_vias_tlb_data_t.setText(n_entradas_tlb_data_t.getText());
               }
               politica_reemplazo_tlb_data_cb1.setEnabled(true);
           }        // Nada
@@ -1587,7 +1586,7 @@ public class Vista extends JPanel {
                
               if(n_entradas_tlb_inst_t.getText()!=null)
               {
-            	  n_vias_tlb_inst_t.setText(String.valueOf(getCD1NEntradas()));
+            	  n_vias_tlb_inst_t.setText(n_entradas_tlb_inst_t.getText());
               }
               politica_reemplazo_tlb_inst_cb.setEnabled(true);
           }   
@@ -1802,13 +1801,13 @@ public class Vista extends JPanel {
         	{
         		// Escribimos en número de vías el mismo número que en este campo.
         		// El campo número de vías se supone que ya está desactivado (no se puede editar).
-        		n_vias_tlb_data_t.setText(String.valueOf(getCD1NEntradas()));
+        		n_vias_tlb_data_t.setText(n_entradas_tlb_data_t.getText());
         	}
         }
         catch(NumberFormatException e1)
         {
         	n_entradas_tlb_data_t.setText("16");
-        	n_vias_tlb_data_t.setText(String.valueOf(getCD1NEntradas()));
+        	n_vias_tlb_data_t.setText(n_entradas_tlb_data_t.getText());
         	JOptionPane.showMessageDialog( this, "Valor incorrecto, sólo se aceptan valores numéricos o hexadecimales comenzando por # o 0x.", "Error de formato", JOptionPane.ERROR_MESSAGE );
         }
     }//GEN-LAST:event_n_entradas_tlb_data_tFocusLost
@@ -1837,13 +1836,13 @@ public class Vista extends JPanel {
             {
         		// Escribimos en número de vías el mismo número que en este campo.
         		// El campo número de vías se supone que ya está desactivado (no se puede editar).
-                n_vias_tlb_inst_t.setText(String.valueOf(getCD1NEntradas()));
+                n_vias_tlb_inst_t.setText(n_entradas_tlb_inst_t.getText());
             }
         }
         catch(NumberFormatException e1)
         {
         	n_entradas_tlb_inst_t.setText("16");
-        	n_vias_tlb_inst_t.setText(String.valueOf(getCD1NEntradas()));
+        	n_vias_tlb_inst_t.setText(n_entradas_tlb_inst_t.getText());
         	JOptionPane.showMessageDialog( this, "Valor incorrecto, sólo se aceptan valores numéricos o hexadecimales comenzando por # o 0x.", "Error de formato", JOptionPane.ERROR_MESSAGE );
         }
     }//GEN-LAST:event_n_entradas_tlb_inst_tFocusLost
