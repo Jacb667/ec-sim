@@ -62,7 +62,6 @@ public class DecoderRam {
 					String s = st.nextToken();
 					int dato = Integer.parseInt(s);//S es un dato
 					tablaPags.inicializarDatoMemoriaVirtual(direccion, dato);
-					System.out.println(direccion + " " + dato);
 					direccion += 4; //Pasa a la siguiente dirección;
 				}
 			}

@@ -4,6 +4,7 @@ import general.Config;
 import general.Log;
 import general.MemoryException;
 
+import java.awt.Color;
 import java.util.*;
 
 import javax.swing.JOptionPane;
@@ -25,7 +26,6 @@ public class Traza {
 	int[] ultAC= new int[3];
 	
 	JerarquiaMemoria jmem, jins;
-	StringBuilder stb=new StringBuilder();
 	public Traza(JerarquiaMemoria j1, JerarquiaMemoria j2)
 	{
 		jmem=j1;
@@ -41,7 +41,6 @@ public class Traza {
 			decLine(str.nextToken());
 			
 		}
-		Log.generarEstadistica();
 	}
 	
 	public void decLine(String s) throws MemoryException
@@ -122,95 +121,37 @@ public class Traza {
 			{
 				throw new MemoryException("Error de formato en la linea "+contLines);
 			}
-			
 		}
-		
-		
 	}
+	
 	public void ejecutarLineaF(int dirInst) throws MemoryException
 	{
+		Log.println(1, "Fetch 0x" + Integer.toHexString(dirInst), Color.BLACK, true);
 		if(jins==null)
 		{
 			Direccion d=jmem.simularLeerDato(dirInst);
-			stb.append("FETCH--\t");
-			generarEstadistica(d);
 		}
 		else
 		{
 			Direccion d=jins.simularLeerDato(dirInst);
-			stb.append("FETCH--\t");
-			generarEstadistica(d);
 		}
-		
 	}
 
-	private void generarEstadistica(Direccion d) {
-		
-		if(ultAT!=Log.aciertosTlb)
-		{
-			ultAT=Log.aciertosTlb;
-			stb.append("TLB: HIT, ");
-			
-		}
-		else
-		{
-			stb.append("TLB: MISS, ");
-		}
-		if(ultAP!=Log.aciertosPagina)
-		{
-			ultAP=Log.aciertosPagina;
-			stb.append("PAGE: "+d.getPagina()+" HIT, Direccion Fisica: "+d.getReal()+" ");
-		}
-		else
-		{
-			stb.append("PAGE: "+d.getPagina()+" FAULT, Direccion Fisica: "+d.getReal()+" ");
-		}
-		
-		for(int i=0;i<jmem.getNivelesCache();i++)
-		{
-			if(ultAC[i]!=Log.cache_hits[i])
-			{
-				stb.append("Cache "+i+": HIT ");
-				ultAC[i]=Log.cache_hits[i];
-				break;
-			}
-			else
-			{
-				stb.append("Cache "+i+": MISS ");
-			}
-		}
-		
-	
-		stb.append(" Linea: "+contLines+"\n");
-	}
 	public void ejecutarLineaRW(int dirMem, String s) throws MemoryException
 	{
-		
 		if(s.equals("W"))
 		{
-			stb.append("W--\t");
+			Log.println(1, "Lectura de dirección virtual: 0x" + Integer.toHexString(dirMem), Color.BLACK, true);
 			Direccion d=jmem.simularGuardarDato(dirMem, dirMem);
-			generarEstadistica(d);
 		}
 		else if(s.equals("R"))
 		{
-			stb.append("R--\t");
+			Log.println(1, "Guardado de dato en dirección virtual: 0x" + Integer.toHexString(dirMem), Color.BLACK, true);
 			Direccion d=jmem.simularLeerDato(dirMem);
-			generarEstadistica(d);
 		}
 		else
 		{
 			JOptionPane.showMessageDialog( Config.getVista(), "Parametro invalido: "+s+" En linea: "+contLines, "Parametro Invalido", JOptionPane.ERROR_MESSAGE );
 		}
-	}
-	
-	public void addToResult(String s)
-	{
-		
-		stb.append(s).append("\n");
-	}
-	public String getResult()
-	{
-		return stb.toString();
 	}
 }

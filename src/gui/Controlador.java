@@ -262,7 +262,6 @@ public class Controlador implements ActionListener {
 				v.enabledEjecutarT(true);
 				v.enabledConfig(false);
 				
-				//System.out.println("ENTRA");
 				try {
 					traza=bfOn();
 				} catch (FileNotFoundException e1) {
@@ -309,14 +308,12 @@ public class Controlador implements ActionListener {
 		else if(comando.equals(Global.EJECUTART))
 		{
 			Config.ejecutando_codigo = false;
-			//System.out.println("ENTRA2");
 			if (claseP != null)
 			{	
 				v.resetTraza();
 				claseP.setTraza(traza);
 				try {
 					claseP.ejecutarTraza();
-					//v.resTraza(claseP.resTraza());
 				} catch (MemoryException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -397,9 +394,6 @@ public class Controlador implements ActionListener {
 			sb.append(aux).append("\n");
 			aux=br.readLine();
 		}
-		System.out.println(sb.toString());
 		return sb.toString();
-		
 	}
-
 }
