@@ -35,7 +35,7 @@ public class DecoderRam {
 	}
 	public void decodeLine(String l, int lineaN) throws MemoryException
 	{
-		StringTokenizer st = new StringTokenizer(l," ,.; '\n'");
+		StringTokenizer st = new StringTokenizer(l," ,.;");
 		String s;
 		int direccion = 0;
 		while (st.hasMoreTokens())
@@ -45,10 +45,9 @@ public class DecoderRam {
 			if(x == ':')
 			{
 				//Coge la dirección
-				StringTokenizer st2 = new StringTokenizer(s,":");
 				try
 				{
-					direccion = Integer.parseInt(st2.nextToken());//:Direccion
+					direccion = Integer.decode(s.substring(1));
 				}
 				catch(NumberFormatException ex)
 				{
@@ -62,6 +61,7 @@ public class DecoderRam {
 				{
 					int dato = Integer.parseInt(s);//S es un dato
 					tablaPags.inicializarDatoMemoriaVirtual(direccion, dato);
+					System.out.println(direccion + " " + dato);
 				}
 				catch(NumberFormatException ex)
 				{

@@ -28,7 +28,7 @@ public class Vista extends JPanel {
     private String resultadoCodigo;
     private JPanel[] paneles_caches;
     
-    private File archivoMemoria;
+    private String archivoMemoria;
     
     // Calcula el valor multiplicador seleccionado en un comboBox.
     /*
@@ -1533,7 +1533,7 @@ public class Vista extends JPanel {
 		if(returnVal == JFileChooser.APPROVE_OPTION)
 		{
 			archivoTraza = chooser.getSelectedFile().toString();
-	                enabledValidarT();
+	        enabledValidarT();
 		}
     }//GEN-LAST:event_traza_carga_bActionPerformed
 
@@ -2173,10 +2173,10 @@ public class Vista extends JPanel {
         int returnVal = chooser.showOpenDialog(this);
 		if(returnVal == JFileChooser.APPROVE_OPTION)
 		{
-			archivoMemoria = chooser.getSelectedFile();
+			archivoMemoria = chooser.getSelectedFile().toString();
 		}
 		else
-			archivoMemoria = null;
+			archivoMemoria = "";
     }//GEN-LAST:event_boton_carga_memoriaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -3054,7 +3054,7 @@ public class Vista extends JPanel {
 		memoria_b.setEnabled(b);
 	}
 	
-	public File getArchivoMemoria()
+	public String getArchivoMemoria()
 	{
 		return archivoMemoria;
 	}

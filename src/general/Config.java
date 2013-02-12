@@ -46,8 +46,9 @@ public class Config {
 		CACHE3_INSTRUCCIONES_POLITICA(7),
 		ARCHIVO_TRAZA(8),
 		ARCHIVO_CODIGO(9),
-		ARCHIVO_EXPORTAR(10),
-		END_CONFIG (11);
+		ARCHIVO_MEMORIA(10),
+		TP_POLITICA(11),
+		END_CONFIG (12);
 		
 		private int index;   
 

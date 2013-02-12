@@ -12,6 +12,7 @@ import javax.swing.JScrollPane;
 import memoria.Cache;
 import memoria.CacheAsociativa;
 import memoria.CacheDirecta;
+import memoria.DecoderRam;
 import memoria.JerarquiaMemoria;
 import memoria.MemoriaPrincipal;
 import memoria.TablaPaginas;
@@ -61,6 +62,7 @@ public class ClasePrincipal implements Runnable {
 	private CpuMonociclo cpu;
 	private int direccion_inst = 0;
 	private int direccion_tablPags = 0;
+	private TiposReemplazo politica_tp;
 	
 	private int niveles_cache1;
 	private int niveles_cache2;
@@ -82,6 +84,7 @@ public class ClasePrincipal implements Runnable {
 	// CPU
 	private String archivo_cpu;
 	private String archivo_traza;
+	private String archivo_memoria;
 	//private boolean segmentado = false;
 	
 	// Páginas y memoria
@@ -140,6 +143,12 @@ public class ClasePrincipal implements Runnable {
 					Log.println(3, (direccion_inst + inst.getDireccion()) + " : " + inst, Color.BLACK, false);
 					tablaPags.inicializarDatoMemoriaVirtual(direccion_inst + inst.getDireccion(), inst.codificarBinario());
 				}
+			}
+			
+			if (!archivo_memoria.equals(""))
+			{
+				DecoderRam dram = new DecoderRam(tablaPags);
+				dram.decodeFile(archivo_memoria);
 			}
 			
 			// Asignamos PC a la primera instrucción.
@@ -262,8 +271,10 @@ public class ClasePrincipal implements Runnable {
 		
 		archivo_cpu = Config.get(Conf_Type_c.ARCHIVO_CODIGO);
 		archivo_traza = Config.get(Conf_Type_c.ARCHIVO_TRAZA);
+		archivo_memoria = Config.get(Conf_Type_c.ARCHIVO_MEMORIA);
 		
 		tp_alojada = Config.get(Conf_Type.TABLA_PAGINAS_ALOJADA) == 1 ? true : false;
+		politica_tp = TiposReemplazo.valueOf(Config.get(Conf_Type_c.TP_POLITICA));
 		
 		// Niveles de caché
 		niveles_cache1 = Config.get(Conf_Type.NIVELES_CACHE_DATOS);
@@ -432,7 +443,7 @@ public class ClasePrincipal implements Runnable {
 		}
 
 		// Tabla de Páginas
-		tablaPags = new TablaPaginas(entradas_pagina, palabras_linea, max_entrada, max_ent_mem, TiposReemplazo.LRU, tlb1, tlb2, tp_alojada);
+		tablaPags = new TablaPaginas(entradas_pagina, palabras_linea, max_entrada, max_ent_mem, politica_tp, tlb1, tlb2, tp_alojada);
 		
 		// Memoria principal.
 		memoria = new MemoriaPrincipal(tablaPags);
