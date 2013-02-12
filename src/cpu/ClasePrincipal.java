@@ -145,7 +145,7 @@ public class ClasePrincipal implements Runnable {
 				}
 			}
 			
-			if (!archivo_memoria.equals(""))
+			if (archivo_memoria != null && !archivo_memoria.equals(""))
 			{
 				DecoderRam dram = new DecoderRam(tablaPags);
 				dram.decodeFile(archivo_memoria);
@@ -201,7 +201,15 @@ public class ClasePrincipal implements Runnable {
 	{
 		try
 		{
-			cpu.ejecutarInstruccion();
+			boolean ejecutando = cpu.ejecutarInstruccion();
+			if (!ejecutando)
+			{
+				Log.println(1,"Fin de programa.\n\n", Color.BLACK, true);
+				Log.generarEstadistica();
+				
+				Config.getVista().enabledConfig(true);
+				Config.getVista().enabledEjecutarC(false);
+			}
 		}
 		catch (MemoryException | CpuException e)
 		{

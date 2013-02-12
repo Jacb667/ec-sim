@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 public class DecoderRam {
 	
 	private TablaPaginas tablaPags;
+	private int direccion = 0;
 	public DecoderRam(TablaPaginas tp)//hay que pasarle la memoria donde se quieren guardar los datos.
 	{
 		tablaPags = tp;
@@ -35,42 +36,40 @@ public class DecoderRam {
 	}
 	public void decodeLine(String l, int lineaN) throws MemoryException
 	{
-		StringTokenizer st = new StringTokenizer(l," ,.;");
-		String s;
-		int direccion = 0;
-		while (st.hasMoreTokens())
+		if(l.length() == 0)
+			return;
+		
+		if(l.charAt(0) == ':')
 		{
-			s = st.nextToken();
-			char x = s.charAt(0);
-			if(x == ':')
+			//Coge la dirección
+			try
 			{
-				//Coge la dirección
-				try
-				{
-					direccion = Integer.decode(s.substring(1));
-				}
-				catch(NumberFormatException ex)
-				{
-					JOptionPane.showMessageDialog( Config.getVista(), "Dirección inválida en línea " + lineaN, "Carga de archivo de memoria", JOptionPane.ERROR_MESSAGE );
-				}
+				direccion = Integer.decode(l.substring(1));
 			}
-			else
+			catch(NumberFormatException ex)
 			{
-				//introducir el dato en la RAM;
-				try
+				JOptionPane.showMessageDialog( Config.getVista(), "Dirección inválida en línea " + lineaN, "Carga de archivo de memoria", JOptionPane.ERROR_MESSAGE );
+			}
+		}
+		else
+		{
+			//introducir el dato en la RAM;
+			try
+			{
+				StringTokenizer st = new StringTokenizer(l," ,.;");
+				while (st.hasMoreTokens())
 				{
+					String s = st.nextToken();
 					int dato = Integer.parseInt(s);//S es un dato
 					tablaPags.inicializarDatoMemoriaVirtual(direccion, dato);
 					System.out.println(direccion + " " + dato);
+					direccion += 4; //Pasa a la siguiente dirección;
 				}
-				catch(NumberFormatException ex)
-				{
-					JOptionPane.showMessageDialog( Config.getVista(), "Dato inválido en línea " + lineaN, "Carga de archivo de memoria", JOptionPane.ERROR_MESSAGE );
-				}
-				direccion = direccion+4;//Pasa a la siguiente dirección;
+			}
+			catch(NumberFormatException ex)
+			{
+				JOptionPane.showMessageDialog( Config.getVista(), "Dato inválido en línea " + lineaN, "Carga de archivo de memoria", JOptionPane.ERROR_MESSAGE );
 			}
 		}
-		
 	}
-
 }

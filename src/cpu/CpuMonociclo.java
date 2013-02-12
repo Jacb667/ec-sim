@@ -90,6 +90,7 @@ public class CpuMonociclo {
 		
 		// PC+4
 		incPC();
+		Log.printDebug(inst.toString());
 		
 		/*
 		 *  Etapa Decode
