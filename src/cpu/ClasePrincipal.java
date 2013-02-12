@@ -399,7 +399,7 @@ public class ClasePrincipal implements Runnable {
 					if (niveles_cache2 > 1)
 						caches2[1] = caches1[1];
 					if (niveles_cache2 > 2)
-					caches2[2] = caches2[2];
+					caches2[2] = caches1[2];
 				}
 				else
 				{
@@ -419,7 +419,7 @@ public class ClasePrincipal implements Runnable {
 					
 					// La última es la misma que la de datos.
 					if (niveles_cache2 > 2)
-						caches2[2] = caches2[2];
+						caches2[2] = caches1[2];
 				}
 			}
 			else
