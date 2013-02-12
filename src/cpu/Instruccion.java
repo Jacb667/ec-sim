@@ -2,6 +2,7 @@ package cpu;
 
 import java.util.StringTokenizer;
 
+import general.CpuException;
 import general.Global;
 import general.Global.Opcode;
 

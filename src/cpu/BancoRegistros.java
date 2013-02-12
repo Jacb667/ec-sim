@@ -1,5 +1,7 @@
 package cpu;
 
+import general.CpuException;
+
 public class BancoRegistros {
 	
 	private int datos[];
