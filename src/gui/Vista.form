@@ -66,7 +66,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="config_p1" pref="345" max="32767" attributes="0"/>
+                      <Component id="config_p1" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -168,16 +168,13 @@
                                           <Component id="politica_reemplazo_tp_l" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="politica_reemplazo_tp" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace pref="123" max="32767" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="boton_carga_memoria" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="politica_reemplazo_tp_l1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace pref="161" max="32767" attributes="0"/>
+                                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                      <Component id="boton_carga_memoria" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="politica_reemplazo_tp_l1" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
+                              <EmptySpace pref="117" max="32767" attributes="0"/>
                               <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
@@ -275,7 +272,7 @@
                       <Properties>
                         <Property name="selected" type="boolean" value="true"/>
                         <Property name="text" type="java.lang.String" value="Alojada en memoria"/>
-                        <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Especifica si la Tabla de P&#xe1;ginas se alojar&#xe1; en memoria principal.&lt;br&gt;&#xa;Si no se aloja en memoria, la Tabla de P&#xe1;ginas funcionar&#xe1; de la misma forma, pero no se visualizar&#xe1; dentro de un marco.&lt;br&gt;&#xa;Desactivar esta opci&#xf3;n es aconsejable cuando se desea utilizar toda la memoria para el proceso, sin preocuparse por la memoria ocupada por la Tabla de P&#xe1;ginas.&lt;/html&gt;"/>
+                        <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Especifica si la Tabla de P&#xe1;ginas se alojar&#xe1; en memoria principal.&lt;br&gt;&#xa;Si no se aloja en memoria, la Tabla de P&#xe1;ginas funcionar&#xe1; de la misma forma,&lt;br&gt;pero no se visualizar&#xe1; dentro de un marco.&lt;br&gt;&#xa;Desactivar esta opci&#xf3;n es aconsejable cuando se desea utilizar toda la memoria para el proceso, &lt;br&gt;sin preocuparse por la memoria ocupada por la Tabla de P&#xe1;ginas.&lt;/html&gt;"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="tabla_paginas_l">
@@ -299,7 +296,7 @@
                             <StringItem index="4" value="RANDOM"/>
                           </StringArray>
                         </Property>
-                        <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Pol&#xed;tica de reemplazo utilizada para cach&#xe9;s asociativas:&lt;br&gt;&lt;br&gt;&#xa;&#xa;- &lt;b&gt;LRU:&lt;/b&gt; Elimina la p&#xe1;gina menos utilizada recientemente.&lt;br&gt;&#xa;- &lt;b&gt;NRU:&lt;/b&gt; Elimina la p&#xe1;gina con menor n&#xfa;mero de utilizaciones.&lt;br&gt;&#xa;- &lt;b&gt;FIFO:&lt;/b&gt; Elimina la primera p&#xe1;gina que se asign&#xf3;.&lt;br&gt;&#xa;- &lt;b&gt;AGING:&lt;/b&gt; Se basa en el hist&#xf3;rico de accesos para determinar la p&#xe1;gina que se eliminar&#xe1;.&lt;br&gt;&#xa;- &lt;b&gt;RANDOM:&lt;/b&gt; Se selecciona una p&#xe1;gina aleatoriamente y se elimina.&lt;br&gt;&lt;/html&gt;"/>
+                        <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Pol&#xed;tica de reemplazo utilizada para reemplazar p&#xe1;ginas:&lt;br&gt;&lt;br&gt;&#xa;&#xa;- &lt;b&gt;LRU:&lt;/b&gt; Elimina la p&#xe1;gina menos utilizada recientemente.&lt;br&gt;&#xa;- &lt;b&gt;NRU:&lt;/b&gt; Elimina la p&#xe1;gina con menor n&#xfa;mero de utilizaciones.&lt;br&gt;&#xa;- &lt;b&gt;FIFO:&lt;/b&gt; Elimina la primera p&#xe1;gina que se asign&#xf3;.&lt;br&gt;&#xa;- &lt;b&gt;AGING:&lt;/b&gt; Se basa en el hist&#xf3;rico de accesos para determinar la p&#xe1;gina que se eliminar&#xe1;.&lt;br&gt;&#xa;- &lt;b&gt;RANDOM:&lt;/b&gt; Se selecciona una p&#xe1;gina aleatoriamente y se elimina.&lt;br&gt;&lt;/html&gt;"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="politica_reemplazo_tp_l1">
@@ -310,6 +307,7 @@
                     <Component class="javax.swing.JButton" name="boton_carga_memoria">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Cargar"/>
+                        <Property name="toolTipText" type="java.lang.String" value="Selecciona un archivo para cargar el contenido&lt;br&gt; de la memoria RAM."/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="boton_carga_memoriaActionPerformed"/>
