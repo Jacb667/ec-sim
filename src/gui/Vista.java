@@ -270,7 +270,7 @@ public class Vista extends JPanel {
 
         tp_alojada_chb.setSelected(true);
         tp_alojada_chb.setText("Alojada en memoria");
-        tp_alojada_chb.setToolTipText("<html>Especifica si la Tabla de Páginas se alojará en memoria principal.<br>\nSi no se aloja en memoria, la Tabla de Páginas funcionará de la misma forma,<br>pero no se visualizará dentro de un marco.<br>\nDesactivar esta opción es aconsejable cuando se desea utilizar toda la memoria para el proceso, <br>sin preocuparse por la memoria ocupada por la Tabla de Páginas.</html>");
+        tp_alojada_chb.setToolTipText("<html>Especifica si la Tabla de Páginas se alojará en memoria principal.<br>\nSi no se aloja en memoria, la Tabla de Páginas funcionará de la misma forma,<br>\npero no se visualizará dentro de un marco. Desactivar esta opción es aconsejable <br>\ncuando se desea utilizar toda la memoria para el proceso, sin preocuparse por la <br>\nmemoria ocupada por la Tabla de Páginas.</html>");
 
         tabla_paginas_l.setText("Tabla de Páginas:");
 
@@ -282,7 +282,7 @@ public class Vista extends JPanel {
         politica_reemplazo_tp_l1.setText("Fichero de memoria:");
 
         boton_carga_memoria.setText("Cargar");
-        boton_carga_memoria.setToolTipText("Selecciona un archivo para cargar el contenido<br> de la memoria RAM.");
+        boton_carga_memoria.setToolTipText("<html>Selecciona un archivo para cargar el contenido de la memoria RAM.</html>");
         boton_carga_memoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boton_carga_memoriaActionPerformed(evt);

@@ -272,7 +272,7 @@
                       <Properties>
                         <Property name="selected" type="boolean" value="true"/>
                         <Property name="text" type="java.lang.String" value="Alojada en memoria"/>
-                        <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Especifica si la Tabla de P&#xe1;ginas se alojar&#xe1; en memoria principal.&lt;br&gt;&#xa;Si no se aloja en memoria, la Tabla de P&#xe1;ginas funcionar&#xe1; de la misma forma,&lt;br&gt;pero no se visualizar&#xe1; dentro de un marco.&lt;br&gt;&#xa;Desactivar esta opci&#xf3;n es aconsejable cuando se desea utilizar toda la memoria para el proceso, &lt;br&gt;sin preocuparse por la memoria ocupada por la Tabla de P&#xe1;ginas.&lt;/html&gt;"/>
+                        <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Especifica si la Tabla de P&#xe1;ginas se alojar&#xe1; en memoria principal.&lt;br&gt;&#xa;Si no se aloja en memoria, la Tabla de P&#xe1;ginas funcionar&#xe1; de la misma forma,&lt;br&gt;&#xa;pero no se visualizar&#xe1; dentro de un marco. Desactivar esta opci&#xf3;n es aconsejable &lt;br&gt;&#xa;cuando se desea utilizar toda la memoria para el proceso, sin preocuparse por la &lt;br&gt;&#xa;memoria ocupada por la Tabla de P&#xe1;ginas.&lt;/html&gt;"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="tabla_paginas_l">
@@ -307,7 +307,7 @@
                     <Component class="javax.swing.JButton" name="boton_carga_memoria">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Cargar"/>
-                        <Property name="toolTipText" type="java.lang.String" value="Selecciona un archivo para cargar el contenido&lt;br&gt; de la memoria RAM."/>
+                        <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Selecciona un archivo para cargar el contenido de la memoria RAM.&lt;/html&gt;"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="boton_carga_memoriaActionPerformed"/>
