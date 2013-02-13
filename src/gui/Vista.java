@@ -2850,7 +2850,7 @@ public class Vista extends JPanel {
     {
     	int valor = Integer.decode(tam_linea_t.getText());
 
-		if (cb_tipo_tam_linea.getSelectedItem().toString().toUpperCase() == "BYTES")
+		if (cb_tipo_tam_linea.getSelectedItem().toString().equalsIgnoreCase("BYTES"))
 			return valor / getTamPal();
 		else
 			return valor;
