@@ -27,7 +27,7 @@ public class Aplicacion extends javax.swing.JFrame {
     {
     	UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
     	vista = new Vista();
-        JFrame ventana = new JFrame("Simulador MIPS v1.1");
+        JFrame ventana = new JFrame("Simulador MIPS rev-251");
         ventana.setMinimumSize(new Dimension(660,405));
         ventana.setPreferredSize(new Dimension(660,405));
         controlador = new Controlador(vista);
