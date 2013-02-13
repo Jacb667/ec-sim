@@ -1,0 +1,7 @@
+inicio: addi $1, $1, 0
+bucle:  lw $20, 1000($1)
+	sw $1, 1000($1)
+	addi $1, $1, 4
+	slti $5, $1, 1000
+	bne $0, $5, bucle
+	trap 
