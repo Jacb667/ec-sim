@@ -121,6 +121,7 @@ public class Alu
 			case J:
 			case JR:
 			case JAL:
+			case TRAP:
 				// No utilizan la ALU.
 				break;
 		}
